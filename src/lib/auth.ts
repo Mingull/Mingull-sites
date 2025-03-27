@@ -20,9 +20,9 @@ export const auth = betterAuth({
 			},
 		},
 	},
-	trustedOrigins: ["http://localhost:3000", "http://192.168.178.126:3000"],
+	trustedOrigins: ["http://localhost:3000", "http://192.168.178.126:3000", "http://145.49.38.211:3000"],
 	onAPIError: {
-		onError(error, ctx) {
+		onError(error) {
 			console.error(error);
 		},
 	},

@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { z } from "zod";
 import { toast } from "sonner";
+import { User } from "@/lib/db/schemas/auth";
+import { getUser } from "@/lib/server";
 
 const pasteValidation = z.object({
 	content: z.string().min(1, "Content must not be empty"),
@@ -16,12 +18,22 @@ const pasteValidation = z.object({
 export default function Home() {
 	const [content, setContent] = useState("");
 	const [syntax, setSyntax] = useState("plaintext");
+	const [user, setUser] = useState<User | null>(null);
 	const router = useRouter();
+
+	useEffect(() => {
+		getUser().then((user) => {
+			setUser(user);
+		});
+		// getUserAccounts().then(setAccounts);
+	}, []);
 
 	const handleCreatePaste = async () => {
 		if (!content.trim()) return;
 
 		try {
+			if (!user) return router.push("/signin?ref=paste");
+			
 			const { data } = await axios.post("/api/paste", {
 				content,
 				syntax,

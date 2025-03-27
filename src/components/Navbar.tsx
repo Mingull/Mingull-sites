@@ -29,7 +29,8 @@ const Navbar = ({ hideOn }: { hideOn: string[] }) => {
 			authClient.signOut();
 			setUser(null);
 			toast.success("Signed out successfully");
-		} catch (error) {
+		} catch (error: unknown) {
+			console.error(error);
 			toast.error("Failed to sign out. Please try again.");
 		}
 		router.push("/signin");
