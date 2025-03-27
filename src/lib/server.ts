@@ -21,3 +21,7 @@ export const getUser = async (): Promise<User | null> => {
 		image: session.user.image ?? null,
 	};
 };
+
+export const serverLog = async (message?: any, ...optionalParams: any[]) => {
+	console.log(message, ...optionalParams);
+};

@@ -1,16 +1,13 @@
-import { sql } from "drizzle-orm";
-import { mysqlTable, varchar, text, boolean, datetime } from "drizzle-orm/mysql-core";
+import { boolean, datetime, mysqlTable, text, varchar } from "drizzle-orm/mysql-core";
 import { users } from "./auth";
+import { timestamps } from "./helpers";
 
 export const collections = mysqlTable("collections", {
 	id: varchar("id", { length: 36 }).primaryKey(),
 	userId: varchar("user_id", { length: 36 }).references(() => users.id, { onDelete: "cascade" }),
 	name: varchar("name", { length: 255 }).notNull(),
 	description: text("description"),
-	createdAt: datetime("created_at").default(sql`CURRENT_TIMESTAMP`),
-	updatedAt: datetime("updated_at")
-		.default(sql`CURRENT_TIMESTAMP`)
-		.$onUpdate(() => sql`CURRENT_TIMESTAMP`),
+	...timestamps(),
 });
 
 export const pastes = mysqlTable("pastes", {
@@ -21,20 +18,13 @@ export const pastes = mysqlTable("pastes", {
 	content: text("content").notNull(),
 	syntax: varchar("syntax", { length: 50 }).default("plaintext"),
 	isPublic: boolean("is_public").default(false).notNull(),
-	expiresAt: datetime("expires_at"),
-	createdAt: datetime("created_at").default(sql`CURRENT_TIMESTAMP`),
-	updatedAt: datetime("updated_at")
-		.default(sql`CURRENT_TIMESTAMP`)
-		.$onUpdate(() => sql`CURRENT_TIMESTAMP`),
+	...timestamps({ expiresAt: datetime("expires_at") }),
 });
 
 export const tags = mysqlTable("tags", {
 	id: varchar("id", { length: 36 }).primaryKey(),
 	name: varchar("name", { length: 255 }).notNull(),
-	createdAt: datetime("created_at").default(sql`CURRENT_TIMESTAMP`),
-	updatedAt: datetime("updated_at")
-		.default(sql`CURRENT_TIMESTAMP`)
-		.$onUpdate(() => sql`CURRENT_TIMESTAMP`),
+	...timestamps(),
 });
 
 export const pasteTags = mysqlTable("paste_tags", {

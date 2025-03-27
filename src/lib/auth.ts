@@ -12,6 +12,20 @@ export const auth = betterAuth({
 			...authSchema,
 		},
 	}),
+	user: {
+		additionalFields: {
+			bio: {
+				type: "string",
+				nullable: true,
+			},
+		},
+	},
+	trustedOrigins: ["http://localhost:3000", "http://192.168.178.126:3000"],
+	onAPIError: {
+		onError(error, ctx) {
+			console.error(error);
+		},
+	},
 	emailAndPassword: {
 		enabled: true,
 	},

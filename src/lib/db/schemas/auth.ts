@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
 import { boolean, datetime, int, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { timestamps } from "./helpers";
 
 export const users = mysqlTable("users", {
 	id: varchar("id", { length: 36 }).primaryKey(),
@@ -9,10 +10,8 @@ export const users = mysqlTable("users", {
 	email: varchar("email", { length: 255 }).notNull().unique(),
 	emailVerified: boolean("email_verified").notNull(),
 	image: text("image"),
-	createdAt: datetime("created_at").default(sql`CURRENT_TIMESTAMP`),
-	updatedAt: datetime("updated_at")
-		.default(sql`CURRENT_TIMESTAMP`)
-		.$onUpdate(() => sql`CURRENT_TIMESTAMP`),
+	bio: text("bio"),
+	...timestamps(),
 });
 
 export const sessions = mysqlTable("sessions", {
@@ -22,12 +21,9 @@ export const sessions = mysqlTable("sessions", {
 		.references(() => users.id, { onDelete: "cascade" }),
 	expiresAt: timestamp("expires_at").notNull(),
 	token: varchar("token", { length: 255 }).notNull().unique(),
-	createdAt: datetime("created_at").default(sql`CURRENT_TIMESTAMP`),
-	updatedAt: datetime("updated_at")
-		.default(sql`CURRENT_TIMESTAMP`)
-		.$onUpdate(() => sql`CURRENT_TIMESTAMP`),
 	ipAddress: text("ip_address"),
 	userAgent: text("user_agent"),
+	...timestamps(),
 });
 
 export const accounts = mysqlTable("accounts", {
@@ -44,21 +40,14 @@ export const accounts = mysqlTable("accounts", {
 	refreshTokenExpiresAt: datetime("refresh_token_expires_at"),
 	scope: text("scope"),
 	password: text("password"),
-	createdAt: datetime("created_at").default(sql`CURRENT_TIMESTAMP`),
-	updatedAt: datetime("updated_at")
-		.default(sql`CURRENT_TIMESTAMP`)
-		.$onUpdate(() => sql`CURRENT_TIMESTAMP`),
+	...timestamps(),
 });
 
 export const verifications = mysqlTable("verifications", {
 	id: varchar("id", { length: 36 }).primaryKey(),
 	identifier: text("identifier").notNull(),
 	value: text("value").notNull(),
-	expiresAt: timestamp("expires_at").notNull(),
-	createdAt: datetime("created_at").default(sql`CURRENT_TIMESTAMP`),
-	updatedAt: datetime("updated_at")
-		.default(sql`CURRENT_TIMESTAMP`)
-		.$onUpdate(() => sql`CURRENT_TIMESTAMP`),
+	...timestamps({ expiresAt: timestamp("expires_at").notNull() }),
 });
 
 export const apikeys = mysqlTable("api_keys", {
@@ -79,14 +68,10 @@ export const apikeys = mysqlTable("api_keys", {
 	rateLimitMax: int("rate_limit_max"),
 	requestCount: int("request_count"),
 	remaining: int("remaining"),
-	lastRequest: datetime("last_request").default(sql`CURRENT_TIMESTAMP`),
-	expiresAt: datetime("expires_at").default(sql`CURRENT_TIMESTAMP`),
-	createdAt: datetime("created_at").default(sql`CURRENT_TIMESTAMP`),
-	updatedAt: datetime("updated_at")
-		.default(sql`CURRENT_TIMESTAMP`)
-		.$onUpdate(() => sql`CURRENT_TIMESTAMP`),
 	permissions: text("permissions"),
 	metadata: text("metadata"),
+	lastRequest: datetime("last_request").default(sql`CURRENT_TIMESTAMP`),
+	...timestamps({ expiresAt: datetime("expires_at").default(sql`CURRENT_TIMESTAMP`) }),
 });
 
 export type User = typeof users.$inferSelect;

@@ -4,4 +4,4 @@ import * as schema from "./schemas";
 
 const sql = createPool(process.env.DATABASE_URL!);
 
-export const db = drizzle(sql, { schema, mode: "planetscale" });
+export const db = drizzle(sql, { schema, mode: "planetscale"});
