@@ -1,0 +1,11 @@
+{
+	"extends": "@mingull/typescript-config/react-library.json",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@mingull/lib/*": ["./src/*"]
+		}
+	},
+	"include": ["."],
+	"exclude": ["node_modules", "dist"]
+}

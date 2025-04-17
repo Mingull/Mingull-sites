@@ -1,0 +1,5 @@
+INSERT INTO `users` (`id`, `name`, `username`, `display_username`, `email`, `email_verified`, `image`, `bio`, `birthday`, `role`, `banned`, `ban_reason`, `ban_expires`, `created_at`, `updated_at`) VALUES
+('hcVIVHmsben0x1H5BwvYbNYOarA3edjk', 'Niels Plug', 'mingull', 'Mingull', 'nielsplug@outlook.com', 0, NULL, NULL, '2002-01-06 23:00:00', 'user', NULL, NULL, NULL, '2025-04-10 22:14:12', '2025-04-10 22:14:12');
+
+INSERT INTO `accounts` (`id`, `account_id`, `provider_id`, `user_id`, `access_token`, `refresh_token`, `id_token`, `access_token_expires_at`, `refresh_token_expires_at`, `scope`, `password`, `metadata`, `created_at`, `updated_at`) VALUES
+('QhfIaqlAFcBFrYFp1CLtIJwI8SAPuTdQ', 'hcVIVHmsben0x1H5BwvYbNYOarA3edjk', 'credential', 'hcVIVHmsben0x1H5BwvYbNYOarA3edjk', NULL, NULL, NULL, NULL, NULL, NULL, '795fbb120d91df53619cd47a7e057d26:f5822071611d648ef8938a11c1f43df86374da72111e15cef0d7f33401a9b29339e8a7c189ca7ddddaab47ab9069793006af4c31b79db92dcf24d0c80594834a', NULL, '2025-04-10 22:14:13', '2025-04-10 22:14:13');

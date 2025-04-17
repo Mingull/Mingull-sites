@@ -1,0 +1,21 @@
+meta {
+  name: sign-up
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{host}}/auth/sign-up/email
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Niels Plug",
+    "username": "Mingull",
+    "email": "nielsplug@outlook.com",
+    "password": "Pass1234",
+    "birthday": "2002-01-07"
+  }
+}

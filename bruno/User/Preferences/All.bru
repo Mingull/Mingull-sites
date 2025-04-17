@@ -1,0 +1,16 @@
+meta {
+  name: All
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{host}}/user/preferences?limit=5
+  body: none
+  auth: inherit
+}
+
+params:query {
+  limit: 5
+  : 
+}

@@ -1,0 +1,48 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1743760950303,
+      "tag": "0000_tiresome_rhino",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1743761060671,
+      "tag": "0001_secret_scourge",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1743761251804,
+      "tag": "0002_organic_trauma",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1744745736545,
+      "tag": "0003_nosy_the_fallen",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1744822808688,
+      "tag": "0004_condemned_stone_men",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1744831981982,
+      "tag": "0005_fluffy_bruce_banner",
+      "breakpoints": true
+    }
+  ]
+}
