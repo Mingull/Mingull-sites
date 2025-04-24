@@ -1,9 +1,9 @@
 import { createErrorResponse, createSuccessResponse, getHttpCode, getStatus } from "@/lib/api";
 import { withAuth } from "@/lib/middlewares/with-auth";
 import { queue } from "@/lib/queue";
-import { db, eq } from "@mingull/lib/db/index";
+import { db, eq } from "@mingull/lib/db";
 import { preferences, sites, userPreferences } from "@mingull/lib/db/schemas/index";
-import { Worker } from "@mingull/lib/queuer";
+import { Worker } from "@mingull/queueify";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 

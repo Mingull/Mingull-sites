@@ -1,4 +1,3 @@
-import { Prettify } from "../index.js";
 import { Job, JobOptions } from "./types.js";
 export type QueueOptions = {
 	retryAttempts: number;

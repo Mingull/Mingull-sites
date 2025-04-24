@@ -1,6 +1,6 @@
 import { auth } from "@mingull/lib/auth/server";
 import { Session, User } from "better-auth";
-import { createMiddleware } from "../../../../../packages/library/src/middleware";
+import { createMiddleware } from "@mingull/middlewarity";
 
 export const withOptionalAuth = createMiddleware<{ session: Session | null; user: User | null }>(
 	(handler) => async (req, ctx) => {

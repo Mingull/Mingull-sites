@@ -3,9 +3,9 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
-			"@mingull/lib/*": ["./src/*"]
+			"@mingull/queueify/*": ["./src/*"]
 		}
 	},
-	"include": [".", "../middleware"],
+	"include": ["."],
 	"exclude": ["node_modules", "dist"]
 }

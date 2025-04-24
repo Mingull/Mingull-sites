@@ -296,6 +296,12 @@ importers:
       '@mingull/lib':
         specifier: workspace:*
         version: link:../../packages/library
+      '@mingull/middlewarity':
+        specifier: workspace:*
+        version: link:../../packages/middlewarity
+      '@mingull/queueify':
+        specifier: workspace:*
+        version: link:../../packages/queueify
       better-auth:
         specifier: ^1.2.7
         version: 1.2.7
@@ -366,9 +372,6 @@ importers:
       drizzle-orm:
         specifier: ^0.42.0
         version: 0.42.0(gel@2.0.2)(kysely@0.27.6)(mysql2@3.14.0)
-      ioredis:
-        specifier: ^5.6.1
-        version: 5.6.1
       next:
         specifier: 15.3.1
         version: 15.3.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -403,6 +406,24 @@ importers:
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
+
+  packages/middlewarity:
+    dependencies:
+      '@mingull/lib':
+        specifier: workspace:*
+        version: link:../library
+      next:
+        specifier: 15.3.1
+        version: 15.3.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      zod:
+        specifier: ^3.24.3
+        version: 3.24.3
+
+  packages/queueify:
+    dependencies:
+      ioredis:
+        specifier: ^5.6.1
+        version: 5.6.1
 
   packages/typescript-config: {}
 

@@ -1,0 +1,21 @@
+{
+	"name": "@mingull/middlewarity",
+	"version": "0.0.0",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"lint": "eslint . --max-warnings 0",
+		"build": "tsc",
+		"start": "node dist/index.js",
+		"start:db": "node dist/db/index.js"
+	},
+	"dependencies": {
+		"@mingull/lib": "workspace:*",
+		"next": "15.3.1",
+		"zod": "^3.24.3"
+	},
+	"exports": {
+		".": "./src/index.ts",
+		"./types": "./src/types.ts"
+	}
+}

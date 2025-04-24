@@ -1,4 +1,4 @@
-import { RedisQueue } from "@mingull/lib/queuer";
+import { RedisQueue } from "@mingull/queueify";
 
 export const queue = new RedisQueue({
 	queueName: "api",

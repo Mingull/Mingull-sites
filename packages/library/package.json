@@ -14,7 +14,6 @@
 		"better-auth": "^1.2.7",
 		"clsx": "^2.1.1",
 		"drizzle-orm": "^0.42.0",
-		"ioredis": "^5.6.1",
 		"next": "15.3.1",
 		"tailwind-merge": "^3.2.0",
 		"zod": "^3.24.3"
@@ -32,10 +31,10 @@
 	"exports": {
 		".": "./src/index.ts",
 		"./auth/*": "./src/auth/*.ts",
+		"./db": "./src/db/index.ts",
 		"./db/*": "./src/db/*.ts",
 		"./middleware": "./src/middleware/index.ts",
 		"./middleware/*": "./src/middleware/*.ts",
-		"./queuer": "./src/queuer/index.ts",
 		"./exceptions": "./src/exceptions/index.ts",
 		"./plugins/client/*": "./src/plugins/client/*.ts",
 		"./plugins/server/*": "./src/plugins/server/*.ts"

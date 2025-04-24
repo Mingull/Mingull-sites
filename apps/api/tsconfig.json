@@ -27,9 +27,9 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"../../packages/library/src/middleware/index.ts",
-		"../../packages/library/src/middleware/json.ts",
-		"../../packages/library/src/middleware/types.ts"
+		"../../packages/middleware/index.ts",
+		"../../packages/middleware/json.ts",
+		"../../packages/middleware/types.ts"
 	],
 	"exclude": ["node_modules"]
 }

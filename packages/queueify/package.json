@@ -1,0 +1,22 @@
+{
+	"name": "@mingull/queueify",
+	"version": "0.0.0",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"lint": "eslint . --max-warnings 0",
+		"build": "tsc",
+		"start": "node dist/index.js",
+		"start:db": "node dist/db/index.js"
+	},
+	"dependencies": {
+		"ioredis": "^5.6.1"
+	},
+	"exports": {
+		".": "./src/index.ts",
+		"./queue": "./src/queue.ts",
+		"./worker": "./src/worker.ts",
+		"./redis": "./src/redis.ts",
+		"./types": "./src/types.ts"
+	}
+}

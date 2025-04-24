@@ -1,4 +1,4 @@
-import { createMiddleware } from "../../../../../packages/library/src/middleware";
+import { createMiddleware } from "@mingull/middlewarity";
 
 export const withRateLimit = createMiddleware<{ ratelimit: number }>((handler) => {
 	return async (req, ctx) => {
