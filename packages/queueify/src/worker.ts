@@ -3,25 +3,23 @@ import { Job } from "./types.js";
 
 export class Worker<T> {
 	private queue: Queue<T>;
-	private processJob: (job: Job<T>) => Promise<void>;
+	private processJob: ((job: Job<T>) => Promise<void>) | undefined = undefined;
 	private concurrency;
 	private activeJobs: Map<string, Promise<void>> = new Map();
 
-	constructor({
-		queue,
-		job,
-		options,
-	}: {
-		queue: Queue<T>;
-		job: (job: Job<T>) => Promise<void>;
-		options: { concurrency?: number };
-	}) {
-		this.processJob = job;
+	constructor({ queue, options }: { queue: Queue<T>; options: { concurrency?: number } }) {
 		this.queue = queue;
 		this.concurrency = options.concurrency ?? 1;
 	}
 
+	public setProcessor(job: (job: Job<T>) => Promise<void>) {
+		this.processJob = job;
+	}
+
 	async start() {
+		if (!this.processJob) {
+			throw new Error("Process job function is not set. Please set it using setProcessJob() method.");
+		}
 		while (true) {
 			const job = await this.queue.getOrWaitForJob();
 			if (job == null) {

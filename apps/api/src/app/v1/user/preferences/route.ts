@@ -1,6 +1,6 @@
 import { createErrorResponse, createSuccessResponse, getHttpCode, getStatus } from "@/lib/api";
 import { withAuth } from "@/lib/middlewares/with-auth";
-import { queue } from "@/lib/queue";
+import { emailQueue } from "@/lib/queues";
 import { db, eq } from "@mingull/lib/db";
 import { preferences, sites, userPreferences } from "@mingull/lib/db/schemas/index";
 import { Worker } from "@mingull/queueify";
@@ -55,20 +55,33 @@ export const POST = withAuth(async (req, ctx) => {
 			statusText: getHttpCode("BadRequest"),
 		});
 	}
-
-	await queue.addJob({
-		name: "updateUserPreferences",
-		data: {
+	const preference = await db.select().from(preferences).where(eq(preferences.id, data.preference_id)).limit(1);
+	if (!preference.length) {
+		return NextResponse.json(createErrorResponse({ code: "NotFound", message: "Preference not found" }), {
+			status: getStatus("NotFound"),
+			statusText: getHttpCode("NotFound"),
+		});
+	}
+	await db
+		.insert(userPreferences)
+		.values({
 			userId: ctx.user.id,
 			preferenceId: data.preference_id,
 			value: data.value,
-		},
-		options: {
-			retry: {
-				totalAttempts: 0,
-				maxAttempts: 10,
-				delay: 1000,
+		})
+		.onDuplicateKeyUpdate({
+			set: {
+				value: data.value,
 			},
+		});
+
+	await emailQueue.addJob({
+		name: "update-user-preferences",
+		data: {
+			userId: ctx.user.id,
+			email: ctx.user.email,
+			preference: data.preference_id,
+			value: data.value,
 		},
 	});
 
