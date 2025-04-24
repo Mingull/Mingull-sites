@@ -1,5 +1,5 @@
 import { createSuccessResponse } from "@/lib/api";
-import { composeMiddlewares } from "@/lib/middlewares";
+import { composeMiddlewares } from "@mingull/lib/middleware";
 import { withLogger } from "@/lib/middlewares/with-logger";
 import { withRateLimit } from "@/lib/middlewares/with-ratelimit";
 import { NextResponse } from "next/server";

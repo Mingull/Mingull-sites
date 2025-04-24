@@ -1,4 +1,4 @@
-import { createMiddleware } from ".";
+import { createMiddleware } from "../../../../../packages/library/src/middleware";
 
 export const withLogger = createMiddleware((handler) => {
 	return async (req, ctx) => {

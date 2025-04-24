@@ -1,6 +1,6 @@
 import { auth } from "@mingull/lib/auth/server";
 import { Session, User } from "better-auth";
-import { createMiddleware } from ".";
+import { createMiddleware } from "../../../../../packages/library/src/middleware";
 import { NextResponse } from "next/server";
 import { createErrorResponse, getHttpCode, getStatus } from "../api";
 

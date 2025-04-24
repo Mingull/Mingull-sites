@@ -4,8 +4,7 @@ import { and, db, eq } from "@mingull/lib/db/index";
 import { preferences, sites, userPreferences } from "@mingull/lib/db/schemas/index";
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = withAuth<{ pref: string }>(async (req, ctx) => {
-	console.log({ ctx });
+export const GET = withAuth<{ params: { pref: string } }>(async (req, ctx) => {
 	const userPrefs = await db
 		.select()
 		.from(preferences)
