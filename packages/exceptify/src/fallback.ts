@@ -1,4 +1,4 @@
-import { isPromise } from "../lib/utils.js";
+import { isPromise } from "@mingull/lib";
 import { Result } from "./index.js";
 
 export function withFallback<T, E = unknown>(result: Result<T, E>, fallback: T): T;

@@ -35,7 +35,6 @@
 		"./db/*": "./src/db/*.ts",
 		"./middleware": "./src/middleware/index.ts",
 		"./middleware/*": "./src/middleware/*.ts",
-		"./exceptions": "./src/exceptions/index.ts",
 		"./plugins/client/*": "./src/plugins/client/*.ts",
 		"./plugins/server/*": "./src/plugins/server/*.ts"
 	}
