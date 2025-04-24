@@ -55,6 +55,7 @@ export const POST = withAuth(async (req, ctx) => {
 			statusText: getHttpCode("BadRequest"),
 		});
 	}
+	
 	const preference = await db.select().from(preferences).where(eq(preferences.id, data.preference_id)).limit(1);
 	if (!preference.length) {
 		return NextResponse.json(createErrorResponse({ code: "NotFound", message: "Preference not found" }), {
@@ -62,6 +63,7 @@ export const POST = withAuth(async (req, ctx) => {
 			statusText: getHttpCode("NotFound"),
 		});
 	}
+
 	await db
 		.insert(userPreferences)
 		.values({
