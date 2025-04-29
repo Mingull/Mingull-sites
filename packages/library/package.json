@@ -13,7 +13,7 @@
 		"@paralleldrive/cuid2": "^2.2.2",
 		"better-auth": "^1.2.7",
 		"clsx": "^2.1.1",
-		"drizzle-orm": "^0.42.0",
+		"drizzle-orm": "^0.43.1",
 		"next": "15.3.1",
 		"tailwind-merge": "^3.2.0",
 		"zod": "^3.24.3"
@@ -21,15 +21,16 @@
 	"devDependencies": {
 		"@mingull/eslint-config": "workspace:*",
 		"@mingull/typescript-config": "workspace:*",
-		"@turbo/gen": "^2.5.0",
-		"@types/node": "^22.14.1",
+		"@turbo/gen": "^2.5.2",
+		"@types/node": "^22.15.3",
 		"drizzle-kit": "^0.31.0",
-		"mysql2": "^3.14.0",
+		"mysql2": "^3.14.1",
 		"tailwindcss": "^4.1.4",
 		"typescript": "^5.8.3"
 	},
 	"exports": {
 		".": "./src/index.ts",
+		"./utils": "./src/lib/utils.ts",
 		"./auth/*": "./src/auth/*.ts",
 		"./db": "./src/db/index.ts",
 		"./db/*": "./src/db/*.ts",

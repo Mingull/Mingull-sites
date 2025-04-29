@@ -1,10 +1,10 @@
 "use client";
 
-import * as React from "react";
-import { Input } from "@mingull/ui/components/input";
-import { cn } from "@mingull/lib";
+import { cn } from "@mingull/lib/utils";
 import { Button } from "@mingull/ui/components/button";
+import { Input } from "@mingull/ui/components/input";
 import { Eye, EyeOff } from "lucide-react";
+import * as React from "react";
 
 const PasswordInput = ({ className, ...props }: React.InputHTMLAttributes<HTMLInputElement>) => {
 	const [showPassword, setShowPassword] = React.useState(false);
@@ -33,3 +33,4 @@ const PasswordInput = ({ className, ...props }: React.InputHTMLAttributes<HTMLIn
 };
 
 export { PasswordInput };
+

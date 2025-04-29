@@ -11,8 +11,8 @@ import {
 	CommandList,
 } from "@mingull/ui/components/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@mingull/ui/components/popover";
-import { cn } from "@mingull/utils";
-("../../../utils/src/lib/utils.js");
+
+import { cn } from "@mingull/lib/utils";
 
 export function Combobox({
 	options,

@@ -4,7 +4,7 @@ import * as React from "react";
 import { Command as CommandPrimitive } from "cmdk";
 import { SearchIcon } from "lucide-react";
 
-import { cn } from "@mingull/utils";
+import { cn } from "@mingull/lib/utils";
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@mingull/ui/components/dialog";
 

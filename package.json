@@ -1,33 +1,33 @@
 {
-  "name": "test-repo",
-  "private": true,
-  "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types"
-  },
-  "devDependencies": {
-    "@mingull/eslint-config": "workspace:*",
-    "@mingull/typescript-config": "workspace:*",
-    "prettier": "^3.5.3",
-    "prettier-plugin-tailwindcss": "^0.6.11",
-    "turbo": "^2.5.0",
-    "typescript": "5.8.3"
-  },
-  "packageManager": "pnpm@10.9.0",
-  "engines": {
-    "node": ">=20"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "core-js-pure",
-      "esbuild",
-      "sharp"
-    ]
-  },
-  "dependencies": {
-    "dotenv": "^16.5.0"
-  }
+	"name": "test-repo",
+	"private": true,
+	"scripts": {
+		"build": "turbo run build",
+		"dev": "turbo run dev",
+		"lint": "turbo run lint",
+		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
+		"check-types": "turbo run check-types"
+	},
+	"devDependencies": {
+		"@mingull/eslint-config": "workspace:*",
+		"@mingull/typescript-config": "workspace:*",
+		"@types/node": "^22.15.3",
+		"dotenv": "^16.5.0",
+		"prettier": "^3.5.3",
+		"prettier-plugin-tailwindcss": "^0.6.11",
+		"tailwindcss": "^4.1.4",
+		"turbo": "^2.5.2",
+		"typescript": "5.8.3"
+	},
+	"packageManager": "pnpm@10.9.0",
+	"engines": {
+		"node": ">=20"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"core-js-pure",
+			"esbuild",
+			"sharp"
+		]
+	}
 }

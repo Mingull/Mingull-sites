@@ -1,0 +1,29 @@
+{
+	"name": "@mingull/cli",
+	"version": "0.0.0",
+	"type": "module",
+	"private": true,
+	"bin": {
+		"monoger": "./dist/index.js"
+	},
+	"scripts": {
+		"lint": "eslint . --max-warnings 0",
+		"build": "tsc",
+		"start": "node dist/index.js",
+		"dev": "tsup --watch"
+	},
+	"dependencies": {
+		"@antfu/ni": "^24.3.0",
+		"@clack/prompts": "^0.10.1",
+		"@mingull/exceptify": "workspace:*",
+		"@mingull/lib": "workspace:*",
+		"chalk": "^5.4.1",
+		"commander": "^13.1.0",
+		"zod": "^3.24.3"
+	},
+	"devDependencies": {
+		"@mingull/eslint-config": "workspace:*",
+		"@mingull/typescript-config": "workspace:*",
+		"tsup": "^8.4.0"
+	}
+}

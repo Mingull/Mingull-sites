@@ -1,7 +1,8 @@
 "use client";
 
 import { Button, buttonVariants } from "@mingull/ui/components/button";
-import { cn } from "@mingull/lib";
+
+import { cn } from "@mingull/lib/utils";
 
 import { differenceInCalendarDays } from "date-fns";
 import { ChevronLeft, ChevronRight } from "lucide-react";

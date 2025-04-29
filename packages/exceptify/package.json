@@ -6,11 +6,14 @@
 	"scripts": {
 		"lint": "eslint . --max-warnings 0",
 		"build": "tsc",
-		"start": "node dist/index.js",
-		"start:db": "node dist/db/index.js"
+		"start": "node dist/index.js"
 	},
 	"dependencies": {
 		"@mingull/lib": "workspace:*"
+	},
+	"devDependencies": {
+		"@mingull/eslint-config": "workspace:*",
+		"@mingull/typescript-config": "workspace:*"
 	},
 	"exports": {
 		".": "./src/index.ts"
