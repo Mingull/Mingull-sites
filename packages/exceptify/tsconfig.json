@@ -3,7 +3,7 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
-			"@mingull/lib/*": ["./src/*"]
+			"@mingull/exceptify/*": ["./src/*"]
 		}
 	},
 	"include": [".", "../middleware"],

@@ -1,6 +1,7 @@
 import MDXContent from "@/components/mdx-content";
 import { getPostBySlug } from "@/lib/posts";
-import { formatDate, getMdxComponents } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
+import { getMdxComponents } from "@/lib/get-components";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";

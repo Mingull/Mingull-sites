@@ -1,7 +1,6 @@
-import path from "path";
 import fs from "fs/promises";
 import matter from "gray-matter";
-import { MDXRemote, MDXRemoteProps } from "next-mdx-remote";
+import path from "path";
 
 const rootDirectory = path.join(process.cwd(), "src", "content", "posts");
 
@@ -27,18 +26,21 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 
 		const { data, content } = matter(fileContent);
 
-		console.log(typeof data.components); // array of objects
-		console.log(data.components);
-
 		// convert string to [key: string]: value: string object
-		const components = (data.components as { [key: string]: string }[]).reduce((acc, component) => {
-			const entry = Object.entries(component)[0];
-			if (entry) {
-				const [key, value] = entry;
-				acc[key] = value;
-			}
-			return acc;
-		}, {} as Record<string, string>);
+		const components =
+			data.components ?
+				(data.components as { [key: string]: string }[]).reduce(
+					(acc, component) => {
+						const entry = Object.entries(component)[0];
+						if (entry) {
+							const [key, value] = entry;
+							acc[key] = value;
+						}
+						return acc;
+					},
+					{} as Record<string, string>,
+				)
+			:	{};
 
 		return { metadata: { ...data, slug, components }, content };
 	} catch (e) {
