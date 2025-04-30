@@ -27,24 +27,21 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 		const { data, content } = matter(fileContent);
 
 		// convert string to [key: string]: value: string object
-		const components =
-			data.components ?
-				(data.components as { [key: string]: string }[]).reduce(
-					(acc, component) => {
-						const entry = Object.entries(component)[0];
-						if (entry) {
-							const [key, value] = entry;
-							acc[key] = value;
-						}
-						return acc;
-					},
-					{} as Record<string, string>,
-				)
-			:	{};
+		let components: Record<string, string> = {};
+
+		if (Array.isArray(data.components)) {
+			components = data.components.reduce((acc, obj) => {
+				const [key, value] = Object.entries(obj)[0] || [];
+				if (typeof key === "string" && typeof value === "string") {
+					acc[key] = value;
+				}
+				return acc;
+			}, {});
+		}
 
 		return { metadata: { ...data, slug, components }, content };
 	} catch (e) {
-		console.log(e);
+		console.error(`Failed to load post: ${slug}`, e);
 		return null;
 	}
 }

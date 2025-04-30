@@ -5,17 +5,16 @@
   author: 'Niels Plug'
   publishedAt: '2024-10-09'
   components:
-    - Counter: counter.tsx
+    - Counter: '@/components/counter.tsx'
 ---
 
-MDX is a powerful tool that allows you to write JSX in your Markdown files. This
-post will introduce you to the basics of MDX.
+MDX is a powerful tool that allows you to write JSX in your Markdown files. This post will introduce you to the basics of MDX.
 
 ## What is MDX?
 
-MDX is a file format that allows you to write JSX in your Markdown files. This
-means that you can use React components, import other components, and even write
-inline JSX in your Markdown files.
+MDX is a file format that allows you to write JSX in your Markdown files.
+This means that you can use React components, import other components,
+and even write inline JSX in your Markdown files.
 
 ```js
 export async function getSource() {
@@ -41,9 +40,23 @@ plugin to enable MDX support in your project.
 Once you have the plugin installed, you can start writing MDX files by creating
 files with the `.mdx` extension and writing JSX inside them.
 
-## Counter components
+## Examples of MDX components
 
-{/* <Counter/> */}
+MDX allows you to use any React component in your Markdown files.
+This means you can create interactive and dynamic content easily.
+You can also import components and use them directly in your Markdown.
+
+## Examples of Counter components
+
+<Counter />
+
+### Basic Counter
+
+<Counter initialCount={0} />
+
+### Advanced Counter
+
+<Counter initialCount={10} step={2} />
 
 ## Conclusion
 

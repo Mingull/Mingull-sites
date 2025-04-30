@@ -74,7 +74,7 @@ export default async function Post(props: { params: Promise<{ slug: string; loca
 				</header>
 
 				<main className="prose dark:prose-invert mt-8 w-full max-w-full">
-					<MDXContent source={content} components={getMdxComponents({ ...(components || {}) })} />
+					<MDXContent source={content} components={await getMdxComponents({ ...(components || {}) })} />
 				</main>
 
 				{/* <footer className="mt-16">
