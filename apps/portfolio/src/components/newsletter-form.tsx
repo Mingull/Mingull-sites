@@ -6,11 +6,10 @@ import { toast } from "sonner";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { NewsletterFormSchema } from "@/lib/schemas";
-import { Button } from "@mingull/ui/components/button";
-import { Input } from "@mingull/ui/components/input";
-
+import { Button } from "@mingull/ui/button";
+import { Input } from "@mingull/ui/input";
 // import { subscribe } from "@/lib/actions/send-email";
-import { Card, CardContent } from "@mingull/ui/components/card";
+import { Card, CardContent } from "@mingull/ui/card";
 
 type Inputs = z.infer<typeof NewsletterFormSchema>;
 
@@ -61,7 +60,7 @@ export default function NewsletterForm() {
 							/>
 
 							{errors.email?.message && (
-								<p className="ml-1 mt-2 text-sm text-rose-400">{errors.email.message}</p>
+								<p className="mt-2 ml-1 text-sm text-rose-400">{errors.email.message}</p>
 							)}
 						</div>
 

@@ -1,8 +1,8 @@
 "use client";
-import { Link, usePathname } from "@/i18n/routing";
+import { Link, usePathname } from "@/i18n/navigation";
 import { useLocale } from "next-intl";
 import ReactCountryFlag from "react-country-flag";
-import { Button } from "@mingull/ui/components/button";
+import { Button } from "@mingull/ui/button";
 
 export default function LanguageSelector() {
 	const locale = useLocale();

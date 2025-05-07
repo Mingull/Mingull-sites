@@ -1,10 +1,9 @@
-import { db } from "../../../lib/db";
-import { pastes } from "../../../lib/db/schemas";
-import { getUser } from "../../../../../Pastelimency/src/lib/actions/server";
-import { eq, or } from "drizzle-orm";
+import { db, eq, or } from "@mingull/lib/db";
+import { pastes } from "@mingull/lib/db/schemas/index";
 import { nanoid } from "nanoid";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { getUser } from "../../../../../Pastelimency/src/lib/actions/server";
 
 const pasteSchema = z.object({
 	title: z.string().min(3, "Title must be at least 3 characters long"),

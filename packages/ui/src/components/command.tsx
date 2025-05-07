@@ -6,7 +6,7 @@ import { SearchIcon } from "lucide-react";
 
 import { cn } from "@mingull/lib/utils";
 
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@mingull/ui/components/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@mingull/ui/dialog";
 
 function Command({ className, ...props }: React.ComponentProps<typeof CommandPrimitive>) {
 	return (

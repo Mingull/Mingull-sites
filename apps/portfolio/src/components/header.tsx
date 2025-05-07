@@ -1,10 +1,11 @@
 "use client";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { ComponentProps } from "react";
 import LoginButton from "./login-button";
 import ThemeToggle from "./theme-toggle";
+import LanguageSelector from "./language-selector";
+import { Link } from "@/i18n/navigation";
 
 export default function Header() {
 	return (
@@ -23,7 +24,7 @@ export default function Header() {
 				</div>
 
 				<div className="flex">
-					{/* <LanguageSelector /> */}
+					<LanguageSelector />
 					<ThemeToggle />
 					<LoginButton />
 				</div>

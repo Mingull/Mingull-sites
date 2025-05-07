@@ -15,7 +15,7 @@ import {
 
 import { cn } from "@mingull/lib/utils";
 
-import { Label } from "@mingull/ui/components/label";
+import { Label } from "@mingull/ui/label";
 
 const Form = FormProvider;
 

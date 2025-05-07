@@ -1,5 +1,5 @@
 "use client";
-import { Progress } from "@mingull/ui/components/progress";
+import { Progress } from "@mingull/ui/progress";
 
 export default function Skills() {
 	const skills = [

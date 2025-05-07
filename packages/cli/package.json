@@ -19,7 +19,7 @@
 		"@mingull/lib": "workspace:*",
 		"chalk": "^5.4.1",
 		"commander": "^13.1.0",
-		"zod": "^3.24.3"
+		"zod": "^3.24.4"
 	},
 	"devDependencies": {
 		"@mingull/eslint-config": "workspace:*",

@@ -1,5 +1,5 @@
 import { ProjectMetadata } from "@/lib/projects";
-import { formatDate } from "@/lib/utils";
+import { formatDate } from "@/lib/utils.server";
 import Image from "next/image";
 import Link from "next/link";
 

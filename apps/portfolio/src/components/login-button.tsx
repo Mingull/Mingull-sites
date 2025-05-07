@@ -4,8 +4,8 @@ import { LogIn, LogOutIcon, UserIcon } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
 import { SmartLink } from "./smart-link";
-import { Avatar, AvatarFallback, AvatarImage } from "@mingull/ui/components/avatar";
-import { Button } from "@mingull/ui/components/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@mingull/ui/avatar";
+import { Button } from "@mingull/ui/button";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -13,8 +13,8 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
-} from "@mingull/ui/components/dropdown-menu";
-import { Icons } from "@mingull/ui/components/icons";
+} from "@mingull/ui/dropdown-menu";
+import { Spinner } from "@mingull/ui/icons";
 import { useEffect, useState } from "react";
 // import { Session } from "@mingull/shared/types-react";
 
@@ -60,7 +60,7 @@ export default function LoginButton() {
 function LoadingButton() {
 	return (
 		<Button size="sm" variant="ghost">
-			<Icons.spinner className="size-4 animate-spin" />
+			<Spinner className="size-4 animate-spin" />
 			<span className="sr-only">loading</span>
 		</Button>
 	);

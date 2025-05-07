@@ -1,4 +1,5 @@
 "use client";
+//@ts-ignore
 import authorImage from "@/../public/images/authors/niels.jpg";
 import Image from "next/image";
 

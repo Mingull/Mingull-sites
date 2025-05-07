@@ -1,8 +1,8 @@
 "use client";
 
 import { cn } from "@mingull/lib/utils";
-import { Button } from "@mingull/ui/components/button";
-import { Input } from "@mingull/ui/components/input";
+import { Button } from "@mingull/ui/button";
+import { Input } from "@mingull/ui/input";
 import { Eye, EyeOff } from "lucide-react";
 import * as React from "react";
 

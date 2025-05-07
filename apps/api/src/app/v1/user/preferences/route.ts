@@ -47,7 +47,7 @@ const postPreferencesSchema = z
 	.strict();
 
 export const POST = withAuth(async (req, ctx) => {
-	const { data, error } = await ctx.json(postPreferencesSchema);
+	const { data, error } = await ctx.json<z.infer<typeof postPreferencesSchema>>();
 
 	if (error) {
 		return NextResponse.json(createErrorResponse({ code: "BadRequest", message: error.message }), {
@@ -55,7 +55,7 @@ export const POST = withAuth(async (req, ctx) => {
 			statusText: getHttpCode("BadRequest"),
 		});
 	}
-	
+
 	const preference = await db.select().from(preferences).where(eq(preferences.id, data.preference_id)).limit(1);
 	if (!preference.length) {
 		return NextResponse.json(createErrorResponse({ code: "NotFound", message: "Preference not found" }), {

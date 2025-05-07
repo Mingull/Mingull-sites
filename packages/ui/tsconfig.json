@@ -2,10 +2,12 @@
 	"extends": "@mingull/typescript-config/react-library.json",
 	"compilerOptions": {
 		"baseUrl": ".",
+		"allowImportingTsExtensions": true,
+		"noEmit": true,
 		"paths": {
 			"@mingull/ui/*": ["./src/*"]
 		}
 	},
-	"include": [".", "../../apps/Pastelimency/src/components/navbar.tsx"],
+	"include": ["."],
 	"exclude": ["node_modules", "dist"]
 }

@@ -14,7 +14,7 @@ export type BaseContext<P extends MiddlewareParams> = ((P["params"] extends Para
 :	{ params?: undefined }) &
 	(P["searchParams"] extends SearchParams ? { searchParams: Promise<P["searchParams"]> }
 	:	{ searchParams?: undefined })) & {
-	json: <T>(schema: z.Schema<T>) => ReturnType<typeof json<T>>;
+	json: <T>() => ReturnType<typeof json<T>>;
 };
 
 export type Context<T = {}, P extends MiddlewareParams = MiddlewareParams> = BaseContext<P> & T;

@@ -1,22 +1,11 @@
-import { betterFetch } from "@better-fetch/fetch";
-import { NextRequest, NextResponse } from "next/server";
-import type { Session } from "@mingull/shared/types-react";
+import createMiddleware from "next-intl/middleware";
+import { routing } from "./i18n/routing";
 
-export default async function authMiddleware(request: NextRequest) {
-	const { data: session } = await betterFetch<Session>(process.env.NEXT_PUBLIC_BETTER_AUTH_URL + "/get-session", {
-		baseURL: request.nextUrl.origin,
-		headers: {
-			//get the cookie from the request
-			cookie: request.headers.get("cookie") || "",
-		},
-	});
-
-	if (!session) {
-		return NextResponse.redirect(new URL("/", request.url));
-	}
-	return NextResponse.next();
-}
+export default createMiddleware(routing);
 
 export const config = {
-	matcher: ["/docs/:path*", "/dashboard"],
+	// Match all pathnames except for
+	// - … if they start with `/api`, `/trpc`, `/_next` or `/_vercel`
+	// - … the ones containing a dot (e.g. `favicon.ico`)
+	matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
 };
