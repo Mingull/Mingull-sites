@@ -1,4 +1,4 @@
-import { getPosts } from "@/lib/posts";
+import { getPosts } from "@/lib/actions/get-posts";
 import Link from "next/link";
 import Posts from "./posts";
 

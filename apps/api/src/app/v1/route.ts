@@ -1,7 +1,7 @@
 import { createSuccessResponse } from "@/lib/api";
-import { composeMiddlewares } from "../../../../../packages/middleware";
 import { withLogger } from "@/lib/middlewares/with-logger";
 import { withRateLimit } from "@/lib/middlewares/with-ratelimit";
+import { composeMiddlewares } from "@mingull/middlewarity";
 import { NextResponse } from "next/server";
 
 const withComposition = composeMiddlewares(withRateLimit, withLogger);

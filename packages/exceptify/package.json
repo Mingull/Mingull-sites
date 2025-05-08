@@ -16,8 +16,6 @@
 		"@mingull/typescript-config": "workspace:*"
 	},
 	"exports": {
-		"./attempt": "./src/attempt.ts",
-		"./catcher": "./src/catcher.ts",
-		"./fallback": "./src/fallback.ts"
+		".": "./src/index.ts"
 	}
 }

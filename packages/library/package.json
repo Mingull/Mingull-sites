@@ -22,7 +22,7 @@
 		"@mingull/eslint-config": "workspace:*",
 		"@mingull/typescript-config": "workspace:*",
 		"@turbo/gen": "^2.5.3",
-		"@types/node": "^22.15.14",
+		"@types/node": "^22.15.16",
 		"drizzle-kit": "^0.31.1",
 		"mysql2": "^3.14.1",
 		"tailwindcss": "^4.1.5",

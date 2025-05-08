@@ -1,4 +1,4 @@
-import { createMiddleware } from "@mingull/middlewarity";
+import { createMiddleware } from "@mingull/api";
 
 export const withLogger = createMiddleware((handler) => {
 	return async (req, ctx) => {

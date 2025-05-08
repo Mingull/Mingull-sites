@@ -1,7 +1,7 @@
 services:
     redis:
         image: redis:latest
-        container_name: redis-job-queue
+        container_name: redis-server
         restart: always
         ports:
             - "6379:6379"

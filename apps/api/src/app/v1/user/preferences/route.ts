@@ -1,9 +1,7 @@
-import { createErrorResponse, createSuccessResponse, getHttpCode, getStatus } from "@/lib/api";
+import { createErrorResponse, createSuccessResponse, getHttpCode, getStatus } from "@mingull/api";
 import { withAuth } from "@/lib/middlewares/with-auth";
-import { emailQueue } from "@/lib/queues";
 import { db, eq } from "@mingull/lib/db";
 import { preferences, sites, userPreferences } from "@mingull/lib/db/schemas/index";
-import { Worker } from "@mingull/queueify";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
@@ -47,20 +45,20 @@ const postPreferencesSchema = z
 	.strict();
 
 export const POST = withAuth(async (req, ctx) => {
-	const { data, error } = await ctx.json<z.infer<typeof postPreferencesSchema>>();
+	const { data, error } = await ctx.json<typeof postPreferencesSchema>();
 
 	if (error) {
 		return NextResponse.json(createErrorResponse({ code: "BadRequest", message: error.message }), {
-			status: getStatus("BadRequest"),
-			statusText: getHttpCode("BadRequest"),
+			status: getHttpCode("BadRequest"),
+			statusText: getStatus("BadRequest"),
 		});
 	}
 
 	const preference = await db.select().from(preferences).where(eq(preferences.id, data.preference_id)).limit(1);
 	if (!preference.length) {
 		return NextResponse.json(createErrorResponse({ code: "NotFound", message: "Preference not found" }), {
-			status: getStatus("NotFound"),
-			statusText: getHttpCode("NotFound"),
+			status: getHttpCode("NotFound"),
+			statusText: getStatus("NotFound"),
 		});
 	}
 
@@ -77,18 +75,18 @@ export const POST = withAuth(async (req, ctx) => {
 			},
 		});
 
-	await emailQueue.addJob({
-		name: "update-user-preferences",
-		data: {
-			userId: ctx.user.id,
-			email: ctx.user.email,
-			preference: data.preference_id,
-			value: data.value,
-		},
-	});
+	// await emailQueue.addJob({
+	// 	name: "update-user-preferences",
+	// 	data: {
+	// 		 userId: ctx.user.id,
+	// 		email: ctx.user.email,
+	// 		 preference: data.preference_id,
+	// 		value: data.value,
+	// 	},
+	// });
 
 	return NextResponse.json(createSuccessResponse({ code: "Ok", message: "User preferences updated", data }), {
-		status: getStatus("Ok"),
-		statusText: getHttpCode("Ok"),
+		status: getHttpCode("Ok"),
+		statusText: getStatus("Ok"),
 	});
 });

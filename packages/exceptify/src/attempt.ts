@@ -1,5 +1,5 @@
 import { isPromise } from "@mingull/lib/utils";
-import { Result } from "./index.js";
+import { Result } from "./types.ts";
 
 export function attempt<T, E = unknown>(fn: () => Promise<T>): Promise<Result<T, E>>;
 export function attempt<T, E = unknown>(fn: () => T): Result<T, E>;

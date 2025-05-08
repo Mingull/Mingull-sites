@@ -1,31 +1,32 @@
+"use client";
 import Posts from "@/components/posts";
 import PostsWithSearch from "@/components/posts-with-search";
-import { getPosts } from "@/lib/posts";
+import { getPosts } from "@/lib/actions/get-posts";
 import { Button, Input, Skeleton } from "@mingull/ui";
 import { usePromise } from "@mingull/ui/hooks/use-promise";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { useMemo, useState } from "react";
 
-export default function PostsPage() {	
+export default function PostsPage() {
 	const { state: posts, error, loading } = usePromise(() => getPosts(), []);
-	const [query, setQuery] = useState("");
+	// const [query, setQuery] = useState("");
 
-	const filteredPosts = useMemo(() => {
-		if (!posts) return [];
-		return posts
-			.filter((post) => post.title?.toLowerCase().includes(query.toLowerCase()))
-			.filter((post) => post.publishedAt && new Date(post.publishedAt).getTime() <= Date.now());
-	}, [posts, query]);
+	// const filteredPosts = useMemo(() => {
+	// 	if (!posts) return [];
+	// 	return posts
+	// 		.filter((post) => post.title?.toLowerCase().includes(query.toLowerCase()))
+	// 		.filter((post) => post.publishedAt && new Date(post.publishedAt).getTime() <= Date.now());
+	// }, [posts, query]);
 
-	const isFiltered = query.length > 0;
+	// const isFiltered = query.length > 0;
 
-	const resetFilter = () => setQuery("");
+	// const resetFilter = () => setQuery("");
 	return (
 		<section className="py-24">
 			<div className="container max-w-3xl xl:max-w-4xl">
 				<h1 className="title mb-12">Posts</h1>
 
-				<div className="mb-12 flex items-center gap-3">
+				{/* <div className="mb-12 flex items-center gap-3">
 					<Input
 						type="text"
 						placeholder="Search Posts..."
@@ -69,8 +70,7 @@ export default function PostsPage() {
 					</ul>
 				: error ?
 					<p className="text-red-500">Error loading posts</p>
-				:	<Posts posts={filteredPosts} />}
-				{/* <PostsWithSearch posts={posts} /> */}
+				:	<Posts posts={filteredPosts} />} */}
 			</div>
 		</section>
 	);

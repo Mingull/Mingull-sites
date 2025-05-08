@@ -1,6 +1,6 @@
 import { Prettify } from "@mingull/lib";
-import { json } from "./json.js";
-import { Handler, MergeContexts, Middleware, MiddlewareParams, SearchParams } from "./types.js";
+import { json } from "./json.ts";
+import { Handler, MergeContexts, Middleware, MiddlewareParams, SearchParams } from "./types.ts";
 /**
  * @param middleware - The middleware function to be created.
  * @returns A middleware function that takes a handler and returns a new handler.

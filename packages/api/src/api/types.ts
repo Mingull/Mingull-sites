@@ -1,8 +1,11 @@
-import { httpCodePhrases, httpCodes } from "./http-codes";
+import { Prettify } from "@mingull/lib";
+import { httpCodePhrases, httpCodes } from "./http-codes.js";
 
 export type SuccessResponse<
-	TCodePhrase extends HttpCodePhrase = HttpCodePhrase,
-	TCode extends HttpCode = HttpCode,
+	TCodePhrase extends
+		(typeof httpCodePhrases.success)[keyof typeof httpCodePhrases.success] = (typeof httpCodePhrases.success)[keyof typeof httpCodePhrases.success],
+	TCode extends
+		(typeof httpCodes.success)[keyof typeof httpCodes.success] = (typeof httpCodes.success)[keyof typeof httpCodes.success],
 	TData = unknown,
 	TMeta = Record<string, unknown>,
 > = {
@@ -37,7 +40,12 @@ export type SuccessResponse<
 	debugInfo?: Record<string, unknown>;
 };
 
-export type ErrorResponse<TCodePhrase extends HttpCodePhrase = HttpCodePhrase, TCode extends HttpCode = HttpCode> = {
+export type ErrorResponse<
+	TCodePhrase extends
+		(typeof httpCodePhrases.error)[keyof typeof httpCodePhrases.error] = (typeof httpCodePhrases.error)[keyof typeof httpCodePhrases.error],
+	TCode extends
+		(typeof httpCodes.error)[keyof typeof httpCodes.error] = (typeof httpCodes.error)[keyof typeof httpCodes.error],
+> = {
 	/**
 	 * Whether the request was successful
 	 */
@@ -61,5 +69,5 @@ export type ErrorResponse<TCodePhrase extends HttpCodePhrase = HttpCodePhrase, T
 };
 
 // Type to infer string keys for autocompletion
-export type HttpCodePhrase = (typeof httpCodePhrases)[keyof typeof httpCodePhrases];
-export type HttpCode = (typeof httpCodes)[keyof typeof httpCodes];
+export type HttpCodePhrase = Prettify<(typeof httpCodePhrases)[keyof typeof httpCodePhrases]>;
+export type HttpCode = Prettify<(typeof httpCodes)[keyof typeof httpCodes]>;

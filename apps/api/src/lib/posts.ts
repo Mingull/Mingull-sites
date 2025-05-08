@@ -5,22 +5,19 @@ import matter from "gray-matter";
 import path from "path";
 import { z } from "zod";
 import { PostMetadataSchema, PostSchema } from "./schemas/post.schema";
-import { getLocale } from "next-intl/server";
-import { routing } from "@/i18n/routing";
 
 const rootDirectory = path.join(process.cwd(), "src", "content", "posts");
 
 export type Post = z.infer<typeof PostSchema>;
 export type PostMetadata = z.infer<typeof PostMetadataSchema>;
 
-export async function getPostBySlug(slug: string): Promise<Post | null> {
+export async function getPostBySlug({ locale, slug }: { slug: string; locale: string }): Promise<Post | null> {
 	console.log("getting post by slug", slug);
 	try {
-		const locale = await getLocale();
 		const candidatePaths = [
 			path.join(rootDirectory, locale, `${slug}.mdx`),
 			path.join(rootDirectory, `${slug}.mdx`),
-			path.join(rootDirectory, routing.defaultLocale, `${slug}.mdx`),
+			path.join(rootDirectory, "nl", `${slug}.mdx`),
 		];
 
 		let filePath: string | null = null;
@@ -94,15 +91,14 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 	}
 }
 
-export async function getPosts(limit?: number): Promise<PostMetadata[]> {
-	const locale = await getLocale();
-	console.log({ locale });
-	const candidateDirs = [
-		path.join(rootDirectory, locale),
-		rootDirectory,
-		path.join(rootDirectory, routing.defaultLocale),
-	];
-	console.log({ candidateDirs });
+export async function getPosts({
+	limit,
+	locale,
+}: {
+	limit?: number;
+	locale?: string | undefined;
+}): Promise<PostMetadata[]> {
+	const candidateDirs = [path.join(rootDirectory, locale ?? "nl"), rootDirectory];
 
 	const seenSlugs = new Set<string>();
 	const collected: PostMetadata[] = [];

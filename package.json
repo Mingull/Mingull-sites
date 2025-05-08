@@ -11,7 +11,7 @@
 	"devDependencies": {
 		"@mingull/eslint-config": "workspace:*",
 		"@mingull/typescript-config": "workspace:*",
-		"@types/node": "^22.15.14",
+		"@types/node": "^22.15.16",
 		"dotenv": "^16.5.0",
 		"prettier": "^3.5.3",
 		"prettier-plugin-tailwindcss": "^0.6.11",
