@@ -11,13 +11,11 @@ const rootDirectory = path.join(process.cwd(), "src", "content", "posts");
 export type Post = z.infer<typeof PostSchema>;
 export type PostMetadata = z.infer<typeof PostMetadataSchema>;
 
-export async function getPostBySlug({ locale, slug }: { slug: string; locale: string }): Promise<Post | null> {
-	console.log("getting post by slug", slug);
+export async function getPostBySlug({ locale, slug }: { slug: string; locale?: string }): Promise<Post | null> {
 	try {
 		const candidatePaths = [
-			path.join(rootDirectory, locale, `${slug}.mdx`),
+			path.join(rootDirectory, locale ?? "nl", `${slug}.mdx`),
 			path.join(rootDirectory, `${slug}.mdx`),
-			path.join(rootDirectory, "nl", `${slug}.mdx`),
 		];
 
 		let filePath: string | null = null;

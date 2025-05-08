@@ -4,10 +4,10 @@ import { getPosts } from "@/lib/posts";
 import { attempt } from "@mingull/exceptify";
 import { NextResponse } from "next/server";
 
-export const GET = withRateLimit<{ searchParams: { locale?: string } }>(async (req, ctx) => {
-	const { locale } = await ctx.searchParams;
+export const GET = withRateLimit<{ searchParams: { locale?: string; limit?: string } }>(async (req, ctx) => {
+	const { locale, limit } = await ctx.searchParams;
 
-	const { data, error } = await attempt(() => getPosts({ locale }));
+	const { data, error } = await attempt(() => getPosts({ locale, limit: limit ? parseInt(limit) : undefined }));
 
 	if (error) {
 		return NextResponse.json(
