@@ -1,11 +1,13 @@
 "use client";
 
-import { PostMetadata } from "@/lib/posts";
-import { Button } from "@mingull/ui/button";
-import { Input } from "@mingull/ui/input";
+import { postMetadataSchema } from "@/lib/schemas";
+import { Button, Input } from "@mingull/ui/comps";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { useMemo, useState } from "react";
+import { z } from "zod";
 import Posts from "./posts";
+
+type PostMetadata = z.infer<typeof postMetadataSchema>;
 
 export default function PostsWithSearch({ posts }: { posts: PostMetadata[] }) {
 	const [query, setQuery] = useState("");

@@ -1,4 +1,4 @@
-import { createSuccessResponse } from "@/lib/api";
+import { createSuccessResponse } from "@mingull/api";
 import { withAuth } from "@/lib/middlewares/with-auth";
 import { and, db, eq } from "@mingull/lib/db/index";
 import { preferences, sites, userPreferences } from "@mingull/lib/db/schemas/index";

@@ -11,7 +11,6 @@ export * from "./command.tsx";
 export * from "./dialog.tsx";
 export * from "./dropdown-menu.tsx";
 export * from "./form.tsx";
-export * from "./index.ts";
 export * from "./input.tsx";
 export * from "./label.tsx";
 export * from "./password-input.tsx";

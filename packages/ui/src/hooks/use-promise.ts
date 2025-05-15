@@ -1,10 +1,24 @@
 "use client";
-import { DependencyList, useEffect, useState } from "react";
+import { DependencyList, useCallback, useEffect, useRef, useState } from "react";
+import { useMounted } from "./use-mounted.ts";
 
 type Result<T, E = Error> =
-	| { loading: true; error: null; state: null }
-	| { loading: false; error: null; state: Awaited<T> }
-	| { loading: false; error: E; state: null };
+	| { status: "loading"; data: null; error: null }
+	| { status: "success"; data: T; error: null }
+	| { status: "error"; data: null; error: E };
+
+type UsePromiseOptions<T> = {
+	queryKey: DependencyList;
+	queryFn: () => T | Promise<T>;
+	enabled?: boolean;
+};
+
+type UsePromiseReturn<T, E = Error> = Result<T, E> & {
+	isLoading: boolean;
+	isSuccess: boolean;
+	isError: boolean;
+	refetch: () => void;
+};
 
 /**
  * Runs a synchronous or asynchronous function and tracks its loading, success, and error state.
@@ -22,35 +36,47 @@ type Result<T, E = Error> =
  * if (error) return <ErrorDisplay error={error} />;
  * return <Content data={data} />;
  */
-export function usePromise<T, E = Error>(factory: () => T | Promise<T>, deps: DependencyList = []): Result<T, E> {
+
+export function usePromise<T, E = Error>({
+	queryKey,
+	queryFn,
+	enabled = true,
+}: UsePromiseOptions<T>): UsePromiseReturn<T, E> {
+	const isMounted = useMounted();
 	const [result, setResult] = useState<Result<T, E>>({
-		loading: true,
+		status: "loading",
+		data: null,
 		error: null,
-		state: null,
-	} as Result<T, E>);
+	});
+	const [nonce, setNonce] = useState(0);
+
+	const refetch = () => setNonce((n) => n + 1);
+
+	const callback = useCallback(queryFn, queryKey);
 
 	useEffect(() => {
-		let cancelled = false;
+		if (!enabled) return;
 
-		setResult({ loading: true, error: null, state: null });
+		setResult({ status: "loading", data: null, error: null });
 
-		Promise.resolve()
-			.then(() => factory())
-			.then((data: T) => {
-				if (!cancelled) {
-					setResult({ loading: false, error: null, state: data as Awaited<T> });
+		Promise.resolve(callback())
+			.then((data) => {
+				if (isMounted.current) {
+					setResult({ status: "success", data: data as Awaited<T>, error: null });
 				}
 			})
 			.catch((err: E) => {
-				if (!cancelled) {
-					setResult({ loading: false, error: err, state: null });
+				if (isMounted.current) {
+					setResult({ status: "error", data: null, error: err });
 				}
 			});
+	}, [callback, nonce, enabled]);
 
-		return () => {
-			cancelled = true;
-		};
-	}, deps);
-
-	return result;
+	return {
+		...result,
+		isLoading: result.status === "loading",
+		isSuccess: result.status === "success",
+		isError: result.status === "error",
+		refetch,
+	};
 }

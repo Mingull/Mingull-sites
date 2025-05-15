@@ -4,7 +4,7 @@ import RecentPosts from "@/components/recent-posts";
 import RecentProjects from "@/components/recent-projects";
 import Skills from "@/components/skills";
 
-export default function Home() {
+export default async function Home() {
 	return (
 		<section className="py-24">
 			<div className="container max-w-3xl xl:max-w-4xl">
@@ -20,4 +20,3 @@ export default function Home() {
 		</section>
 	);
 }
-export const dynamic = "force-dynamic";

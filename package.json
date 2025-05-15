@@ -11,23 +11,16 @@
 	"devDependencies": {
 		"@mingull/eslint-config": "workspace:*",
 		"@mingull/typescript-config": "workspace:*",
-		"@types/node": "^22.15.16",
+		"@types/node": "^22.15.17",
 		"dotenv": "^16.5.0",
 		"prettier": "^3.5.3",
 		"prettier-plugin-tailwindcss": "^0.6.11",
-		"tailwindcss": "^4.1.5",
+		"tailwindcss": "^4.1.6",
 		"turbo": "^2.5.3",
 		"typescript": "5.8.3"
 	},
 	"packageManager": "pnpm@10.10.0",
 	"engines": {
 		"node": ">=20"
-	},
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"core-js-pure",
-			"esbuild",
-			"sharp"
-		]
 	}
 }

@@ -1,17 +1,13 @@
-import { db } from "../../../lib/db";
-import { tags } from "../../../lib/db/schemas";
-import { getUser } from "../../../../../Pastelimency/src/lib/actions/server";
-import { NextRequest, NextResponse } from "next/server";
+import { withAuth } from "@/lib/middlewares/with-auth";
+import { db } from "@mingull/lib/db";
+import { tags } from "@mingull/lib/db/schemas/index";
+import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export const GET = withAuth(async (req, ctx) => {
 	try {
-		const user = await getUser();
-		if (!user) {
-			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-		}
 		const allTags = await db.select().from(tags);
 		return NextResponse.json(allTags);
 	} catch (error) {
 		return NextResponse.json({ error: "Failed to fetch tags" }, { status: 500 });
 	}
-}
+});

@@ -1,19 +1,18 @@
-"client only";
-import { useEffect, useState } from "react";
+"use client";
+import { useEffect, useRef } from "react";
 
 /**
- * Detects if the component has mounted on the client.
- * Useful for hydration-safe rendering.
- *
- * @returns `true` if mounted on the client, otherwise `false`.
+ * Returns a ref that is true when the component is mounted.
  */
 export const useMounted = () => {
-	const [mounted, setMounted] = useState(false);
+	const mountedRef = useRef(false);
 
 	useEffect(() => {
-		setMounted(true);
-		return () => setMounted(false);
+		mountedRef.current = true;
+		return () => {
+			mountedRef.current = false;
+		};
 	}, []);
 
-	return mounted;
+	return mountedRef;
 };

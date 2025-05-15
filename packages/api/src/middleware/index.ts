@@ -6,7 +6,7 @@ import { Handler, MergeContexts, Middleware, MiddlewareParams, SearchParams } fr
  * @returns A middleware function that takes a handler and returns a new handler.
  */
 export const createMiddleware =
-	<T = {}>(middleware: Middleware<T>): Middleware<T> =>
+	<T = object>(middleware: Middleware<T>): Middleware<T> =>
 	<P extends MiddlewareParams>(handler: Handler<T, P>): Handler<T, P> =>
 	(req, ctx) => {
 		const searchParams: SearchParams = {};

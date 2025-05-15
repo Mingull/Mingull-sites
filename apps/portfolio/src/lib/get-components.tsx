@@ -1,6 +1,4 @@
-import { attempt } from "@mingull/exceptify/attempt";
-import { withFallback } from "@mingull/exceptify/fallback";
-import { ClientUI } from "./client-ui";
+import { attempt, withFallback } from "@mingull/exceptify";
 import { MDXRemoteProps } from "next-mdx-remote";
 import dynamic from "next/dynamic";
 import React from "react";

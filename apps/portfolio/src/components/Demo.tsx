@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import * as UI from "@mingull/ui";
+import * as UI from "@mingull/ui/comps";
 
 interface DemoProps {
 	component: keyof typeof UI; // Component name like 'Button', 'Badge', etc.
@@ -9,7 +9,7 @@ interface DemoProps {
 }
 
 const Demo: React.FC<DemoProps> = ({ component, ...props }) => {
-    console.log("Loading component:", component);
+	console.log("Loading component:", component);
 	const [LoadedComponent, setLoadedComponent] = useState<React.ComponentType<any> | null>(null);
 
 	useEffect(() => {

@@ -1,8 +1,6 @@
 "use client";
 
-import { Button } from "@mingull/ui/button";
-import { Input } from "@mingull/ui/input";
-import { Textarea } from "@mingull/ui/textarea";
+import { Button, Input, Textarea } from "@mingull/ui/comps";
 import Link from "next/link";
 import { sendEmail } from "@/lib/actions/send-email";
 import { ContactFormSchema } from "@/lib/schemas";

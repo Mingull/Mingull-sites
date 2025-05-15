@@ -1,17 +1,24 @@
 "use client";
 import { ThemeProvider, useTheme } from "next-themes";
-import { Toaster } from "@mingull/ui/sonner";
+import { Toaster } from "@mingull/ui/comps/sonner";
+import { HydrationBoundary, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react";
 
 export default function Providers({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const [queryClient] = useState(() => new QueryClient());
 	return (
-		<ThemeProvider enableSystem attribute="class" defaultTheme="system" disableTransitionOnChange>
-			{children}
-			<ToastProvider />
-		</ThemeProvider>
+		<QueryClientProvider client={queryClient}>
+			<HydrationBoundary state={{}}>
+				<ThemeProvider enableSystem attribute="class" defaultTheme="system" disableTransitionOnChange>
+					{children}
+					<ToastProvider />
+				</ThemeProvider>
+			</HydrationBoundary>
+		</QueryClientProvider>
 	);
 }
 

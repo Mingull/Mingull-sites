@@ -1,23 +1,15 @@
 import path from "path";
 import fs from "fs/promises";
 import matter from "gray-matter";
+import { z } from "zod";
+import { projectMetadataSchema, projectSchema } from "./schemas/project.schema";
 
 const rootDirectory = path.join(process.cwd(), "src", "content", "projects");
 
-export type Project = {
-	metadata: ProjectMetadata;
-	content: string;
-};
+export type Project = z.infer<typeof projectSchema>;
+export type ProjectMetadata = z.infer<typeof projectMetadataSchema>;
 
-export type ProjectMetadata = {
-	title?: string;
-	summary?: string;
-	image?: string;
-	author?: string;
-	publishedAt?: string;
-	slug: string;
-};
-export async function getProjectBySlug(slug: string): Promise<Project | null> {
+export async function getProjectBySlug({ locale, slug }: { slug: string; locale?: string }): Promise<Project | null> {
 	try {
 		const filePath = path.join(rootDirectory, `${slug}.mdx`);
 		const fileContent = await fs.readFile(filePath, "utf-8");
@@ -31,7 +23,7 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
 	}
 }
 
-export async function getProjects(limit?: number) {
+export async function getProjects({ limit, locale }: { limit?: number; locale?: string | undefined }) {
 	const files = await fs.readdir(rootDirectory);
 
 	// get the posts sorted by date in descending order using the metadata from the posts

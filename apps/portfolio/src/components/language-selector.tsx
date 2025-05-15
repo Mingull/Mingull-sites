@@ -2,7 +2,7 @@
 import { Link, usePathname } from "@/i18n/navigation";
 import { useLocale } from "next-intl";
 import ReactCountryFlag from "react-country-flag";
-import { Button } from "@mingull/ui/button";
+import { Button } from "@mingull/ui/comps";
 
 export default function LanguageSelector() {
 	const locale = useLocale();

@@ -1,11 +1,3 @@
-import MDXContent from "@/components/mdx-content";
-import { getProjectBySlug } from "@/lib/projects";
-import { formatDate } from "@/lib/utils.server";
-import { ArrowLeftIcon } from "@radix-ui/react-icons";
-import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-
 // export async function generateStaticParams() {
 // 	const projects = await getProjects();
 // 	const slugs = projects.map((project) => ({ slug: project.slug }));
@@ -13,16 +5,16 @@ import { notFound } from "next/navigation";
 // }
 
 export default async function Project(props: { params: Promise<{ slug: string; locale: string }> }) {
-	const params = await props.params;
-	const { slug } = params;
-	const project = await getProjectBySlug(slug);
+	// const params = await props.params;
+	// const { slug } = params;
+	// const project = await getProjectBySlug(slug);
 
-	if (!project) {
-		notFound();
-	}
+	// if (!project) {
+	// 	notFound();
+	// }
 
-	const { metadata, content } = project;
-	const { title, image, author, publishedAt } = metadata;
+	// const { metadata, content } = project;
+	// const { title, image, author, publishedAt } = metadata;
 
 	return (
 		<section className="py-24">

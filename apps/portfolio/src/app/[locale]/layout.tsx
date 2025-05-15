@@ -1,13 +1,15 @@
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import Providers from "@/components/providers";
-import { cn } from "@/lib/utils";
-import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
-import "@mingull/ui/globals.css";
-import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
+import { cn } from "@/lib/utils";
+import "@mingull/ui/globals.css";
+import type { Metadata } from "next";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { Inter, Playfair_Display } from "next/font/google";
 import { notFound } from "next/navigation";
+import React from "react";
 // import "@/app/globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -26,6 +28,8 @@ export default async function RootLayout({
 	if (!hasLocale(routing.locales, locale)) {
 		notFound();
 	}
+
+	const messages = await getMessages();
 	return (
 		<html lang={locale} suppressHydrationWarning>
 			<body
@@ -35,7 +39,7 @@ export default async function RootLayout({
 					playFair.variable,
 				)}
 			>
-				<NextIntlClientProvider>
+				<NextIntlClientProvider locale={locale} messages={messages}>
 					<Providers>
 						<Header />
 						<main className="grow">{children}</main>

@@ -1,19 +1,32 @@
-import axios from "axios";
-import { getStatus } from "@mingull/api";
-import { ErrorResponse, SuccessResponse } from "@mingull/api/types";
-import { PostMetadataSchema } from "../schemas";
+import { getHttpCode, getStatus } from "@mingull/api";
+import { type ApiResponse } from "@mingull/api/types";
+import { attempt } from "@mingull/exceptify";
+import { Locale } from "next-intl";
 import { z } from "zod";
-import { getLocale } from "next-intl/server";
+import { postMetadataSchema } from "../schemas";
 
-type PostMetadata = z.infer<typeof PostMetadataSchema>;
+export type PostMetadata = z.infer<typeof postMetadataSchema>;
 
-export const getPosts = async (limit?: number): Promise<PostMetadata[]> => {
-	const locale = await getLocale();
-	const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/v1/content/posts`, {
-		params: { limit, locale },
-	});
-	if (data.code !== getStatus("Ok")) {
-		throw new Error(data.message || "Failed to fetch posts");
+export const getPosts = async (locale: Locale, limit?: number): Promise<PostMetadata[]> => {
+	const { data: result, error } = await attempt(() =>
+		fetch(`${process.env.NEXT_PUBLIC_API_URL}/content/posts?limit=${limit ?? 10}&locale=${locale}`).then(
+			(res) => res.json() as Promise<ApiResponse<PostMetadata[]>>,
+		),
+	);
+	if (error) {
+		console.error("Error fetching posts:", error);
+		return [];
 	}
-	return data.data;
+	if (result?.status !== getHttpCode("Ok") || result?.code !== getStatus("Ok")) {
+		console.log("Error fetching posts:", result?.message);
+		return [];
+	}
+	const parsed = postMetadataSchema.array().safeParse(result?.data);
+
+	if (!parsed.success) {
+		console.error("Invalid post metadata received:", parsed.error);
+		return [];
+	}
+
+	return parsed.data;
 };

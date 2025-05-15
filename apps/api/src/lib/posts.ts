@@ -1,15 +1,14 @@
 "use server";
-
 import fs from "fs/promises";
 import matter from "gray-matter";
 import path from "path";
 import { z } from "zod";
-import { PostMetadataSchema, PostSchema } from "./schemas/post.schema";
+import { postMetadataSchema, postSchema } from "./schemas/post.schema";
 
 const rootDirectory = path.join(process.cwd(), "src", "content", "posts");
 
-export type Post = z.infer<typeof PostSchema>;
-export type PostMetadata = z.infer<typeof PostMetadataSchema>;
+export type Post = z.infer<typeof postSchema>;
+export type PostMetadata = z.infer<typeof postMetadataSchema>;
 
 export async function getPostBySlug({ locale, slug }: { slug: string; locale?: string }): Promise<Post | null> {
 	try {
@@ -49,7 +48,7 @@ export async function getPostBySlug({ locale, slug }: { slug: string; locale?: s
 			}, {});
 		}
 
-		const parsed = PostMetadataSchema.safeParse({
+		const parsed = postMetadataSchema.safeParse({
 			...data,
 			slug,
 			components,
@@ -132,8 +131,6 @@ export async function getPosts({
 	return limit ? sorted.slice(0, limit) : sorted;
 }
 
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 export async function getPostMetadata(filepath: string): Promise<PostMetadata> {
 	// remove {nl|en}\\ and .mdx extension
 	const slug = filepath.replace(/\.mdx$/, "").replace(/^(nl|en)\\/, "");
@@ -141,7 +138,7 @@ export async function getPostMetadata(filepath: string): Promise<PostMetadata> {
 	const fileContent = await fs.readFile(filePath, "utf-8");
 	const { data } = matter(fileContent);
 
-	const parsed = PostMetadataSchema.safeParse({ ...data, slug });
+	const parsed = postMetadataSchema.safeParse({ ...data, slug });
 
 	if (!parsed.success) {
 		console.error(`Invalid metadata in: ${filepath}`, parsed.error.format());

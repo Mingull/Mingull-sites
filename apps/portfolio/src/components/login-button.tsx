@@ -1,21 +1,9 @@
 "use client";
-import { signOut, useSession } from "@/lib/auth-client";
-import { LogIn, LogOutIcon, UserIcon } from "lucide-react";
+import { Button } from "@mingull/ui/comps/button";
+import { Spinner } from "@mingull/ui/icons";
+import { LogIn } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
-import { SmartLink } from "./smart-link";
-import { Avatar, AvatarFallback, AvatarImage } from "@mingull/ui/avatar";
-import { Button } from "@mingull/ui/button";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from "@mingull/ui/dropdown-menu";
-import { Spinner } from "@mingull/ui/icons";
-import { useEffect, useState } from "react";
 // import { Session } from "@mingull/shared/types-react";
 
 export default function LoginButton() {

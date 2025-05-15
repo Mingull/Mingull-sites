@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@mingull/ui/button";
+import { Button } from "@mingull/ui/comps";
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
 
 export default function Counter() {

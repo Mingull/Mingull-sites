@@ -1,4 +1,4 @@
-import { createSuccessResponse } from "@/lib/api";
+import { createSuccessResponse } from "@mingull/api";
 import { withOptionalAuth } from "@/lib/middlewares/with-optional-auth";
 import { withRateLimit } from "@/lib/middlewares/with-ratelimit";
 import { db, eq } from "@mingull/lib/db/index";

@@ -1,15 +1,15 @@
 "use client";
 
-import { z } from "zod";
-import Link from "next/link";
-import { toast } from "sonner";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { NewsletterFormSchema } from "@/lib/schemas";
-import { Button } from "@mingull/ui/button";
-import { Input } from "@mingull/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@mingull/ui/comps/button";
+import { Input } from "@mingull/ui/comps/input";
+import Link from "next/link";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 // import { subscribe } from "@/lib/actions/send-email";
-import { Card, CardContent } from "@mingull/ui/card";
+import { Card, CardContent } from "@mingull/ui/comps/card";
 
 type Inputs = z.infer<typeof NewsletterFormSchema>;
 

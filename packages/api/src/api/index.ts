@@ -1,7 +1,7 @@
 import { getHttpCode } from "./getters/get-http-code.ts";
 import { getStatus } from "./getters/get-status.ts";
 import { httpCodePhrases, httpCodes } from "./http-codes.ts";
-import { ErrorResponse, HttpCode, SuccessResponse } from "./types.ts";
+import { ErrorResponse, SuccessResponse } from "./types.ts";
 
 export type CreateErrorProps<TCode extends keyof typeof httpCodePhrases.error> = {
 	code: TCode;

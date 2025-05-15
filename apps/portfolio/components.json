@@ -15,6 +15,6 @@
 		"hooks": "@/hooks",
 		"lib": "@/lib",
 		"utils": "@mingull/ui/lib/utils",
-		"ui": "@mingull/ui/components"
+		"ui": "@mingull/ui"
 	}
 }

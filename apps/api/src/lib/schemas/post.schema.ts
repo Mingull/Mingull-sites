@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const PostMetadataSchema = z.object({
+export const postMetadataSchema = z.object({
 	slug: z.string(),
 	title: z.string().optional(),
 	summary: z.string().optional(),
@@ -16,7 +16,7 @@ export const PostMetadataSchema = z.object({
 		.optional(),
 });
 
-export const PostSchema = z.object({
-	metadata: PostMetadataSchema,
+export const postSchema = z.object({
+	metadata: postMetadataSchema,
 	content: z.string(),
 });

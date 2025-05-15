@@ -1,8 +1,8 @@
 "use client";
 
 import { cn } from "@mingull/lib/utils";
-import { Button } from "@mingull/ui/button";
-import { Input } from "@mingull/ui/input";
+import { Button } from "@mingull/ui/comps/button";
+import { Input } from "@mingull/ui/comps/input";
 import { Eye, EyeOff } from "lucide-react";
 import * as React from "react";
 
@@ -20,7 +20,7 @@ const PasswordInput = ({ className, ...props }: React.InputHTMLAttributes<HTMLIn
 				type="button"
 				variant="ghost"
 				size="icon"
-				className="absolute right-0 top-0 hover:bg-transparent"
+				className="absolute top-0 right-0 hover:bg-transparent"
 				onClick={handleTogglePasswordVisibility}
 			>
 				{showPassword ?
@@ -33,4 +33,3 @@ const PasswordInput = ({ className, ...props }: React.InputHTMLAttributes<HTMLIn
 };
 
 export { PasswordInput };
-

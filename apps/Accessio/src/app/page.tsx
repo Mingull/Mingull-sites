@@ -1,6 +1,6 @@
 "use client";
 import { defaults } from "@/app/defaults";
-import { Button } from "@mingull/ui/components/button";
+import { Button } from "@mingull/ui/comps";
 import Link from "next/link";
 
 export default function Home() {

@@ -1,5 +1,5 @@
 "use client";
-//@ts-ignore
+//@ts-expect-error
 import authorImage from "@/../public/images/authors/niels.jpg";
 import Image from "next/image";
 

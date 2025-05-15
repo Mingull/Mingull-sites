@@ -6,9 +6,34 @@ services:
         ports:
             - "6379:6379"
         volumes:
-            - redis_data:/data
+            - redis-data:/data
         command: ["redis-server", "--notify-keyspace-events", "Ex"]
 
+    mariadb:
+        image: "mariadb:latest"
+        container_name: mariadb-server
+        restart: always
+        volumes:
+            - mariadb-data:/var/lib/mysql
+        ports:
+            - "3306:3306"
+        environment:
+            MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: "1"
+            MARIADB_ROOT_PASSWORD: ""
+
+    phpmyadmin:
+        image: "phpmyadmin"
+        container_name: phpmyadmin
+        restart: always
+        ports:
+            - "8080:80"
+        depends_on:
+            - mariadb
+        environment:
+            PMA_HOST: mariadb
+
 volumes:
-    redis_data:
+    redis-data:
+        driver: local
+    mariadb-data:
         driver: local

@@ -10,7 +10,7 @@ export const NewsletterFormSchema = z.object({
 	email: z.string().email("Invalid email."),
 });
 
-export const PostMetadataSchema = z.object({
+export const postMetadataSchema = z.object({
 	slug: z.string(),
 	title: z.string().optional(),
 	summary: z.string().optional(),
@@ -24,4 +24,24 @@ export const PostMetadataSchema = z.object({
 			//.regex(/^(?!.*\.mdx$)(?!.*\.json$)[\w/@-]+$/, "Component path must not end with .mdx or .json"),
 		)
 		.optional(),
+});
+
+export const postSchema = z.object({
+	metadata: postMetadataSchema,
+	content: z.string(),
+});
+
+export const projectMetadataSchema = z.object({
+	slug: z.string(),
+	title: z.string().optional(),
+	summary: z.string().optional(),
+	image: z.string().optional(),
+	author: z.string().optional(),
+	publishedAt: z.string().datetime().optional(),
+	updatedAt: z.string().datetime().optional(),
+});
+
+export const projectSchema = z.object({
+	metadata: projectMetadataSchema,
+	content: z.string(),
 });

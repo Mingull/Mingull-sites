@@ -1,6 +1,5 @@
 import { DiscordIcon } from "@mingull/ui/icons";
 import { Navigation } from "./type";
-import { BusIcon } from "lucide-react";
 
 export const navigation: Navigation = {
 	groups: [

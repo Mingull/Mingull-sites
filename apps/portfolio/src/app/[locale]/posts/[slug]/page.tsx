@@ -1,10 +1,8 @@
 import MDXContent from "@/components/mdx-content";
+import { getPostBySlug } from "@/lib/actions/get-post-by-slug";
 import { getMdxComponents } from "@/lib/get-components";
-import { getPostBySlug } from "@/lib/posts";
 import { formatDate } from "@/lib/utils.server";
-import { Button } from "@mingull/ui/button";
-import { Separator } from "@mingull/ui/separator";
-import { Typography } from "@mingull/ui/typography";
+import { Button, Separator, Typography } from "@mingull/ui/comps";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,8 +19,9 @@ import Balancer from "react-wrap-balancer";
 // }
 
 export default async function Post({ params }: { params: Promise<{ slug: string; locale: string }> }) {
-	const { slug } = await params;
-	const post = await getPostBySlug(slug);
+	const { slug, locale } = await params;
+	const post = await getPostBySlug(locale, slug);
+
 	if (!post) notFound();
 
 	const { metadata, content } = post;
@@ -74,12 +73,15 @@ export default async function Post({ params }: { params: Promise<{ slug: string;
 					<Balancer>{title}</Balancer>
 				</Typography.H1>
 				<Typography.Lead>
-					{author} / {formatDate(publishedAt)}
+					<Balancer>
+						{author} / {formatDate(publishedAt)}
+					</Balancer>
 				</Typography.Lead>
 				<Separator />
 			</header>
 			<main className="prose prose-neutral dark:prose-invert prose-sm sm:prose-base max-w-none">
-				<MDXContent source={content} components={mdxComponents} />
+				<MDXContent source={content} />
+				{/*components={mdxComponents} />*/}
 			</main>
 			{/* <footer className="mt-16"><NewsletterForm /></footer> */}
 		</section>

@@ -1,9 +1,8 @@
-import { db } from "../../../lib/db";
-import { collections } from "../../../lib/db/schemas";
-import { getUser } from "../../../../../Pastelimency/src/lib/actions/server";
-import { eq } from "drizzle-orm";
+import { withAuth } from "@/lib/middlewares/with-auth";
+import { db, eq } from "@mingull/lib/db";
+import { collections } from "@mingull/lib/db/schemas/index";
 import { nanoid } from "nanoid";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { z } from "zod";
 
 const collectionSchema = z.object({
@@ -12,17 +11,12 @@ const collectionSchema = z.object({
 	userId: z.string().uuid(),
 });
 
-export async function POST(req: NextRequest) {
+export const POST = withAuth(async (req, ctx) => {
 	try {
-		const user = await getUser();
-		if (!user) {
-			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-		}
-		const json = await req.json();
-		const validatedData = collectionSchema.safeParse(json);
+		const validatedData = await ctx.json<typeof collectionSchema>();
 
-		if (!validatedData.success) {
-			return NextResponse.json({ error: validatedData.error.format() }, { status: 400 });
+		if (!validatedData.data) {
+			return NextResponse.json({ error: validatedData.error }, { status: 400 });
 		}
 
 		const { name, description, userId } = validatedData.data;
@@ -34,18 +28,12 @@ export async function POST(req: NextRequest) {
 	} catch (error) {
 		return NextResponse.json({ error: "Failed to create collection" }, { status: 500 });
 	}
-}
-
-export async function GET(req: NextRequest) {
+});
+export const GET = withAuth(async (req, ctx) => {
 	try {
-		const user = await getUser();
-		if (!user) {
-			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-		}
-
-		const userCollections = await db.select().from(collections).where(eq(collections.userId, user.id));
+		const userCollections = await db.select().from(collections).where(eq(collections.userId, ctx.user.id));
 		return NextResponse.json(userCollections);
 	} catch (error) {
 		return NextResponse.json({ error: "Failed to fetch collections" }, { status: 500 });
 	}
-}
+});

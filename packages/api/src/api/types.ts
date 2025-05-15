@@ -68,6 +68,21 @@ export type ErrorResponse<
 	details?: Record<string, unknown>;
 };
 
-// Type to infer string keys for autocompletion
+export type ApiResponse<TData = unknown> = Prettify<
+	| SuccessResponse<
+			(typeof httpCodePhrases.success)[keyof typeof httpCodePhrases.success],
+			(typeof httpCodes.success)[keyof typeof httpCodes.success],
+			TData,
+			Record<string, unknown>
+	  >
+	| ErrorResponse<
+			(typeof httpCodePhrases.error)[keyof typeof httpCodePhrases.error],
+			(typeof httpCodes.error)[keyof typeof httpCodes.error]
+	  >
+>;
+
+/**
+ * Type to infer string keys for autocompletion
+ */
 export type HttpCodePhrase = Prettify<(typeof httpCodePhrases)[keyof typeof httpCodePhrases]>;
 export type HttpCode = Prettify<(typeof httpCodes)[keyof typeof httpCodes]>;

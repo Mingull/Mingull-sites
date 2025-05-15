@@ -22,15 +22,16 @@
 		"@mingull/eslint-config": "workspace:*",
 		"@mingull/typescript-config": "workspace:*",
 		"@turbo/gen": "^2.5.3",
-		"@types/node": "^22.15.16",
+		"@types/node": "^22.15.17",
 		"drizzle-kit": "^0.31.1",
 		"mysql2": "^3.14.1",
-		"tailwindcss": "^4.1.5",
+		"tailwindcss": "^4.1.6",
 		"typescript": "^5.8.3"
 	},
 	"exports": {
 		".": "./src/index.ts",
 		"./utils": "./src/lib/utils.ts",
+		"./utils-server": "./src/lib/utils.server.ts",
 		"./auth/*": "./src/auth/*.ts",
 		"./db": "./src/db/index.ts",
 		"./db/*": "./src/db/*.ts",

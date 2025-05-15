@@ -1,21 +1,21 @@
 "use client";
 import { defaults } from "@/app/defaults";
 import { authClient } from "@/lib/auth/client";
-import { catcher } from "@/lib/catcher";
+import { catcher } from "@minugll/exceptify";
 import { ChevronsUpDown, SquareCode, SquareLibrary } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useAuth } from "./context/auth";
-import { Avatar, AvatarFallback, AvatarImage } from "@mingull/ui/components/avatar";
-import { Button } from "@mingull/ui/components/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@mingull/ui/comps/avatar";
+import { Button } from "@mingull/ui/comps/button";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
-} from "@mingull/ui/components/dropdown-menu";
+} from "@mingull/ui/comps/dropdown-menu";
 
 const Navbar = ({ hideOn }: { hideOn: string[] }) => {
 	const pathname = usePathname();
