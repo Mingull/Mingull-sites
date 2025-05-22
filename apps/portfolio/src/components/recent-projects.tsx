@@ -12,32 +12,27 @@ export default function RecentProjects() {
 		data: projects,
 		isLoading,
 		isError,
+		error,
 	} = useQuery({ queryKey: ["projects", locale], queryFn: () => getProjects(locale, 4) });
+
+	console.log(error);
 
 	return (
 		<section className="pb-24">
 			<h2 className="title mb-12">Recent Projects</h2>
 			{isLoading ?
-				<ul className="flex flex-col gap-8">
+				<ul className="grid grid-cols-1 gap-8 sm:grid-cols-2">
 					{Array.from({ length: 4 }).map((_, i) => (
-						<li
-							key={i}
-							className="border-border flex flex-col justify-between gap-x-4 gap-y-1 rounded border p-4 sm:flex-row"
-						>
-							<div className="flex w-full max-w-lg gap-x-4">
-								<div className="bg-muted relative h-[72px] min-w-28 overflow-hidden rounded">
-									<Skeleton className="absolute inset-0" />
-								</div>
-
-								<div className="flex flex-1 flex-col">
-									<Skeleton className="h-5 w-3/4" />
-									<Skeleton className="mt-2 h-4 w-full" />
-									<Skeleton className="mt-1 h-4 w-5/6" />
-								</div>
+						<li key={i} className="group relative">
+							<div className="bg-muted h-72 w-full overflow-hidden sm:h-60">
+								<Skeleton className="rounded-lg object-cover object-center transition-transform duration-500 group-hover:scale-105" />
 							</div>
 
-							<div className="mt-2 flex-shrink-0 sm:mt-0 sm:ml-4">
-								<Skeleton className="h-3.5 w-20" />
+							<div className="bg-background/70 absolute inset-[1px] rounded-lg opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+							<div className="absolute inset-x-0 bottom-0 translate-y-2 px-6 py-5 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+								<Skeleton className="title line-clamp-1 text-xl no-underline" />
+								<Skeleton className="to-muted-foreground line-clamp-1 text-sm" />
+								<Skeleton className="text-muted-foreground text-xs font-light" />
 							</div>
 						</li>
 					))}

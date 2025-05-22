@@ -11,7 +11,7 @@ export default function Projects({ projects }: { projects?: ProjectMetadata[] })
 	const formatDate = useFormatDate();
 	return (
 		<ul className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-			{projects ?
+			{projects && projects.length > 0 ?
 				projects.map((project) => (
 					<li key={project.slug} className="group relative">
 						<Link href={`/projects/${project.slug}`}>
@@ -22,6 +22,7 @@ export default function Projects({ projects }: { projects?: ProjectMetadata[] })
 										alt={project.title || ""}
 										fill
 										className="rounded-lg object-cover object-center transition-transform duration-500 group-hover:scale-105"
+										loading="lazy"
 									/>
 								</div>
 							:	null}

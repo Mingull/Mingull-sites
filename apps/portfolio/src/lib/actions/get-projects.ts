@@ -24,7 +24,7 @@ export const getProjects = async (locale: Locale, limit?: number): Promise<Proje
 	const parsed = projectMetadataSchema.array().safeParse(result?.data);
 
 	if (!parsed.success) {
-		console.error("Invalid projects metadata received:", parsed.error);
+		console.error("Invalid project metadata received:", parsed.error);
 		return [];
 	}
 

@@ -7,6 +7,7 @@ import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import Balancer from "react-wrap-balancer";
 
 // export async function generateMetadata({ params }: { params: Promise<{ slug: string; locale: string }> }) {
@@ -25,7 +26,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string;
 	if (!post) notFound();
 
 	const { metadata, content } = post;
-	const { title, image, author, publishedAt, components = {} } = metadata;
+	const { title, image, author, publishedAt } = metadata;
 
 	const isScheduled = !publishedAt || new Date(publishedAt).getTime() > Date.now();
 
@@ -50,8 +51,6 @@ export default async function Post({ params }: { params: Promise<{ slug: string;
 			</section>
 		);
 	}
-
-	const mdxComponents = await getMdxComponents(components);
 
 	return (
 		<section className="container max-w-3xl px-4 pt-20 pb-16 md:px-6 md:pt-24 md:pb-24 xl:max-w-6xl">
@@ -80,8 +79,23 @@ export default async function Post({ params }: { params: Promise<{ slug: string;
 				<Separator />
 			</header>
 			<main className="prose prose-neutral dark:prose-invert prose-sm sm:prose-base max-w-none">
-				<MDXContent source={content} />
-				{/*components={mdxComponents} />*/}
+				<Suspense
+					fallback={
+						<section className="container max-w-3xl px-4 pt-24 pb-16 md:px-6 md:pt-32 md:pb-24">
+							<BackLink />
+							<div className="mt-8 space-y-4">
+								<Typography.H1>
+									<Balancer>Loading...</Balancer>
+								</Typography.H1>
+								<Typography.Lead>
+									<Balancer>Loading...</Balancer>
+								</Typography.Lead>
+							</div>
+						</section>
+					}
+				>
+					<MDXContent source={content} />
+				</Suspense>
 			</main>
 			{/* <footer className="mt-16"><NewsletterForm /></footer> */}
 		</section>

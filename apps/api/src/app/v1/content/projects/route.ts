@@ -8,6 +8,8 @@ export const GET = withRateLimit<{ searchParams: { locale: string; limit?: strin
 	const { locale, limit } = await ctx.searchParams;
 	const { data, error } = await attempt(() => getProjects({ locale, limit: limit ? parseInt(limit) : undefined }));
 
+	console.log({ data, error });
+
 	if (error) {
 		return NextResponse.json(
 			createErrorResponse({

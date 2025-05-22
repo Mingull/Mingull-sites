@@ -13,7 +13,7 @@ export default function PostsPage() {
 		data: posts,
 		isLoading,
 		isError,
-	} = useQuery({ queryKey: ["posts", locale], queryFn: () => getPosts(locale) });
+	} = useQuery({ queryKey: ["posts", locale], queryFn: () => getPosts(locale) });	
 
 	const [query, setQuery] = useState("");
 	const isFiltered = query.length > 0;

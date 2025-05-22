@@ -4,17 +4,24 @@
 // 	return slugs.flatMap((slug) => routing.locales.map((locale) => ({ ...slug, locale })));
 // }
 
-export default async function Project(props: { params: Promise<{ slug: string; locale: string }> }) {
-	// const params = await props.params;
-	// const { slug } = params;
-	// const project = await getProjectBySlug(slug);
+import MDXContent from "@/components/mdx-content";
+import { Link } from "@/i18n/navigation";
+import { getProjectBySlug } from "@/lib/actions/get-project-by-slug";
+import { formatDate } from "@/lib/utils.server";
+import { ArrowLeftIcon } from "lucide-react";
+import Image from "next/image";
+import { notFound } from "next/navigation";
 
-	// if (!project) {
-	// 	notFound();
-	// }
+export default async function Project({ params }: { params: Promise<{ slug: string; locale: string }> }) {
+	const { slug, locale } = await params;
+	const project = await getProjectBySlug(locale, slug);
 
-	// const { metadata, content } = project;
-	// const { title, image, author, publishedAt } = metadata;
+	if (!project) notFound();
+
+	const { metadata, content } = project;
+	const { title, image, author, publishedAt } = metadata;
+
+	const isScheduled = !publishedAt || new Date(publishedAt).getTime() > Date.now();
 
 	return (
 		<section className="py-24">

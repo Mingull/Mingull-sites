@@ -7,11 +7,11 @@ import { z } from "zod";
 
 type PostMetadata = z.infer<typeof postMetadataSchema>;
 
-export default function Posts({ posts }: { posts: PostMetadata[] }) {
+export default function Posts({ posts }: { posts?: PostMetadata[] }) {
 	const formatDate = useFormatDate();
 	return (
 		<ul className="flex flex-col gap-8">
-			{posts.length > 0 ?
+			{posts && posts.length > 0 ?
 				posts.map((post) => (
 					<li key={post.slug}>
 						<Link
