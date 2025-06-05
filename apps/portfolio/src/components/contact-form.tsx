@@ -102,7 +102,7 @@ export default function ContactForm() {
 					</div>
 					<div className="mt-6">
 						<Button type="submit" disabled={isSubmitting} className="w-full disabled:opacity-50">
-							{isSubmitting ? "Submitting..." : "Contact Us"}
+							{isSubmitting ? "Submitting..." : "Contact Me"}
 						</Button>
 					</div>
 					<p className="text-muted-foreground mt-4 text-xs">

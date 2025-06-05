@@ -1,6 +1,6 @@
-import { createLucideIcon, IconNode } from "lucide-react";
+import { createIcon } from "./icon.tsx";
 
-const _iconNode: IconNode = [
+export const Spinner = createIcon("spinner", [
 	[
 		"path",
 		{
@@ -9,7 +9,4 @@ const _iconNode: IconNode = [
 			key: "path0",
 		},
 	],
-];
-
-const SpinnerIcon = createLucideIcon("spinner", _iconNode);
-export { _iconNode, SpinnerIcon as default };
+]);

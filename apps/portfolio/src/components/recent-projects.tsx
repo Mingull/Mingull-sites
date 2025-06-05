@@ -15,8 +15,6 @@ export default function RecentProjects() {
 		error,
 	} = useQuery({ queryKey: ["projects", locale], queryFn: () => getProjects(locale, 4) });
 
-	console.log(error);
-
 	return (
 		<section className="pb-24">
 			<h2 className="title mb-12">Recent Projects</h2>

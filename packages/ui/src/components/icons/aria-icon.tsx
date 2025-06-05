@@ -1,6 +1,7 @@
-import { createLucideIcon, IconNode } from "lucide-react";
+import { createIcon } from "./icon.tsx";
 
-const _iconNode: IconNode = [
+
+export const AriaIcon = createIcon("aria", [
 	[
 		"path",
 		{
@@ -8,7 +9,5 @@ const _iconNode: IconNode = [
 			key: "path0",
 		},
 	],
-];
+]);
 
-const AriaIcon = createLucideIcon("aria", _iconNode);
-export { _iconNode, AriaIcon as default };

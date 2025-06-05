@@ -4,26 +4,31 @@
 	"type": "module",
 	"private": true,
 	"bin": {
-		"monoger": "./dist/index.js"
+		"manager": "./dist/index.js"
 	},
 	"scripts": {
 		"lint": "eslint . --max-warnings 0",
-		"build": "tsup",
+		"build": "tsdown",
 		"start": "node dist/index.js",
-		"dev": "tsup --watch"
+		"dev": "tsdown --watch"
 	},
 	"dependencies": {
-		"@antfu/ni": "^24.3.0",
-		"@clack/prompts": "^0.10.1",
+		"@antfu/ni": "^25.0.0",
+		"@arethetypeswrong/core": "^0.18.1",
+		"@clack/prompts": "^0.11.0",
 		"@mingull/exceptify": "workspace:*",
 		"@mingull/lib": "workspace:*",
 		"chalk": "^5.4.1",
-		"commander": "^13.1.0",
-		"zod": "^3.24.4"
+		"commander": "^14.0.0",
+		"fast-glob": "^3.3.3",
+		"micromatch": "^4.0.8",
+		"zod": "^3.25.49"
 	},
 	"devDependencies": {
 		"@mingull/eslint-config": "workspace:*",
 		"@mingull/typescript-config": "workspace:*",
-		"tsup": "^8.4.0"
+		"@types/micromatch": "^4.0.9",
+		"tsdown": "^0.12.6",
+		"tsup": "^8.5.0"
 	}
 }

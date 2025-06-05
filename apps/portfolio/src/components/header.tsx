@@ -19,14 +19,14 @@ export default function Header() {
 						<HeaderLink href="/posts">Posts</HeaderLink>
 						{/* <HeaderLink href="/docs">Docs</HeaderLink> */}
 						<HeaderLink href="/projects">Projects</HeaderLink>
-						<HeaderLink href="/contact">Contact</HeaderLink>
+						{/* <HeaderLink href="/contact">Contact</HeaderLink> */}
 					</ul>
 				</div>
 
 				<div className="flex">
 					<LanguageSelector />
 					<ThemeToggle />
-					<LoginButton />
+					{/* <LoginButton /> */}
 				</div>
 			</nav>
 		</header>

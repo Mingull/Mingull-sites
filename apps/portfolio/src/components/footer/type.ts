@@ -1,3 +1,4 @@
+import { Icon } from "@mingull/ui/comps/icons/icon";
 import { LucideIcon } from "lucide-react";
 
 export type Navigation = {
@@ -15,7 +16,7 @@ export type NavigationGroup = {
 	/**
 	 * Optional icon to represent the group, from the Lucide icon set.
 	 */
-	icon?: LucideIcon;
+	icon?: LucideIcon | Icon;
 	/**
 	 * List of navigation items within this group.
 	 */
@@ -44,7 +45,7 @@ export type NavigationItem = {
 	/**
 	 * Optional icon to display next to the item, from the Lucide icon set.
 	 */
-	icon?: LucideIcon;
+	icon?: LucideIcon | Icon;
 	/**
 	 * Optional badge label to highlight the item (e.g., "New", "Beta").
 	 */
