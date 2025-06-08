@@ -31,7 +31,8 @@ export const POST = withAuth(async (req, ctx) => {
 
 		return NextResponse.json({ id }, { status: 201 });
 	} catch (error) {
-		return NextResponse.json({ error: "Failed to create paste", rawError: error }, { status: 500 });
+		console.error("Error creating paste:", error);
+		return NextResponse.json({ error: "Failed to create paste" }, { status: 500 });
 	}
 });
 
