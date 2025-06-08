@@ -55,20 +55,16 @@
 		"tsdown": "^0.12.7"
 	},
 	"exports": {
-		"./comps": {
-			"import": "./dist/components/index.js",
-			"types": "./dist/components/index.d.ts"
-		},
-		"./comps/*": {
-			"import": "./dist/components/*.tsx",
-			"types": "./dist/components/*.d.ts"
-		},
+		"./comps": "./src/components/index.tsx",
+		"./comps/*": "./src/components/*.tsx",
 		"./globals.css": "./styles/globals.css",
 		"./postcss.config": "./postcss.config.mjs",
-		"./lib/*": "./dist/lib/*.ts",
-		"./hooks": "./dist/hooks/index.ts",
-		"./hooks/*": "./dist/hooks/*.ts",
-		"./contexts": "./dist/contexts/index.ts",
-		"./contexts/*": "./dist/contexts/*.ts"
+		"./hooks": {
+			"import": "./dist/hooks/index.js",
+			"types": "./dist/hooks/index.d.ts"
+		},
+		"./hooks/*": "./src/hooks/*.tsx",
+		"./contexts": "./src/contexts/index.tsx",
+		"./contexts/*": "./src/contexts/*.tsx"
 	}
 }

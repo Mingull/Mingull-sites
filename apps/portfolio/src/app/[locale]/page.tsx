@@ -3,7 +3,7 @@ import Intro from "@/components/intro";
 import RecentPosts from "@/components/recent-posts";
 import RecentProjects from "@/components/recent-projects";
 import Skills from "@/components/skills";
-import { Alert, AlertDescription, AlertTitle } from "@mingull/ui/comps";
+import { Alert, AlertDescription, AlertTitle } from "@mingull/ui/comps/alert";
 import { TriangleAlert } from "lucide-react";
 
 export default async function Home() {
@@ -29,7 +29,7 @@ export default async function Home() {
 
 				<RecentProjects />
 				<RecentPosts />
-				<ExpandableCardDemo />
+				{/* <ExpandableCardDemo /> */}
 
 				{/* <NewsletterForm /> */}
 			</div>

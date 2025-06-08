@@ -2,14 +2,7 @@
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./button.tsx";
-import {
-	Command,
-	CommandEmpty,
-	CommandGroup,
-	CommandInput,
-	CommandItem,
-	CommandList,
-} from "./command.tsx";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "./command.tsx";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover.tsx";
 
 import { cn } from "@mingull/lib/utils";

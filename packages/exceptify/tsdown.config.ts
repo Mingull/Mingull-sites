@@ -11,5 +11,4 @@ export default defineConfig({
 	shims: true,
 	unbundle: true, // 👈 disables bundling
 	skipNodeModulesBundle: true, // 👈 disables chunking
-	tsconfig: "tsconfig.json",
 });

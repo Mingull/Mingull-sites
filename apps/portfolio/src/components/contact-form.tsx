@@ -1,6 +1,5 @@
 "use client";
 
-import { Button, Input, Textarea } from "@mingull/ui/comps";
 import Link from "next/link";
 import { sendEmail } from "@/lib/actions/send-email";
 import { ContactFormSchema } from "@/lib/schemas";
@@ -8,6 +7,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import { Input } from "@mingull/ui/comps/input";
+import { Textarea } from "@mingull/ui/comps/textarea";
+import { Button } from "@mingull/ui/comps/button";
 
 type Inputs = z.infer<typeof ContactFormSchema>;
 

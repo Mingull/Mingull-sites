@@ -1,7 +1,7 @@
 "use client";
 import Projects from "@/components/projects";
 import { getProjects } from "@/lib/actions/get-projects";
-import { Skeleton } from "@mingull/ui/comps";
+import { Skeleton } from "@mingull/ui/comps/skeleton";
 import { useQuery } from "@tanstack/react-query";
 import { useLocale } from "next-intl";
 

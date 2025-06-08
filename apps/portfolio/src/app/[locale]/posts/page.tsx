@@ -1,7 +1,9 @@
 "use client";
 import Posts from "@/components/posts";
 import { getPosts } from "@/lib/actions/get-posts";
-import { Button, Input, Skeleton } from "@mingull/ui/comps";
+import { Button } from "@mingull/ui/comps/button";
+import { Input } from "@mingull/ui/comps/input";
+import { Skeleton } from "@mingull/ui/comps/skeleton";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { useQuery } from "@tanstack/react-query";
 import { useLocale } from "next-intl";
@@ -13,7 +15,7 @@ export default function PostsPage() {
 		data: posts,
 		isLoading,
 		isError,
-	} = useQuery({ queryKey: ["posts", locale], queryFn: () => getPosts(locale) });	
+	} = useQuery({ queryKey: ["posts", locale], queryFn: () => getPosts(locale) });
 
 	const [query, setQuery] = useState("");
 	const isFiltered = query.length > 0;
@@ -24,7 +26,7 @@ export default function PostsPage() {
 			.filter((post) => post.title?.toLowerCase().includes(query.toLowerCase()))
 			.filter((post) => post.publishedAt && new Date(post.publishedAt).getTime() <= Date.now());
 	}, [posts, query, isLoading, isError]);
-	
+
 	return (
 		<section className="py-24">
 			<div className="container max-w-3xl xl:max-w-4xl">
