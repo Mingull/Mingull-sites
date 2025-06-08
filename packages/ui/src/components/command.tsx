@@ -1,12 +1,12 @@
 "use client";
 
-import * as React from "react";
 import { Command as CommandPrimitive } from "cmdk";
 import { SearchIcon } from "lucide-react";
+import * as React from "react";
 
 import { cn } from "@mingull/lib/utils";
 
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@mingull/ui/comps/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "./dialog.tsx";
 
 function Command({ className, ...props }: React.ComponentProps<typeof CommandPrimitive>) {
 	return (
@@ -123,12 +123,7 @@ function CommandShortcut({ className, ...props }: React.ComponentProps<"span">) 
 
 export {
 	Command,
-	CommandDialog,
-	CommandInput,
-	CommandList,
-	CommandEmpty,
-	CommandGroup,
-	CommandItem,
-	CommandShortcut,
-	CommandSeparator,
+	CommandDialog, CommandEmpty,
+	CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut
 };
+

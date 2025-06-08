@@ -10,10 +10,8 @@ const generateExports = (dir: string, outputFile: string) => {
 	const files = fs.readdirSync(dir);
 	const exportLines: string[] = [];
 
-	console.log({ files });
-
 	files.forEach((file) => {
-		if (file.endsWith(".ts") || file.endsWith(".tsx")) {
+		if ((file.endsWith(".ts") || file.endsWith(".tsx")) && !file.endsWith(".d.ts") && !file.startsWith("index.")) {
 			exportLines.push(`export * from "./${file}";`);
 		}
 	});

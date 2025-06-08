@@ -9,7 +9,7 @@ export const GET = withRateLimit<{ params: { slug: string }; searchParams: { loc
 	const { slug } = await ctx.params;
 
 	const { data, error } = await attempt(() => getPostBySlug({ locale, slug }));
-	
+
 	if (error) {
 		return NextResponse.json(
 			createErrorResponse({
@@ -28,7 +28,13 @@ export const GET = withRateLimit<{ params: { slug: string }; searchParams: { loc
 		createSuccessResponse({
 			code: "Ok",
 			message: "Posts fetched successfully",
-			data,
+			data: {
+				...data,
+				metadata: {
+					...data?.metadata,
+					image: data?.metadata?.image ? `${process.env.NEXT_PUBLIC_BASE_URL}${data.metadata.image}` : null,
+				},
+			},
 		}),
 		{
 			status: getHttpCode("Ok"),

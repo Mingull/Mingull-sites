@@ -1,12 +1,10 @@
 "use server";
 import { getHttpCode, getStatus } from "@mingull/api";
+import { ApiResponse } from "@mingull/api/types";
 import { attempt } from "@mingull/exceptify";
-import axios from "axios";
-import { getLocale } from "next-intl/server";
+import { Locale } from "next-intl";
 import { z } from "zod";
 import { postSchema } from "../schemas";
-import { ApiResponse } from "@mingull/api/types";
-import { Locale } from "next-intl";
 
 type Post = z.infer<typeof postSchema>;
 

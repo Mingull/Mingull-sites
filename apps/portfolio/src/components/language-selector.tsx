@@ -10,7 +10,7 @@ export default function LanguageSelector() {
 	return (
 		<Button size="sm" variant="ghost" asChild>
 			<Link href={pathname} locale={locale === "en" ? "nl" : "en"}>
-				<ReactCountryFlag countryCode={locale === "en" ? "gb" : "nl"} className="size-4" />
+				<ReactCountryFlag countryCode={locale === "en" ? "GB" : "NL"} className="size-4" svg />
 			</Link>
 		</Button>
 	);

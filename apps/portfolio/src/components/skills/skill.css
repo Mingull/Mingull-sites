@@ -1,0 +1,49 @@
+.containerize {
+	display: grid;
+	gap: 1rem;
+	/*   grid-template-columns: repeat(calc(var(--column-count, 3) * 2), 1fr); */
+	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+
+	/* for demo */
+	max-width: 65rem;
+	margin-inline: auto;
+	margin-block: 6rem;
+
+	container-type: inline-size;
+
+	@container (width >= calc(100px * 2 + 1rem)) {
+		.item {
+			grid-column: span 2;
+		}
+	}
+
+	@container (calc(100px * 4 + 3rem) < width < calc(100px * 6 + 5rem) ) {
+		.item:last-child:nth-child(odd) {
+			grid-column: 2 / span 2;
+		}
+	}
+
+	@container (calc(100px * 6 + 5rem) < width < calc(100px * 8 + 7rem)) {
+		.item:nth-child(3n + 4):last-child {
+			grid-column: 3 / 5;
+		}
+
+		&:has(:nth-child(3n + 5):last-child) > :nth-last-child(2) {
+			grid-column: 2 / 4;
+		}
+	}
+
+	@container (calc(100px * 8 + 7rem) < width < calc(100px * 10 + 9rem)) {
+		.item:nth-child(4n + 5):last-child {
+			grid-column: 4 / 6;
+		}
+
+		&:has(:nth-child(4n + 6):last-child) > :nth-last-child(2) {
+			grid-column: 3 / 5;
+		}
+
+		&:has(:nth-child(4n + 7):last-child) > :nth-last-child(3) {
+			grid-column: 2 / 4;
+		}
+	}
+}

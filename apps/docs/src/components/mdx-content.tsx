@@ -3,7 +3,7 @@ import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import React, { JSX } from "react";
 import rehypeSlug from "rehype-slug";
 import { highlight } from "sugar-high";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@mingull/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@mingull/ui/comps/accordion";
 
 const Code = ({ children, ...props }: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>) => {
 	const codeHTMl = highlight(children as string);

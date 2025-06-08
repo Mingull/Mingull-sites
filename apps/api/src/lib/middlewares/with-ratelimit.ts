@@ -6,7 +6,7 @@ export const withRateLimit = createMiddleware<{ ratelimit: boolean }>((handler) 
 	return async (req, ctx) => {
 		const forwarded = req.headers.get("x-forwarded-for") ?? "";
 		const ip = forwarded.split(",")[0]?.trim() || "unknown";
-		const userAgent = req.headers.get("user-agent") || "unknown";
+		// const userAgent = req.headers.get("user-agent") || "unknown";
 		const windowSeconds = 60; // 1 minute
 		const maxRequests = 100;
 

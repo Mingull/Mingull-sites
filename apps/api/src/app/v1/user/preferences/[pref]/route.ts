@@ -1,8 +1,8 @@
-import { createSuccessResponse } from "@mingull/api";
 import { withAuth } from "@/lib/middlewares/with-auth";
+import { createSuccessResponse } from "@mingull/api";
 import { and, db, eq } from "@mingull/lib/db/index";
 import { preferences, sites, userPreferences } from "@mingull/lib/db/schemas/index";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 export const GET = withAuth<{ params: { pref: string } }>(async (req, ctx) => {
 	const userPrefs = await db
@@ -60,8 +60,8 @@ export const GET = withAuth<{ params: { pref: string } }>(async (req, ctx) => {
 	);
 });
 
-export async function POST(req: NextRequest, { params }: { params: { pref: string } }) {
-	const { pref } = await params;
+export const POST = withAuth<{ params: { pref: string } }>(async (req, ctx) => {
+	const { pref } = await ctx.params;
 	if (!pref) return NextResponse.json({ error: "Preference ID is required" }, { status: 400 });
 
 	const body = await req.json(); // Use .json() to parse the request body
@@ -70,4 +70,4 @@ export async function POST(req: NextRequest, { params }: { params: { pref: strin
 	// Save user preference logic here...
 
 	return NextResponse.json({ message: "User preference saved", pref, data: body });
-}
+});

@@ -8,8 +8,6 @@ export const GET = withRateLimit<{ searchParams: { locale: string; limit?: strin
 	const { locale, limit } = await ctx.searchParams;
 	const { data, error } = await attempt(() => getProjects({ locale, limit: limit ? parseInt(limit) : undefined }));
 
-	console.log({ data, error });
-
 	if (error) {
 		return NextResponse.json(
 			createErrorResponse({
@@ -28,7 +26,10 @@ export const GET = withRateLimit<{ searchParams: { locale: string; limit?: strin
 		createSuccessResponse({
 			code: "Ok",
 			message: "Posts fetched successfully",
-			data,
+			data: data?.map((project) => ({
+				...project,
+				image: project.image ? `${process.env.NEXT_PUBLIC_BASE_URL}${project.image}` : null,
+			})),
 		}),
 		{
 			status: getHttpCode("Ok"),

@@ -4,7 +4,7 @@ interface ContactFormEmailProps {
 	message: string;
 }
 
-const ContactFormEmail: React.FC<Readonly<ContactFormEmailProps>> = ({ name, email, message }) => (
+const ContactFormEmail = ({ name, email, message }: Readonly<ContactFormEmailProps>) => (
 	<div>
 		<h1>Contact form submission</h1>
 		<p>

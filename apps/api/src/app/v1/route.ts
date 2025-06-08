@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 const withComposition = composeMiddlewares(withRateLimit, withLogger);
 
-export const GET = withComposition(async (req, ctx) => {
+export const GET = withComposition(async () => {
 	return NextResponse.json(
 		createSuccessResponse({
 			code: "Ok",

@@ -2,7 +2,7 @@ import { navigation } from "./navigation"; // your config
 
 export default function Footer() {
 	return (
-		<footer className="bg-muted py-8">
+		<footer className="bg-muted py-16">
 			<div className="container max-w-3xl">
 				<div className="md:flex md:items-center md:justify-between">
 					<div className="flex w-full justify-between gap-4">

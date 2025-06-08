@@ -45,7 +45,7 @@ const postPreferencesSchema = z
 	.strict();
 
 export const POST = withAuth(async (req, ctx) => {
-	const { data, error } = await ctx.json<typeof postPreferencesSchema>();
+	const { data, error } = await ctx.json(postPreferencesSchema);
 
 	if (error) {
 		return NextResponse.json(createErrorResponse({ code: "BadRequest", message: error.message }), {

@@ -1,9 +1,9 @@
+import { withAuth } from "@/lib/middlewares/with-auth";
 import { db, eq, or } from "@mingull/lib/db";
 import { pastes } from "@mingull/lib/db/schemas/index";
 import { nanoid } from "nanoid";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { z } from "zod";
-import { getUser } from "../../../../../Pastelimency/src/lib/actions/server";
 
 const pasteSchema = z.object({
 	title: z.string().min(3, "Title must be at least 3 characters long"),
@@ -12,10 +12,9 @@ const pasteSchema = z.object({
 	isPublic: z.boolean().default(false),
 });
 
-export async function POST(req: NextRequest) {
+export const POST = withAuth(async (req, ctx) => {
 	try {
-		const user = await getUser();
-		if (!user) {
+		if (!ctx.user) {
 			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 		}
 		const json = await req.json();
@@ -32,13 +31,14 @@ export async function POST(req: NextRequest) {
 
 		return NextResponse.json({ id }, { status: 201 });
 	} catch (error) {
+		console.error("Error creating paste:", error);
 		return NextResponse.json({ error: "Failed to create paste" }, { status: 500 });
 	}
-}
+});
 
-export async function GET(req: NextRequest) {
+export const GET = withAuth(async (req, ctx) => {
 	try {
-		const user = await getUser();
+		const user = ctx.user;
 		const isAuthenticated = Boolean(user);
 
 		// Fetch pastes: Show only public pastes or user's own pastes if logged in
@@ -55,6 +55,7 @@ export async function GET(req: NextRequest) {
 
 		return NextResponse.json(userPastes);
 	} catch (error) {
+		console.error("Error fetching pastes:", error);
 		return NextResponse.json({ error: "Failed to fetch pastes" }, { status: 500 });
 	}
-}
+});

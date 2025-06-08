@@ -6,7 +6,7 @@ import { ArrowLeftIcon } from "lucide-react";
 import { useEffect } from "react";
 import Balancer from "react-wrap-balancer";
 
-export default function PostError({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+export default function PostError({ error }: { error: Error & { digest?: string }; reset: () => void }) {
 	useEffect(() => {
 		// Log the error to an error reporting service
 		console.error(error);

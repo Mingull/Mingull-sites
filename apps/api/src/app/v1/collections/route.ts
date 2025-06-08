@@ -13,7 +13,7 @@ const collectionSchema = z.object({
 
 export const POST = withAuth(async (req, ctx) => {
 	try {
-		const validatedData = await ctx.json<typeof collectionSchema>();
+		const validatedData = await ctx.json(collectionSchema);
 
 		if (!validatedData.data) {
 			return NextResponse.json({ error: validatedData.error }, { status: 400 });
@@ -26,6 +26,7 @@ export const POST = withAuth(async (req, ctx) => {
 
 		return NextResponse.json({ id }, { status: 201 });
 	} catch (error) {
+		console.error("Error creating collection:", error);
 		return NextResponse.json({ error: "Failed to create collection" }, { status: 500 });
 	}
 });
@@ -34,6 +35,6 @@ export const GET = withAuth(async (req, ctx) => {
 		const userCollections = await db.select().from(collections).where(eq(collections.userId, ctx.user.id));
 		return NextResponse.json(userCollections);
 	} catch (error) {
-		return NextResponse.json({ error: "Failed to fetch collections" }, { status: 500 });
+		return NextResponse.json({ error: "Failed to fetch collections", rawError: error }, { status: 500 });
 	}
 });

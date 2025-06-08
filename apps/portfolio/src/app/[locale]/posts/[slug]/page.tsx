@@ -1,6 +1,5 @@
 import MDXContent from "@/components/mdx-content";
 import { getPostBySlug } from "@/lib/actions/get-post-by-slug";
-import { getMdxComponents } from "@/lib/get-components";
 import { formatDate } from "@/lib/utils.server";
 import { Button, Separator, Typography } from "@mingull/ui/comps";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";

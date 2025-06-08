@@ -1,6 +1,6 @@
 "use client";
 import { ThemeProvider, useTheme } from "next-themes";
-import { Toaster } from "@mingull/ui/sonner";
+import { Toaster } from "@mingull/ui/comps/sonner";
 
 export default function Providers({
 	children,
