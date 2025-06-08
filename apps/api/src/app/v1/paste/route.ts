@@ -55,6 +55,7 @@ export const GET = withAuth(async (req, ctx) => {
 
 		return NextResponse.json(userPastes);
 	} catch (error) {
-		return NextResponse.json({ error: "Failed to fetch pastes", rawError: error }, { status: 500 });
+		console.error("Error fetching pastes:", error);
+		return NextResponse.json({ error: "Failed to fetch pastes" }, { status: 500 });
 	}
 });
