@@ -26,7 +26,8 @@ export const POST = withAuth(async (req, ctx) => {
 
 		return NextResponse.json({ id }, { status: 201 });
 	} catch (error) {
-		return NextResponse.json({ error: "Failed to create collection", rawError: error }, { status: 500 });
+		console.error("Error creating collection:", error);
+		return NextResponse.json({ error: "Failed to create collection" }, { status: 500 });
 	}
 });
 export const GET = withAuth(async (req, ctx) => {
