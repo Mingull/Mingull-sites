@@ -2,7 +2,7 @@
 
 import React, { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { useClickOutside } from "@mingull/ui/hooks/use-click-outside";
+import { useClickOutside } from "@mingull/ui/hooks";
 import Image from "next/image";
 export function ExpandableCardDemo() {
 	const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(null);

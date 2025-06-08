@@ -1,6 +1,6 @@
 "use client";
 
-import { useClickOutside } from "@mingull/ui/hooks/use-click-outside";
+import { useClickOutside } from "@mingull/ui/hooks";
 import { AnimatePresence, motion as m } from "motion/react";
 import { SetStateAction, useEffect, useId, useRef, useState } from "react";
 import { SkillNode, skills } from "./skills";
@@ -71,6 +71,13 @@ export default function Skills() {
 										>
 											{active.summary}
 										</m.p>
+										<m.p className="text-sm text-neutral-600 dark:text-neutral-400">
+											<strong>Version:</strong> {active.version}
+										</m.p>
+										<m.p className="text-sm text-neutral-600 dark:text-neutral-400">
+											<strong>Experience:</strong>
+											{calculateYearsOfExperience(active.years)}
+										</m.p>
 									</div>
 
 									{/* <m.a
@@ -86,13 +93,6 @@ export default function Skills() {
 									</m.a> */}
 								</div>
 								<div className="relative px-4 pt-4">
-									<m.p className="text-sm text-neutral-600 dark:text-neutral-400">
-										<strong>Version:</strong> {active.version}
-									</m.p>
-									<m.p className="text-sm text-neutral-600 dark:text-neutral-400">
-										<strong>Experience:</strong> {active.experience} (
-										{calculateYearsOfExperience(active.years)})
-									</m.p>
 									<m.div
 										layout
 										initial={{ opacity: 0 }}

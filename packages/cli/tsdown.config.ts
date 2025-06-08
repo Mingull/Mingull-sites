@@ -10,6 +10,5 @@ export default defineConfig({
 	outDir: "dist",
 	treeshake: true,
 	shims: true,
-	attw: true,
 	skipNodeModulesBundle: true, // 👈 disables chunking
 });

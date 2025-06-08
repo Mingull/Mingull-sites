@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
 				port: process.env.NODE_ENV === "production" ? undefined : "3001",
 				pathname: "/**",
 			},
+			{
+				protocol: "https",
+				hostname: "assets.aceternity.com",
+				port: "",
+				pathname: "/**",
+			},
 		],
 	},
 };

@@ -1,6 +1,7 @@
 // app/posts/page.tsx
 import { Link } from "@/i18n/navigation";
-import { Button, Typography } from "@mingull/ui/comps";
+import { Button } from "@mingull/ui/comps/button";
+import { Typography } from "@mingull/ui/comps/typography";
 import { ArrowLeftIcon } from "lucide-react";
 import Balancer from "react-wrap-balancer";
 
