@@ -28,7 +28,7 @@ export const GET = withRateLimit<{ searchParams: { locale: string; limit?: strin
 			message: "Posts fetched successfully",
 			data: data?.map((post) => ({
 				...post,
-				image: `${process.env.NEXT_PUBLIC_BASE_URL}${post.image}` || null,
+				image: post.image ? `${process.env.NEXT_PUBLIC_BASE_URL}${post.image}` : null,
 			})),
 		}),
 		{
