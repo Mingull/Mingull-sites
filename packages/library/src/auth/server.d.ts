@@ -305,8 +305,8 @@ export declare const auth: {
                                                         required: string[];
                                                     };
                                                 };
-                                                required: string[];
                                             };
+                                            required: string[];
                                         };
                                     };
                                 };
@@ -681,6 +681,7 @@ export declare const auth: {
                     name: string;
                     email: string;
                     password: string;
+                    callbackURL?: string;
                 } & ({} | ({
                     birthday: Date;
                 } & {
@@ -766,6 +767,7 @@ export declare const auth: {
                             name: string;
                             email: string;
                             password: string;
+                            callbackURL?: string;
                         } & ({} | ({
                             birthday: Date;
                         } & {
@@ -1302,8 +1304,8 @@ export declare const auth: {
                                                     type: string;
                                                     description: string;
                                                 };
-                                                required: string[];
                                             };
+                                            required: string[];
                                         };
                                     };
                                 };
@@ -1761,19 +1763,2961 @@ export declare const auth: {
         };
         updateUser: {
             <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
-                body: Partial<import("better-auth").Prettify<(({} | ({
-                    birthday: Date;
-                } & {
-                    birthday?: Date | null | undefined;
-                }) | ({} & {}) | ({} & {
-                    username?: string | null | undefined;
-                    displayUsername?: string | null | undefined;
-                })) & {}) & {
-                    bio?: string | null | undefined;
-                } & {
+                body: Partial<import("better-auth").AdditionalUserFieldsInput<{
+                    database: (options: import("better-auth").BetterAuthOptions) => import("better-auth").Adapter;
+                    basePath: string;
+                    user: {
+                        additionalFields: {
+                            bio: {
+                                type: "string";
+                                nullable: boolean;
+                                required: false;
+                            };
+                        };
+                    };
+                    account: {
+                        accountLinking: {
+                            enabled: true;
+                            trustedProviders: ("github" | "discord" | "email-password")[];
+                        };
+                    };
+                    advanced: {
+                        crossSubDomainCookies: {
+                            enabled: true;
+                            domain: string | undefined;
+                        };
+                    };
+                    trustedOrigins: string[];
+                    onAPIError: {
+                        onError(error: unknown): void;
+                    };
+                    emailAndPassword: {
+                        enabled: true;
+                    };
+                    socialProviders: {
+                        discord: {
+                            clientId: string;
+                            clientSecret: string;
+                        };
+                        github: {
+                            clientId: string;
+                            clientSecret: string;
+                        };
+                    };
+                    plugins: ({
+                        id: "account-details";
+                        schema: {
+                            account: {
+                                fields: {
+                                    metadata: {
+                                        type: "string";
+                                        required: false;
+                                        transform: {
+                                            input: (value: string | number | boolean | string[] | Date | number[] | null | undefined) => string | number | boolean | string[] | Date | number[] | null | undefined;
+                                            output: (value: string | number | boolean | string[] | Date | number[] | null | undefined) => string | number | boolean | string[] | Date | number[] | null | undefined;
+                                        };
+                                    };
+                                };
+                            };
+                        };
+                        hooks: {
+                            before: {
+                                matcher: (ctx: import("better-auth").HookEndpointContext) => boolean;
+                                handler: (inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                    context: import("better-auth").MiddlewareContext<import("better-auth").MiddlewareOptions, import("better-auth").AuthContext & {
+                                        returned?: unknown;
+                                        responseHeaders?: Headers;
+                                    }>;
+                                }>;
+                            }[];
+                            after: {
+                                matcher: (ctx: import("better-auth").HookEndpointContext) => boolean;
+                                handler: (inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                    context: import("better-auth").MiddlewareContext<import("better-auth").MiddlewareOptions, import("better-auth").AuthContext & {
+                                        returned?: unknown;
+                                        responseHeaders?: Headers;
+                                    }>;
+                                }>;
+                            }[];
+                        };
+                    } | {
+                        id: "birthdayPlugin";
+                        schema: {
+                            user: {
+                                fields: {
+                                    birthday: {
+                                        type: "date";
+                                        required: true;
+                                        unique: false;
+                                    };
+                                };
+                            };
+                        };
+                        hooks: {
+                            before: {
+                                matcher: (context: import("better-auth").HookEndpointContext) => boolean;
+                                handler: (inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                    context: import("better-auth").MiddlewareContext<import("better-auth").MiddlewareOptions, import("better-auth").AuthContext & {
+                                        returned?: unknown;
+                                        responseHeaders?: Headers;
+                                    }>;
+                                }>;
+                            }[];
+                        };
+                    } | {
+                        id: "admin";
+                        init(): {
+                            options: {
+                                databaseHooks: {
+                                    user: {
+                                        create: {
+                                            before(user: {
+                                                id: string;
+                                                name: string;
+                                                email: string;
+                                                emailVerified: boolean;
+                                                createdAt: Date;
+                                                updatedAt: Date;
+                                                image?: string | null | undefined;
+                                            }): Promise<{
+                                                data: {
+                                                    id: string;
+                                                    name: string;
+                                                    email: string;
+                                                    emailVerified: boolean;
+                                                    createdAt: Date;
+                                                    updatedAt: Date;
+                                                    image?: string | null | undefined;
+                                                    role: string;
+                                                };
+                                            }>;
+                                        };
+                                    };
+                                    session: {
+                                        create: {
+                                            before(session: {
+                                                id: string;
+                                                createdAt: Date;
+                                                updatedAt: Date;
+                                                userId: string;
+                                                expiresAt: Date;
+                                                token: string;
+                                                ipAddress?: string | null | undefined;
+                                                userAgent?: string | null | undefined;
+                                            }, ctx: import("better-auth").GenericEndpointContext | undefined): Promise<void>;
+                                        };
+                                    };
+                                };
+                            };
+                        };
+                        hooks: {
+                            after: {
+                                matcher(context: import("better-auth").HookEndpointContext): boolean;
+                                handler: (inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<import("better-auth/plugins").SessionWithImpersonatedBy[] | undefined>;
+                            }[];
+                        };
+                        endpoints: {
+                            setRole: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_1 extends boolean = false>(inputCtx_0: {
+                                    body: {
+                                        userId: string;
+                                        role: "user" | "admin" | ("user" | "admin")[];
+                                    };
+                                } & {
+                                    method?: "POST" | undefined;
+                                } & {
+                                    query?: Record<string, any> | undefined;
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_1 | undefined;
+                                }): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_1] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        user: import("better-auth/plugins").UserWithRole;
+                                    };
+                                } : {
+                                    user: import("better-auth/plugins").UserWithRole;
+                                }>;
+                                options: {
+                                    method: "POST";
+                                    body: import("better-auth").ZodObject<{
+                                        userId: import("better-auth").ZodString;
+                                        role: import("better-auth").ZodUnion<[import("better-auth").ZodString, import("better-auth").ZodArray<import("better-auth").ZodString, "many">]>;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        userId: string;
+                                        role: string | string[];
+                                    }, {
+                                        userId: string;
+                                        role: string | string[];
+                                    }>;
+                                    use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                        session: {
+                                            user: import("better-auth/plugins").UserWithRole;
+                                            session: import("better-auth").Session;
+                                        };
+                                    }>)[];
+                                    metadata: {
+                                        openapi: {
+                                            operationId: string;
+                                            summary: string;
+                                            description: string;
+                                            responses: {
+                                                200: {
+                                                    description: string;
+                                                    content: {
+                                                        "application/json": {
+                                                            schema: {
+                                                                type: "object";
+                                                                properties: {
+                                                                    user: {
+                                                                        $ref: string;
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                        $Infer: {
+                                            body: {
+                                                userId: string;
+                                                role: "user" | "admin" | ("user" | "admin")[];
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/admin/set-role";
+                            };
+                            createUser: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_2 extends boolean = false>(inputCtx_0: {
+                                    body: {
+                                        email: string;
+                                        password: string;
+                                        name: string;
+                                        role?: "user" | "admin" | ("user" | "admin")[] | undefined;
+                                        data?: Record<string, any>;
+                                    };
+                                } & {
+                                    method?: "POST" | undefined;
+                                } & {
+                                    query?: Record<string, any> | undefined;
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_2 | undefined;
+                                }): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_2] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        user: import("better-auth/plugins").UserWithRole;
+                                    };
+                                } : {
+                                    user: import("better-auth/plugins").UserWithRole;
+                                }>;
+                                options: {
+                                    method: "POST";
+                                    body: import("better-auth").ZodObject<{
+                                        email: import("better-auth").ZodString;
+                                        password: import("better-auth").ZodString;
+                                        name: import("better-auth").ZodString;
+                                        role: import("better-auth").ZodOptional<import("better-auth").ZodUnion<[import("better-auth").ZodString, import("better-auth").ZodArray<import("better-auth").ZodString, "many">]>>;
+                                        data: import("better-auth").ZodOptional<import("better-auth").ZodRecord<import("better-auth").ZodString, import("better-auth").ZodAny>>;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        password: string;
+                                        name: string;
+                                        email: string;
+                                        data?: Record<string, any> | undefined;
+                                        role?: string | string[] | undefined;
+                                    }, {
+                                        password: string;
+                                        name: string;
+                                        email: string;
+                                        data?: Record<string, any> | undefined;
+                                        role?: string | string[] | undefined;
+                                    }>;
+                                    metadata: {
+                                        openapi: {
+                                            operationId: string;
+                                            summary: string;
+                                            description: string;
+                                            responses: {
+                                                200: {
+                                                    description: string;
+                                                    content: {
+                                                        "application/json": {
+                                                            schema: {
+                                                                type: "object";
+                                                                properties: {
+                                                                    user: {
+                                                                        $ref: string;
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                        $Infer: {
+                                            body: {
+                                                email: string;
+                                                password: string;
+                                                name: string;
+                                                role?: "user" | "admin" | ("user" | "admin")[] | undefined;
+                                                data?: Record<string, any>;
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/admin/create-user";
+                            };
+                            listUsers: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_3 extends boolean = false>(inputCtx_0: {
+                                    body?: undefined;
+                                } & {
+                                    method?: "GET" | undefined;
+                                } & {
+                                    query: {
+                                        searchValue?: string | undefined;
+                                        searchField?: "name" | "email" | undefined;
+                                        searchOperator?: "contains" | "starts_with" | "ends_with" | undefined;
+                                        limit?: string | number | undefined;
+                                        offset?: string | number | undefined;
+                                        sortBy?: string | undefined;
+                                        sortDirection?: "asc" | "desc" | undefined;
+                                        filterField?: string | undefined;
+                                        filterValue?: string | number | boolean | undefined;
+                                        filterOperator?: "eq" | "ne" | "lt" | "lte" | "gt" | "gte" | undefined;
+                                    };
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_3 | undefined;
+                                }): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_3] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        users: import("better-auth/plugins").UserWithRole[];
+                                        total: number;
+                                        limit: number | undefined;
+                                        offset: number | undefined;
+                                    } | {
+                                        users: never[];
+                                        total: number;
+                                    };
+                                } : {
+                                    users: import("better-auth/plugins").UserWithRole[];
+                                    total: number;
+                                    limit: number | undefined;
+                                    offset: number | undefined;
+                                } | {
+                                    users: never[];
+                                    total: number;
+                                }>;
+                                options: {
+                                    method: "GET";
+                                    use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                        session: {
+                                            user: import("better-auth/plugins").UserWithRole;
+                                            session: import("better-auth").Session;
+                                        };
+                                    }>)[];
+                                    query: import("better-auth").ZodObject<{
+                                        searchValue: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                        searchField: import("better-auth").ZodOptional<import("better-auth").ZodEnum<["email", "name"]>>;
+                                        searchOperator: import("better-auth").ZodOptional<import("better-auth").ZodEnum<["contains", "starts_with", "ends_with"]>>;
+                                        limit: import("better-auth").ZodOptional<import("better-auth").ZodUnion<[import("better-auth").ZodString, import("better-auth").ZodNumber]>>;
+                                        offset: import("better-auth").ZodOptional<import("better-auth").ZodUnion<[import("better-auth").ZodString, import("better-auth").ZodNumber]>>;
+                                        sortBy: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                        sortDirection: import("better-auth").ZodOptional<import("better-auth").ZodEnum<["asc", "desc"]>>;
+                                        filterField: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                        filterValue: import("better-auth").ZodOptional<import("better-auth").ZodUnion<[import("better-auth").ZodUnion<[import("better-auth").ZodString, import("better-auth").ZodNumber]>, import("better-auth").ZodBoolean]>>;
+                                        filterOperator: import("better-auth").ZodOptional<import("better-auth").ZodEnum<["eq", "ne", "lt", "lte", "gt", "gte"]>>;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        searchValue?: string | undefined;
+                                        searchField?: "name" | "email" | undefined;
+                                        searchOperator?: "contains" | "starts_with" | "ends_with" | undefined;
+                                        limit?: string | number | undefined;
+                                        offset?: string | number | undefined;
+                                        sortBy?: string | undefined;
+                                        sortDirection?: "asc" | "desc" | undefined;
+                                        filterField?: string | undefined;
+                                        filterValue?: string | number | boolean | undefined;
+                                        filterOperator?: "eq" | "ne" | "lt" | "lte" | "gt" | "gte" | undefined;
+                                    }, {
+                                        searchValue?: string | undefined;
+                                        searchField?: "name" | "email" | undefined;
+                                        searchOperator?: "contains" | "starts_with" | "ends_with" | undefined;
+                                        limit?: string | number | undefined;
+                                        offset?: string | number | undefined;
+                                        sortBy?: string | undefined;
+                                        sortDirection?: "asc" | "desc" | undefined;
+                                        filterField?: string | undefined;
+                                        filterValue?: string | number | boolean | undefined;
+                                        filterOperator?: "eq" | "ne" | "lt" | "lte" | "gt" | "gte" | undefined;
+                                    }>;
+                                    metadata: {
+                                        openapi: {
+                                            operationId: string;
+                                            summary: string;
+                                            description: string;
+                                            responses: {
+                                                200: {
+                                                    description: string;
+                                                    content: {
+                                                        "application/json": {
+                                                            schema: {
+                                                                type: "object";
+                                                                properties: {
+                                                                    users: {
+                                                                        type: string;
+                                                                        items: {
+                                                                            $ref: string;
+                                                                        };
+                                                                    };
+                                                                    total: {
+                                                                        type: string;
+                                                                    };
+                                                                    limit: {
+                                                                        type: string;
+                                                                    };
+                                                                    offset: {
+                                                                        type: string;
+                                                                    };
+                                                                };
+                                                                required: string[];
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/admin/list-users";
+                            };
+                            listUserSessions: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_4 extends boolean = false>(inputCtx_0: {
+                                    body: {
+                                        userId: string;
+                                    };
+                                } & {
+                                    method?: "POST" | undefined;
+                                } & {
+                                    query?: Record<string, any> | undefined;
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_4 | undefined;
+                                }): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_4] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        sessions: {
+                                            id: string;
+                                            createdAt: Date;
+                                            updatedAt: Date;
+                                            userId: string;
+                                            expiresAt: Date;
+                                            token: string;
+                                            ipAddress?: string | null | undefined;
+                                            userAgent?: string | null | undefined;
+                                        }[];
+                                    };
+                                } : {
+                                    sessions: {
+                                        id: string;
+                                        createdAt: Date;
+                                        updatedAt: Date;
+                                        userId: string;
+                                        expiresAt: Date;
+                                        token: string;
+                                        ipAddress?: string | null | undefined;
+                                        userAgent?: string | null | undefined;
+                                    }[];
+                                }>;
+                                options: {
+                                    method: "POST";
+                                    use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                        session: {
+                                            user: import("better-auth/plugins").UserWithRole;
+                                            session: import("better-auth").Session;
+                                        };
+                                    }>)[];
+                                    body: import("better-auth").ZodObject<{
+                                        userId: import("better-auth").ZodString;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        userId: string;
+                                    }, {
+                                        userId: string;
+                                    }>;
+                                    metadata: {
+                                        openapi: {
+                                            operationId: string;
+                                            summary: string;
+                                            description: string;
+                                            responses: {
+                                                200: {
+                                                    description: string;
+                                                    content: {
+                                                        "application/json": {
+                                                            schema: {
+                                                                type: "object";
+                                                                properties: {
+                                                                    sessions: {
+                                                                        type: string;
+                                                                        items: {
+                                                                            $ref: string;
+                                                                        };
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/admin/list-user-sessions";
+                            };
+                            unbanUser: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_5 extends boolean = false>(inputCtx_0: {
+                                    body: {
+                                        userId: string;
+                                    };
+                                } & {
+                                    method?: "POST" | undefined;
+                                } & {
+                                    query?: Record<string, any> | undefined;
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_5 | undefined;
+                                }): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_5] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        user: any;
+                                    };
+                                } : {
+                                    user: any;
+                                }>;
+                                options: {
+                                    method: "POST";
+                                    body: import("better-auth").ZodObject<{
+                                        userId: import("better-auth").ZodString;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        userId: string;
+                                    }, {
+                                        userId: string;
+                                    }>;
+                                    use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                        session: {
+                                            user: import("better-auth/plugins").UserWithRole;
+                                            session: import("better-auth").Session;
+                                        };
+                                    }>)[];
+                                    metadata: {
+                                        openapi: {
+                                            operationId: string;
+                                            summary: string;
+                                            description: string;
+                                            responses: {
+                                                200: {
+                                                    description: string;
+                                                    content: {
+                                                        "application/json": {
+                                                            schema: {
+                                                                type: "object";
+                                                                properties: {
+                                                                    user: {
+                                                                        $ref: string;
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/admin/unban-user";
+                            };
+                            banUser: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_6 extends boolean = false>(inputCtx_0: {
+                                    body: {
+                                        userId: string;
+                                        banReason?: string | undefined;
+                                        banExpiresIn?: number | undefined;
+                                    };
+                                } & {
+                                    method?: "POST" | undefined;
+                                } & {
+                                    query?: Record<string, any> | undefined;
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_6 | undefined;
+                                }): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_6] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        user: any;
+                                    };
+                                } : {
+                                    user: any;
+                                }>;
+                                options: {
+                                    method: "POST";
+                                    body: import("better-auth").ZodObject<{
+                                        userId: import("better-auth").ZodString;
+                                        banReason: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                        banExpiresIn: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        userId: string;
+                                        banReason?: string | undefined;
+                                        banExpiresIn?: number | undefined;
+                                    }, {
+                                        userId: string;
+                                        banReason?: string | undefined;
+                                        banExpiresIn?: number | undefined;
+                                    }>;
+                                    use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                        session: {
+                                            user: import("better-auth/plugins").UserWithRole;
+                                            session: import("better-auth").Session;
+                                        };
+                                    }>)[];
+                                    metadata: {
+                                        openapi: {
+                                            operationId: string;
+                                            summary: string;
+                                            description: string;
+                                            responses: {
+                                                200: {
+                                                    description: string;
+                                                    content: {
+                                                        "application/json": {
+                                                            schema: {
+                                                                type: "object";
+                                                                properties: {
+                                                                    user: {
+                                                                        $ref: string;
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/admin/ban-user";
+                            };
+                            impersonateUser: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_7 extends boolean = false>(inputCtx_0: {
+                                    body: {
+                                        userId: string;
+                                    };
+                                } & {
+                                    method?: "POST" | undefined;
+                                } & {
+                                    query?: Record<string, any> | undefined;
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_7 | undefined;
+                                }): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_7] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        session: {
+                                            id: string;
+                                            createdAt: Date;
+                                            updatedAt: Date;
+                                            userId: string;
+                                            expiresAt: Date;
+                                            token: string;
+                                            ipAddress?: string | null | undefined;
+                                            userAgent?: string | null | undefined;
+                                        };
+                                        user: {
+                                            id: string;
+                                            name: string;
+                                            email: string;
+                                            emailVerified: boolean;
+                                            createdAt: Date;
+                                            updatedAt: Date;
+                                            image?: string | null | undefined;
+                                        };
+                                    };
+                                } : {
+                                    session: {
+                                        id: string;
+                                        createdAt: Date;
+                                        updatedAt: Date;
+                                        userId: string;
+                                        expiresAt: Date;
+                                        token: string;
+                                        ipAddress?: string | null | undefined;
+                                        userAgent?: string | null | undefined;
+                                    };
+                                    user: {
+                                        id: string;
+                                        name: string;
+                                        email: string;
+                                        emailVerified: boolean;
+                                        createdAt: Date;
+                                        updatedAt: Date;
+                                        image?: string | null | undefined;
+                                    };
+                                }>;
+                                options: {
+                                    method: "POST";
+                                    body: import("better-auth").ZodObject<{
+                                        userId: import("better-auth").ZodString;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        userId: string;
+                                    }, {
+                                        userId: string;
+                                    }>;
+                                    use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                        session: {
+                                            user: import("better-auth/plugins").UserWithRole;
+                                            session: import("better-auth").Session;
+                                        };
+                                    }>)[];
+                                    metadata: {
+                                        openapi: {
+                                            operationId: string;
+                                            summary: string;
+                                            description: string;
+                                            responses: {
+                                                200: {
+                                                    description: string;
+                                                    content: {
+                                                        "application/json": {
+                                                            schema: {
+                                                                type: "object";
+                                                                properties: {
+                                                                    session: {
+                                                                        $ref: string;
+                                                                    };
+                                                                    user: {
+                                                                        $ref: string;
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/admin/impersonate-user";
+                            };
+                            stopImpersonating: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_8 extends boolean = false>(inputCtx_0?: ({
+                                    body?: undefined;
+                                } & {
+                                    method?: "POST" | undefined;
+                                } & {
+                                    query?: Record<string, any> | undefined;
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_8 | undefined;
+                                }) | undefined): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_8] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        session: import("better-auth").Session & Record<string, any>;
+                                        user: import("better-auth").User & Record<string, any>;
+                                    };
+                                } : {
+                                    session: import("better-auth").Session & Record<string, any>;
+                                    user: import("better-auth").User & Record<string, any>;
+                                }>;
+                                options: {
+                                    method: "POST";
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/admin/stop-impersonating";
+                            };
+                            revokeUserSession: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_9 extends boolean = false>(inputCtx_0: {
+                                    body: {
+                                        sessionToken: string;
+                                    };
+                                } & {
+                                    method?: "POST" | undefined;
+                                } & {
+                                    query?: Record<string, any> | undefined;
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_9 | undefined;
+                                }): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_9] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        success: boolean;
+                                    };
+                                } : {
+                                    success: boolean;
+                                }>;
+                                options: {
+                                    method: "POST";
+                                    body: import("better-auth").ZodObject<{
+                                        sessionToken: import("better-auth").ZodString;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        sessionToken: string;
+                                    }, {
+                                        sessionToken: string;
+                                    }>;
+                                    use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                        session: {
+                                            user: import("better-auth/plugins").UserWithRole;
+                                            session: import("better-auth").Session;
+                                        };
+                                    }>)[];
+                                    metadata: {
+                                        openapi: {
+                                            operationId: string;
+                                            summary: string;
+                                            description: string;
+                                            responses: {
+                                                200: {
+                                                    description: string;
+                                                    content: {
+                                                        "application/json": {
+                                                            schema: {
+                                                                type: "object";
+                                                                properties: {
+                                                                    success: {
+                                                                        type: string;
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/admin/revoke-user-session";
+                            };
+                            revokeUserSessions: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_10 extends boolean = false>(inputCtx_0: {
+                                    body: {
+                                        userId: string;
+                                    };
+                                } & {
+                                    method?: "POST" | undefined;
+                                } & {
+                                    query?: Record<string, any> | undefined;
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_10 | undefined;
+                                }): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_10] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        success: boolean;
+                                    };
+                                } : {
+                                    success: boolean;
+                                }>;
+                                options: {
+                                    method: "POST";
+                                    body: import("better-auth").ZodObject<{
+                                        userId: import("better-auth").ZodString;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        userId: string;
+                                    }, {
+                                        userId: string;
+                                    }>;
+                                    use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                        session: {
+                                            user: import("better-auth/plugins").UserWithRole;
+                                            session: import("better-auth").Session;
+                                        };
+                                    }>)[];
+                                    metadata: {
+                                        openapi: {
+                                            operationId: string;
+                                            summary: string;
+                                            description: string;
+                                            responses: {
+                                                200: {
+                                                    description: string;
+                                                    content: {
+                                                        "application/json": {
+                                                            schema: {
+                                                                type: "object";
+                                                                properties: {
+                                                                    success: {
+                                                                        type: string;
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/admin/revoke-user-sessions";
+                            };
+                            removeUser: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_11 extends boolean = false>(inputCtx_0: {
+                                    body: {
+                                        userId: string;
+                                    };
+                                } & {
+                                    method?: "POST" | undefined;
+                                } & {
+                                    query?: Record<string, any> | undefined;
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_11 | undefined;
+                                }): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_11] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        success: boolean;
+                                    };
+                                } : {
+                                    success: boolean;
+                                }>;
+                                options: {
+                                    method: "POST";
+                                    body: import("better-auth").ZodObject<{
+                                        userId: import("better-auth").ZodString;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        userId: string;
+                                    }, {
+                                        userId: string;
+                                    }>;
+                                    use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                        session: {
+                                            user: import("better-auth/plugins").UserWithRole;
+                                            session: import("better-auth").Session;
+                                        };
+                                    }>)[];
+                                    metadata: {
+                                        openapi: {
+                                            operationId: string;
+                                            summary: string;
+                                            description: string;
+                                            responses: {
+                                                200: {
+                                                    description: string;
+                                                    content: {
+                                                        "application/json": {
+                                                            schema: {
+                                                                type: "object";
+                                                                properties: {
+                                                                    success: {
+                                                                        type: string;
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/admin/remove-user";
+                            };
+                            setUserPassword: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_12 extends boolean = false>(inputCtx_0: {
+                                    body: {
+                                        userId: string;
+                                        newPassword: string;
+                                    };
+                                } & {
+                                    method?: "POST" | undefined;
+                                } & {
+                                    query?: Record<string, any> | undefined;
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_12 | undefined;
+                                }): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_12] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        status: boolean;
+                                    };
+                                } : {
+                                    status: boolean;
+                                }>;
+                                options: {
+                                    method: "POST";
+                                    body: import("better-auth").ZodObject<{
+                                        newPassword: import("better-auth").ZodString;
+                                        userId: import("better-auth").ZodString;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        userId: string;
+                                        newPassword: string;
+                                    }, {
+                                        userId: string;
+                                        newPassword: string;
+                                    }>;
+                                    use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                        session: {
+                                            user: import("better-auth/plugins").UserWithRole;
+                                            session: import("better-auth").Session;
+                                        };
+                                    }>)[];
+                                    metadata: {
+                                        openapi: {
+                                            operationId: string;
+                                            summary: string;
+                                            description: string;
+                                            responses: {
+                                                200: {
+                                                    description: string;
+                                                    content: {
+                                                        "application/json": {
+                                                            schema: {
+                                                                type: "object";
+                                                                properties: {
+                                                                    status: {
+                                                                        type: string;
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/admin/set-user-password";
+                            };
+                            userHasPermission: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_13 extends boolean = false>(inputCtx_0: {
+                                    body: ({
+                                        permission: {
+                                            readonly user?: ("list" | "create" | "set-role" | "ban" | "impersonate" | "delete" | "set-password")[] | undefined;
+                                            readonly session?: ("list" | "delete" | "revoke")[] | undefined;
+                                        };
+                                        permissions?: never;
+                                    } | {
+                                        permissions: {
+                                            readonly user?: ("list" | "create" | "set-role" | "ban" | "impersonate" | "delete" | "set-password")[] | undefined;
+                                            readonly session?: ("list" | "delete" | "revoke")[] | undefined;
+                                        };
+                                        permission?: never;
+                                    }) & {
+                                        userId?: string;
+                                        role?: "user" | "admin" | undefined;
+                                    };
+                                } & {
+                                    method?: "POST" | undefined;
+                                } & {
+                                    query?: Record<string, any> | undefined;
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_13 | undefined;
+                                }): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_13] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        error: null;
+                                        success: boolean;
+                                    };
+                                } : {
+                                    error: null;
+                                    success: boolean;
+                                }>;
+                                options: {
+                                    method: "POST";
+                                    body: import("better-auth").ZodIntersection<import("better-auth").ZodObject<{
+                                        userId: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                        role: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        userId?: string | undefined;
+                                        role?: string | undefined;
+                                    }, {
+                                        userId?: string | undefined;
+                                        role?: string | undefined;
+                                    }>, import("better-auth").ZodUnion<[import("better-auth").ZodObject<{
+                                        permission: import("better-auth").ZodRecord<import("better-auth").ZodString, import("better-auth").ZodArray<import("better-auth").ZodString, "many">>;
+                                        permissions: import("better-auth").ZodUndefined;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        permission: Record<string, string[]>;
+                                        permissions?: undefined;
+                                    }, {
+                                        permission: Record<string, string[]>;
+                                        permissions?: undefined;
+                                    }>, import("better-auth").ZodObject<{
+                                        permission: import("better-auth").ZodUndefined;
+                                        permissions: import("better-auth").ZodRecord<import("better-auth").ZodString, import("better-auth").ZodArray<import("better-auth").ZodString, "many">>;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        permissions: Record<string, string[]>;
+                                        permission?: undefined;
+                                    }, {
+                                        permissions: Record<string, string[]>;
+                                        permission?: undefined;
+                                    }>]>>;
+                                    metadata: {
+                                        openapi: {
+                                            description: string;
+                                            requestBody: {
+                                                content: {
+                                                    "application/json": {
+                                                        schema: {
+                                                            type: "object";
+                                                            properties: {
+                                                                permission: {
+                                                                    type: string;
+                                                                    description: string;
+                                                                    deprecated: boolean;
+                                                                };
+                                                                permissions: {
+                                                                    type: string;
+                                                                    description: string;
+                                                                };
+                                                            };
+                                                            required: string[];
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                            responses: {
+                                                "200": {
+                                                    description: string;
+                                                    content: {
+                                                        "application/json": {
+                                                            schema: {
+                                                                type: "object";
+                                                                properties: {
+                                                                    error: {
+                                                                        type: string;
+                                                                    };
+                                                                    success: {
+                                                                        type: string;
+                                                                    };
+                                                                };
+                                                                required: string[];
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                        $Infer: {
+                                            body: ({
+                                                permission: {
+                                                    readonly user?: ("list" | "create" | "set-role" | "ban" | "impersonate" | "delete" | "set-password")[] | undefined;
+                                                    readonly session?: ("list" | "delete" | "revoke")[] | undefined;
+                                                };
+                                                permissions?: never;
+                                            } | {
+                                                permissions: {
+                                                    readonly user?: ("list" | "create" | "set-role" | "ban" | "impersonate" | "delete" | "set-password")[] | undefined;
+                                                    readonly session?: ("list" | "delete" | "revoke")[] | undefined;
+                                                };
+                                                permission?: never;
+                                            }) & {
+                                                userId?: string;
+                                                role?: "user" | "admin" | undefined;
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/admin/has-permission";
+                            };
+                        };
+                        $ERROR_CODES: {
+                            readonly FAILED_TO_CREATE_USER: "Failed to create user";
+                            readonly USER_ALREADY_EXISTS: "User already exists";
+                            readonly YOU_CANNOT_BAN_YOURSELF: "You cannot ban yourself";
+                            readonly YOU_ARE_NOT_ALLOWED_TO_CHANGE_USERS_ROLE: "You are not allowed to change users role";
+                            readonly YOU_ARE_NOT_ALLOWED_TO_CREATE_USERS: "You are not allowed to create users";
+                            readonly YOU_ARE_NOT_ALLOWED_TO_LIST_USERS: "You are not allowed to list users";
+                            readonly YOU_ARE_NOT_ALLOWED_TO_LIST_USERS_SESSIONS: "You are not allowed to list users sessions";
+                            readonly YOU_ARE_NOT_ALLOWED_TO_BAN_USERS: "You are not allowed to ban users";
+                            readonly YOU_ARE_NOT_ALLOWED_TO_IMPERSONATE_USERS: "You are not allowed to impersonate users";
+                            readonly YOU_ARE_NOT_ALLOWED_TO_REVOKE_USERS_SESSIONS: "You are not allowed to revoke users sessions";
+                            readonly YOU_ARE_NOT_ALLOWED_TO_DELETE_USERS: "You are not allowed to delete users";
+                            readonly YOU_ARE_NOT_ALLOWED_TO_SET_USERS_PASSWORD: "You are not allowed to set users password";
+                            readonly BANNED_USER: "You have been banned from this application";
+                        };
+                        schema: {
+                            user: {
+                                fields: {
+                                    role: {
+                                        type: "string";
+                                        required: false;
+                                        input: false;
+                                    };
+                                    banned: {
+                                        type: "boolean";
+                                        defaultValue: false;
+                                        required: false;
+                                        input: false;
+                                    };
+                                    banReason: {
+                                        type: "string";
+                                        required: false;
+                                        input: false;
+                                    };
+                                    banExpires: {
+                                        type: "date";
+                                        required: false;
+                                        input: false;
+                                    };
+                                };
+                            };
+                            session: {
+                                fields: {
+                                    impersonatedBy: {
+                                        type: "string";
+                                        required: false;
+                                    };
+                                };
+                            };
+                        };
+                    } | {
+                        id: "api-key";
+                        $ERROR_CODES: {
+                            INVALID_METADATA_TYPE: string;
+                            REFILL_AMOUNT_AND_INTERVAL_REQUIRED: string;
+                            REFILL_INTERVAL_AND_AMOUNT_REQUIRED: string;
+                            USER_BANNED: string;
+                            UNAUTHORIZED_SESSION: string;
+                            KEY_NOT_FOUND: string;
+                            KEY_DISABLED: string;
+                            KEY_EXPIRED: string;
+                            USAGE_EXCEEDED: string;
+                            KEY_NOT_RECOVERABLE: string;
+                            EXPIRES_IN_IS_TOO_SMALL: string;
+                            EXPIRES_IN_IS_TOO_LARGE: string;
+                            INVALID_REMAINING: string;
+                            INVALID_PREFIX_LENGTH: string;
+                            INVALID_NAME_LENGTH: string;
+                            METADATA_DISABLED: string;
+                            RATE_LIMIT_EXCEEDED: string;
+                            NO_VALUES_TO_UPDATE: string;
+                            KEY_DISABLED_EXPIRATION: string;
+                            INVALID_API_KEY: string;
+                            INVALID_USER_ID_FROM_API_KEY: string;
+                            INVALID_API_KEY_GETTER_RETURN_TYPE: string;
+                            SERVER_ONLY_PROPERTY: string;
+                        };
+                        hooks: {
+                            before: {
+                                matcher: (ctx: import("better-auth").HookEndpointContext) => boolean;
+                                handler: (inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                    user: {
+                                        id: string;
+                                        name: string;
+                                        email: string;
+                                        emailVerified: boolean;
+                                        createdAt: Date;
+                                        updatedAt: Date;
+                                        image?: string | null | undefined;
+                                    };
+                                    session: {
+                                        id: string;
+                                        token: string;
+                                        userId: string;
+                                        userAgent: string | null;
+                                        ipAddress: string | null;
+                                        createdAt: Date;
+                                        updatedAt: Date;
+                                        expiresAt: Date;
+                                    };
+                                } | {
+                                    context: import("better-auth").MiddlewareContext<import("better-auth").MiddlewareOptions, import("better-auth").AuthContext & {
+                                        returned?: unknown;
+                                        responseHeaders?: Headers;
+                                    }>;
+                                }>;
+                            }[];
+                        };
+                        endpoints: {
+                            createApiKey: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_14 extends boolean = false>(inputCtx_0: {
+                                    body: {
+                                        metadata?: any;
+                                        name?: string | undefined;
+                                        userId?: string | undefined;
+                                        prefix?: string | undefined;
+                                        expiresIn?: number | null | undefined;
+                                        permissions?: Record<string, string[]> | undefined;
+                                        rateLimitMax?: number | undefined;
+                                        refillInterval?: number | undefined;
+                                        refillAmount?: number | undefined;
+                                        rateLimitEnabled?: boolean | undefined;
+                                        rateLimitTimeWindow?: number | undefined;
+                                        remaining?: number | null | undefined;
+                                    };
+                                } & {
+                                    method?: "POST" | undefined;
+                                } & {
+                                    query?: Record<string, any> | undefined;
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_14 | undefined;
+                                }): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_14] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        key: string;
+                                        metadata: any;
+                                        permissions: any;
+                                        id: string;
+                                        name: string | null;
+                                        start: string | null;
+                                        prefix: string | null;
+                                        userId: string;
+                                        refillInterval: number | null;
+                                        refillAmount: number | null;
+                                        lastRefillAt: Date | null;
+                                        enabled: boolean;
+                                        rateLimitEnabled: boolean;
+                                        rateLimitTimeWindow: number | null;
+                                        rateLimitMax: number | null;
+                                        requestCount: number;
+                                        remaining: number | null;
+                                        lastRequest: Date | null;
+                                        expiresAt: Date | null;
+                                        createdAt: Date;
+                                        updatedAt: Date;
+                                    };
+                                } : {
+                                    key: string;
+                                    metadata: any;
+                                    permissions: any;
+                                    id: string;
+                                    name: string | null;
+                                    start: string | null;
+                                    prefix: string | null;
+                                    userId: string;
+                                    refillInterval: number | null;
+                                    refillAmount: number | null;
+                                    lastRefillAt: Date | null;
+                                    enabled: boolean;
+                                    rateLimitEnabled: boolean;
+                                    rateLimitTimeWindow: number | null;
+                                    rateLimitMax: number | null;
+                                    requestCount: number;
+                                    remaining: number | null;
+                                    lastRequest: Date | null;
+                                    expiresAt: Date | null;
+                                    createdAt: Date;
+                                    updatedAt: Date;
+                                }>;
+                                options: {
+                                    method: "POST";
+                                    body: import("better-auth").ZodObject<{
+                                        name: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                        expiresIn: import("better-auth").ZodDefault<import("better-auth").ZodNullable<import("better-auth").ZodOptional<import("better-auth").ZodNumber>>>;
+                                        userId: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                        prefix: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                        remaining: import("better-auth").ZodDefault<import("better-auth").ZodNullable<import("better-auth").ZodOptional<import("better-auth").ZodNumber>>>;
+                                        metadata: import("better-auth").ZodOptional<import("better-auth").ZodAny>;
+                                        refillAmount: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                        refillInterval: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                        rateLimitTimeWindow: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                        rateLimitMax: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                        rateLimitEnabled: import("better-auth").ZodOptional<import("better-auth").ZodBoolean>;
+                                        permissions: import("better-auth").ZodOptional<import("better-auth").ZodRecord<import("better-auth").ZodString, import("better-auth").ZodArray<import("better-auth").ZodString, "many">>>;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        expiresIn: number | null;
+                                        remaining: number | null;
+                                        metadata?: any;
+                                        name?: string | undefined;
+                                        userId?: string | undefined;
+                                        prefix?: string | undefined;
+                                        permissions?: Record<string, string[]> | undefined;
+                                        rateLimitMax?: number | undefined;
+                                        refillInterval?: number | undefined;
+                                        refillAmount?: number | undefined;
+                                        rateLimitEnabled?: boolean | undefined;
+                                        rateLimitTimeWindow?: number | undefined;
+                                    }, {
+                                        metadata?: any;
+                                        name?: string | undefined;
+                                        userId?: string | undefined;
+                                        prefix?: string | undefined;
+                                        expiresIn?: number | null | undefined;
+                                        permissions?: Record<string, string[]> | undefined;
+                                        rateLimitMax?: number | undefined;
+                                        refillInterval?: number | undefined;
+                                        refillAmount?: number | undefined;
+                                        rateLimitEnabled?: boolean | undefined;
+                                        rateLimitTimeWindow?: number | undefined;
+                                        remaining?: number | null | undefined;
+                                    }>;
+                                    metadata: {
+                                        openapi: {
+                                            description: string;
+                                            responses: {
+                                                "200": {
+                                                    description: string;
+                                                    content: {
+                                                        "application/json": {
+                                                            schema: {
+                                                                type: "object";
+                                                                properties: {
+                                                                    id: {
+                                                                        type: string;
+                                                                        description: string;
+                                                                    };
+                                                                    createdAt: {
+                                                                        type: string;
+                                                                        format: string;
+                                                                        description: string;
+                                                                    };
+                                                                    updatedAt: {
+                                                                        type: string;
+                                                                        format: string;
+                                                                        description: string;
+                                                                    };
+                                                                    name: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    prefix: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    start: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    key: {
+                                                                        type: string;
+                                                                        description: string;
+                                                                    };
+                                                                    enabled: {
+                                                                        type: string;
+                                                                        description: string;
+                                                                    };
+                                                                    expiresAt: {
+                                                                        type: string;
+                                                                        format: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    userId: {
+                                                                        type: string;
+                                                                        description: string;
+                                                                    };
+                                                                    lastRefillAt: {
+                                                                        type: string;
+                                                                        format: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    lastRequest: {
+                                                                        type: string;
+                                                                        format: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    metadata: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        additionalProperties: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    rateLimitMax: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    rateLimitTimeWindow: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    remaining: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    refillAmount: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    refillInterval: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    rateLimitEnabled: {
+                                                                        type: string;
+                                                                        description: string;
+                                                                    };
+                                                                    requestCount: {
+                                                                        type: string;
+                                                                        description: string;
+                                                                    };
+                                                                    permissions: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        additionalProperties: {
+                                                                            type: string;
+                                                                            items: {
+                                                                                type: string;
+                                                                            };
+                                                                        };
+                                                                        description: string;
+                                                                    };
+                                                                };
+                                                                required: string[];
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/api-key/create";
+                            };
+                            verifyApiKey: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_15 extends boolean = false>(inputCtx_0: {
+                                    body: {
+                                        key: string;
+                                        permissions?: Record<string, string[]> | undefined;
+                                    };
+                                } & {
+                                    method?: "POST" | undefined;
+                                } & {
+                                    query?: Record<string, any> | undefined;
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_15 | undefined;
+                                }): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_15] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        valid: boolean;
+                                        error: {
+                                            message: string;
+                                            code: "KEY_NOT_FOUND";
+                                        };
+                                        key: null;
+                                    } | {
+                                        valid: boolean;
+                                        error: {
+                                            message: string;
+                                            code: "KEY_DISABLED";
+                                        };
+                                        key: null;
+                                    } | {
+                                        valid: boolean;
+                                        error: {
+                                            message: string;
+                                            code: "KEY_EXPIRED";
+                                        };
+                                        key: null;
+                                    } | {
+                                        valid: boolean;
+                                        error: {
+                                            message: string;
+                                            code: "USAGE_EXCEEDED";
+                                        };
+                                        key: null;
+                                    } | {
+                                        valid: boolean;
+                                        error: {
+                                            message: string | null;
+                                            code: "RATE_LIMITED";
+                                            details: {
+                                                tryAgainIn: number | null;
+                                            };
+                                        };
+                                        key: null;
+                                    } | {
+                                        valid: boolean;
+                                        error: null;
+                                        key: Omit<{
+                                            id: string;
+                                            name: string | null;
+                                            start: string | null;
+                                            prefix: string | null;
+                                            key: string;
+                                            userId: string;
+                                            refillInterval: number | null;
+                                            refillAmount: number | null;
+                                            lastRefillAt: Date | null;
+                                            enabled: boolean;
+                                            rateLimitEnabled: boolean;
+                                            rateLimitTimeWindow: number | null;
+                                            rateLimitMax: number | null;
+                                            requestCount: number;
+                                            remaining: number | null;
+                                            lastRequest: Date | null;
+                                            expiresAt: Date | null;
+                                            createdAt: Date;
+                                            updatedAt: Date;
+                                            metadata: Record<string, any> | null;
+                                            permissions?: {
+                                                [key: string]: string[];
+                                            } | null;
+                                        }, "key"> | null;
+                                    };
+                                } : {
+                                    valid: boolean;
+                                    error: {
+                                        message: string;
+                                        code: "KEY_NOT_FOUND";
+                                    };
+                                    key: null;
+                                } | {
+                                    valid: boolean;
+                                    error: {
+                                        message: string;
+                                        code: "KEY_DISABLED";
+                                    };
+                                    key: null;
+                                } | {
+                                    valid: boolean;
+                                    error: {
+                                        message: string;
+                                        code: "KEY_EXPIRED";
+                                    };
+                                    key: null;
+                                } | {
+                                    valid: boolean;
+                                    error: {
+                                        message: string;
+                                        code: "USAGE_EXCEEDED";
+                                    };
+                                    key: null;
+                                } | {
+                                    valid: boolean;
+                                    error: {
+                                        message: string | null;
+                                        code: "RATE_LIMITED";
+                                        details: {
+                                            tryAgainIn: number | null;
+                                        };
+                                    };
+                                    key: null;
+                                } | {
+                                    valid: boolean;
+                                    error: null;
+                                    key: Omit<{
+                                        id: string;
+                                        name: string | null;
+                                        start: string | null;
+                                        prefix: string | null;
+                                        key: string;
+                                        userId: string;
+                                        refillInterval: number | null;
+                                        refillAmount: number | null;
+                                        lastRefillAt: Date | null;
+                                        enabled: boolean;
+                                        rateLimitEnabled: boolean;
+                                        rateLimitTimeWindow: number | null;
+                                        rateLimitMax: number | null;
+                                        requestCount: number;
+                                        remaining: number | null;
+                                        lastRequest: Date | null;
+                                        expiresAt: Date | null;
+                                        createdAt: Date;
+                                        updatedAt: Date;
+                                        metadata: Record<string, any> | null;
+                                        permissions?: {
+                                            [key: string]: string[];
+                                        } | null;
+                                    }, "key"> | null;
+                                }>;
+                                options: {
+                                    method: "POST";
+                                    body: import("better-auth").ZodObject<{
+                                        key: import("better-auth").ZodString;
+                                        permissions: import("better-auth").ZodOptional<import("better-auth").ZodRecord<import("better-auth").ZodString, import("better-auth").ZodArray<import("better-auth").ZodString, "many">>>;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        key: string;
+                                        permissions?: Record<string, string[]> | undefined;
+                                    }, {
+                                        key: string;
+                                        permissions?: Record<string, string[]> | undefined;
+                                    }>;
+                                    metadata: {
+                                        SERVER_ONLY: true;
+                                    };
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/api-key/verify";
+                            };
+                            getApiKey: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_16 extends boolean = false>(inputCtx_0: {
+                                    body?: undefined;
+                                } & {
+                                    method?: "GET" | undefined;
+                                } & {
+                                    query: {
+                                        id: string;
+                                    };
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_16 | undefined;
+                                }): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_16] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        permissions: {
+                                            [key: string]: string[];
+                                        } | null;
+                                        id: string;
+                                        name: string | null;
+                                        start: string | null;
+                                        prefix: string | null;
+                                        userId: string;
+                                        refillInterval: number | null;
+                                        refillAmount: number | null;
+                                        lastRefillAt: Date | null;
+                                        enabled: boolean;
+                                        rateLimitEnabled: boolean;
+                                        rateLimitTimeWindow: number | null;
+                                        rateLimitMax: number | null;
+                                        requestCount: number;
+                                        remaining: number | null;
+                                        lastRequest: Date | null;
+                                        expiresAt: Date | null;
+                                        createdAt: Date;
+                                        updatedAt: Date;
+                                        metadata: Record<string, any> | null;
+                                    };
+                                } : {
+                                    permissions: {
+                                        [key: string]: string[];
+                                    } | null;
+                                    id: string;
+                                    name: string | null;
+                                    start: string | null;
+                                    prefix: string | null;
+                                    userId: string;
+                                    refillInterval: number | null;
+                                    refillAmount: number | null;
+                                    lastRefillAt: Date | null;
+                                    enabled: boolean;
+                                    rateLimitEnabled: boolean;
+                                    rateLimitTimeWindow: number | null;
+                                    rateLimitMax: number | null;
+                                    requestCount: number;
+                                    remaining: number | null;
+                                    lastRequest: Date | null;
+                                    expiresAt: Date | null;
+                                    createdAt: Date;
+                                    updatedAt: Date;
+                                    metadata: Record<string, any> | null;
+                                }>;
+                                options: {
+                                    method: "GET";
+                                    query: import("better-auth").ZodObject<{
+                                        id: import("better-auth").ZodString;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        id: string;
+                                    }, {
+                                        id: string;
+                                    }>;
+                                    use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                        session: {
+                                            session: Record<string, any> & {
+                                                id: string;
+                                                createdAt: Date;
+                                                updatedAt: Date;
+                                                userId: string;
+                                                expiresAt: Date;
+                                                token: string;
+                                                ipAddress?: string | null | undefined;
+                                                userAgent?: string | null | undefined;
+                                            };
+                                            user: Record<string, any> & {
+                                                id: string;
+                                                name: string;
+                                                email: string;
+                                                emailVerified: boolean;
+                                                createdAt: Date;
+                                                updatedAt: Date;
+                                                image?: string | null | undefined;
+                                            };
+                                        };
+                                    }>)[];
+                                    metadata: {
+                                        openapi: {
+                                            description: string;
+                                            responses: {
+                                                "200": {
+                                                    description: string;
+                                                    content: {
+                                                        "application/json": {
+                                                            schema: {
+                                                                type: "object";
+                                                                properties: {
+                                                                    id: {
+                                                                        type: string;
+                                                                        description: string;
+                                                                    };
+                                                                    name: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    start: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    prefix: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    userId: {
+                                                                        type: string;
+                                                                        description: string;
+                                                                    };
+                                                                    refillInterval: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    refillAmount: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    lastRefillAt: {
+                                                                        type: string;
+                                                                        format: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    enabled: {
+                                                                        type: string;
+                                                                        description: string;
+                                                                        default: boolean;
+                                                                    };
+                                                                    rateLimitEnabled: {
+                                                                        type: string;
+                                                                        description: string;
+                                                                    };
+                                                                    rateLimitTimeWindow: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    rateLimitMax: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    requestCount: {
+                                                                        type: string;
+                                                                        description: string;
+                                                                    };
+                                                                    remaining: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    lastRequest: {
+                                                                        type: string;
+                                                                        format: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    expiresAt: {
+                                                                        type: string;
+                                                                        format: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    createdAt: {
+                                                                        type: string;
+                                                                        format: string;
+                                                                        description: string;
+                                                                    };
+                                                                    updatedAt: {
+                                                                        type: string;
+                                                                        format: string;
+                                                                        description: string;
+                                                                    };
+                                                                    metadata: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        additionalProperties: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    permissions: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                };
+                                                                required: string[];
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/api-key/get";
+                            };
+                            updateApiKey: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_17 extends boolean = false>(inputCtx_0: {
+                                    body: {
+                                        keyId: string;
+                                        metadata?: any;
+                                        name?: string | undefined;
+                                        userId?: string | undefined;
+                                        enabled?: boolean | undefined;
+                                        expiresIn?: number | null | undefined;
+                                        permissions?: Record<string, string[]> | null | undefined;
+                                        rateLimitMax?: number | undefined;
+                                        refillInterval?: number | undefined;
+                                        refillAmount?: number | undefined;
+                                        rateLimitEnabled?: boolean | undefined;
+                                        rateLimitTimeWindow?: number | undefined;
+                                        remaining?: number | undefined;
+                                    };
+                                } & {
+                                    method?: "POST" | undefined;
+                                } & {
+                                    query?: Record<string, any> | undefined;
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_17 | undefined;
+                                }): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_17] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        permissions: {
+                                            [key: string]: string[];
+                                        } | null;
+                                        id: string;
+                                        name: string | null;
+                                        start: string | null;
+                                        prefix: string | null;
+                                        userId: string;
+                                        refillInterval: number | null;
+                                        refillAmount: number | null;
+                                        lastRefillAt: Date | null;
+                                        enabled: boolean;
+                                        rateLimitEnabled: boolean;
+                                        rateLimitTimeWindow: number | null;
+                                        rateLimitMax: number | null;
+                                        requestCount: number;
+                                        remaining: number | null;
+                                        lastRequest: Date | null;
+                                        expiresAt: Date | null;
+                                        createdAt: Date;
+                                        updatedAt: Date;
+                                        metadata: Record<string, any> | null;
+                                    };
+                                } : {
+                                    permissions: {
+                                        [key: string]: string[];
+                                    } | null;
+                                    id: string;
+                                    name: string | null;
+                                    start: string | null;
+                                    prefix: string | null;
+                                    userId: string;
+                                    refillInterval: number | null;
+                                    refillAmount: number | null;
+                                    lastRefillAt: Date | null;
+                                    enabled: boolean;
+                                    rateLimitEnabled: boolean;
+                                    rateLimitTimeWindow: number | null;
+                                    rateLimitMax: number | null;
+                                    requestCount: number;
+                                    remaining: number | null;
+                                    lastRequest: Date | null;
+                                    expiresAt: Date | null;
+                                    createdAt: Date;
+                                    updatedAt: Date;
+                                    metadata: Record<string, any> | null;
+                                }>;
+                                options: {
+                                    method: "POST";
+                                    body: import("better-auth").ZodObject<{
+                                        keyId: import("better-auth").ZodString;
+                                        userId: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                        name: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                        enabled: import("better-auth").ZodOptional<import("better-auth").ZodBoolean>;
+                                        remaining: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                        refillAmount: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                        refillInterval: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                        metadata: import("better-auth").ZodOptional<import("better-auth").ZodAny>;
+                                        expiresIn: import("better-auth").ZodNullable<import("better-auth").ZodOptional<import("better-auth").ZodNumber>>;
+                                        rateLimitEnabled: import("better-auth").ZodOptional<import("better-auth").ZodBoolean>;
+                                        rateLimitTimeWindow: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                        rateLimitMax: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                        permissions: import("better-auth").ZodNullable<import("better-auth").ZodOptional<import("better-auth").ZodRecord<import("better-auth").ZodString, import("better-auth").ZodArray<import("better-auth").ZodString, "many">>>>;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        keyId: string;
+                                        metadata?: any;
+                                        name?: string | undefined;
+                                        userId?: string | undefined;
+                                        enabled?: boolean | undefined;
+                                        expiresIn?: number | null | undefined;
+                                        permissions?: Record<string, string[]> | null | undefined;
+                                        rateLimitMax?: number | undefined;
+                                        refillInterval?: number | undefined;
+                                        refillAmount?: number | undefined;
+                                        rateLimitEnabled?: boolean | undefined;
+                                        rateLimitTimeWindow?: number | undefined;
+                                        remaining?: number | undefined;
+                                    }, {
+                                        keyId: string;
+                                        metadata?: any;
+                                        name?: string | undefined;
+                                        userId?: string | undefined;
+                                        enabled?: boolean | undefined;
+                                        expiresIn?: number | null | undefined;
+                                        permissions?: Record<string, string[]> | null | undefined;
+                                        rateLimitMax?: number | undefined;
+                                        refillInterval?: number | undefined;
+                                        refillAmount?: number | undefined;
+                                        rateLimitEnabled?: boolean | undefined;
+                                        rateLimitTimeWindow?: number | undefined;
+                                        remaining?: number | undefined;
+                                    }>;
+                                    metadata: {
+                                        openapi: {
+                                            description: string;
+                                            responses: {
+                                                "200": {
+                                                    description: string;
+                                                    content: {
+                                                        "application/json": {
+                                                            schema: {
+                                                                type: "object";
+                                                                properties: {
+                                                                    id: {
+                                                                        type: string;
+                                                                        description: string;
+                                                                    };
+                                                                    name: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    start: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    prefix: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    userId: {
+                                                                        type: string;
+                                                                        description: string;
+                                                                    };
+                                                                    refillInterval: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    refillAmount: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    lastRefillAt: {
+                                                                        type: string;
+                                                                        format: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    enabled: {
+                                                                        type: string;
+                                                                        description: string;
+                                                                        default: boolean;
+                                                                    };
+                                                                    rateLimitEnabled: {
+                                                                        type: string;
+                                                                        description: string;
+                                                                    };
+                                                                    rateLimitTimeWindow: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    rateLimitMax: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    requestCount: {
+                                                                        type: string;
+                                                                        description: string;
+                                                                    };
+                                                                    remaining: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    lastRequest: {
+                                                                        type: string;
+                                                                        format: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    expiresAt: {
+                                                                        type: string;
+                                                                        format: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    createdAt: {
+                                                                        type: string;
+                                                                        format: string;
+                                                                        description: string;
+                                                                    };
+                                                                    updatedAt: {
+                                                                        type: string;
+                                                                        format: string;
+                                                                        description: string;
+                                                                    };
+                                                                    metadata: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        additionalProperties: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                    permissions: {
+                                                                        type: string;
+                                                                        nullable: boolean;
+                                                                        description: string;
+                                                                    };
+                                                                };
+                                                                required: string[];
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/api-key/update";
+                            };
+                            deleteApiKey: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_18 extends boolean = false>(inputCtx_0: {
+                                    body: {
+                                        keyId: string;
+                                    };
+                                } & {
+                                    method?: "POST" | undefined;
+                                } & {
+                                    query?: Record<string, any> | undefined;
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_18 | undefined;
+                                }): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_18] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        success: boolean;
+                                    };
+                                } : {
+                                    success: boolean;
+                                }>;
+                                options: {
+                                    method: "POST";
+                                    body: import("better-auth").ZodObject<{
+                                        keyId: import("better-auth").ZodString;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        keyId: string;
+                                    }, {
+                                        keyId: string;
+                                    }>;
+                                    use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                        session: {
+                                            session: Record<string, any> & {
+                                                id: string;
+                                                createdAt: Date;
+                                                updatedAt: Date;
+                                                userId: string;
+                                                expiresAt: Date;
+                                                token: string;
+                                                ipAddress?: string | null | undefined;
+                                                userAgent?: string | null | undefined;
+                                            };
+                                            user: Record<string, any> & {
+                                                id: string;
+                                                name: string;
+                                                email: string;
+                                                emailVerified: boolean;
+                                                createdAt: Date;
+                                                updatedAt: Date;
+                                                image?: string | null | undefined;
+                                            };
+                                        };
+                                    }>)[];
+                                    metadata: {
+                                        openapi: {
+                                            description: string;
+                                            requestBody: {
+                                                content: {
+                                                    "application/json": {
+                                                        schema: {
+                                                            type: "object";
+                                                            properties: {
+                                                                keyId: {
+                                                                    type: string;
+                                                                    description: string;
+                                                                };
+                                                            };
+                                                            required: string[];
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                            responses: {
+                                                "200": {
+                                                    description: string;
+                                                    content: {
+                                                        "application/json": {
+                                                            schema: {
+                                                                type: "object";
+                                                                properties: {
+                                                                    success: {
+                                                                        type: string;
+                                                                        description: string;
+                                                                    };
+                                                                };
+                                                                required: string[];
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/api-key/delete";
+                            };
+                            listApiKeys: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_19 extends boolean = false>(inputCtx_0?: ({
+                                    body?: undefined;
+                                } & {
+                                    method?: "GET" | undefined;
+                                } & {
+                                    query?: Record<string, any> | undefined;
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_19 | undefined;
+                                }) | undefined): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_19] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        permissions: {
+                                            [key: string]: string[];
+                                        } | null;
+                                        id: string;
+                                        name: string | null;
+                                        start: string | null;
+                                        prefix: string | null;
+                                        userId: string;
+                                        refillInterval: number | null;
+                                        refillAmount: number | null;
+                                        lastRefillAt: Date | null;
+                                        enabled: boolean;
+                                        rateLimitEnabled: boolean;
+                                        rateLimitTimeWindow: number | null;
+                                        rateLimitMax: number | null;
+                                        requestCount: number;
+                                        remaining: number | null;
+                                        lastRequest: Date | null;
+                                        expiresAt: Date | null;
+                                        createdAt: Date;
+                                        updatedAt: Date;
+                                        metadata: Record<string, any> | null;
+                                    }[];
+                                } : {
+                                    permissions: {
+                                        [key: string]: string[];
+                                    } | null;
+                                    id: string;
+                                    name: string | null;
+                                    start: string | null;
+                                    prefix: string | null;
+                                    userId: string;
+                                    refillInterval: number | null;
+                                    refillAmount: number | null;
+                                    lastRefillAt: Date | null;
+                                    enabled: boolean;
+                                    rateLimitEnabled: boolean;
+                                    rateLimitTimeWindow: number | null;
+                                    rateLimitMax: number | null;
+                                    requestCount: number;
+                                    remaining: number | null;
+                                    lastRequest: Date | null;
+                                    expiresAt: Date | null;
+                                    createdAt: Date;
+                                    updatedAt: Date;
+                                    metadata: Record<string, any> | null;
+                                }[]>;
+                                options: {
+                                    method: "GET";
+                                    use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                        session: {
+                                            session: Record<string, any> & {
+                                                id: string;
+                                                createdAt: Date;
+                                                updatedAt: Date;
+                                                userId: string;
+                                                expiresAt: Date;
+                                                token: string;
+                                                ipAddress?: string | null | undefined;
+                                                userAgent?: string | null | undefined;
+                                            };
+                                            user: Record<string, any> & {
+                                                id: string;
+                                                name: string;
+                                                email: string;
+                                                emailVerified: boolean;
+                                                createdAt: Date;
+                                                updatedAt: Date;
+                                                image?: string | null | undefined;
+                                            };
+                                        };
+                                    }>)[];
+                                    metadata: {
+                                        openapi: {
+                                            description: string;
+                                            responses: {
+                                                "200": {
+                                                    description: string;
+                                                    content: {
+                                                        "application/json": {
+                                                            schema: {
+                                                                type: "array";
+                                                                items: {
+                                                                    type: string;
+                                                                    properties: {
+                                                                        id: {
+                                                                            type: string;
+                                                                            description: string;
+                                                                        };
+                                                                        name: {
+                                                                            type: string;
+                                                                            nullable: boolean;
+                                                                            description: string;
+                                                                        };
+                                                                        start: {
+                                                                            type: string;
+                                                                            nullable: boolean;
+                                                                            description: string;
+                                                                        };
+                                                                        prefix: {
+                                                                            type: string;
+                                                                            nullable: boolean;
+                                                                            description: string;
+                                                                        };
+                                                                        userId: {
+                                                                            type: string;
+                                                                            description: string;
+                                                                        };
+                                                                        refillInterval: {
+                                                                            type: string;
+                                                                            nullable: boolean;
+                                                                            description: string;
+                                                                        };
+                                                                        refillAmount: {
+                                                                            type: string;
+                                                                            nullable: boolean;
+                                                                            description: string;
+                                                                        };
+                                                                        lastRefillAt: {
+                                                                            type: string;
+                                                                            format: string;
+                                                                            nullable: boolean;
+                                                                            description: string;
+                                                                        };
+                                                                        enabled: {
+                                                                            type: string;
+                                                                            description: string;
+                                                                            default: boolean;
+                                                                        };
+                                                                        rateLimitEnabled: {
+                                                                            type: string;
+                                                                            description: string;
+                                                                        };
+                                                                        rateLimitTimeWindow: {
+                                                                            type: string;
+                                                                            nullable: boolean;
+                                                                            description: string;
+                                                                        };
+                                                                        rateLimitMax: {
+                                                                            type: string;
+                                                                            nullable: boolean;
+                                                                            description: string;
+                                                                        };
+                                                                        requestCount: {
+                                                                            type: string;
+                                                                            description: string;
+                                                                        };
+                                                                        remaining: {
+                                                                            type: string;
+                                                                            nullable: boolean;
+                                                                            description: string;
+                                                                        };
+                                                                        lastRequest: {
+                                                                            type: string;
+                                                                            format: string;
+                                                                            nullable: boolean;
+                                                                            description: string;
+                                                                        };
+                                                                        expiresAt: {
+                                                                            type: string;
+                                                                            format: string;
+                                                                            nullable: boolean;
+                                                                            description: string;
+                                                                        };
+                                                                        createdAt: {
+                                                                            type: string;
+                                                                            format: string;
+                                                                            description: string;
+                                                                        };
+                                                                        updatedAt: {
+                                                                            type: string;
+                                                                            format: string;
+                                                                            description: string;
+                                                                        };
+                                                                        metadata: {
+                                                                            type: string;
+                                                                            nullable: boolean;
+                                                                            additionalProperties: boolean;
+                                                                            description: string;
+                                                                        };
+                                                                        permissions: {
+                                                                            type: string;
+                                                                            nullable: boolean;
+                                                                            description: string;
+                                                                        };
+                                                                    };
+                                                                    required: string[];
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/api-key/list";
+                            };
+                        };
+                        schema: {
+                            apikey: {
+                                fields: {
+                                    name: {
+                                        type: "string";
+                                        required: false;
+                                        input: false;
+                                    };
+                                    start: {
+                                        type: "string";
+                                        required: false;
+                                        input: false;
+                                    };
+                                    prefix: {
+                                        type: "string";
+                                        required: false;
+                                        input: false;
+                                    };
+                                    key: {
+                                        type: "string";
+                                        required: true;
+                                        input: false;
+                                    };
+                                    userId: {
+                                        type: "string";
+                                        references: {
+                                            model: string;
+                                            field: string;
+                                        };
+                                        required: true;
+                                        input: false;
+                                    };
+                                    refillInterval: {
+                                        type: "number";
+                                        required: false;
+                                        input: false;
+                                    };
+                                    refillAmount: {
+                                        type: "number";
+                                        required: false;
+                                        input: false;
+                                    };
+                                    lastRefillAt: {
+                                        type: "date";
+                                        required: false;
+                                        input: false;
+                                    };
+                                    enabled: {
+                                        type: "boolean";
+                                        required: false;
+                                        input: false;
+                                        defaultValue: true;
+                                    };
+                                    rateLimitEnabled: {
+                                        type: "boolean";
+                                        required: false;
+                                        input: false;
+                                        defaultValue: true;
+                                    };
+                                    rateLimitTimeWindow: {
+                                        type: "number";
+                                        required: false;
+                                        input: false;
+                                        defaultValue: number;
+                                    };
+                                    rateLimitMax: {
+                                        type: "number";
+                                        required: false;
+                                        input: false;
+                                        defaultValue: number;
+                                    };
+                                    requestCount: {
+                                        type: "number";
+                                        required: false;
+                                        input: false;
+                                        defaultValue: number;
+                                    };
+                                    remaining: {
+                                        type: "number";
+                                        required: false;
+                                        input: false;
+                                    };
+                                    lastRequest: {
+                                        type: "date";
+                                        required: false;
+                                        input: false;
+                                    };
+                                    expiresAt: {
+                                        type: "date";
+                                        required: false;
+                                        input: false;
+                                    };
+                                    createdAt: {
+                                        type: "date";
+                                        required: true;
+                                        input: false;
+                                    };
+                                    updatedAt: {
+                                        type: "date";
+                                        required: true;
+                                        input: false;
+                                    };
+                                    permissions: {
+                                        type: "string";
+                                        required: false;
+                                        input: false;
+                                    };
+                                    metadata: {
+                                        type: "string";
+                                        required: false;
+                                        input: true;
+                                        transform: {
+                                            input(value: string | number | boolean | string[] | Date | number[] | null | undefined): string;
+                                            output(value: string | number | boolean | string[] | Date | number[] | null | undefined): any;
+                                        };
+                                    };
+                                };
+                            };
+                        };
+                    } | {
+                        id: "username";
+                        endpoints: {
+                            signInUsername: {
+                                <AsResponse_1 extends boolean = false, ReturnHeaders_20 extends boolean = false>(inputCtx_0: {
+                                    body: {
+                                        password: string;
+                                        username: string;
+                                        rememberMe?: boolean | undefined;
+                                    };
+                                } & {
+                                    method?: "POST" | undefined;
+                                } & {
+                                    query?: Record<string, any> | undefined;
+                                } & {
+                                    params?: Record<string, any>;
+                                } & {
+                                    request?: Request;
+                                } & {
+                                    headers?: HeadersInit;
+                                } & {
+                                    asResponse?: boolean;
+                                    returnHeaders?: boolean;
+                                    use?: import("better-auth").Middleware[];
+                                    path?: string;
+                                } & {
+                                    asResponse?: AsResponse_1 | undefined;
+                                    returnHeaders?: ReturnHeaders_20 | undefined;
+                                }): Promise<[AsResponse_1] extends [true] ? Response : [ReturnHeaders_20] extends [true] ? {
+                                    headers: Headers;
+                                    response: {
+                                        token: string;
+                                        user: {
+                                            id: string;
+                                            email: string;
+                                            emailVerified: boolean;
+                                            username: string;
+                                            name: string;
+                                            image: string | null | undefined;
+                                            createdAt: Date;
+                                            updatedAt: Date;
+                                        };
+                                    } | null;
+                                } : {
+                                    token: string;
+                                    user: {
+                                        id: string;
+                                        email: string;
+                                        emailVerified: boolean;
+                                        username: string;
+                                        name: string;
+                                        image: string | null | undefined;
+                                        createdAt: Date;
+                                        updatedAt: Date;
+                                    };
+                                } | null>;
+                                options: {
+                                    method: "POST";
+                                    body: import("better-auth").ZodObject<{
+                                        username: import("better-auth").ZodString;
+                                        password: import("better-auth").ZodString;
+                                        rememberMe: import("better-auth").ZodOptional<import("better-auth").ZodBoolean>;
+                                    }, "strip", import("better-auth").ZodTypeAny, {
+                                        password: string;
+                                        username: string;
+                                        rememberMe?: boolean | undefined;
+                                    }, {
+                                        password: string;
+                                        username: string;
+                                        rememberMe?: boolean | undefined;
+                                    }>;
+                                    metadata: {
+                                        openapi: {
+                                            summary: string;
+                                            description: string;
+                                            responses: {
+                                                200: {
+                                                    description: string;
+                                                    content: {
+                                                        "application/json": {
+                                                            schema: {
+                                                                type: "object";
+                                                                properties: {
+                                                                    token: {
+                                                                        type: string;
+                                                                        description: string;
+                                                                    };
+                                                                    user: {
+                                                                        $ref: string;
+                                                                    };
+                                                                };
+                                                                required: string[];
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                    };
+                                } & {
+                                    use: any[];
+                                };
+                                path: "/sign-in/username";
+                            };
+                        };
+                        schema: {
+                            user: {
+                                fields: {
+                                    username: {
+                                        type: "string";
+                                        required: false;
+                                        sortable: true;
+                                        unique: true;
+                                        returned: true;
+                                        transform: {
+                                            input(value: string | number | boolean | string[] | Date | number[] | null | undefined): string | undefined;
+                                        };
+                                    };
+                                    displayUsername: {
+                                        type: "string";
+                                        required: false;
+                                    };
+                                };
+                            };
+                        };
+                        hooks: {
+                            before: {
+                                matcher(context: import("better-auth").HookEndpointContext): boolean;
+                                handler: (inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<void>;
+                            }[];
+                        };
+                        $ERROR_CODES: {
+                            INVALID_USERNAME_OR_PASSWORD: string;
+                            EMAIL_NOT_VERIFIED: string;
+                            UNEXPECTED_ERROR: string;
+                            USERNAME_IS_ALREADY_TAKEN: string;
+                            USERNAME_TOO_SHORT: string;
+                            USERNAME_TOO_LONG: string;
+                            INVALID_USERNAME: string;
+                        };
+                    })[];
+                }>> & {
                     name?: string;
-                    image?: string | null;
-                }>>;
+                    image?: string;
+                };
             } & {
                 method?: "POST" | undefined;
             } & {
@@ -1828,19 +4772,2961 @@ export declare const auth: {
                 }>)[];
                 metadata: {
                     $Infer: {
-                        body: Partial<import("better-auth").Prettify<(({} | ({
-                            birthday: Date;
-                        } & {
-                            birthday?: Date | null | undefined;
-                        }) | ({} & {}) | ({} & {
-                            username?: string | null | undefined;
-                            displayUsername?: string | null | undefined;
-                        })) & {}) & {
-                            bio?: string | null | undefined;
-                        } & {
+                        body: Partial<import("better-auth").AdditionalUserFieldsInput<{
+                            database: (options: import("better-auth").BetterAuthOptions) => import("better-auth").Adapter;
+                            basePath: string;
+                            user: {
+                                additionalFields: {
+                                    bio: {
+                                        type: "string";
+                                        nullable: boolean;
+                                        required: false;
+                                    };
+                                };
+                            };
+                            account: {
+                                accountLinking: {
+                                    enabled: true;
+                                    trustedProviders: ("github" | "discord" | "email-password")[];
+                                };
+                            };
+                            advanced: {
+                                crossSubDomainCookies: {
+                                    enabled: true;
+                                    domain: string | undefined;
+                                };
+                            };
+                            trustedOrigins: string[];
+                            onAPIError: {
+                                onError(error: unknown): void;
+                            };
+                            emailAndPassword: {
+                                enabled: true;
+                            };
+                            socialProviders: {
+                                discord: {
+                                    clientId: string;
+                                    clientSecret: string;
+                                };
+                                github: {
+                                    clientId: string;
+                                    clientSecret: string;
+                                };
+                            };
+                            plugins: ({
+                                id: "account-details";
+                                schema: {
+                                    account: {
+                                        fields: {
+                                            metadata: {
+                                                type: "string";
+                                                required: false;
+                                                transform: {
+                                                    input: (value: string | number | boolean | string[] | Date | number[] | null | undefined) => string | number | boolean | string[] | Date | number[] | null | undefined;
+                                                    output: (value: string | number | boolean | string[] | Date | number[] | null | undefined) => string | number | boolean | string[] | Date | number[] | null | undefined;
+                                                };
+                                            };
+                                        };
+                                    };
+                                };
+                                hooks: {
+                                    before: {
+                                        matcher: (ctx: import("better-auth").HookEndpointContext) => boolean;
+                                        handler: (inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                            context: import("better-auth").MiddlewareContext<import("better-auth").MiddlewareOptions, import("better-auth").AuthContext & {
+                                                returned?: unknown;
+                                                responseHeaders?: Headers;
+                                            }>;
+                                        }>;
+                                    }[];
+                                    after: {
+                                        matcher: (ctx: import("better-auth").HookEndpointContext) => boolean;
+                                        handler: (inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                            context: import("better-auth").MiddlewareContext<import("better-auth").MiddlewareOptions, import("better-auth").AuthContext & {
+                                                returned?: unknown;
+                                                responseHeaders?: Headers;
+                                            }>;
+                                        }>;
+                                    }[];
+                                };
+                            } | {
+                                id: "birthdayPlugin";
+                                schema: {
+                                    user: {
+                                        fields: {
+                                            birthday: {
+                                                type: "date";
+                                                required: true;
+                                                unique: false;
+                                            };
+                                        };
+                                    };
+                                };
+                                hooks: {
+                                    before: {
+                                        matcher: (context: import("better-auth").HookEndpointContext) => boolean;
+                                        handler: (inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                            context: import("better-auth").MiddlewareContext<import("better-auth").MiddlewareOptions, import("better-auth").AuthContext & {
+                                                returned?: unknown;
+                                                responseHeaders?: Headers;
+                                            }>;
+                                        }>;
+                                    }[];
+                                };
+                            } | {
+                                id: "admin";
+                                init(): {
+                                    options: {
+                                        databaseHooks: {
+                                            user: {
+                                                create: {
+                                                    before(user: {
+                                                        id: string;
+                                                        name: string;
+                                                        email: string;
+                                                        emailVerified: boolean;
+                                                        createdAt: Date;
+                                                        updatedAt: Date;
+                                                        image?: string | null | undefined;
+                                                    }): Promise<{
+                                                        data: {
+                                                            id: string;
+                                                            name: string;
+                                                            email: string;
+                                                            emailVerified: boolean;
+                                                            createdAt: Date;
+                                                            updatedAt: Date;
+                                                            image?: string | null | undefined;
+                                                            role: string;
+                                                        };
+                                                    }>;
+                                                };
+                                            };
+                                            session: {
+                                                create: {
+                                                    before(session: {
+                                                        id: string;
+                                                        createdAt: Date;
+                                                        updatedAt: Date;
+                                                        userId: string;
+                                                        expiresAt: Date;
+                                                        token: string;
+                                                        ipAddress?: string | null | undefined;
+                                                        userAgent?: string | null | undefined;
+                                                    }, ctx: import("better-auth").GenericEndpointContext | undefined): Promise<void>;
+                                                };
+                                            };
+                                        };
+                                    };
+                                };
+                                hooks: {
+                                    after: {
+                                        matcher(context: import("better-auth").HookEndpointContext): boolean;
+                                        handler: (inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<import("better-auth/plugins").SessionWithImpersonatedBy[] | undefined>;
+                                    }[];
+                                };
+                                endpoints: {
+                                    setRole: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
+                                            body: {
+                                                userId: string;
+                                                role: "user" | "admin" | ("user" | "admin")[];
+                                            };
+                                        } & {
+                                            method?: "POST" | undefined;
+                                        } & {
+                                            query?: Record<string, any> | undefined;
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                user: import("better-auth/plugins").UserWithRole;
+                                            };
+                                        } : {
+                                            user: import("better-auth/plugins").UserWithRole;
+                                        }>;
+                                        options: {
+                                            method: "POST";
+                                            body: import("better-auth").ZodObject<{
+                                                userId: import("better-auth").ZodString;
+                                                role: import("better-auth").ZodUnion<[import("better-auth").ZodString, import("better-auth").ZodArray<import("better-auth").ZodString, "many">]>;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                userId: string;
+                                                role: string | string[];
+                                            }, {
+                                                userId: string;
+                                                role: string | string[];
+                                            }>;
+                                            use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                                session: {
+                                                    user: import("better-auth/plugins").UserWithRole;
+                                                    session: import("better-auth").Session;
+                                                };
+                                            }>)[];
+                                            metadata: {
+                                                openapi: {
+                                                    operationId: string;
+                                                    summary: string;
+                                                    description: string;
+                                                    responses: {
+                                                        200: {
+                                                            description: string;
+                                                            content: {
+                                                                "application/json": {
+                                                                    schema: {
+                                                                        type: "object";
+                                                                        properties: {
+                                                                            user: {
+                                                                                $ref: string;
+                                                                            };
+                                                                        };
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                                $Infer: {
+                                                    body: {
+                                                        userId: string;
+                                                        role: "user" | "admin" | ("user" | "admin")[];
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/admin/set-role";
+                                    };
+                                    createUser: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
+                                            body: {
+                                                email: string;
+                                                password: string;
+                                                name: string;
+                                                role?: "user" | "admin" | ("user" | "admin")[] | undefined;
+                                                data?: Record<string, any>;
+                                            };
+                                        } & {
+                                            method?: "POST" | undefined;
+                                        } & {
+                                            query?: Record<string, any> | undefined;
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                user: import("better-auth/plugins").UserWithRole;
+                                            };
+                                        } : {
+                                            user: import("better-auth/plugins").UserWithRole;
+                                        }>;
+                                        options: {
+                                            method: "POST";
+                                            body: import("better-auth").ZodObject<{
+                                                email: import("better-auth").ZodString;
+                                                password: import("better-auth").ZodString;
+                                                name: import("better-auth").ZodString;
+                                                role: import("better-auth").ZodOptional<import("better-auth").ZodUnion<[import("better-auth").ZodString, import("better-auth").ZodArray<import("better-auth").ZodString, "many">]>>;
+                                                data: import("better-auth").ZodOptional<import("better-auth").ZodRecord<import("better-auth").ZodString, import("better-auth").ZodAny>>;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                password: string;
+                                                name: string;
+                                                email: string;
+                                                data?: Record<string, any> | undefined;
+                                                role?: string | string[] | undefined;
+                                            }, {
+                                                password: string;
+                                                name: string;
+                                                email: string;
+                                                data?: Record<string, any> | undefined;
+                                                role?: string | string[] | undefined;
+                                            }>;
+                                            metadata: {
+                                                openapi: {
+                                                    operationId: string;
+                                                    summary: string;
+                                                    description: string;
+                                                    responses: {
+                                                        200: {
+                                                            description: string;
+                                                            content: {
+                                                                "application/json": {
+                                                                    schema: {
+                                                                        type: "object";
+                                                                        properties: {
+                                                                            user: {
+                                                                                $ref: string;
+                                                                            };
+                                                                        };
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                                $Infer: {
+                                                    body: {
+                                                        email: string;
+                                                        password: string;
+                                                        name: string;
+                                                        role?: "user" | "admin" | ("user" | "admin")[] | undefined;
+                                                        data?: Record<string, any>;
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/admin/create-user";
+                                    };
+                                    listUsers: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
+                                            body?: undefined;
+                                        } & {
+                                            method?: "GET" | undefined;
+                                        } & {
+                                            query: {
+                                                searchValue?: string | undefined;
+                                                searchField?: "name" | "email" | undefined;
+                                                searchOperator?: "contains" | "starts_with" | "ends_with" | undefined;
+                                                limit?: string | number | undefined;
+                                                offset?: string | number | undefined;
+                                                sortBy?: string | undefined;
+                                                sortDirection?: "asc" | "desc" | undefined;
+                                                filterField?: string | undefined;
+                                                filterValue?: string | number | boolean | undefined;
+                                                filterOperator?: "eq" | "ne" | "lt" | "lte" | "gt" | "gte" | undefined;
+                                            };
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                users: import("better-auth/plugins").UserWithRole[];
+                                                total: number;
+                                                limit: number | undefined;
+                                                offset: number | undefined;
+                                            } | {
+                                                users: never[];
+                                                total: number;
+                                            };
+                                        } : {
+                                            users: import("better-auth/plugins").UserWithRole[];
+                                            total: number;
+                                            limit: number | undefined;
+                                            offset: number | undefined;
+                                        } | {
+                                            users: never[];
+                                            total: number;
+                                        }>;
+                                        options: {
+                                            method: "GET";
+                                            use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                                session: {
+                                                    user: import("better-auth/plugins").UserWithRole;
+                                                    session: import("better-auth").Session;
+                                                };
+                                            }>)[];
+                                            query: import("better-auth").ZodObject<{
+                                                searchValue: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                                searchField: import("better-auth").ZodOptional<import("better-auth").ZodEnum<["email", "name"]>>;
+                                                searchOperator: import("better-auth").ZodOptional<import("better-auth").ZodEnum<["contains", "starts_with", "ends_with"]>>;
+                                                limit: import("better-auth").ZodOptional<import("better-auth").ZodUnion<[import("better-auth").ZodString, import("better-auth").ZodNumber]>>;
+                                                offset: import("better-auth").ZodOptional<import("better-auth").ZodUnion<[import("better-auth").ZodString, import("better-auth").ZodNumber]>>;
+                                                sortBy: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                                sortDirection: import("better-auth").ZodOptional<import("better-auth").ZodEnum<["asc", "desc"]>>;
+                                                filterField: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                                filterValue: import("better-auth").ZodOptional<import("better-auth").ZodUnion<[import("better-auth").ZodUnion<[import("better-auth").ZodString, import("better-auth").ZodNumber]>, import("better-auth").ZodBoolean]>>;
+                                                filterOperator: import("better-auth").ZodOptional<import("better-auth").ZodEnum<["eq", "ne", "lt", "lte", "gt", "gte"]>>;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                searchValue?: string | undefined;
+                                                searchField?: "name" | "email" | undefined;
+                                                searchOperator?: "contains" | "starts_with" | "ends_with" | undefined;
+                                                limit?: string | number | undefined;
+                                                offset?: string | number | undefined;
+                                                sortBy?: string | undefined;
+                                                sortDirection?: "asc" | "desc" | undefined;
+                                                filterField?: string | undefined;
+                                                filterValue?: string | number | boolean | undefined;
+                                                filterOperator?: "eq" | "ne" | "lt" | "lte" | "gt" | "gte" | undefined;
+                                            }, {
+                                                searchValue?: string | undefined;
+                                                searchField?: "name" | "email" | undefined;
+                                                searchOperator?: "contains" | "starts_with" | "ends_with" | undefined;
+                                                limit?: string | number | undefined;
+                                                offset?: string | number | undefined;
+                                                sortBy?: string | undefined;
+                                                sortDirection?: "asc" | "desc" | undefined;
+                                                filterField?: string | undefined;
+                                                filterValue?: string | number | boolean | undefined;
+                                                filterOperator?: "eq" | "ne" | "lt" | "lte" | "gt" | "gte" | undefined;
+                                            }>;
+                                            metadata: {
+                                                openapi: {
+                                                    operationId: string;
+                                                    summary: string;
+                                                    description: string;
+                                                    responses: {
+                                                        200: {
+                                                            description: string;
+                                                            content: {
+                                                                "application/json": {
+                                                                    schema: {
+                                                                        type: "object";
+                                                                        properties: {
+                                                                            users: {
+                                                                                type: string;
+                                                                                items: {
+                                                                                    $ref: string;
+                                                                                };
+                                                                            };
+                                                                            total: {
+                                                                                type: string;
+                                                                            };
+                                                                            limit: {
+                                                                                type: string;
+                                                                            };
+                                                                            offset: {
+                                                                                type: string;
+                                                                            };
+                                                                        };
+                                                                        required: string[];
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/admin/list-users";
+                                    };
+                                    listUserSessions: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
+                                            body: {
+                                                userId: string;
+                                            };
+                                        } & {
+                                            method?: "POST" | undefined;
+                                        } & {
+                                            query?: Record<string, any> | undefined;
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                sessions: {
+                                                    id: string;
+                                                    createdAt: Date;
+                                                    updatedAt: Date;
+                                                    userId: string;
+                                                    expiresAt: Date;
+                                                    token: string;
+                                                    ipAddress?: string | null | undefined;
+                                                    userAgent?: string | null | undefined;
+                                                }[];
+                                            };
+                                        } : {
+                                            sessions: {
+                                                id: string;
+                                                createdAt: Date;
+                                                updatedAt: Date;
+                                                userId: string;
+                                                expiresAt: Date;
+                                                token: string;
+                                                ipAddress?: string | null | undefined;
+                                                userAgent?: string | null | undefined;
+                                            }[];
+                                        }>;
+                                        options: {
+                                            method: "POST";
+                                            use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                                session: {
+                                                    user: import("better-auth/plugins").UserWithRole;
+                                                    session: import("better-auth").Session;
+                                                };
+                                            }>)[];
+                                            body: import("better-auth").ZodObject<{
+                                                userId: import("better-auth").ZodString;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                userId: string;
+                                            }, {
+                                                userId: string;
+                                            }>;
+                                            metadata: {
+                                                openapi: {
+                                                    operationId: string;
+                                                    summary: string;
+                                                    description: string;
+                                                    responses: {
+                                                        200: {
+                                                            description: string;
+                                                            content: {
+                                                                "application/json": {
+                                                                    schema: {
+                                                                        type: "object";
+                                                                        properties: {
+                                                                            sessions: {
+                                                                                type: string;
+                                                                                items: {
+                                                                                    $ref: string;
+                                                                                };
+                                                                            };
+                                                                        };
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/admin/list-user-sessions";
+                                    };
+                                    unbanUser: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
+                                            body: {
+                                                userId: string;
+                                            };
+                                        } & {
+                                            method?: "POST" | undefined;
+                                        } & {
+                                            query?: Record<string, any> | undefined;
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                user: any;
+                                            };
+                                        } : {
+                                            user: any;
+                                        }>;
+                                        options: {
+                                            method: "POST";
+                                            body: import("better-auth").ZodObject<{
+                                                userId: import("better-auth").ZodString;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                userId: string;
+                                            }, {
+                                                userId: string;
+                                            }>;
+                                            use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                                session: {
+                                                    user: import("better-auth/plugins").UserWithRole;
+                                                    session: import("better-auth").Session;
+                                                };
+                                            }>)[];
+                                            metadata: {
+                                                openapi: {
+                                                    operationId: string;
+                                                    summary: string;
+                                                    description: string;
+                                                    responses: {
+                                                        200: {
+                                                            description: string;
+                                                            content: {
+                                                                "application/json": {
+                                                                    schema: {
+                                                                        type: "object";
+                                                                        properties: {
+                                                                            user: {
+                                                                                $ref: string;
+                                                                            };
+                                                                        };
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/admin/unban-user";
+                                    };
+                                    banUser: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
+                                            body: {
+                                                userId: string;
+                                                banReason?: string | undefined;
+                                                banExpiresIn?: number | undefined;
+                                            };
+                                        } & {
+                                            method?: "POST" | undefined;
+                                        } & {
+                                            query?: Record<string, any> | undefined;
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                user: any;
+                                            };
+                                        } : {
+                                            user: any;
+                                        }>;
+                                        options: {
+                                            method: "POST";
+                                            body: import("better-auth").ZodObject<{
+                                                userId: import("better-auth").ZodString;
+                                                banReason: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                                banExpiresIn: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                userId: string;
+                                                banReason?: string | undefined;
+                                                banExpiresIn?: number | undefined;
+                                            }, {
+                                                userId: string;
+                                                banReason?: string | undefined;
+                                                banExpiresIn?: number | undefined;
+                                            }>;
+                                            use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                                session: {
+                                                    user: import("better-auth/plugins").UserWithRole;
+                                                    session: import("better-auth").Session;
+                                                };
+                                            }>)[];
+                                            metadata: {
+                                                openapi: {
+                                                    operationId: string;
+                                                    summary: string;
+                                                    description: string;
+                                                    responses: {
+                                                        200: {
+                                                            description: string;
+                                                            content: {
+                                                                "application/json": {
+                                                                    schema: {
+                                                                        type: "object";
+                                                                        properties: {
+                                                                            user: {
+                                                                                $ref: string;
+                                                                            };
+                                                                        };
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/admin/ban-user";
+                                    };
+                                    impersonateUser: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
+                                            body: {
+                                                userId: string;
+                                            };
+                                        } & {
+                                            method?: "POST" | undefined;
+                                        } & {
+                                            query?: Record<string, any> | undefined;
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                session: {
+                                                    id: string;
+                                                    createdAt: Date;
+                                                    updatedAt: Date;
+                                                    userId: string;
+                                                    expiresAt: Date;
+                                                    token: string;
+                                                    ipAddress?: string | null | undefined;
+                                                    userAgent?: string | null | undefined;
+                                                };
+                                                user: {
+                                                    id: string;
+                                                    name: string;
+                                                    email: string;
+                                                    emailVerified: boolean;
+                                                    createdAt: Date;
+                                                    updatedAt: Date;
+                                                    image?: string | null | undefined;
+                                                };
+                                            };
+                                        } : {
+                                            session: {
+                                                id: string;
+                                                createdAt: Date;
+                                                updatedAt: Date;
+                                                userId: string;
+                                                expiresAt: Date;
+                                                token: string;
+                                                ipAddress?: string | null | undefined;
+                                                userAgent?: string | null | undefined;
+                                            };
+                                            user: {
+                                                id: string;
+                                                name: string;
+                                                email: string;
+                                                emailVerified: boolean;
+                                                createdAt: Date;
+                                                updatedAt: Date;
+                                                image?: string | null | undefined;
+                                            };
+                                        }>;
+                                        options: {
+                                            method: "POST";
+                                            body: import("better-auth").ZodObject<{
+                                                userId: import("better-auth").ZodString;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                userId: string;
+                                            }, {
+                                                userId: string;
+                                            }>;
+                                            use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                                session: {
+                                                    user: import("better-auth/plugins").UserWithRole;
+                                                    session: import("better-auth").Session;
+                                                };
+                                            }>)[];
+                                            metadata: {
+                                                openapi: {
+                                                    operationId: string;
+                                                    summary: string;
+                                                    description: string;
+                                                    responses: {
+                                                        200: {
+                                                            description: string;
+                                                            content: {
+                                                                "application/json": {
+                                                                    schema: {
+                                                                        type: "object";
+                                                                        properties: {
+                                                                            session: {
+                                                                                $ref: string;
+                                                                            };
+                                                                            user: {
+                                                                                $ref: string;
+                                                                            };
+                                                                        };
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/admin/impersonate-user";
+                                    };
+                                    stopImpersonating: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0?: ({
+                                            body?: undefined;
+                                        } & {
+                                            method?: "POST" | undefined;
+                                        } & {
+                                            query?: Record<string, any> | undefined;
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }) | undefined): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                session: import("better-auth").Session & Record<string, any>;
+                                                user: import("better-auth").User & Record<string, any>;
+                                            };
+                                        } : {
+                                            session: import("better-auth").Session & Record<string, any>;
+                                            user: import("better-auth").User & Record<string, any>;
+                                        }>;
+                                        options: {
+                                            method: "POST";
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/admin/stop-impersonating";
+                                    };
+                                    revokeUserSession: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
+                                            body: {
+                                                sessionToken: string;
+                                            };
+                                        } & {
+                                            method?: "POST" | undefined;
+                                        } & {
+                                            query?: Record<string, any> | undefined;
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                success: boolean;
+                                            };
+                                        } : {
+                                            success: boolean;
+                                        }>;
+                                        options: {
+                                            method: "POST";
+                                            body: import("better-auth").ZodObject<{
+                                                sessionToken: import("better-auth").ZodString;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                sessionToken: string;
+                                            }, {
+                                                sessionToken: string;
+                                            }>;
+                                            use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                                session: {
+                                                    user: import("better-auth/plugins").UserWithRole;
+                                                    session: import("better-auth").Session;
+                                                };
+                                            }>)[];
+                                            metadata: {
+                                                openapi: {
+                                                    operationId: string;
+                                                    summary: string;
+                                                    description: string;
+                                                    responses: {
+                                                        200: {
+                                                            description: string;
+                                                            content: {
+                                                                "application/json": {
+                                                                    schema: {
+                                                                        type: "object";
+                                                                        properties: {
+                                                                            success: {
+                                                                                type: string;
+                                                                            };
+                                                                        };
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/admin/revoke-user-session";
+                                    };
+                                    revokeUserSessions: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
+                                            body: {
+                                                userId: string;
+                                            };
+                                        } & {
+                                            method?: "POST" | undefined;
+                                        } & {
+                                            query?: Record<string, any> | undefined;
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                success: boolean;
+                                            };
+                                        } : {
+                                            success: boolean;
+                                        }>;
+                                        options: {
+                                            method: "POST";
+                                            body: import("better-auth").ZodObject<{
+                                                userId: import("better-auth").ZodString;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                userId: string;
+                                            }, {
+                                                userId: string;
+                                            }>;
+                                            use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                                session: {
+                                                    user: import("better-auth/plugins").UserWithRole;
+                                                    session: import("better-auth").Session;
+                                                };
+                                            }>)[];
+                                            metadata: {
+                                                openapi: {
+                                                    operationId: string;
+                                                    summary: string;
+                                                    description: string;
+                                                    responses: {
+                                                        200: {
+                                                            description: string;
+                                                            content: {
+                                                                "application/json": {
+                                                                    schema: {
+                                                                        type: "object";
+                                                                        properties: {
+                                                                            success: {
+                                                                                type: string;
+                                                                            };
+                                                                        };
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/admin/revoke-user-sessions";
+                                    };
+                                    removeUser: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
+                                            body: {
+                                                userId: string;
+                                            };
+                                        } & {
+                                            method?: "POST" | undefined;
+                                        } & {
+                                            query?: Record<string, any> | undefined;
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                success: boolean;
+                                            };
+                                        } : {
+                                            success: boolean;
+                                        }>;
+                                        options: {
+                                            method: "POST";
+                                            body: import("better-auth").ZodObject<{
+                                                userId: import("better-auth").ZodString;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                userId: string;
+                                            }, {
+                                                userId: string;
+                                            }>;
+                                            use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                                session: {
+                                                    user: import("better-auth/plugins").UserWithRole;
+                                                    session: import("better-auth").Session;
+                                                };
+                                            }>)[];
+                                            metadata: {
+                                                openapi: {
+                                                    operationId: string;
+                                                    summary: string;
+                                                    description: string;
+                                                    responses: {
+                                                        200: {
+                                                            description: string;
+                                                            content: {
+                                                                "application/json": {
+                                                                    schema: {
+                                                                        type: "object";
+                                                                        properties: {
+                                                                            success: {
+                                                                                type: string;
+                                                                            };
+                                                                        };
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/admin/remove-user";
+                                    };
+                                    setUserPassword: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
+                                            body: {
+                                                userId: string;
+                                                newPassword: string;
+                                            };
+                                        } & {
+                                            method?: "POST" | undefined;
+                                        } & {
+                                            query?: Record<string, any> | undefined;
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                status: boolean;
+                                            };
+                                        } : {
+                                            status: boolean;
+                                        }>;
+                                        options: {
+                                            method: "POST";
+                                            body: import("better-auth").ZodObject<{
+                                                newPassword: import("better-auth").ZodString;
+                                                userId: import("better-auth").ZodString;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                userId: string;
+                                                newPassword: string;
+                                            }, {
+                                                userId: string;
+                                                newPassword: string;
+                                            }>;
+                                            use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                                session: {
+                                                    user: import("better-auth/plugins").UserWithRole;
+                                                    session: import("better-auth").Session;
+                                                };
+                                            }>)[];
+                                            metadata: {
+                                                openapi: {
+                                                    operationId: string;
+                                                    summary: string;
+                                                    description: string;
+                                                    responses: {
+                                                        200: {
+                                                            description: string;
+                                                            content: {
+                                                                "application/json": {
+                                                                    schema: {
+                                                                        type: "object";
+                                                                        properties: {
+                                                                            status: {
+                                                                                type: string;
+                                                                            };
+                                                                        };
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/admin/set-user-password";
+                                    };
+                                    userHasPermission: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
+                                            body: ({
+                                                permission: {
+                                                    readonly user?: ("list" | "create" | "set-role" | "ban" | "impersonate" | "delete" | "set-password")[] | undefined;
+                                                    readonly session?: ("list" | "delete" | "revoke")[] | undefined;
+                                                };
+                                                permissions?: never;
+                                            } | {
+                                                permissions: {
+                                                    readonly user?: ("list" | "create" | "set-role" | "ban" | "impersonate" | "delete" | "set-password")[] | undefined;
+                                                    readonly session?: ("list" | "delete" | "revoke")[] | undefined;
+                                                };
+                                                permission?: never;
+                                            }) & {
+                                                userId?: string;
+                                                role?: "user" | "admin" | undefined;
+                                            };
+                                        } & {
+                                            method?: "POST" | undefined;
+                                        } & {
+                                            query?: Record<string, any> | undefined;
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                error: null;
+                                                success: boolean;
+                                            };
+                                        } : {
+                                            error: null;
+                                            success: boolean;
+                                        }>;
+                                        options: {
+                                            method: "POST";
+                                            body: import("better-auth").ZodIntersection<import("better-auth").ZodObject<{
+                                                userId: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                                role: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                userId?: string | undefined;
+                                                role?: string | undefined;
+                                            }, {
+                                                userId?: string | undefined;
+                                                role?: string | undefined;
+                                            }>, import("better-auth").ZodUnion<[import("better-auth").ZodObject<{
+                                                permission: import("better-auth").ZodRecord<import("better-auth").ZodString, import("better-auth").ZodArray<import("better-auth").ZodString, "many">>;
+                                                permissions: import("better-auth").ZodUndefined;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                permission: Record<string, string[]>;
+                                                permissions?: undefined;
+                                            }, {
+                                                permission: Record<string, string[]>;
+                                                permissions?: undefined;
+                                            }>, import("better-auth").ZodObject<{
+                                                permission: import("better-auth").ZodUndefined;
+                                                permissions: import("better-auth").ZodRecord<import("better-auth").ZodString, import("better-auth").ZodArray<import("better-auth").ZodString, "many">>;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                permissions: Record<string, string[]>;
+                                                permission?: undefined;
+                                            }, {
+                                                permissions: Record<string, string[]>;
+                                                permission?: undefined;
+                                            }>]>>;
+                                            metadata: {
+                                                openapi: {
+                                                    description: string;
+                                                    requestBody: {
+                                                        content: {
+                                                            "application/json": {
+                                                                schema: {
+                                                                    type: "object";
+                                                                    properties: {
+                                                                        permission: {
+                                                                            type: string;
+                                                                            description: string;
+                                                                            deprecated: boolean;
+                                                                        };
+                                                                        permissions: {
+                                                                            type: string;
+                                                                            description: string;
+                                                                        };
+                                                                    };
+                                                                    required: string[];
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                    responses: {
+                                                        "200": {
+                                                            description: string;
+                                                            content: {
+                                                                "application/json": {
+                                                                    schema: {
+                                                                        type: "object";
+                                                                        properties: {
+                                                                            error: {
+                                                                                type: string;
+                                                                            };
+                                                                            success: {
+                                                                                type: string;
+                                                                            };
+                                                                        };
+                                                                        required: string[];
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                                $Infer: {
+                                                    body: ({
+                                                        permission: {
+                                                            readonly user?: ("list" | "create" | "set-role" | "ban" | "impersonate" | "delete" | "set-password")[] | undefined;
+                                                            readonly session?: ("list" | "delete" | "revoke")[] | undefined;
+                                                        };
+                                                        permissions?: never;
+                                                    } | {
+                                                        permissions: {
+                                                            readonly user?: ("list" | "create" | "set-role" | "ban" | "impersonate" | "delete" | "set-password")[] | undefined;
+                                                            readonly session?: ("list" | "delete" | "revoke")[] | undefined;
+                                                        };
+                                                        permission?: never;
+                                                    }) & {
+                                                        userId?: string;
+                                                        role?: "user" | "admin" | undefined;
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/admin/has-permission";
+                                    };
+                                };
+                                $ERROR_CODES: {
+                                    readonly FAILED_TO_CREATE_USER: "Failed to create user";
+                                    readonly USER_ALREADY_EXISTS: "User already exists";
+                                    readonly YOU_CANNOT_BAN_YOURSELF: "You cannot ban yourself";
+                                    readonly YOU_ARE_NOT_ALLOWED_TO_CHANGE_USERS_ROLE: "You are not allowed to change users role";
+                                    readonly YOU_ARE_NOT_ALLOWED_TO_CREATE_USERS: "You are not allowed to create users";
+                                    readonly YOU_ARE_NOT_ALLOWED_TO_LIST_USERS: "You are not allowed to list users";
+                                    readonly YOU_ARE_NOT_ALLOWED_TO_LIST_USERS_SESSIONS: "You are not allowed to list users sessions";
+                                    readonly YOU_ARE_NOT_ALLOWED_TO_BAN_USERS: "You are not allowed to ban users";
+                                    readonly YOU_ARE_NOT_ALLOWED_TO_IMPERSONATE_USERS: "You are not allowed to impersonate users";
+                                    readonly YOU_ARE_NOT_ALLOWED_TO_REVOKE_USERS_SESSIONS: "You are not allowed to revoke users sessions";
+                                    readonly YOU_ARE_NOT_ALLOWED_TO_DELETE_USERS: "You are not allowed to delete users";
+                                    readonly YOU_ARE_NOT_ALLOWED_TO_SET_USERS_PASSWORD: "You are not allowed to set users password";
+                                    readonly BANNED_USER: "You have been banned from this application";
+                                };
+                                schema: {
+                                    user: {
+                                        fields: {
+                                            role: {
+                                                type: "string";
+                                                required: false;
+                                                input: false;
+                                            };
+                                            banned: {
+                                                type: "boolean";
+                                                defaultValue: false;
+                                                required: false;
+                                                input: false;
+                                            };
+                                            banReason: {
+                                                type: "string";
+                                                required: false;
+                                                input: false;
+                                            };
+                                            banExpires: {
+                                                type: "date";
+                                                required: false;
+                                                input: false;
+                                            };
+                                        };
+                                    };
+                                    session: {
+                                        fields: {
+                                            impersonatedBy: {
+                                                type: "string";
+                                                required: false;
+                                            };
+                                        };
+                                    };
+                                };
+                            } | {
+                                id: "api-key";
+                                $ERROR_CODES: {
+                                    INVALID_METADATA_TYPE: string;
+                                    REFILL_AMOUNT_AND_INTERVAL_REQUIRED: string;
+                                    REFILL_INTERVAL_AND_AMOUNT_REQUIRED: string;
+                                    USER_BANNED: string;
+                                    UNAUTHORIZED_SESSION: string;
+                                    KEY_NOT_FOUND: string;
+                                    KEY_DISABLED: string;
+                                    KEY_EXPIRED: string;
+                                    USAGE_EXCEEDED: string;
+                                    KEY_NOT_RECOVERABLE: string;
+                                    EXPIRES_IN_IS_TOO_SMALL: string;
+                                    EXPIRES_IN_IS_TOO_LARGE: string;
+                                    INVALID_REMAINING: string;
+                                    INVALID_PREFIX_LENGTH: string;
+                                    INVALID_NAME_LENGTH: string;
+                                    METADATA_DISABLED: string;
+                                    RATE_LIMIT_EXCEEDED: string;
+                                    NO_VALUES_TO_UPDATE: string;
+                                    KEY_DISABLED_EXPIRATION: string;
+                                    INVALID_API_KEY: string;
+                                    INVALID_USER_ID_FROM_API_KEY: string;
+                                    INVALID_API_KEY_GETTER_RETURN_TYPE: string;
+                                    SERVER_ONLY_PROPERTY: string;
+                                };
+                                hooks: {
+                                    before: {
+                                        matcher: (ctx: import("better-auth").HookEndpointContext) => boolean;
+                                        handler: (inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                            user: {
+                                                id: string;
+                                                name: string;
+                                                email: string;
+                                                emailVerified: boolean;
+                                                createdAt: Date;
+                                                updatedAt: Date;
+                                                image?: string | null | undefined;
+                                            };
+                                            session: {
+                                                id: string;
+                                                token: string;
+                                                userId: string;
+                                                userAgent: string | null;
+                                                ipAddress: string | null;
+                                                createdAt: Date;
+                                                updatedAt: Date;
+                                                expiresAt: Date;
+                                            };
+                                        } | {
+                                            context: import("better-auth").MiddlewareContext<import("better-auth").MiddlewareOptions, import("better-auth").AuthContext & {
+                                                returned?: unknown;
+                                                responseHeaders?: Headers;
+                                            }>;
+                                        }>;
+                                    }[];
+                                };
+                                endpoints: {
+                                    createApiKey: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
+                                            body: {
+                                                metadata?: any;
+                                                name?: string | undefined;
+                                                userId?: string | undefined;
+                                                prefix?: string | undefined;
+                                                expiresIn?: number | null | undefined;
+                                                permissions?: Record<string, string[]> | undefined;
+                                                rateLimitMax?: number | undefined;
+                                                refillInterval?: number | undefined;
+                                                refillAmount?: number | undefined;
+                                                rateLimitEnabled?: boolean | undefined;
+                                                rateLimitTimeWindow?: number | undefined;
+                                                remaining?: number | null | undefined;
+                                            };
+                                        } & {
+                                            method?: "POST" | undefined;
+                                        } & {
+                                            query?: Record<string, any> | undefined;
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                key: string;
+                                                metadata: any;
+                                                permissions: any;
+                                                id: string;
+                                                name: string | null;
+                                                start: string | null;
+                                                prefix: string | null;
+                                                userId: string;
+                                                refillInterval: number | null;
+                                                refillAmount: number | null;
+                                                lastRefillAt: Date | null;
+                                                enabled: boolean;
+                                                rateLimitEnabled: boolean;
+                                                rateLimitTimeWindow: number | null;
+                                                rateLimitMax: number | null;
+                                                requestCount: number;
+                                                remaining: number | null;
+                                                lastRequest: Date | null;
+                                                expiresAt: Date | null;
+                                                createdAt: Date;
+                                                updatedAt: Date;
+                                            };
+                                        } : {
+                                            key: string;
+                                            metadata: any;
+                                            permissions: any;
+                                            id: string;
+                                            name: string | null;
+                                            start: string | null;
+                                            prefix: string | null;
+                                            userId: string;
+                                            refillInterval: number | null;
+                                            refillAmount: number | null;
+                                            lastRefillAt: Date | null;
+                                            enabled: boolean;
+                                            rateLimitEnabled: boolean;
+                                            rateLimitTimeWindow: number | null;
+                                            rateLimitMax: number | null;
+                                            requestCount: number;
+                                            remaining: number | null;
+                                            lastRequest: Date | null;
+                                            expiresAt: Date | null;
+                                            createdAt: Date;
+                                            updatedAt: Date;
+                                        }>;
+                                        options: {
+                                            method: "POST";
+                                            body: import("better-auth").ZodObject<{
+                                                name: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                                expiresIn: import("better-auth").ZodDefault<import("better-auth").ZodNullable<import("better-auth").ZodOptional<import("better-auth").ZodNumber>>>;
+                                                userId: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                                prefix: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                                remaining: import("better-auth").ZodDefault<import("better-auth").ZodNullable<import("better-auth").ZodOptional<import("better-auth").ZodNumber>>>;
+                                                metadata: import("better-auth").ZodOptional<import("better-auth").ZodAny>;
+                                                refillAmount: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                                refillInterval: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                                rateLimitTimeWindow: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                                rateLimitMax: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                                rateLimitEnabled: import("better-auth").ZodOptional<import("better-auth").ZodBoolean>;
+                                                permissions: import("better-auth").ZodOptional<import("better-auth").ZodRecord<import("better-auth").ZodString, import("better-auth").ZodArray<import("better-auth").ZodString, "many">>>;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                expiresIn: number | null;
+                                                remaining: number | null;
+                                                metadata?: any;
+                                                name?: string | undefined;
+                                                userId?: string | undefined;
+                                                prefix?: string | undefined;
+                                                permissions?: Record<string, string[]> | undefined;
+                                                rateLimitMax?: number | undefined;
+                                                refillInterval?: number | undefined;
+                                                refillAmount?: number | undefined;
+                                                rateLimitEnabled?: boolean | undefined;
+                                                rateLimitTimeWindow?: number | undefined;
+                                            }, {
+                                                metadata?: any;
+                                                name?: string | undefined;
+                                                userId?: string | undefined;
+                                                prefix?: string | undefined;
+                                                expiresIn?: number | null | undefined;
+                                                permissions?: Record<string, string[]> | undefined;
+                                                rateLimitMax?: number | undefined;
+                                                refillInterval?: number | undefined;
+                                                refillAmount?: number | undefined;
+                                                rateLimitEnabled?: boolean | undefined;
+                                                rateLimitTimeWindow?: number | undefined;
+                                                remaining?: number | null | undefined;
+                                            }>;
+                                            metadata: {
+                                                openapi: {
+                                                    description: string;
+                                                    responses: {
+                                                        "200": {
+                                                            description: string;
+                                                            content: {
+                                                                "application/json": {
+                                                                    schema: {
+                                                                        type: "object";
+                                                                        properties: {
+                                                                            id: {
+                                                                                type: string;
+                                                                                description: string;
+                                                                            };
+                                                                            createdAt: {
+                                                                                type: string;
+                                                                                format: string;
+                                                                                description: string;
+                                                                            };
+                                                                            updatedAt: {
+                                                                                type: string;
+                                                                                format: string;
+                                                                                description: string;
+                                                                            };
+                                                                            name: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            prefix: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            start: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            key: {
+                                                                                type: string;
+                                                                                description: string;
+                                                                            };
+                                                                            enabled: {
+                                                                                type: string;
+                                                                                description: string;
+                                                                            };
+                                                                            expiresAt: {
+                                                                                type: string;
+                                                                                format: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            userId: {
+                                                                                type: string;
+                                                                                description: string;
+                                                                            };
+                                                                            lastRefillAt: {
+                                                                                type: string;
+                                                                                format: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            lastRequest: {
+                                                                                type: string;
+                                                                                format: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            metadata: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                additionalProperties: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            rateLimitMax: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            rateLimitTimeWindow: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            remaining: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            refillAmount: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            refillInterval: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            rateLimitEnabled: {
+                                                                                type: string;
+                                                                                description: string;
+                                                                            };
+                                                                            requestCount: {
+                                                                                type: string;
+                                                                                description: string;
+                                                                            };
+                                                                            permissions: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                additionalProperties: {
+                                                                                    type: string;
+                                                                                    items: {
+                                                                                        type: string;
+                                                                                    };
+                                                                                };
+                                                                                description: string;
+                                                                            };
+                                                                        };
+                                                                        required: string[];
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/api-key/create";
+                                    };
+                                    verifyApiKey: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
+                                            body: {
+                                                key: string;
+                                                permissions?: Record<string, string[]> | undefined;
+                                            };
+                                        } & {
+                                            method?: "POST" | undefined;
+                                        } & {
+                                            query?: Record<string, any> | undefined;
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                valid: boolean;
+                                                error: {
+                                                    message: string;
+                                                    code: "KEY_NOT_FOUND";
+                                                };
+                                                key: null;
+                                            } | {
+                                                valid: boolean;
+                                                error: {
+                                                    message: string;
+                                                    code: "KEY_DISABLED";
+                                                };
+                                                key: null;
+                                            } | {
+                                                valid: boolean;
+                                                error: {
+                                                    message: string;
+                                                    code: "KEY_EXPIRED";
+                                                };
+                                                key: null;
+                                            } | {
+                                                valid: boolean;
+                                                error: {
+                                                    message: string;
+                                                    code: "USAGE_EXCEEDED";
+                                                };
+                                                key: null;
+                                            } | {
+                                                valid: boolean;
+                                                error: {
+                                                    message: string | null;
+                                                    code: "RATE_LIMITED";
+                                                    details: {
+                                                        tryAgainIn: number | null;
+                                                    };
+                                                };
+                                                key: null;
+                                            } | {
+                                                valid: boolean;
+                                                error: null;
+                                                key: Omit<{
+                                                    id: string;
+                                                    name: string | null;
+                                                    start: string | null;
+                                                    prefix: string | null;
+                                                    key: string;
+                                                    userId: string;
+                                                    refillInterval: number | null;
+                                                    refillAmount: number | null;
+                                                    lastRefillAt: Date | null;
+                                                    enabled: boolean;
+                                                    rateLimitEnabled: boolean;
+                                                    rateLimitTimeWindow: number | null;
+                                                    rateLimitMax: number | null;
+                                                    requestCount: number;
+                                                    remaining: number | null;
+                                                    lastRequest: Date | null;
+                                                    expiresAt: Date | null;
+                                                    createdAt: Date;
+                                                    updatedAt: Date;
+                                                    metadata: Record<string, any> | null;
+                                                    permissions?: {
+                                                        [key: string]: string[];
+                                                    } | null;
+                                                }, "key"> | null;
+                                            };
+                                        } : {
+                                            valid: boolean;
+                                            error: {
+                                                message: string;
+                                                code: "KEY_NOT_FOUND";
+                                            };
+                                            key: null;
+                                        } | {
+                                            valid: boolean;
+                                            error: {
+                                                message: string;
+                                                code: "KEY_DISABLED";
+                                            };
+                                            key: null;
+                                        } | {
+                                            valid: boolean;
+                                            error: {
+                                                message: string;
+                                                code: "KEY_EXPIRED";
+                                            };
+                                            key: null;
+                                        } | {
+                                            valid: boolean;
+                                            error: {
+                                                message: string;
+                                                code: "USAGE_EXCEEDED";
+                                            };
+                                            key: null;
+                                        } | {
+                                            valid: boolean;
+                                            error: {
+                                                message: string | null;
+                                                code: "RATE_LIMITED";
+                                                details: {
+                                                    tryAgainIn: number | null;
+                                                };
+                                            };
+                                            key: null;
+                                        } | {
+                                            valid: boolean;
+                                            error: null;
+                                            key: Omit<{
+                                                id: string;
+                                                name: string | null;
+                                                start: string | null;
+                                                prefix: string | null;
+                                                key: string;
+                                                userId: string;
+                                                refillInterval: number | null;
+                                                refillAmount: number | null;
+                                                lastRefillAt: Date | null;
+                                                enabled: boolean;
+                                                rateLimitEnabled: boolean;
+                                                rateLimitTimeWindow: number | null;
+                                                rateLimitMax: number | null;
+                                                requestCount: number;
+                                                remaining: number | null;
+                                                lastRequest: Date | null;
+                                                expiresAt: Date | null;
+                                                createdAt: Date;
+                                                updatedAt: Date;
+                                                metadata: Record<string, any> | null;
+                                                permissions?: {
+                                                    [key: string]: string[];
+                                                } | null;
+                                            }, "key"> | null;
+                                        }>;
+                                        options: {
+                                            method: "POST";
+                                            body: import("better-auth").ZodObject<{
+                                                key: import("better-auth").ZodString;
+                                                permissions: import("better-auth").ZodOptional<import("better-auth").ZodRecord<import("better-auth").ZodString, import("better-auth").ZodArray<import("better-auth").ZodString, "many">>>;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                key: string;
+                                                permissions?: Record<string, string[]> | undefined;
+                                            }, {
+                                                key: string;
+                                                permissions?: Record<string, string[]> | undefined;
+                                            }>;
+                                            metadata: {
+                                                SERVER_ONLY: true;
+                                            };
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/api-key/verify";
+                                    };
+                                    getApiKey: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
+                                            body?: undefined;
+                                        } & {
+                                            method?: "GET" | undefined;
+                                        } & {
+                                            query: {
+                                                id: string;
+                                            };
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                permissions: {
+                                                    [key: string]: string[];
+                                                } | null;
+                                                id: string;
+                                                name: string | null;
+                                                start: string | null;
+                                                prefix: string | null;
+                                                userId: string;
+                                                refillInterval: number | null;
+                                                refillAmount: number | null;
+                                                lastRefillAt: Date | null;
+                                                enabled: boolean;
+                                                rateLimitEnabled: boolean;
+                                                rateLimitTimeWindow: number | null;
+                                                rateLimitMax: number | null;
+                                                requestCount: number;
+                                                remaining: number | null;
+                                                lastRequest: Date | null;
+                                                expiresAt: Date | null;
+                                                createdAt: Date;
+                                                updatedAt: Date;
+                                                metadata: Record<string, any> | null;
+                                            };
+                                        } : {
+                                            permissions: {
+                                                [key: string]: string[];
+                                            } | null;
+                                            id: string;
+                                            name: string | null;
+                                            start: string | null;
+                                            prefix: string | null;
+                                            userId: string;
+                                            refillInterval: number | null;
+                                            refillAmount: number | null;
+                                            lastRefillAt: Date | null;
+                                            enabled: boolean;
+                                            rateLimitEnabled: boolean;
+                                            rateLimitTimeWindow: number | null;
+                                            rateLimitMax: number | null;
+                                            requestCount: number;
+                                            remaining: number | null;
+                                            lastRequest: Date | null;
+                                            expiresAt: Date | null;
+                                            createdAt: Date;
+                                            updatedAt: Date;
+                                            metadata: Record<string, any> | null;
+                                        }>;
+                                        options: {
+                                            method: "GET";
+                                            query: import("better-auth").ZodObject<{
+                                                id: import("better-auth").ZodString;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                id: string;
+                                            }, {
+                                                id: string;
+                                            }>;
+                                            use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                                session: {
+                                                    session: Record<string, any> & {
+                                                        id: string;
+                                                        createdAt: Date;
+                                                        updatedAt: Date;
+                                                        userId: string;
+                                                        expiresAt: Date;
+                                                        token: string;
+                                                        ipAddress?: string | null | undefined;
+                                                        userAgent?: string | null | undefined;
+                                                    };
+                                                    user: Record<string, any> & {
+                                                        id: string;
+                                                        name: string;
+                                                        email: string;
+                                                        emailVerified: boolean;
+                                                        createdAt: Date;
+                                                        updatedAt: Date;
+                                                        image?: string | null | undefined;
+                                                    };
+                                                };
+                                            }>)[];
+                                            metadata: {
+                                                openapi: {
+                                                    description: string;
+                                                    responses: {
+                                                        "200": {
+                                                            description: string;
+                                                            content: {
+                                                                "application/json": {
+                                                                    schema: {
+                                                                        type: "object";
+                                                                        properties: {
+                                                                            id: {
+                                                                                type: string;
+                                                                                description: string;
+                                                                            };
+                                                                            name: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            start: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            prefix: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            userId: {
+                                                                                type: string;
+                                                                                description: string;
+                                                                            };
+                                                                            refillInterval: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            refillAmount: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            lastRefillAt: {
+                                                                                type: string;
+                                                                                format: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            enabled: {
+                                                                                type: string;
+                                                                                description: string;
+                                                                                default: boolean;
+                                                                            };
+                                                                            rateLimitEnabled: {
+                                                                                type: string;
+                                                                                description: string;
+                                                                            };
+                                                                            rateLimitTimeWindow: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            rateLimitMax: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            requestCount: {
+                                                                                type: string;
+                                                                                description: string;
+                                                                            };
+                                                                            remaining: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            lastRequest: {
+                                                                                type: string;
+                                                                                format: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            expiresAt: {
+                                                                                type: string;
+                                                                                format: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            createdAt: {
+                                                                                type: string;
+                                                                                format: string;
+                                                                                description: string;
+                                                                            };
+                                                                            updatedAt: {
+                                                                                type: string;
+                                                                                format: string;
+                                                                                description: string;
+                                                                            };
+                                                                            metadata: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                additionalProperties: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            permissions: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                        };
+                                                                        required: string[];
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/api-key/get";
+                                    };
+                                    updateApiKey: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
+                                            body: {
+                                                keyId: string;
+                                                metadata?: any;
+                                                name?: string | undefined;
+                                                userId?: string | undefined;
+                                                enabled?: boolean | undefined;
+                                                expiresIn?: number | null | undefined;
+                                                permissions?: Record<string, string[]> | null | undefined;
+                                                rateLimitMax?: number | undefined;
+                                                refillInterval?: number | undefined;
+                                                refillAmount?: number | undefined;
+                                                rateLimitEnabled?: boolean | undefined;
+                                                rateLimitTimeWindow?: number | undefined;
+                                                remaining?: number | undefined;
+                                            };
+                                        } & {
+                                            method?: "POST" | undefined;
+                                        } & {
+                                            query?: Record<string, any> | undefined;
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                permissions: {
+                                                    [key: string]: string[];
+                                                } | null;
+                                                id: string;
+                                                name: string | null;
+                                                start: string | null;
+                                                prefix: string | null;
+                                                userId: string;
+                                                refillInterval: number | null;
+                                                refillAmount: number | null;
+                                                lastRefillAt: Date | null;
+                                                enabled: boolean;
+                                                rateLimitEnabled: boolean;
+                                                rateLimitTimeWindow: number | null;
+                                                rateLimitMax: number | null;
+                                                requestCount: number;
+                                                remaining: number | null;
+                                                lastRequest: Date | null;
+                                                expiresAt: Date | null;
+                                                createdAt: Date;
+                                                updatedAt: Date;
+                                                metadata: Record<string, any> | null;
+                                            };
+                                        } : {
+                                            permissions: {
+                                                [key: string]: string[];
+                                            } | null;
+                                            id: string;
+                                            name: string | null;
+                                            start: string | null;
+                                            prefix: string | null;
+                                            userId: string;
+                                            refillInterval: number | null;
+                                            refillAmount: number | null;
+                                            lastRefillAt: Date | null;
+                                            enabled: boolean;
+                                            rateLimitEnabled: boolean;
+                                            rateLimitTimeWindow: number | null;
+                                            rateLimitMax: number | null;
+                                            requestCount: number;
+                                            remaining: number | null;
+                                            lastRequest: Date | null;
+                                            expiresAt: Date | null;
+                                            createdAt: Date;
+                                            updatedAt: Date;
+                                            metadata: Record<string, any> | null;
+                                        }>;
+                                        options: {
+                                            method: "POST";
+                                            body: import("better-auth").ZodObject<{
+                                                keyId: import("better-auth").ZodString;
+                                                userId: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                                name: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                                                enabled: import("better-auth").ZodOptional<import("better-auth").ZodBoolean>;
+                                                remaining: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                                refillAmount: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                                refillInterval: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                                metadata: import("better-auth").ZodOptional<import("better-auth").ZodAny>;
+                                                expiresIn: import("better-auth").ZodNullable<import("better-auth").ZodOptional<import("better-auth").ZodNumber>>;
+                                                rateLimitEnabled: import("better-auth").ZodOptional<import("better-auth").ZodBoolean>;
+                                                rateLimitTimeWindow: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                                rateLimitMax: import("better-auth").ZodOptional<import("better-auth").ZodNumber>;
+                                                permissions: import("better-auth").ZodNullable<import("better-auth").ZodOptional<import("better-auth").ZodRecord<import("better-auth").ZodString, import("better-auth").ZodArray<import("better-auth").ZodString, "many">>>>;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                keyId: string;
+                                                metadata?: any;
+                                                name?: string | undefined;
+                                                userId?: string | undefined;
+                                                enabled?: boolean | undefined;
+                                                expiresIn?: number | null | undefined;
+                                                permissions?: Record<string, string[]> | null | undefined;
+                                                rateLimitMax?: number | undefined;
+                                                refillInterval?: number | undefined;
+                                                refillAmount?: number | undefined;
+                                                rateLimitEnabled?: boolean | undefined;
+                                                rateLimitTimeWindow?: number | undefined;
+                                                remaining?: number | undefined;
+                                            }, {
+                                                keyId: string;
+                                                metadata?: any;
+                                                name?: string | undefined;
+                                                userId?: string | undefined;
+                                                enabled?: boolean | undefined;
+                                                expiresIn?: number | null | undefined;
+                                                permissions?: Record<string, string[]> | null | undefined;
+                                                rateLimitMax?: number | undefined;
+                                                refillInterval?: number | undefined;
+                                                refillAmount?: number | undefined;
+                                                rateLimitEnabled?: boolean | undefined;
+                                                rateLimitTimeWindow?: number | undefined;
+                                                remaining?: number | undefined;
+                                            }>;
+                                            metadata: {
+                                                openapi: {
+                                                    description: string;
+                                                    responses: {
+                                                        "200": {
+                                                            description: string;
+                                                            content: {
+                                                                "application/json": {
+                                                                    schema: {
+                                                                        type: "object";
+                                                                        properties: {
+                                                                            id: {
+                                                                                type: string;
+                                                                                description: string;
+                                                                            };
+                                                                            name: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            start: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            prefix: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            userId: {
+                                                                                type: string;
+                                                                                description: string;
+                                                                            };
+                                                                            refillInterval: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            refillAmount: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            lastRefillAt: {
+                                                                                type: string;
+                                                                                format: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            enabled: {
+                                                                                type: string;
+                                                                                description: string;
+                                                                                default: boolean;
+                                                                            };
+                                                                            rateLimitEnabled: {
+                                                                                type: string;
+                                                                                description: string;
+                                                                            };
+                                                                            rateLimitTimeWindow: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            rateLimitMax: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            requestCount: {
+                                                                                type: string;
+                                                                                description: string;
+                                                                            };
+                                                                            remaining: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            lastRequest: {
+                                                                                type: string;
+                                                                                format: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            expiresAt: {
+                                                                                type: string;
+                                                                                format: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            createdAt: {
+                                                                                type: string;
+                                                                                format: string;
+                                                                                description: string;
+                                                                            };
+                                                                            updatedAt: {
+                                                                                type: string;
+                                                                                format: string;
+                                                                                description: string;
+                                                                            };
+                                                                            metadata: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                additionalProperties: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                            permissions: {
+                                                                                type: string;
+                                                                                nullable: boolean;
+                                                                                description: string;
+                                                                            };
+                                                                        };
+                                                                        required: string[];
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/api-key/update";
+                                    };
+                                    deleteApiKey: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
+                                            body: {
+                                                keyId: string;
+                                            };
+                                        } & {
+                                            method?: "POST" | undefined;
+                                        } & {
+                                            query?: Record<string, any> | undefined;
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                success: boolean;
+                                            };
+                                        } : {
+                                            success: boolean;
+                                        }>;
+                                        options: {
+                                            method: "POST";
+                                            body: import("better-auth").ZodObject<{
+                                                keyId: import("better-auth").ZodString;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                keyId: string;
+                                            }, {
+                                                keyId: string;
+                                            }>;
+                                            use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                                session: {
+                                                    session: Record<string, any> & {
+                                                        id: string;
+                                                        createdAt: Date;
+                                                        updatedAt: Date;
+                                                        userId: string;
+                                                        expiresAt: Date;
+                                                        token: string;
+                                                        ipAddress?: string | null | undefined;
+                                                        userAgent?: string | null | undefined;
+                                                    };
+                                                    user: Record<string, any> & {
+                                                        id: string;
+                                                        name: string;
+                                                        email: string;
+                                                        emailVerified: boolean;
+                                                        createdAt: Date;
+                                                        updatedAt: Date;
+                                                        image?: string | null | undefined;
+                                                    };
+                                                };
+                                            }>)[];
+                                            metadata: {
+                                                openapi: {
+                                                    description: string;
+                                                    requestBody: {
+                                                        content: {
+                                                            "application/json": {
+                                                                schema: {
+                                                                    type: "object";
+                                                                    properties: {
+                                                                        keyId: {
+                                                                            type: string;
+                                                                            description: string;
+                                                                        };
+                                                                    };
+                                                                    required: string[];
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                    responses: {
+                                                        "200": {
+                                                            description: string;
+                                                            content: {
+                                                                "application/json": {
+                                                                    schema: {
+                                                                        type: "object";
+                                                                        properties: {
+                                                                            success: {
+                                                                                type: string;
+                                                                                description: string;
+                                                                            };
+                                                                        };
+                                                                        required: string[];
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/api-key/delete";
+                                    };
+                                    listApiKeys: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0?: ({
+                                            body?: undefined;
+                                        } & {
+                                            method?: "GET" | undefined;
+                                        } & {
+                                            query?: Record<string, any> | undefined;
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }) | undefined): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                permissions: {
+                                                    [key: string]: string[];
+                                                } | null;
+                                                id: string;
+                                                name: string | null;
+                                                start: string | null;
+                                                prefix: string | null;
+                                                userId: string;
+                                                refillInterval: number | null;
+                                                refillAmount: number | null;
+                                                lastRefillAt: Date | null;
+                                                enabled: boolean;
+                                                rateLimitEnabled: boolean;
+                                                rateLimitTimeWindow: number | null;
+                                                rateLimitMax: number | null;
+                                                requestCount: number;
+                                                remaining: number | null;
+                                                lastRequest: Date | null;
+                                                expiresAt: Date | null;
+                                                createdAt: Date;
+                                                updatedAt: Date;
+                                                metadata: Record<string, any> | null;
+                                            }[];
+                                        } : {
+                                            permissions: {
+                                                [key: string]: string[];
+                                            } | null;
+                                            id: string;
+                                            name: string | null;
+                                            start: string | null;
+                                            prefix: string | null;
+                                            userId: string;
+                                            refillInterval: number | null;
+                                            refillAmount: number | null;
+                                            lastRefillAt: Date | null;
+                                            enabled: boolean;
+                                            rateLimitEnabled: boolean;
+                                            rateLimitTimeWindow: number | null;
+                                            rateLimitMax: number | null;
+                                            requestCount: number;
+                                            remaining: number | null;
+                                            lastRequest: Date | null;
+                                            expiresAt: Date | null;
+                                            createdAt: Date;
+                                            updatedAt: Date;
+                                            metadata: Record<string, any> | null;
+                                        }[]>;
+                                        options: {
+                                            method: "GET";
+                                            use: ((inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<{
+                                                session: {
+                                                    session: Record<string, any> & {
+                                                        id: string;
+                                                        createdAt: Date;
+                                                        updatedAt: Date;
+                                                        userId: string;
+                                                        expiresAt: Date;
+                                                        token: string;
+                                                        ipAddress?: string | null | undefined;
+                                                        userAgent?: string | null | undefined;
+                                                    };
+                                                    user: Record<string, any> & {
+                                                        id: string;
+                                                        name: string;
+                                                        email: string;
+                                                        emailVerified: boolean;
+                                                        createdAt: Date;
+                                                        updatedAt: Date;
+                                                        image?: string | null | undefined;
+                                                    };
+                                                };
+                                            }>)[];
+                                            metadata: {
+                                                openapi: {
+                                                    description: string;
+                                                    responses: {
+                                                        "200": {
+                                                            description: string;
+                                                            content: {
+                                                                "application/json": {
+                                                                    schema: {
+                                                                        type: "array";
+                                                                        items: {
+                                                                            type: string;
+                                                                            properties: {
+                                                                                id: {
+                                                                                    type: string;
+                                                                                    description: string;
+                                                                                };
+                                                                                name: {
+                                                                                    type: string;
+                                                                                    nullable: boolean;
+                                                                                    description: string;
+                                                                                };
+                                                                                start: {
+                                                                                    type: string;
+                                                                                    nullable: boolean;
+                                                                                    description: string;
+                                                                                };
+                                                                                prefix: {
+                                                                                    type: string;
+                                                                                    nullable: boolean;
+                                                                                    description: string;
+                                                                                };
+                                                                                userId: {
+                                                                                    type: string;
+                                                                                    description: string;
+                                                                                };
+                                                                                refillInterval: {
+                                                                                    type: string;
+                                                                                    nullable: boolean;
+                                                                                    description: string;
+                                                                                };
+                                                                                refillAmount: {
+                                                                                    type: string;
+                                                                                    nullable: boolean;
+                                                                                    description: string;
+                                                                                };
+                                                                                lastRefillAt: {
+                                                                                    type: string;
+                                                                                    format: string;
+                                                                                    nullable: boolean;
+                                                                                    description: string;
+                                                                                };
+                                                                                enabled: {
+                                                                                    type: string;
+                                                                                    description: string;
+                                                                                    default: boolean;
+                                                                                };
+                                                                                rateLimitEnabled: {
+                                                                                    type: string;
+                                                                                    description: string;
+                                                                                };
+                                                                                rateLimitTimeWindow: {
+                                                                                    type: string;
+                                                                                    nullable: boolean;
+                                                                                    description: string;
+                                                                                };
+                                                                                rateLimitMax: {
+                                                                                    type: string;
+                                                                                    nullable: boolean;
+                                                                                    description: string;
+                                                                                };
+                                                                                requestCount: {
+                                                                                    type: string;
+                                                                                    description: string;
+                                                                                };
+                                                                                remaining: {
+                                                                                    type: string;
+                                                                                    nullable: boolean;
+                                                                                    description: string;
+                                                                                };
+                                                                                lastRequest: {
+                                                                                    type: string;
+                                                                                    format: string;
+                                                                                    nullable: boolean;
+                                                                                    description: string;
+                                                                                };
+                                                                                expiresAt: {
+                                                                                    type: string;
+                                                                                    format: string;
+                                                                                    nullable: boolean;
+                                                                                    description: string;
+                                                                                };
+                                                                                createdAt: {
+                                                                                    type: string;
+                                                                                    format: string;
+                                                                                    description: string;
+                                                                                };
+                                                                                updatedAt: {
+                                                                                    type: string;
+                                                                                    format: string;
+                                                                                    description: string;
+                                                                                };
+                                                                                metadata: {
+                                                                                    type: string;
+                                                                                    nullable: boolean;
+                                                                                    additionalProperties: boolean;
+                                                                                    description: string;
+                                                                                };
+                                                                                permissions: {
+                                                                                    type: string;
+                                                                                    nullable: boolean;
+                                                                                    description: string;
+                                                                                };
+                                                                            };
+                                                                            required: string[];
+                                                                        };
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/api-key/list";
+                                    };
+                                };
+                                schema: {
+                                    apikey: {
+                                        fields: {
+                                            name: {
+                                                type: "string";
+                                                required: false;
+                                                input: false;
+                                            };
+                                            start: {
+                                                type: "string";
+                                                required: false;
+                                                input: false;
+                                            };
+                                            prefix: {
+                                                type: "string";
+                                                required: false;
+                                                input: false;
+                                            };
+                                            key: {
+                                                type: "string";
+                                                required: true;
+                                                input: false;
+                                            };
+                                            userId: {
+                                                type: "string";
+                                                references: {
+                                                    model: string;
+                                                    field: string;
+                                                };
+                                                required: true;
+                                                input: false;
+                                            };
+                                            refillInterval: {
+                                                type: "number";
+                                                required: false;
+                                                input: false;
+                                            };
+                                            refillAmount: {
+                                                type: "number";
+                                                required: false;
+                                                input: false;
+                                            };
+                                            lastRefillAt: {
+                                                type: "date";
+                                                required: false;
+                                                input: false;
+                                            };
+                                            enabled: {
+                                                type: "boolean";
+                                                required: false;
+                                                input: false;
+                                                defaultValue: true;
+                                            };
+                                            rateLimitEnabled: {
+                                                type: "boolean";
+                                                required: false;
+                                                input: false;
+                                                defaultValue: true;
+                                            };
+                                            rateLimitTimeWindow: {
+                                                type: "number";
+                                                required: false;
+                                                input: false;
+                                                defaultValue: number;
+                                            };
+                                            rateLimitMax: {
+                                                type: "number";
+                                                required: false;
+                                                input: false;
+                                                defaultValue: number;
+                                            };
+                                            requestCount: {
+                                                type: "number";
+                                                required: false;
+                                                input: false;
+                                                defaultValue: number;
+                                            };
+                                            remaining: {
+                                                type: "number";
+                                                required: false;
+                                                input: false;
+                                            };
+                                            lastRequest: {
+                                                type: "date";
+                                                required: false;
+                                                input: false;
+                                            };
+                                            expiresAt: {
+                                                type: "date";
+                                                required: false;
+                                                input: false;
+                                            };
+                                            createdAt: {
+                                                type: "date";
+                                                required: true;
+                                                input: false;
+                                            };
+                                            updatedAt: {
+                                                type: "date";
+                                                required: true;
+                                                input: false;
+                                            };
+                                            permissions: {
+                                                type: "string";
+                                                required: false;
+                                                input: false;
+                                            };
+                                            metadata: {
+                                                type: "string";
+                                                required: false;
+                                                input: true;
+                                                transform: {
+                                                    input(value: string | number | boolean | string[] | Date | number[] | null | undefined): string;
+                                                    output(value: string | number | boolean | string[] | Date | number[] | null | undefined): any;
+                                                };
+                                            };
+                                        };
+                                    };
+                                };
+                            } | {
+                                id: "username";
+                                endpoints: {
+                                    signInUsername: {
+                                        <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
+                                            body: {
+                                                password: string;
+                                                username: string;
+                                                rememberMe?: boolean | undefined;
+                                            };
+                                        } & {
+                                            method?: "POST" | undefined;
+                                        } & {
+                                            query?: Record<string, any> | undefined;
+                                        } & {
+                                            params?: Record<string, any>;
+                                        } & {
+                                            request?: Request;
+                                        } & {
+                                            headers?: HeadersInit;
+                                        } & {
+                                            asResponse?: boolean;
+                                            returnHeaders?: boolean;
+                                            use?: import("better-auth").Middleware[];
+                                            path?: string;
+                                        } & {
+                                            asResponse?: AsResponse | undefined;
+                                            returnHeaders?: ReturnHeaders | undefined;
+                                        }): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                                            headers: Headers;
+                                            response: {
+                                                token: string;
+                                                user: {
+                                                    id: string;
+                                                    email: string;
+                                                    emailVerified: boolean;
+                                                    username: string;
+                                                    name: string;
+                                                    image: string | null | undefined;
+                                                    createdAt: Date;
+                                                    updatedAt: Date;
+                                                };
+                                            } | null;
+                                        } : {
+                                            token: string;
+                                            user: {
+                                                id: string;
+                                                email: string;
+                                                emailVerified: boolean;
+                                                username: string;
+                                                name: string;
+                                                image: string | null | undefined;
+                                                createdAt: Date;
+                                                updatedAt: Date;
+                                            };
+                                        } | null>;
+                                        options: {
+                                            method: "POST";
+                                            body: import("better-auth").ZodObject<{
+                                                username: import("better-auth").ZodString;
+                                                password: import("better-auth").ZodString;
+                                                rememberMe: import("better-auth").ZodOptional<import("better-auth").ZodBoolean>;
+                                            }, "strip", import("better-auth").ZodTypeAny, {
+                                                password: string;
+                                                username: string;
+                                                rememberMe?: boolean | undefined;
+                                            }, {
+                                                password: string;
+                                                username: string;
+                                                rememberMe?: boolean | undefined;
+                                            }>;
+                                            metadata: {
+                                                openapi: {
+                                                    summary: string;
+                                                    description: string;
+                                                    responses: {
+                                                        200: {
+                                                            description: string;
+                                                            content: {
+                                                                "application/json": {
+                                                                    schema: {
+                                                                        type: "object";
+                                                                        properties: {
+                                                                            token: {
+                                                                                type: string;
+                                                                                description: string;
+                                                                            };
+                                                                            user: {
+                                                                                $ref: string;
+                                                                            };
+                                                                        };
+                                                                        required: string[];
+                                                                    };
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        } & {
+                                            use: any[];
+                                        };
+                                        path: "/sign-in/username";
+                                    };
+                                };
+                                schema: {
+                                    user: {
+                                        fields: {
+                                            username: {
+                                                type: "string";
+                                                required: false;
+                                                sortable: true;
+                                                unique: true;
+                                                returned: true;
+                                                transform: {
+                                                    input(value: string | number | boolean | string[] | Date | number[] | null | undefined): string | undefined;
+                                                };
+                                            };
+                                            displayUsername: {
+                                                type: "string";
+                                                required: false;
+                                            };
+                                        };
+                                    };
+                                };
+                                hooks: {
+                                    before: {
+                                        matcher(context: import("better-auth").HookEndpointContext): boolean;
+                                        handler: (inputContext: import("better-auth").MiddlewareInputContext<import("better-auth").MiddlewareOptions>) => Promise<void>;
+                                    }[];
+                                };
+                                $ERROR_CODES: {
+                                    INVALID_USERNAME_OR_PASSWORD: string;
+                                    EMAIL_NOT_VERIFIED: string;
+                                    UNEXPECTED_ERROR: string;
+                                    USERNAME_IS_ALREADY_TAKEN: string;
+                                    USERNAME_TOO_SHORT: string;
+                                    USERNAME_TOO_LONG: string;
+                                    INVALID_USERNAME: string;
+                                };
+                            })[];
+                        }>> & {
                             name?: string;
-                            image?: string | null;
-                        }>>;
+                            image?: string;
+                        };
                     };
                     openapi: {
                         description: string;
@@ -2939,6 +8825,107 @@ export declare const auth: {
                 use: any[];
             };
             path: "/refresh-token";
+        };
+        getAccessToken: {
+            <AsResponse extends boolean = false, ReturnHeaders extends boolean = false>(inputCtx_0: {
+                body: {
+                    providerId: string;
+                    accountId?: string | undefined;
+                    userId?: string | undefined;
+                };
+            } & {
+                method?: "POST" | undefined;
+            } & {
+                query?: Record<string, any> | undefined;
+            } & {
+                params?: Record<string, any>;
+            } & {
+                request?: Request;
+            } & {
+                headers?: HeadersInit;
+            } & {
+                asResponse?: boolean;
+                returnHeaders?: boolean;
+                use?: import("better-auth").Middleware[];
+                path?: string;
+            } & {
+                asResponse?: AsResponse | undefined;
+                returnHeaders?: ReturnHeaders | undefined;
+            }): Promise<[AsResponse] extends [true] ? Response : [ReturnHeaders] extends [true] ? {
+                headers: Headers;
+                response: {
+                    accessToken: string | undefined;
+                    accessTokenExpiresAt: Date | undefined;
+                    scopes: string[];
+                    idToken: string | undefined;
+                };
+            } : {
+                accessToken: string | undefined;
+                accessTokenExpiresAt: Date | undefined;
+                scopes: string[];
+                idToken: string | undefined;
+            }>;
+            options: {
+                method: "POST";
+                body: import("better-auth").ZodObject<{
+                    providerId: import("better-auth").ZodString;
+                    accountId: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                    userId: import("better-auth").ZodOptional<import("better-auth").ZodString>;
+                }, "strip", import("better-auth").ZodTypeAny, {
+                    providerId: string;
+                    accountId?: string | undefined;
+                    userId?: string | undefined;
+                }, {
+                    providerId: string;
+                    accountId?: string | undefined;
+                    userId?: string | undefined;
+                }>;
+                metadata: {
+                    openapi: {
+                        description: string;
+                        responses: {
+                            200: {
+                                description: string;
+                                content: {
+                                    "application/json": {
+                                        schema: {
+                                            type: "object";
+                                            properties: {
+                                                tokenType: {
+                                                    type: string;
+                                                };
+                                                idToken: {
+                                                    type: string;
+                                                };
+                                                accessToken: {
+                                                    type: string;
+                                                };
+                                                refreshToken: {
+                                                    type: string;
+                                                };
+                                                accessTokenExpiresAt: {
+                                                    type: string;
+                                                    format: string;
+                                                };
+                                                refreshTokenExpiresAt: {
+                                                    type: string;
+                                                    format: string;
+                                                };
+                                            };
+                                        };
+                                    };
+                                };
+                            };
+                            400: {
+                                description: string;
+                            };
+                        };
+                    };
+                };
+            } & {
+                use: any[];
+            };
+            path: "/get-access-token";
         };
     } & {
         createApiKey: {
@@ -5574,7 +11561,7 @@ export declare const auth: {
             };
         } | {
             id: "admin";
-            init(ctx: import("better-auth").AuthContext): {
+            init(): {
                 options: {
                     databaseHooks: {
                         user: {
@@ -5612,7 +11599,7 @@ export declare const auth: {
                                     token: string;
                                     ipAddress?: string | null | undefined;
                                     userAgent?: string | null | undefined;
-                                }): Promise<void>;
+                                }, ctx: import("better-auth").GenericEndpointContext | undefined): Promise<void>;
                             };
                         };
                     };
@@ -8164,7 +14151,6 @@ export declare const auth: {
             };
             schema: {
                 apikey: {
-                    modelName: string;
                     fields: {
                         name: {
                             type: "string";

@@ -4,7 +4,6 @@ import { attempt } from "@mingull/exceptify";
 import { Locale } from "next-intl";
 import { z } from "zod";
 import { projectSchema } from "../schemas";
-import { Love_Light } from "next/font/google";
 
 type Project = z.infer<typeof projectSchema>;
 

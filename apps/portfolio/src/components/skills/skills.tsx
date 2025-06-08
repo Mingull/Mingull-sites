@@ -1,10 +1,18 @@
-import { Icon } from "@mingull/ui/comps/icons/icon";
-import { AngularIcon, NextJsIcon, NodeJsIcon, ReactIcon, TailwindIcon, TypeScriptIcon } from "@mingull/ui/icons";
+import { Icon } from "@mingull/icons/icon";
+import {
+	AngularIcon,
+	MySQLIcon,
+	NextJsIcon,
+	NodeJsIcon,
+	ReactIcon,
+	TailwindIcon,
+	TypeScriptIcon,
+} from "@mingull/icons";
 
 export type SkillNode = {
 	name: string;
 	version: string;
-	description: string;
+	summary: string;
 	content: string | (() => React.ReactNode);
 	experience: number;
 	years: number;
@@ -15,7 +23,7 @@ export const skills: SkillNode[] = [
 	{
 		name: "Typescript",
 		version: "5.8.3",
-		description: "Superset of JavaScript",
+		summary: "Superset of JavaScript",
 		experience: 90,
 		years: 3,
 		icon: TypeScriptIcon,
@@ -30,7 +38,7 @@ export const skills: SkillNode[] = [
 	{
 		name: "React",
 		version: "19.1.0",
-		description: "JavaScript library",
+		summary: "JavaScript library",
 		experience: 80,
 		years: 2.5,
 		icon: ReactIcon,
@@ -45,7 +53,7 @@ export const skills: SkillNode[] = [
 	{
 		name: "Next.js",
 		version: "15.3.3",
-		description: "React framework",
+		summary: "React framework",
 		experience: 75,
 		years: 1.5,
 		icon: NextJsIcon,
@@ -60,7 +68,7 @@ export const skills: SkillNode[] = [
 	{
 		name: "Tailwind CSS",
 		version: "4.1.8",
-		description: "Utility-first CSS framework",
+		summary: "Utility-first CSS framework",
 		experience: 85,
 		years: 3,
 		icon: TailwindIcon,
@@ -76,22 +84,37 @@ export const skills: SkillNode[] = [
 	{
 		name: "Node.js",
 		version: "22.16.0",
-		description: "JavaScript runtime engine",
+		summary: "JavaScript runtime engine",
 		experience: 70,
 		years: 2,
 		icon: NodeJsIcon,
 		content: () => (
 			<p>
-				Node.js is a JavaScript runtime built on Chrome's V8 engine. It allows developers to run JavaScript on
-				the server side, enabling the creation of scalable and high-performance web applications. I have used
+				Node.js is a JavaScript runtime built on Chrome&apos;s V8 engine. It allows developers to run JavaScript
+				on the server side, enabling the creation of scalable and high-performance web applications. I have used
 				Node.js in various projects, particularly for building RESTful APIs and real-time applications.
+			</p>
+		),
+	},
+	{
+		name: "MySQL",
+		version: "8.0.34",
+		summary: "Popular open-source SQL database",
+		experience: 60,
+		years: 1.5,
+		icon: MySQLIcon,
+		content: () => (
+			<p>
+				MySQL is a widely used relational database management system. It provides a robust and scalable solution
+				for storing and managing data in web applications. I have experience working with MySQL, designing
+				databases, and writing complex queries to retrieve and manipulate data efficiently.
 			</p>
 		),
 	},
 	{
 		name: "Angular",
 		version: "19.0.0",
-		description: "Javascript framework",
+		summary: "Javascript framework",
 		experience: 20,
 		years: 0.9,
 		icon: AngularIcon,

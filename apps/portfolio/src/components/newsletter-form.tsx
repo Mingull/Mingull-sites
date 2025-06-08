@@ -17,7 +17,6 @@ export default function NewsletterForm() {
 	const {
 		register,
 		handleSubmit,
-		reset,
 		formState: { errors, isSubmitting },
 	} = useForm<Inputs>({
 		resolver: zodResolver(NewsletterFormSchema),
@@ -26,7 +25,7 @@ export default function NewsletterForm() {
 		},
 	});
 
-	const processForm: SubmitHandler<Inputs> = async (data) => {
+	const processForm: SubmitHandler<Inputs> = async () => {
 		return toast.warning("This feature is disabled for now. Please try again later.");
 		// const result = await subscribe(data);
 

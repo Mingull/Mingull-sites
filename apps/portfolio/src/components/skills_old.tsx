@@ -1,7 +1,7 @@
 "use client";
-import { Icon } from "@mingull/ui/comps/icons/icon";
+import { Icon } from "@mingull/icons/icon";
 import { Progress } from "@mingull/ui/comps/progress";
-import { AngularIcon, NextJsIcon, NodeJsIcon, ReactIcon, TailwindIcon, TypeScriptIcon } from "@mingull/ui/icons";
+import { AngularIcon, NextJsIcon, NodeJsIcon, ReactIcon, TailwindIcon, TypeScriptIcon } from "@mingull/icons";
 
 type Skill = {
 	name: string;
@@ -33,10 +33,9 @@ export default function Skills() {
 	);
 }
 
-function Skill({ name, version, experience, years, icon }: Skill) {
+function Skill({ name, version, experience, years }: Skill) {
 	// calculate years of experience based on the experience percentage
 	const yearsString = calculateYearsOfExperience(years);
-	const IconComponent = icon;
 	return (
 		<li className="flex flex-col">
 			<div className="flex justify-between">

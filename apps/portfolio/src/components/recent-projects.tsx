@@ -12,7 +12,6 @@ export default function RecentProjects() {
 		data: projects,
 		isLoading,
 		isError,
-		error,
 	} = useQuery({ queryKey: ["projects", locale], queryFn: () => getProjects(locale, 4) });
 
 	return (

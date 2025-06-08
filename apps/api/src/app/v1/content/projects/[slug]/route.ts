@@ -28,7 +28,13 @@ export const GET = withRateLimit<{ params: { slug: string }; searchParams: { loc
 		createSuccessResponse({
 			code: "Ok",
 			message: "Posts fetched successfully",
-			data,
+			data: {
+				...data,
+				metadata: {
+					...data?.metadata,
+					image: data?.metadata?.image ? `${process.env.NEXT_PUBLIC_BASE_URL}${data.metadata.image}` : null,
+				},
+			},
 		}),
 		{
 			status: getHttpCode("Ok"),

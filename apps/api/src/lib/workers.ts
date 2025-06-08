@@ -1,4 +1,4 @@
-import { Job, Worker } from "@mingull/queueify";
+import { Worker } from "@mingull/queueify";
 import { emailQueue } from "./queues";
 
 export const emailWorker = new Worker({

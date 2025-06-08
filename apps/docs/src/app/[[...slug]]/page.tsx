@@ -1,7 +1,7 @@
 import MDXContent from "@/components/mdx-content";
 import { getDocBySlug, getDocCategories, getDocs } from "@/lib/docs";
 import { formatTitle } from "@/lib/utils";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbSeparator } from "@mingull/ui/breadcrumb";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbSeparator } from "@mingull/ui/comps/breadcrumb";
 import type { Metadata } from "next";
 import Link from "next/link";
 

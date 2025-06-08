@@ -17,8 +17,8 @@ export const createMiddleware =
 		return middleware(handler)(req, {
 			...ctx,
 			json: json,
-			searchParams: searchParams,
-			params: ctx.params,
+			params: Promise.resolve(ctx.params ?? {}),
+			searchParams: Promise.resolve(searchParams),
 		});
 	};
 

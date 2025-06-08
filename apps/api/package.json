@@ -2,10 +2,12 @@
 	"name": "api",
 	"version": "0.1.0",
 	"private": true,
+	"type": "module",
 	"scripts": {
 		"dev": "next dev --turbopack --port 3001",
 		"build": "next build",
-		"start": "next start"
+		"start": "next start",
+		"lint": "next lint"
 	},
 	"dependencies": {
 		"@mingull/api": "workspace:*",
@@ -17,10 +19,11 @@
 		"ioredis": "^5.6.1",
 		"nanoid": "^5.1.5",
 		"next": "15.3.3",
-		"zod": "^3.25.49"
+		"zod": "^3.25.56"
 	},
 	"devDependencies": {
-		"@types/node": "^22.15.29",
+		"@mingull/eslint-config": "workspace:*",
+		"@types/node": "^22.15.30",
 		"@types/react": "^19.1.6",
 		"typescript": "^5.8.3"
 	}

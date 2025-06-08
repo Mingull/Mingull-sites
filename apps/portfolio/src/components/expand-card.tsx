@@ -3,6 +3,7 @@
 import React, { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useClickOutside } from "@mingull/ui/hooks/use-click-outside";
+import Image from "next/image";
 export function ExpandableCardDemo() {
 	const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(null);
 	const id = useId();
@@ -68,7 +69,7 @@ export function ExpandableCardDemo() {
 							className="flex h-full w-full max-w-[500px] flex-col overflow-hidden bg-white sm:rounded-3xl md:h-fit md:max-h-[90%] dark:bg-neutral-900"
 						>
 							<motion.div layoutId={`image-${active.title}-${id}`}>
-								<img
+								<Image
 									width={200}
 									height={200}
 									src={active.src}
@@ -123,7 +124,7 @@ export function ExpandableCardDemo() {
 				:	null}
 			</AnimatePresence>
 			<ul className="mx-auto grid w-full max-w-2xl grid-cols-1 items-start gap-4 md:grid-cols-2">
-				{cards.map((card, index) => (
+				{cards.map((card) => (
 					<motion.div
 						layoutId={`card-${card.title}-${id}`}
 						key={card.title}
@@ -132,7 +133,7 @@ export function ExpandableCardDemo() {
 					>
 						<div className="flex w-full flex-col gap-4">
 							<motion.div layoutId={`image-${card.title}-${id}`}>
-								<img
+								<Image
 									width={100}
 									height={100}
 									src={card.src}

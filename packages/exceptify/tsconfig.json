@@ -4,6 +4,8 @@
 		"allowImportingTsExtensions": true,
 		"noEmit": true,
 		"baseUrl": ".",
+		"sourceMap": false,
+		"declarationMap": false,
 		"paths": {
 			"@mingull/exceptify/*": ["./src/*"]
 		}

@@ -1,4 +1,4 @@
-import { Icon } from "@mingull/ui/comps/icons/icon";
+import { Icon } from "@mingull/icons/icon";
 import { LucideIcon } from "lucide-react";
 
 export type Navigation = {

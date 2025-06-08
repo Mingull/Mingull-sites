@@ -1,4 +1,4 @@
-import { DiscordIcon, GitHubIcon } from "@mingull/ui/icons";
+import { DiscordIcon, GitHubIcon } from "@mingull/icons";
 import { LinkedInLogoIcon } from "@radix-ui/react-icons";
 import { BookUserIcon, CompassIcon, Globe2Icon } from "lucide-react";
 import { Navigation } from "./type";

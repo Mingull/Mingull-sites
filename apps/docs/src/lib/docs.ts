@@ -23,11 +23,16 @@ export type DocMetadata = {
 
 export async function getDocBySlug(slug?: string[]): Promise<Doc | null> {
 	try {
+		// Reject invalid slugs that are files like 'favicon.ico'
+		if (slug && slug.length === 1 && slug[0]?.includes(".")) {
+			// Could also add more checks if needed
+			return null;
+		}
 		const filePath =
 			!slug || slug.length === 0 ? path.join(rootDirectory, "index.mdx")
 			: slug.length === 1 ? path.join(rootDirectory, `${slug[0]}/index.mdx`)
 			: path.join(rootDirectory, `${slug[0]}`, `${slug[1]}.mdx`);
-	
+
 		const fileContent = await fs.readFile(filePath, "utf-8");
 
 		const { data, content } = matter(fileContent);

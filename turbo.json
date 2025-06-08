@@ -1,21 +1,31 @@
 {
-  "$schema": "https://turbo.build/schema.json",
-  "ui": "tui",
-  "tasks": {
-    "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
-    },
-    "lint": {
-      "dependsOn": ["^lint"]
-    },
-    "check-types": {
-      "dependsOn": ["^check-types"]
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true
-    }
-  }
+	"$schema": "https://turbo.build/schema.json",
+	"ui": "tui",
+	"tasks": {
+		"build": {
+			"dependsOn": ["^build"],
+			"inputs": ["$TURBO_DEFAULT$", ".env*"],
+			"outputs": [".next/**", "!.next/cache/**", "dist/**", "!.turbo/**", "!.next/server/app/**"]
+		},
+		"portfolio#build": {
+			"dependsOn": ["api#build", "@mingull/exceptify#build"],
+			"env": ["RESEND_API_KEY", "RESEND_AUDIENCE_ID", "NODE_ENV"]
+		},
+		"api#build": {
+			"dependsOn": ["@mingull/exceptify#build"]
+		},
+		"lint": {
+			"dependsOn": ["^lint"]
+		},
+		"api#lint": {
+			"env": ["REDIS_URL"]
+		},
+		"check-types": {
+			"dependsOn": ["^check-types"]
+		},
+		"dev": {
+			"cache": false,
+			"persistent": true
+		}
+	}
 }

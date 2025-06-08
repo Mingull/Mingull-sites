@@ -4,6 +4,7 @@ import { useClickOutside } from "@mingull/ui/hooks/use-click-outside";
 import { AnimatePresence, motion as m } from "motion/react";
 import { SetStateAction, useEffect, useId, useRef, useState } from "react";
 import { SkillNode, skills } from "./skills";
+import "./skill.css";
 
 export default function Skills() {
 	const [active, setActive] = useState<(typeof skills)[number] | boolean | null>(null);
@@ -46,26 +47,6 @@ export default function Skills() {
 			<AnimatePresence>
 				{isActiveSkill ?
 					<div className="fixed inset-0 z-[100] grid place-items-center">
-						<m.button
-							key={`button-${active.name}-${id}`}
-							layout
-							initial={{
-								opacity: 0,
-							}}
-							animate={{
-								opacity: 1,
-							}}
-							exit={{
-								opacity: 0,
-								transition: {
-									duration: 0.05,
-								},
-							}}
-							className="absolute top-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-white lg:hidden"
-							onClick={() => setActive(null)}
-						>
-							<CloseIcon />
-						</m.button>
 						<m.div
 							layoutId={`card-${active.name}-${id}`}
 							ref={ref}
@@ -85,10 +66,10 @@ export default function Skills() {
 											{active.name}
 										</m.h3>
 										<m.p
-											layoutId={`description-${active.description}-${id}`}
+											layoutId={`description-${active.summary}-${id}`}
 											className="text-base text-neutral-600 dark:text-neutral-400"
 										>
-											{active.description}
+											{active.summary}
 										</m.p>
 									</div>
 
@@ -105,6 +86,13 @@ export default function Skills() {
 									</m.a> */}
 								</div>
 								<div className="relative px-4 pt-4">
+									<m.p className="text-sm text-neutral-600 dark:text-neutral-400">
+										<strong>Version:</strong> {active.version}
+									</m.p>
+									<m.p className="text-sm text-neutral-600 dark:text-neutral-400">
+										<strong>Experience:</strong> {active.experience} (
+										{calculateYearsOfExperience(active.years)})
+									</m.p>
 									<m.div
 										layout
 										initial={{ opacity: 0 }}
@@ -120,12 +108,7 @@ export default function Skills() {
 					</div>
 				:	null}
 			</AnimatePresence>
-			<m.ul
-				initial="hidden"
-				whileInView="show"
-				viewport={{ once: true, amount: 0.3 }}
-				className="flex flex-row flex-wrap gap-4 xl:justify-between xl:gap-1"
-			>
+			<m.ul initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="containerize">
 				{skills.map((skill) => (
 					<Skill key={skill.name} {...skill} setActive={setActive} id={id} />
 				))}
@@ -141,22 +124,21 @@ function Skill({
 	years,
 	icon,
 	id,
-	description,
+	summary,
 	content,
 	setActive,
 }: SkillNode & { id: string; setActive: (value: SetStateAction<boolean | SkillNode | null>) => void }) {
-	const yearsString = calculateYearsOfExperience(years);
 	const IconComponent = icon;
 	return (
 		<m.li
 			layoutId={`card-${name}-${id}`}
 			key={name}
-			onClick={() => setActive({ name, version, experience, years, icon, description, content })}
-			className="flex cursor-pointer flex-col rounded-xl p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+			onClick={() => setActive({ name, version, experience, years, icon, summary, content })}
+			className="item flex cursor-pointer flex-col rounded-xl p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800"
 		>
 			<div className="flex w-full flex-col gap-4">
 				<m.div layoutId={`image-${name}-${id}`}>
-					<IconComponent className="h-50 w-full rounded-lg object-cover object-top" />
+					<IconComponent className="h-36 w-full rounded-lg object-cover object-top" />
 				</m.div>
 				<div className="flex flex-col items-center justify-center">
 					<m.h3
@@ -166,49 +148,16 @@ function Skill({
 						{name}
 					</m.h3>
 					<m.p
-						layoutId={`description-${description}-${id}`}
+						layoutId={`description-${summary}-${id}`}
 						className="text-center text-base text-neutral-600 md:text-left dark:text-neutral-400"
 					>
-						{description}
+						{summary}
 					</m.p>
 				</div>
 			</div>
 		</m.li>
 	);
 }
-
-export const CloseIcon = () => {
-	return (
-		<m.svg
-			initial={{
-				opacity: 0,
-			}}
-			animate={{
-				opacity: 1,
-			}}
-			exit={{
-				opacity: 0,
-				transition: {
-					duration: 0.05,
-				},
-			}}
-			xmlns="http://www.w3.org/2000/svg"
-			width="24"
-			height="24"
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			strokeWidth="2"
-			strokeLinecap="round"
-			strokeLinejoin="round"
-			className="h-4 w-4 text-black"
-		>
-			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-			<path d="M18 6l-12 12" />
-			<path d="M6 6l12 12" />
-		</m.svg>
-	);
-};
 
 const calculateYearsOfExperience = (years: number): string => {
 	const totalMonths = Math.round(years * 12);

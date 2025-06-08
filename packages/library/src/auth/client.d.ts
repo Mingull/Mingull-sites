@@ -2,13 +2,13 @@ export declare const authClient: {
     admin: {
         listUsers: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -95,13 +95,13 @@ export declare const authClient: {
     admin: {
         listUserSessions: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -172,13 +172,13 @@ export declare const authClient: {
     admin: {
         unbanUser: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -240,13 +240,13 @@ export declare const authClient: {
     admin: {
         banUser: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -312,13 +312,13 @@ export declare const authClient: {
     admin: {
         impersonateUser: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -398,13 +398,13 @@ export declare const authClient: {
     admin: {
         stopImpersonating: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -464,13 +464,13 @@ export declare const authClient: {
     admin: {
         revokeUserSession: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -532,13 +532,13 @@ export declare const authClient: {
     admin: {
         revokeUserSessions: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -600,13 +600,13 @@ export declare const authClient: {
     admin: {
         removeUser: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -668,13 +668,13 @@ export declare const authClient: {
     admin: {
         setUserPassword: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -738,13 +738,13 @@ export declare const authClient: {
     apiKey: {
         create: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -848,13 +848,13 @@ export declare const authClient: {
     apiKey: {
         get: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -938,13 +938,13 @@ export declare const authClient: {
     apiKey: {
         update: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -1051,13 +1051,13 @@ export declare const authClient: {
     apiKey: {
         delete: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -1119,13 +1119,13 @@ export declare const authClient: {
     apiKey: {
         list: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -1205,13 +1205,13 @@ export declare const authClient: {
     signIn: {
         username: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -1287,13 +1287,13 @@ export declare const authClient: {
     admin: {
         setRole: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -1357,13 +1357,13 @@ export declare const authClient: {
     admin: {
         createUser: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -1433,13 +1433,13 @@ export declare const authClient: {
     admin: {
         hasPermission: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -1528,13 +1528,13 @@ export declare const authClient: {
     signIn: {
         social: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -1637,13 +1637,13 @@ export declare const authClient: {
 } & {
     getSession: <FetchOptions extends {
         mode?: RequestMode | undefined;
+        cache?: RequestCache | undefined;
         method?: string | undefined;
         headers?: (HeadersInit & (HeadersInit | {
             accept: "application/json" | "text/plain" | "application/octet-stream";
             "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
             authorization: "Bearer" | "Basic";
         })) | undefined;
-        cache?: RequestCache | undefined;
         credentials?: RequestCredentials | undefined;
         integrity?: string | undefined;
         keepalive?: boolean | undefined;
@@ -1733,13 +1733,13 @@ export declare const authClient: {
 } & {
     signOut: <FetchOptions extends {
         mode?: RequestMode | undefined;
+        cache?: RequestCache | undefined;
         method?: string | undefined;
         headers?: (HeadersInit & (HeadersInit | {
             accept: "application/json" | "text/plain" | "application/octet-stream";
             "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
             authorization: "Bearer" | "Basic";
         })) | undefined;
-        cache?: RequestCache | undefined;
         credentials?: RequestCredentials | undefined;
         integrity?: string | undefined;
         keepalive?: boolean | undefined;
@@ -1797,13 +1797,13 @@ export declare const authClient: {
     signIn: {
         email: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -1881,13 +1881,13 @@ export declare const authClient: {
 } & {
     forgetPassword: <FetchOptions extends {
         mode?: RequestMode | undefined;
+        cache?: RequestCache | undefined;
         method?: string | undefined;
         headers?: (HeadersInit & (HeadersInit | {
             accept: "application/json" | "text/plain" | "application/octet-stream";
             "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
             authorization: "Bearer" | "Basic";
         })) | undefined;
-        cache?: RequestCache | undefined;
         credentials?: RequestCredentials | undefined;
         integrity?: string | undefined;
         keepalive?: boolean | undefined;
@@ -1949,13 +1949,13 @@ export declare const authClient: {
 } & {
     resetPassword: <FetchOptions extends {
         mode?: RequestMode | undefined;
+        cache?: RequestCache | undefined;
         method?: string | undefined;
         headers?: (HeadersInit & (HeadersInit | {
             accept: "application/json" | "text/plain" | "application/octet-stream";
             "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
             authorization: "Bearer" | "Basic";
         })) | undefined;
-        cache?: RequestCache | undefined;
         credentials?: RequestCredentials | undefined;
         integrity?: string | undefined;
         keepalive?: boolean | undefined;
@@ -2019,13 +2019,13 @@ export declare const authClient: {
 } & {
     verifyEmail: <FetchOptions extends {
         mode?: RequestMode | undefined;
+        cache?: RequestCache | undefined;
         method?: string | undefined;
         headers?: (HeadersInit & (HeadersInit | {
             accept: "application/json" | "text/plain" | "application/octet-stream";
             "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
             authorization: "Bearer" | "Basic";
         })) | undefined;
-        cache?: RequestCache | undefined;
         credentials?: RequestCredentials | undefined;
         integrity?: string | undefined;
         keepalive?: boolean | undefined;
@@ -2100,13 +2100,13 @@ export declare const authClient: {
 } & {
     sendVerificationEmail: <FetchOptions extends {
         mode?: RequestMode | undefined;
+        cache?: RequestCache | undefined;
         method?: string | undefined;
         headers?: (HeadersInit & (HeadersInit | {
             accept: "application/json" | "text/plain" | "application/octet-stream";
             "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
             authorization: "Bearer" | "Basic";
         })) | undefined;
-        cache?: RequestCache | undefined;
         credentials?: RequestCredentials | undefined;
         integrity?: string | undefined;
         keepalive?: boolean | undefined;
@@ -2168,13 +2168,13 @@ export declare const authClient: {
 } & {
     changeEmail: <FetchOptions extends {
         mode?: RequestMode | undefined;
+        cache?: RequestCache | undefined;
         method?: string | undefined;
         headers?: (HeadersInit & (HeadersInit | {
             accept: "application/json" | "text/plain" | "application/octet-stream";
             "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
             authorization: "Bearer" | "Basic";
         })) | undefined;
-        cache?: RequestCache | undefined;
         credentials?: RequestCredentials | undefined;
         integrity?: string | undefined;
         keepalive?: boolean | undefined;
@@ -2236,13 +2236,13 @@ export declare const authClient: {
 } & {
     changePassword: <FetchOptions extends {
         mode?: RequestMode | undefined;
+        cache?: RequestCache | undefined;
         method?: string | undefined;
         headers?: (HeadersInit & (HeadersInit | {
             accept: "application/json" | "text/plain" | "application/octet-stream";
             "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
             authorization: "Bearer" | "Basic";
         })) | undefined;
-        cache?: RequestCache | undefined;
         credentials?: RequestCredentials | undefined;
         integrity?: string | undefined;
         keepalive?: boolean | undefined;
@@ -2315,13 +2315,13 @@ export declare const authClient: {
 } & {
     deleteUser: <FetchOptions extends {
         mode?: RequestMode | undefined;
+        cache?: RequestCache | undefined;
         method?: string | undefined;
         headers?: (HeadersInit & (HeadersInit | {
             accept: "application/json" | "text/plain" | "application/octet-stream";
             "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
             authorization: "Bearer" | "Basic";
         })) | undefined;
-        cache?: RequestCache | undefined;
         credentials?: RequestCredentials | undefined;
         integrity?: string | undefined;
         keepalive?: boolean | undefined;
@@ -2387,13 +2387,13 @@ export declare const authClient: {
     resetPassword: {
         ":token": <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -2455,13 +2455,13 @@ export declare const authClient: {
 } & {
     revokeSession: <FetchOptions extends {
         mode?: RequestMode | undefined;
+        cache?: RequestCache | undefined;
         method?: string | undefined;
         headers?: (HeadersInit & (HeadersInit | {
             accept: "application/json" | "text/plain" | "application/octet-stream";
             "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
             authorization: "Bearer" | "Basic";
         })) | undefined;
-        cache?: RequestCache | undefined;
         credentials?: RequestCredentials | undefined;
         integrity?: string | undefined;
         keepalive?: boolean | undefined;
@@ -2521,13 +2521,13 @@ export declare const authClient: {
 } & {
     revokeSessions: <FetchOptions extends {
         mode?: RequestMode | undefined;
+        cache?: RequestCache | undefined;
         method?: string | undefined;
         headers?: (HeadersInit & (HeadersInit | {
             accept: "application/json" | "text/plain" | "application/octet-stream";
             "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
             authorization: "Bearer" | "Basic";
         })) | undefined;
-        cache?: RequestCache | undefined;
         credentials?: RequestCredentials | undefined;
         integrity?: string | undefined;
         keepalive?: boolean | undefined;
@@ -2584,13 +2584,13 @@ export declare const authClient: {
 } & {
     revokeOtherSessions: <FetchOptions extends {
         mode?: RequestMode | undefined;
+        cache?: RequestCache | undefined;
         method?: string | undefined;
         headers?: (HeadersInit & (HeadersInit | {
             accept: "application/json" | "text/plain" | "application/octet-stream";
             "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
             authorization: "Bearer" | "Basic";
         })) | undefined;
-        cache?: RequestCache | undefined;
         credentials?: RequestCredentials | undefined;
         integrity?: string | undefined;
         keepalive?: boolean | undefined;
@@ -2647,13 +2647,13 @@ export declare const authClient: {
 } & {
     linkSocial: <FetchOptions extends {
         mode?: RequestMode | undefined;
+        cache?: RequestCache | undefined;
         method?: string | undefined;
         headers?: (HeadersInit & (HeadersInit | {
             accept: "application/json" | "text/plain" | "application/octet-stream";
             "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
             authorization: "Bearer" | "Basic";
         })) | undefined;
-        cache?: RequestCache | undefined;
         credentials?: RequestCredentials | undefined;
         integrity?: string | undefined;
         keepalive?: boolean | undefined;
@@ -2718,13 +2718,13 @@ export declare const authClient: {
 } & {
     listAccounts: <FetchOptions extends {
         mode?: RequestMode | undefined;
+        cache?: RequestCache | undefined;
         method?: string | undefined;
         headers?: (HeadersInit & (HeadersInit | {
             accept: "application/json" | "text/plain" | "application/octet-stream";
             "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
             authorization: "Bearer" | "Basic";
         })) | undefined;
-        cache?: RequestCache | undefined;
         credentials?: RequestCredentials | undefined;
         integrity?: string | undefined;
         keepalive?: boolean | undefined;
@@ -2787,13 +2787,13 @@ export declare const authClient: {
     deleteUser: {
         callback: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -2858,13 +2858,13 @@ export declare const authClient: {
 } & {
     unlinkAccount: <FetchOptions extends {
         mode?: RequestMode | undefined;
+        cache?: RequestCache | undefined;
         method?: string | undefined;
         headers?: (HeadersInit & (HeadersInit | {
             accept: "application/json" | "text/plain" | "application/octet-stream";
             "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
             authorization: "Bearer" | "Basic";
         })) | undefined;
-        cache?: RequestCache | undefined;
         credentials?: RequestCredentials | undefined;
         integrity?: string | undefined;
         keepalive?: boolean | undefined;
@@ -2926,13 +2926,13 @@ export declare const authClient: {
 } & {
     refreshToken: <FetchOptions extends {
         mode?: RequestMode | undefined;
+        cache?: RequestCache | undefined;
         method?: string | undefined;
         headers?: (HeadersInit & (HeadersInit | {
             accept: "application/json" | "text/plain" | "application/octet-stream";
             "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
             authorization: "Bearer" | "Basic";
         })) | undefined;
-        cache?: RequestCache | undefined;
         credentials?: RequestCredentials | undefined;
         integrity?: string | undefined;
         keepalive?: boolean | undefined;
@@ -2992,16 +2992,89 @@ export declare const authClient: {
         message?: string;
     }, FetchOptions["throw"] extends true ? true : false>>;
 } & {
+    getAccessToken: <FetchOptions extends {
+        mode?: RequestMode | undefined;
+        cache?: RequestCache | undefined;
+        method?: string | undefined;
+        headers?: (HeadersInit & (HeadersInit | {
+            accept: "application/json" | "text/plain" | "application/octet-stream";
+            "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
+            authorization: "Bearer" | "Basic";
+        })) | undefined;
+        credentials?: RequestCredentials | undefined;
+        integrity?: string | undefined;
+        keepalive?: boolean | undefined;
+        priority?: RequestPriority | undefined;
+        redirect?: RequestRedirect | undefined;
+        referrer?: string | undefined;
+        referrerPolicy?: ReferrerPolicy | undefined;
+        signal?: (AbortSignal | null) | undefined;
+        window?: null | undefined;
+        onRequest?: (<T extends Record<string, any>>(context: import("better-auth/client").RequestContext<T>) => Promise<import("better-auth/client").RequestContext | void> | import("better-auth/client").RequestContext | void) | undefined;
+        onResponse?: ((context: import("better-auth/client").ResponseContext) => Promise<Response | void | import("better-auth/client").ResponseContext> | Response | import("better-auth/client").ResponseContext | void) | undefined;
+        onSuccess?: ((context: import("better-auth/client").SuccessContext<any>) => Promise<void> | void) | undefined;
+        onError?: ((context: import("better-auth/client").ErrorContext) => Promise<void> | void) | undefined;
+        onRetry?: ((response: import("better-auth/client").ResponseContext) => Promise<void> | void) | undefined;
+        hookOptions?: {
+            cloneResponse?: boolean;
+        } | undefined;
+        timeout?: number | undefined;
+        customFetchImpl?: import("better-auth/client").FetchEsque | undefined;
+        plugins?: import("better-auth/client").BetterFetchPlugin[] | undefined;
+        baseURL?: string | undefined;
+        throw?: boolean | undefined;
+        auth?: ({
+            type: "Bearer";
+            token: string | Promise<string | undefined> | (() => string | Promise<string | undefined> | undefined) | undefined;
+        } | {
+            type: "Basic";
+            username: string | (() => string | undefined) | undefined;
+            password: string | (() => string | undefined) | undefined;
+        } | {
+            type: "Custom";
+            prefix: string | (() => string | undefined) | undefined;
+            value: string | (() => string | undefined) | undefined;
+        }) | undefined;
+        body?: (Partial<{
+            providerId: string;
+            accountId?: string | undefined;
+            userId?: string | undefined;
+        }> & Record<string, any>) | undefined;
+        query?: (Partial<Record<string, any>> & Record<string, any>) | undefined;
+        params?: Record<string, any> | undefined;
+        duplex?: "full" | "half" | undefined;
+        jsonParser?: ((text: string) => Promise<any> | any) | undefined;
+        retry?: import("better-auth/client").RetryOptions | undefined;
+        retryAttempt?: number | undefined;
+        output?: (import("better-auth/client").StandardSchemaV1 | typeof Blob | typeof File) | undefined;
+        errorSchema?: import("better-auth/client").StandardSchemaV1 | undefined;
+        disableValidation?: boolean | undefined;
+    }>(data_0: import("better-auth").Prettify<{
+        providerId: string;
+        accountId?: string | undefined;
+        userId?: string | undefined;
+    } & {
+        fetchOptions?: FetchOptions | undefined;
+    }>, data_1?: FetchOptions | undefined) => Promise<import("better-auth/client").BetterFetchResponse<{
+        accessToken: string | undefined;
+        accessTokenExpiresAt: Date | undefined;
+        scopes: string[];
+        idToken: string | undefined;
+    }, {
+        code?: string;
+        message?: string;
+    }, FetchOptions["throw"] extends true ? true : false>>;
+} & {
     signUp: {
         email: <FetchOptions extends {
             mode?: RequestMode | undefined;
+            cache?: RequestCache | undefined;
             method?: string | undefined;
             headers?: (HeadersInit & (HeadersInit | {
                 accept: "application/json" | "text/plain" | "application/octet-stream";
                 "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
                 authorization: "Bearer" | "Basic";
             })) | undefined;
-            cache?: RequestCache | undefined;
             credentials?: RequestCredentials | undefined;
             integrity?: string | undefined;
             keepalive?: boolean | undefined;
@@ -3040,6 +3113,7 @@ export declare const authClient: {
                 name: string;
                 email: string;
                 password: string;
+                callbackURL?: string;
             }> & Record<string, any>) | undefined;
             query?: (Partial<Record<string, any>> & Record<string, any>) | undefined;
             params?: Record<string, any> | undefined;
@@ -3094,13 +3168,13 @@ export declare const authClient: {
 } & {
     updateUser: <FetchOptions extends {
         mode?: RequestMode | undefined;
+        cache?: RequestCache | undefined;
         method?: string | undefined;
         headers?: (HeadersInit & (HeadersInit | {
             accept: "application/json" | "text/plain" | "application/octet-stream";
             "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
             authorization: "Bearer" | "Basic";
         })) | undefined;
-        cache?: RequestCache | undefined;
         credentials?: RequestCredentials | undefined;
         integrity?: string | undefined;
         keepalive?: boolean | undefined;
@@ -3135,10 +3209,10 @@ export declare const authClient: {
             prefix: string | (() => string | undefined) | undefined;
             value: string | (() => string | undefined) | undefined;
         }) | undefined;
-        body?: (Partial<Partial<import("better-auth").Prettify<{
+        body?: (Partial<Partial<{}> & {
             name?: string;
-            image?: string | null;
-        }>>> & Record<string, any>) | undefined;
+            image?: string;
+        }> & Record<string, any>) | undefined;
         query?: (Partial<Record<string, any>> & Record<string, any>) | undefined;
         params?: Record<string, any> | undefined;
         duplex?: "full" | "half" | undefined;
@@ -3168,13 +3242,13 @@ export declare const authClient: {
 } & {
     listSessions: <FetchOptions extends {
         mode?: RequestMode | undefined;
+        cache?: RequestCache | undefined;
         method?: string | undefined;
         headers?: (HeadersInit & (HeadersInit | {
             accept: "application/json" | "text/plain" | "application/octet-stream";
             "content-type": "application/json" | "text/plain" | "application/x-www-form-urlencoded" | "multipart/form-data" | "application/octet-stream";
             authorization: "Bearer" | "Basic";
         })) | undefined;
-        cache?: RequestCache | undefined;
         credentials?: RequestCredentials | undefined;
         integrity?: string | undefined;
         keepalive?: boolean | undefined;

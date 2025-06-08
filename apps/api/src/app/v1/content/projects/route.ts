@@ -26,7 +26,10 @@ export const GET = withRateLimit<{ searchParams: { locale: string; limit?: strin
 		createSuccessResponse({
 			code: "Ok",
 			message: "Posts fetched successfully",
-			data,
+			data: data?.map((project) => ({
+				...project,
+				image: `${process.env.NEXT_PUBLIC_BASE_URL}${project.image}` || null,
+			})),
 		}),
 		{
 			status: getHttpCode("Ok"),

@@ -1,9 +1,16 @@
 "use client";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useState } from "react";
-import { Button } from "@mingull/ui/comps/button";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@mingull/ui/comps/command";
-import { Popover, PopoverContent, PopoverTrigger } from "@mingull/ui/comps/popover";
+import { Button } from "./button.tsx";
+import {
+	Command,
+	CommandEmpty,
+	CommandGroup,
+	CommandInput,
+	CommandItem,
+	CommandList,
+} from "./command.tsx";
+import { Popover, PopoverContent, PopoverTrigger } from "./popover.tsx";
 
 import { cn } from "@mingull/lib/utils";
 

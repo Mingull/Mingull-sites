@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@mingull/ui/comps/button";
 import { SunIcon, MoonIcon } from "@radix-ui/react-icons";
-import { Spinner } from "@mingull/ui/icons";
+import { Spinner } from "@mingull/icons";
 
 export default function ThemeToggle() {
 	const { setTheme, resolvedTheme } = useTheme();

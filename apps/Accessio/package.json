@@ -4,14 +4,14 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev --turbopack --port 3002",
-		"build": "next build",
+		"build": "echo \"next build\"",
 		"start": "next start",
 		"lint": "next lint",
 		"lint:fix": "next lint --fix",
 		"check-types": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@hookform/resolvers": "^5.0.1",
+		"@hookform/resolvers": "^5.1.0",
 		"@mingull/lib": "workspace:*",
 		"@mingull/ui": "workspace:*",
 		"@shadcn/ui": "^0.0.4",
@@ -20,8 +20,8 @@
 		"clsx": "^2.1.1",
 		"cmdk": "1.1.1",
 		"date-fns": "^4.1.0",
-		"drizzle-orm": "^0.44.1",
-		"lucide-react": "^0.511.0",
+		"drizzle-orm": "^0.44.2",
+		"lucide-react": "^0.513.0",
 		"nanoid": "^5.1.5",
 		"next": "15.3.3",
 		"next-themes": "^0.4.6",
@@ -32,16 +32,16 @@
 		"sonner": "^2.0.5",
 		"tailwind-merge": "^3.3.0",
 		"tailwindcss-animate": "^1.0.7",
-		"zod": "^3.25.49"
+		"zod": "^3.25.56"
 	},
 	"devDependencies": {
 		"@eslint/eslintrc": "^3.3.1",
 		"@mingull/eslint-config": "workspace:^",
 		"@mingull/typescript-config": "workspace:*",
 		"@tailwindcss/postcss": "^4.1.8",
-		"@types/node": "^22.15.29",
+		"@types/node": "^22.15.30",
 		"@types/react": "^19.1.6",
-		"@types/react-dom": "^19.1.5",
+		"@types/react-dom": "^19.1.6",
 		"dotenv": "^16.5.0",
 		"drizzle-kit": "^0.31.1",
 		"eslint": "^9.28.0",

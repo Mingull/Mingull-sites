@@ -1,4 +1,3 @@
-import { createLucideIcon } from "lucide-react";
 import { createIcon } from "./icon.tsx";
 
 export const NextJsIcon = createIcon(

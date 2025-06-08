@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, buttonVariants } from "@mingull/ui/comps/button";
+import { Button, buttonVariants } from "./button.tsx";
 
 import { cn } from "@mingull/lib/utils";
 
