@@ -5,6 +5,7 @@ import { useSelectedLayoutSegment } from "next/navigation";
 import { ComponentProps } from "react";
 import LanguageSelector from "./language-selector";
 import ThemeToggle from "./theme-toggle";
+import { GitHubIcon } from "@mingull/icons";
 
 export default function Header() {
 	return (
@@ -21,8 +22,11 @@ export default function Header() {
 						{/* <HeaderLink href="/contact">Contact</HeaderLink> */}
 					</ul>
 				</div>
-				<div className="flex">
+				<div className="flex gap-4">
 					<LanguageSelector />
+					<Link href={"https://github.com/mingull"} target="_blank">
+						<GitHubIcon className="text-foreground" />
+					</Link>
 					<ThemeToggle />
 					{/* <LoginButton /> */}
 				</div>

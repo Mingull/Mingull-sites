@@ -3,7 +3,9 @@ import Header from "@/components/header";
 import Providers from "@/components/providers";
 import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
+import { Alert, AlertDescription, AlertTitle } from "@mingull/ui/comps/alert";
 import "@mingull/ui/globals.css";
+import { TriangleAlert } from "lucide-react";
 import type { Metadata } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
@@ -42,7 +44,25 @@ export default async function RootLayout({
 				<NextIntlClientProvider locale={locale} messages={messages}>
 					<Providers>
 						<Header />
-						<main className="grow">{children}</main>
+						<main className="grow">
+							<div className="flex items-center justify-center pt-24">
+								<div className="max-w-2xl">
+									<Alert variant="warning">
+										<TriangleAlert />
+										<AlertTitle>Work in Progress</AlertTitle>
+										<AlertDescription>
+											This site is currently under construction. Some features may be unavailable
+											or behave unexpectedly.
+											<br />
+											We&apos;re actively working on improvements — please check back soon.
+											<br />
+											Thanks for your patience and support!
+										</AlertDescription>
+									</Alert>
+								</div>
+							</div>
+							{children}
+						</main>
 						<Footer />
 					</Providers>
 				</NextIntlClientProvider>

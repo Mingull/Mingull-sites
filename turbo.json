@@ -8,7 +8,7 @@
 			"outputs": [".next/**", "!.next/cache/**", "dist/**", "!.turbo/**", "!.next/server/app/**"]
 		},
 		"portfolio#build": {
-			"dependsOn": ["api#build"],
+			"dependsOn": ["api#build", "@mingull/exceptify#build"],
 			"env": ["RESEND_API_KEY", "RESEND_AUDIENCE_ID", "NODE_ENV"]
 		},
 		"api#build": {
