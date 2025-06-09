@@ -15,9 +15,11 @@ export type Icon = (props: IconProps) => React.ReactNode;
 
 export const createIcon = (name: string, node: IconNode, defaultProps?: IconProps): Icon => {
 	return ({ size, color, className, style, ...rest }: IconProps) => {
+		const hasColorClass = className?.match(/\b(text|bg)-\S+/);
+
 		const combinedStyle: React.CSSProperties = {
 			...style,
-			color: color ?? defaultProps?.color,
+			...(hasColorClass ? {} : { color: color ?? defaultProps?.color }),
 		};
 
 		return (
