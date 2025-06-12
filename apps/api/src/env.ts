@@ -7,7 +7,7 @@ config({ path: "../../.env" });
 export const env = createEnv({
 	server: {
 		BASE_API: z.string().url(),
-		API_URL: z.string(),
+		API_URL: z.string().url(),
 		REDIS_URL: z.string().min(2).max(100),
 	},
 	experimental__runtimeEnv: process.env,
