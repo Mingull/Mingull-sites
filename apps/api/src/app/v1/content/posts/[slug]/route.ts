@@ -1,3 +1,4 @@
+import { env } from "@/env";
 import { withRateLimit } from "@/lib/middlewares/with-ratelimit";
 import { getPostBySlug } from "@/lib/posts";
 import { createErrorResponse, createSuccessResponse, getHttpCode, getStatus } from "@mingull/api";
@@ -32,7 +33,7 @@ export const GET = withRateLimit<{ params: { slug: string }; searchParams: { loc
 				...data,
 				metadata: {
 					...data?.metadata,
-					image: data?.metadata?.image ? `${process.env.NEXT_PUBLIC_BASE_URL}${data.metadata.image}` : null,
+					image: data?.metadata?.image ? `${env.BASE_API}${data.metadata.image}` : null,
 				},
 			},
 		}),

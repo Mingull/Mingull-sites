@@ -14,17 +14,19 @@
 		"@mingull/exceptify": "workspace:*",
 		"@mingull/lib": "workspace:*",
 		"@mingull/queueify": "workspace:*",
-		"better-auth": "^1.2.8",
+		"better-auth": "^1.2.9",
 		"gray-matter": "^4.0.3",
 		"ioredis": "^5.6.1",
 		"nanoid": "^5.1.5",
 		"next": "15.3.3",
-		"zod": "^3.25.56"
+		"zod": "^3.25.57"
 	},
 	"devDependencies": {
+		"@mingull/env": "workspace:*",
+		"@t3-oss/env-nextjs": "^0.13.8",
 		"@mingull/eslint-config": "workspace:*",
-		"@types/node": "^22.15.30",
-		"@types/react": "^19.1.6",
+		"@types/node": "^24.0.0",
+		"@types/react": "^19.1.7",
 		"typescript": "^5.8.3"
 	}
 }

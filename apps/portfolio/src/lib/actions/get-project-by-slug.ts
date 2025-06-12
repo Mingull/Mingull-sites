@@ -4,12 +4,13 @@ import { attempt } from "@mingull/exceptify";
 import { Locale } from "next-intl";
 import { z } from "zod";
 import { projectSchema } from "../schemas";
+import { env } from "@/env";
 
 type Project = z.infer<typeof projectSchema>;
 
 export const getProjectBySlug = async (locale: Locale, slug: string): Promise<Project | null> => {
 	const { data: result, error } = await attempt(() =>
-		fetch(`${process.env.NEXT_PUBLIC_API_URL}/content/projects/${slug}?locale=${locale}`).then(
+		fetch(`${env.API_URL}/content/projects/${slug}?locale=${locale}`).then(
 			(res) => res.json() as Promise<ApiResponse<Project>>,
 		),
 	);

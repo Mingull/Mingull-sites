@@ -3,6 +3,7 @@ import { withRateLimit } from "@/lib/middlewares/with-ratelimit";
 import { getPosts } from "@/lib/posts";
 import { attempt } from "@mingull/exceptify";
 import { NextResponse } from "next/server";
+import { env } from "@/env";
 
 export const GET = withRateLimit<{ searchParams: { locale: string; limit?: string } }>(async (req, ctx) => {
 	const { locale, limit } = await ctx.searchParams;
@@ -28,7 +29,7 @@ export const GET = withRateLimit<{ searchParams: { locale: string; limit?: strin
 			message: "Posts fetched successfully",
 			data: data?.map((post) => ({
 				...post,
-				image: post.image ? `${process.env.NEXT_PUBLIC_BASE_URL}${post.image}` : null,
+				image: post.image ? `${env.BASE_API}${post.image}` : null,
 			})),
 		}),
 		{
