@@ -7,7 +7,10 @@ export const env = createEnv({
 	server: {
 		BASE_API: z.string().url(),
 		API_URL: z.string().url(),
-		REDIS_URL: z.string().min(2).max(100),
 	},
-	experimental__runtimeEnv: process.env,
+	experimental__runtimeEnv: {
+		API_URL: process.env.API_URL,
+		BASE_API: process.env.BASE_API,
+	},
+	isServer: true,
 });

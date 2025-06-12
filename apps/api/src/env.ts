@@ -1,5 +1,8 @@
-import { createEnv } from "@mingull/env";
+import { createEnv } from "@t3-oss/env-nextjs";
+import { config } from "dotenv";
 import { z } from "zod";
+
+config({ path: "../../.env" });
 
 export const env = createEnv({
 	server: {
@@ -7,8 +10,5 @@ export const env = createEnv({
 		API_URL: z.string(),
 		REDIS_URL: z.string().min(2).max(100),
 	},
-	path: "../../.env",
-	isServer: true,
+	experimental__runtimeEnv: process.env,
 });
-
-console.log({ env });
