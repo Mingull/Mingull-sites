@@ -4,12 +4,13 @@ import { attempt } from "@mingull/exceptify";
 import { Locale } from "next-intl";
 import { z } from "zod";
 import { projectMetadataSchema } from "../schemas";
+import { env } from "@/env";
 
 type ProjectMetadata = z.infer<typeof projectMetadataSchema>;
 
 export const getProjects = async (locale: Locale, limit?: number): Promise<ProjectMetadata[]> => {
 	const { data: result, error } = await attempt(() =>
-		fetch(`${process.env.NEXT_PUBLIC_API_URL}/content/projects?limit=${limit ?? 10}&locale=${locale}`).then(
+		fetch(`${env.API_URL}/content/projects?limit=${limit ?? 10}&locale=${locale}`).then(
 			(res) => res.json() as Promise<ApiResponse<ProjectMetadata[]>>,
 		),
 	);

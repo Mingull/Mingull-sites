@@ -1,3 +1,4 @@
+import { env } from "@/env";
 import { withRateLimit } from "@/lib/middlewares/with-ratelimit";
 import { getProjects } from "@/lib/projects";
 import { createErrorResponse, createSuccessResponse, getHttpCode, getStatus } from "@mingull/api";
@@ -28,7 +29,7 @@ export const GET = withRateLimit<{ searchParams: { locale: string; limit?: strin
 			message: "Posts fetched successfully",
 			data: data?.map((project) => ({
 				...project,
-				image: project.image ? `${process.env.NEXT_PUBLIC_BASE_URL}${project.image}` : null,
+				image: project.image ? `${env.BASE_API}${project.image}` : null,
 			})),
 		}),
 		{

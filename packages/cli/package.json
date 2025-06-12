@@ -14,7 +14,7 @@
 	},
 	"dependencies": {
 		"@antfu/ni": "^25.0.0",
-		"@arethetypeswrong/core": "^0.18.1",
+		"@arethetypeswrong/core": "^0.18.2",
 		"@clack/prompts": "^0.11.0",
 		"@mingull/exceptify": "workspace:*",
 		"@mingull/lib": "workspace:*",
@@ -22,7 +22,7 @@
 		"commander": "^14.0.0",
 		"fast-glob": "^3.3.3",
 		"micromatch": "^4.0.8",
-		"zod": "^3.25.56"
+		"zod": "^3.25.57"
 	},
 	"devDependencies": {
 		"@mingull/eslint-config": "workspace:*",
