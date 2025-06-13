@@ -2,11 +2,7 @@ import { createEnv } from "@t3-oss/env-nextjs";
 import { config } from "dotenv";
 import { z } from "zod";
 
-console.log({processEnv:process.env});
-if (process.env.NODE_ENV === "development") {
-  console.log("development env(api)");
-  config({ path: "../../.env" });
-}
+config({ path: "../../.env" });
 export const env = createEnv({
 	server: {
 		BASE_API: z.string().url(),
@@ -15,4 +11,3 @@ export const env = createEnv({
 	},
 	experimental__runtimeEnv: process.env,
 });
-console.log({env});
