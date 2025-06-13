@@ -4,6 +4,7 @@ import { z } from "zod";
 
 console.log({processEnv:process.env});
 if (process.env.NODE_ENV === "development") {
+  console.log("development env(portfolio)");
   config({ path: "../../.env" });
 }
 export const env = createEnv({
