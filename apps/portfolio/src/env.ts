@@ -16,3 +16,5 @@ export const env = createEnv({
 	},
 	isServer: true,
 });
+
+console.log({env});
