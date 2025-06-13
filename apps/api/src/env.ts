@@ -4,13 +4,14 @@ import { z } from "zod";
 
 console.log({processEnv:process.env});
 if (process.env.NODE_ENV === "development") {
+  console.log("development env(api)");
   config({ path: "../../.env" });
 }
 export const env = createEnv({
 	server: {
 		BASE_API: z.string().url(),
 		API_URL: z.string().url(),
-		REDIS_URL: z.string().min(2).max(100),
+		REDIS_URL: z.string().url(),
 	},
 	experimental__runtimeEnv: process.env,
 });
