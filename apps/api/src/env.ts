@@ -13,3 +13,4 @@ export const env = createEnv({
 	},
 	experimental__runtimeEnv: process.env,
 });
+console.log({env});
