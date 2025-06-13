@@ -12,7 +12,8 @@
 			"env": ["RESEND_API_KEY", "RESEND_AUDIENCE_ID", "NODE_ENV"]
 		},
 		"api#build": {
-			"dependsOn": ["@mingull/exceptify#build"]
+			"dependsOn": ["@mingull/exceptify#build"],
+			"env": ["NODE_ENV"]
 		},
 		"lint": {
 			"dependsOn": ["^lint"]
