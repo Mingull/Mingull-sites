@@ -1,11 +1,12 @@
 "use server";
+
+import { skillSchema } from "@/schemas/skills";
 import { getHttpCode, getStatus } from "@mingull/api";
 import { ApiResponse } from "@mingull/api/types";
+import { env } from "@mingull/env/next/server";
 import { attempt } from "@mingull/exceptify";
 import { Locale } from "next-intl";
 import { z } from "zod";
-import { skillSchema } from "@/schemas/skills";
-import { env } from "@/env/server";
 
 type Skill = z.infer<typeof skillSchema>;
 

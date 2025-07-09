@@ -1,6 +1,6 @@
 "use server";
 
-import { env } from "@/env/server";
+import { env } from "@mingull/env/next/server";
 import { projectMetadataSchema } from "@/schemas/projects";
 import { getHttpCode, getStatus } from "@mingull/api";
 import { ApiResponse } from "@mingull/api/types";
