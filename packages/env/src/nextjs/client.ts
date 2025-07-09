@@ -2,8 +2,8 @@ import { createEnv } from "@t3-oss/env-nextjs";
 import { config } from "dotenv";
 import { z } from "zod";
 
-config({ path: "../../.env" });
-
+const envConfig = config({ path: "../../.env" });
+console.log({ envConfig });
 export const env = createEnv({
 	client: {
 		NEXT_PUBLIC_BETTER_AUTH_URL: z.string().url(),
