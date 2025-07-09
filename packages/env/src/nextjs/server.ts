@@ -3,9 +3,9 @@ import { createEnv } from "@t3-oss/env-nextjs";
 import { config } from "dotenv";
 import { z } from "zod";
 
-const envConfig = process.env.NODE_ENV !== "production" ? config({ path: "../../.env" }) : config();
+// const envConfig = process.env.NODE_ENV !== "production" ? config({ path: "../../.env" }) : config();
 
-console.log({ envConfig, env: process.env });
+console.log({ env: process });
 
 export const env = createEnv({
 	shared: {
