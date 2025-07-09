@@ -8,7 +8,6 @@ await import_("@mingull/env/next/client");
 
 /** @type {import("next").NextConfig}*/
 const nextConfig = {
-	// crossOrigin: "use-credentials",
 	headers: async () => [
 		{
 			source: "/:path*",
@@ -36,6 +35,11 @@ const nextConfig = {
 			],
 		},
 	],
+	env: {
+		API_URL: env.API_URL,
+		BASE_API: env.BASE_API,
+		BETTER_AUTH_URL: env.BETTER_AUTH_URL,
+	},
 };
 
 export default nextConfig;
