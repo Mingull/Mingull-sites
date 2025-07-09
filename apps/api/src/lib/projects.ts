@@ -131,8 +131,9 @@ export async function getProjects({
 }
 
 export async function getProjectMetadata(filepath: string): Promise<ProjectMetadata> {
-	// remove {nl|en}\\ and .mdx extension
-	const slug = filepath.replace(/\.mdx$/, "").replace(/^(nl|en)\\/, "");
+	// remove {nl|en}/ and .mdx extension
+	const slug = filepath.replace(/\.mdx$/, "").replace(/^(nl|en)\//, "");
+	console.log({ slug });
 	const filePath = path.join(rootDirectory, filepath);
 	const fileContent = await fs.readFile(filePath, "utf-8");
 	const { data } = matter(fileContent);
