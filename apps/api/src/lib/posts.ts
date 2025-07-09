@@ -111,7 +111,7 @@ export async function getPosts({
 		for (const file of files) {
 			if (!file.endsWith(".mdx")) continue;
 
-			const slug = file.replace(/\.mdx$/, "").replace(/^(nl|en)\\/, "");
+			const slug = file.replace(/\.mdx$/, "").replace(/^(nl|en)\//, "");
 			if (seenSlugs.has(slug)) continue;
 
 			try {
@@ -132,8 +132,9 @@ export async function getPosts({
 }
 
 export async function getPostMetadata(filepath: string): Promise<PostMetadata> {
-	// remove {nl|en}\\ and .mdx extension
-	const slug = filepath.replace(/\.mdx$/, "").replace(/^(nl|en)\\/, "");
+	// remove {nl|en}/ and .mdx extension
+	const slug = filepath.replace(/\.mdx$/, "").replace(/^(nl|en)\//, "");
+	console.log({ slug });
 	const filePath = path.join(rootDirectory, filepath);
 	const fileContent = await fs.readFile(filePath, "utf-8");
 	const { data } = matter(fileContent);
