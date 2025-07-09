@@ -4,7 +4,7 @@ import { config } from "dotenv";
 import { z } from "zod";
 
 const envConfig =
-	process.env.NODE_ENV !== "production" ? config({ path: "../../.env" }) : config({ path: "../../../.env" });
+	process.env.NODE_ENV !== "production" ? config({ path: "../../.env" }) : config({ path: "../../../../.env" });
 
 console.log({ envConfig });
 
