@@ -3,7 +3,7 @@ import fs from "fs/promises";
 import matter from "gray-matter";
 import path from "path";
 import { z } from "zod";
-import { postMetadataSchema, postSchema } from "./schemas/post.schema";
+import { postMetadataSchema, postSchema } from "./schemas/post";
 
 const rootDirectory = path.join(process.cwd(), "src", "content", "posts");
 

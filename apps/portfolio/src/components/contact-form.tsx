@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { sendEmail } from "@/lib/actions/send-email";
-import { ContactFormSchema } from "@/lib/schemas";
+import { contactFormSchema } from "@/schemas/contact";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -11,7 +11,7 @@ import { Input } from "@mingull/ui/comps/input";
 import { Textarea } from "@mingull/ui/comps/textarea";
 import { Button } from "@mingull/ui/comps/button";
 
-type Inputs = z.infer<typeof ContactFormSchema>;
+type Inputs = z.infer<typeof contactFormSchema>;
 
 export default function ContactForm() {
 	const {
@@ -20,7 +20,7 @@ export default function ContactForm() {
 		reset,
 		formState: { errors, isSubmitting },
 	} = useForm<Inputs>({
-		resolver: zodResolver(ContactFormSchema),
+		resolver: zodResolver(contactFormSchema),
 		defaultValues: {
 			name: "",
 			email: "",
@@ -74,7 +74,7 @@ export default function ContactForm() {
 							/>
 
 							{errors.name?.message && (
-								<p className="mt-2 ml-1 text-sm text-rose-400">{errors.name.message}</p>
+								<p className="ml-1 mt-2 text-sm text-rose-400">{errors.name.message}</p>
 							)}
 						</div>
 
@@ -89,7 +89,7 @@ export default function ContactForm() {
 							/>
 
 							{errors.email?.message && (
-								<p className="mt-2 ml-1 text-sm text-rose-400">{errors.email.message}</p>
+								<p className="ml-1 mt-2 text-sm text-rose-400">{errors.email.message}</p>
 							)}
 						</div>
 
@@ -98,7 +98,7 @@ export default function ContactForm() {
 							<Textarea rows={4} placeholder="Message" {...register("message")} />
 
 							{errors.message?.message && (
-								<p className="mt-2 ml-1 text-sm text-rose-400">{errors.message.message}</p>
+								<p className="ml-1 mt-2 text-sm text-rose-400">{errors.message.message}</p>
 							)}
 						</div>
 					</div>

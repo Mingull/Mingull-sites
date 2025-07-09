@@ -12,34 +12,34 @@
 	},
 	"dependencies": {
 		"@paralleldrive/cuid2": "^2.2.2",
-		"better-auth": "^1.2.9",
+		"better-auth": "^1.2.12",
 		"clsx": "^2.1.1",
+		"dotenv": "^17.1.0",
 		"drizzle-orm": "^0.44.2",
-		"next": "15.3.3",
+		"next": "15.3.5",
 		"tailwind-merge": "^3.3.1",
-		"zod": "^3.25.57"
+		"zod": "^3.25.76"
 	},
 	"devDependencies": {
 		"@mingull/eslint-config": "workspace:*",
 		"@mingull/typescript-config": "workspace:*",
 		"@turbo/gen": "^2.5.4",
-		"@types/node": "^24.0.0",
-		"drizzle-kit": "^0.31.1",
+		"@types/node": "^24.0.12",
+		"drizzle-kit": "^0.31.4",
 		"mysql2": "^3.14.1",
-		"tailwindcss": "^4.1.8",
-		"tsdown": "^0.12.7",
+		"tailwindcss": "^4.1.11",
+		"tsdown": "^0.12.9",
 		"typescript": "^5.8.3"
 	},
 	"exports": {
-		".": "./src/index.ts",
-		"./utils": "./src/lib/utils.ts",
-		"./utils-server": "./src/lib/utils.server.ts",
-		"./auth/*": "./src/auth/*.ts",
-		"./db": "./src/db/index.ts",
-		"./db/*": "./src/db/*.ts",
-		"./middleware": "./src/middleware/index.ts",
-		"./middleware/*": "./src/middleware/*.ts",
-		"./plugins/client/*": "./src/plugins/client/*.ts",
-		"./plugins/server/*": "./src/plugins/server/*.ts"
+		".": "./dist/index.js",
+		"./server": "./dist/server.js",
+		"./auth/*": "./dist/auth/*.js",
+		"./db": "./dist/db/index.js",
+		"./db/*": "./dist/db/*.js",
+		"./middleware": "./dist/middleware/index.js",
+		"./middleware/*": "./dist/middleware/*.js",
+		"./plugins/client/*": "./dist/plugins/client/*.js",
+		"./plugins/server/*": "./dist/plugins/server/*.js"
 	}
 }

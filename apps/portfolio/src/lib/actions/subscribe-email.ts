@@ -1,14 +1,14 @@
 "use server";
 
-import { NewsletterFormSchema } from "@/lib/schemas";
+import { newsletterFormSchema } from "@/schemas/news-letter";
 import { Resend } from "resend";
 import { z } from "zod";
 
-type NewsletterFormInputs = z.infer<typeof NewsletterFormSchema>;
+type NewsletterFormInputs = z.infer<typeof newsletterFormSchema>;
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function subscribe(data: NewsletterFormInputs) {
-	const result = NewsletterFormSchema.safeParse(data);
+	const result = newsletterFormSchema.safeParse(data);
 
 	if (result.error) {
 		return { error: result.error.format() };

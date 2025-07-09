@@ -1,6 +1,6 @@
 "use client";
 import { Link } from "@/i18n/navigation";
-import { postMetadataSchema } from "@/lib/schemas";
+import { postMetadataSchema } from "@/schemas/posts";
 import { useFormatDate } from "@/lib/utils";
 import Image from "next/image";
 import { z } from "zod";

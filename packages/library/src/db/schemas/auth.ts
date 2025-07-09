@@ -1,6 +1,6 @@
+import { timestamps } from "~/db/schemas/helpers.ts";
 import { sql } from "drizzle-orm";
 import { boolean, datetime, int, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
-import { timestamps } from "@mingull/lib/db/schemas/helpers";
 
 export const users = mysqlTable("users", {
 	id: varchar("id", { length: 36 }).primaryKey(),

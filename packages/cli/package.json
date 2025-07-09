@@ -9,8 +9,7 @@
 	"scripts": {
 		"lint": "eslint . --max-warnings 0",
 		"build": "tsdown",
-		"start": "node dist/index.js",
-		"dev": "tsdown --watch"
+		"start": "node dist/index.js"
 	},
 	"dependencies": {
 		"@antfu/ni": "^25.0.0",
@@ -22,12 +21,12 @@
 		"commander": "^14.0.0",
 		"fast-glob": "^3.3.3",
 		"micromatch": "^4.0.8",
-		"zod": "^3.25.57"
+		"zod": "^3.25.76"
 	},
 	"devDependencies": {
 		"@mingull/eslint-config": "workspace:*",
 		"@mingull/typescript-config": "workspace:*",
 		"@types/micromatch": "^4.0.9",
-		"tsdown": "^0.12.7"
+		"tsdown": "^0.12.9"
 	}
 }

@@ -1,5 +1,6 @@
 "use client";
-import authorImage from "@/../public/images/authors/niels.jpg";
+// @ts-expect-error - This image path is correct, but TypeScript doesn't recognize it
+import authorImage from "@/../public/images/authors/niels.jpg" with { type: "image/jpeg" };
 import Image from "next/image";
 import { motion as m } from "motion/react";
 
@@ -19,7 +20,7 @@ export default function Intro() {
 	};
 	return (
 		<section
-			className="flex flex-col-reverse items-start gap-x-10 gap-y-4 pt-8 pb-24 md:flex-row md:items-center lg:gap-x-16"
+			className="flex flex-col-reverse items-start gap-x-10 gap-y-4 pb-24 pt-8 md:flex-row md:items-center lg:gap-x-16"
 			aria-label="Introductie van Niels"
 		>
 			<m.div
@@ -45,11 +46,11 @@ export default function Intro() {
 					technische uitdagingen.
 				</m.p>
 				<m.p className="text-muted-foreground mt-3 font-light" variants={fadeInItem}>
-					Als ik niet aan het coderen ben, game ik, hak ik op een festival of verdwijn ik in video’s waarvan
-					ik geen idee heb hoe ik daar kwam.
+					Als ik niet aan het coderen ben, game ik, hak ik op een festival of verdwijn ik in video&apos;s
+					waarvan ik geen idee heb hoe ik daar kwam.
 				</m.p>
 				<m.blockquote
-					className="text-muted-foreground border-border mt-6 border-l-4 pl-4 italic"
+					className="text-muted-foreground border-primary bg-primary/10 mt-6 border-l-4 py-1 pl-4 font-mono italic"
 					variants={fadeInItem}
 				>
 					Altijd nieuwsgierig, altijd in ontwikkeling.
@@ -65,7 +66,7 @@ export default function Intro() {
 				className="relative mx-auto md:mx-0"
 			>
 				<Image
-					className="size-48 flex-1 rounded-lg object-cover grayscale transition-all duration-500 hover:scale-110 hover:grayscale-0"
+					className="size-56 flex-1 rounded-lg object-cover grayscale transition-all duration-500 hover:scale-110 hover:grayscale-0"
 					src={authorImage}
 					alt="Portretfoto van Niels Plug tijdens een evenement"
 					width={175}

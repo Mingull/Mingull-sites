@@ -7,7 +7,7 @@
 		"declarationMap": false,
 		"baseUrl": ".",
 		"paths": {
-			"@mingull/ui/*": ["./src/*"]
+			"@/*": ["./src/*"]
 		}
 	},
 	"include": ["."],

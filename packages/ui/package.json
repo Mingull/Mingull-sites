@@ -28,29 +28,30 @@
 		"class-variance-authority": "^0.7.1",
 		"cmdk": "1.1.1",
 		"date-fns": "^4.1.0",
-		"lucide-react": "^0.514.0",
+		"lucide-react": "^0.525.0",
+		"motion": "^12.23.0",
 		"next-themes": "^0.4.6",
 		"react": "^19.1.0",
-		"react-day-picker": "9.7.0",
+		"react-day-picker": "9.8.0",
 		"react-dom": "^19.1.0",
-		"react-hook-form": "^7.57.0",
-		"sonner": "^2.0.5",
+		"react-hook-form": "^7.60.0",
+		"sonner": "^2.0.6",
 		"tailwindcss-animate": "^1.0.7",
-		"tw-animate-css": "^1.3.4",
-		"zod": "^3.25.57"
+		"tw-animate-css": "^1.3.5",
+		"zod": "^3.25.76"
 	},
 	"devDependencies": {
 		"@mingull/eslint-config": "workspace:*",
 		"@mingull/typescript-config": "workspace:*",
-		"@tailwindcss/postcss": "^4.1.8",
+		"@tailwindcss/postcss": "^4.1.11",
 		"@turbo/gen": "^2.5.4",
-		"@types/node": "^24.0.0",
-		"@types/react": "^19.1.7",
+		"@types/node": "^24.0.12",
+		"@types/react": "^19.1.8",
 		"@types/react-dom": "^19.1.6",
-		"tailwindcss": "^4.1.8",
+		"tailwindcss": "^4.1.11",
 		"ts-node": "^10.9.2",
-		"tsdown": "^0.12.7",
-		"tsx": "^4.19.4",
+		"tsdown": "^0.12.9",
+		"tsx": "^4.20.3",
 		"typescript": "^5.8.3"
 	},
 	"exports": {
@@ -58,12 +59,8 @@
 		"./comps/*": "./src/components/*.tsx",
 		"./globals.css": "./styles/globals.css",
 		"./postcss.config": "./postcss.config.mjs",
-		"./hooks": {
-			"import": "./dist/hooks/index.js",
-			"types": "./dist/hooks/index.d.ts"
-		},
-		"./hooks/*": "./src/hooks/*.tsx",
-		"./contexts": "./src/contexts/index.tsx",
-		"./contexts/*": "./src/contexts/*.tsx"
+		"./hooks": "./dist/hooks/index.js",
+		"./hooks/*": "./dist/hooks/*.js",
+		"./contexts": "./src/contexts/index.ts"
 	}
 }

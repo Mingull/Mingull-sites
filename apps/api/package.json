@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "next dev --turbopack --port 3001",
-		"build": "next build",
+		"build": "next build --turbopack",
 		"start": "next start --turbopack --port 3001",
 		"lint": "next lint"
 	},
@@ -14,19 +14,22 @@
 		"@mingull/exceptify": "workspace:*",
 		"@mingull/lib": "workspace:*",
 		"@mingull/queueify": "workspace:*",
-		"better-auth": "^1.2.9",
+		"better-auth": "^1.2.12",
+		"dotenv": "^17.1.0",
 		"gray-matter": "^4.0.3",
 		"ioredis": "^5.6.1",
 		"nanoid": "^5.1.5",
-		"next": "15.3.3",
-		"zod": "^3.25.57"
+		"next": "15.3.5",
+		"zod": "^3.25.76"
 	},
 	"devDependencies": {
 		"@mingull/env": "workspace:*",
-		"@t3-oss/env-nextjs": "^0.13.8",
 		"@mingull/eslint-config": "workspace:*",
-		"@types/node": "^24.0.0",
-		"@types/react": "^19.1.7",
+		"@mingull/icons": "workspace:*",
+		"@mingull/typescript-config": "workspace:*",
+		"@types/node": "^24.0.12",
+		"@types/react": "^19.1.8",
+		"jiti": "^2.4.2",
 		"typescript": "^5.8.3"
 	}
 }

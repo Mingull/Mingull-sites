@@ -1,6 +1,6 @@
 "use client";
 
-import { NewsletterFormSchema } from "@/lib/schemas";
+import { newsletterFormSchema } from "@/schemas/news-letter";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@mingull/ui/comps/button";
 import { Input } from "@mingull/ui/comps/input";
@@ -11,7 +11,7 @@ import { z } from "zod";
 // import { subscribe } from "@/lib/actions/send-email";
 import { Card, CardContent } from "@mingull/ui/comps/card";
 
-type Inputs = z.infer<typeof NewsletterFormSchema>;
+type Inputs = z.infer<typeof newsletterFormSchema>;
 
 export default function NewsletterForm() {
 	const {
@@ -19,7 +19,7 @@ export default function NewsletterForm() {
 		handleSubmit,
 		formState: { errors, isSubmitting },
 	} = useForm<Inputs>({
-		resolver: zodResolver(NewsletterFormSchema),
+		resolver: zodResolver(newsletterFormSchema),
 		defaultValues: {
 			email: "",
 		},
@@ -59,7 +59,7 @@ export default function NewsletterForm() {
 							/>
 
 							{errors.email?.message && (
-								<p className="mt-2 ml-1 text-sm text-rose-400">{errors.email.message}</p>
+								<p className="ml-1 mt-2 text-sm text-rose-400">{errors.email.message}</p>
 							)}
 						</div>
 

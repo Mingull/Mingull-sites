@@ -4,7 +4,7 @@ import { Command as CommandPrimitive } from "cmdk";
 import { SearchIcon } from "lucide-react";
 import * as React from "react";
 
-import { cn } from "@mingull/lib/utils";
+import { cn } from "@mingull/lib";
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "./dialog.tsx";
 
@@ -123,7 +123,12 @@ function CommandShortcut({ className, ...props }: React.ComponentProps<"span">) 
 
 export {
 	Command,
-	CommandDialog, CommandEmpty,
-	CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut
+	CommandDialog,
+	CommandEmpty,
+	CommandGroup,
+	CommandInput,
+	CommandItem,
+	CommandList,
+	CommandSeparator,
+	CommandShortcut,
 };
-

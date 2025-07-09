@@ -6,7 +6,7 @@
 
 import MDXContent from "@/components/mdx-content";
 import { Link } from "@/i18n/navigation";
-import { getProjectBySlug } from "@/lib/actions/get-project-by-slug";
+import { getProjectBySlug } from "@/data/projects/get-project-by-slug";
 import { formatDate } from "@/lib/utils.server";
 import { Button } from "@mingull/ui/comps/button";
 import { Typography } from "@mingull/ui/comps/typography";
@@ -25,6 +25,7 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
 	const { title, image, author, publishedAt } = metadata;
 
 	const isScheduled = !publishedAt || new Date(publishedAt).getTime() > Date.now();
+	
 	if (isScheduled) {
 		return (
 			<section className="container max-w-3xl px-4 pt-24 pb-16 md:px-6 md:pt-32 md:pb-24">

@@ -13,8 +13,5 @@ export default defineConfig({
 	// attw: true,
 	unbundle: true, // 👈 disables bundling
 	skipNodeModulesBundle: true, // 👈 disables chunking
-	outputOptions: {
-		banner: "\"use client\"",
-		exports: "none", // Ensures named exports for better tree-shaking
-	},
+	external: ["@mingull/lib"],
 });

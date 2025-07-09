@@ -1,6 +1,6 @@
 "use client";
 import { Link } from "@/i18n/navigation";
-import { getPosts } from "@/lib/actions/get-posts";
+import { getPosts } from "@/data/posts/get-posts";
 import { Skeleton } from "@mingull/ui/comps/skeleton";
 import { useQuery } from "@tanstack/react-query";
 import { useLocale } from "next-intl";
@@ -15,7 +15,7 @@ export default function RecentPosts() {
 	} = useQuery({ queryKey: ["posts", locale], queryFn: () => getPosts(locale, 4) });
 
 	return (
-		<section className="pb-24">
+		<section className="pb-24" id="posts">
 			<h2 className="title mb-12">Recent Posts</h2>
 			{isLoading ?
 				<ul className="flex flex-col gap-8">
@@ -36,7 +36,7 @@ export default function RecentPosts() {
 								</div>
 							</div>
 
-							<div className="mt-2 flex-shrink-0 sm:mt-0 sm:ml-4">
+							<div className="mt-2 flex-shrink-0 sm:ml-4 sm:mt-0">
 								<Skeleton className="h-3.5 w-20" />
 							</div>
 						</li>

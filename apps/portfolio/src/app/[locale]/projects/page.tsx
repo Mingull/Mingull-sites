@@ -1,6 +1,6 @@
 "use client";
 import Projects from "@/components/projects";
-import { getProjects } from "@/lib/actions/get-projects";
+import { getProjects } from "@/data/projects/get-projects";
 import { Skeleton } from "@mingull/ui/comps/skeleton";
 import { useQuery } from "@tanstack/react-query";
 import { useLocale } from "next-intl";
@@ -15,7 +15,7 @@ export default function ProjectsPage() {
 
 	return (
 		<section className="py-24">
-			<div className="container max-w-3xl xl:max-w-4xl">
+			<div className="container max-w-3xl xl:max-w-5xl">
 				<h1 className="title mb-12">Projects</h1>
 
 				{isLoading ?

@@ -1,15 +1,15 @@
 "use server";
 
 import ContactFormEmail from "@/emails/contact-form-email";
-import { ContactFormSchema } from "@/lib/schemas";
+import { contactFormSchema } from "@/schemas/contact";
 import { Resend } from "resend";
 import { z } from "zod";
 
-type ContactFormInputs = z.infer<typeof ContactFormSchema>;
+type ContactFormInputs = z.infer<typeof contactFormSchema>;
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendEmail(data: ContactFormInputs) {
-	const result = ContactFormSchema.safeParse(data);
+	const result = contactFormSchema.safeParse(data);
 
 	if (result.error) {
 		return { error: result.error.format() };

@@ -1,5 +1,5 @@
 import { createFlexibleContext } from "./flexibleContext";
-import { postSchema } from "@/lib/schemas";
+import { postSchema } from "@/schemas/posts";
 import { useState } from "react";
 import { z } from "zod";
 

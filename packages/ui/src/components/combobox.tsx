@@ -5,7 +5,7 @@ import { Button } from "./button.tsx";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "./command.tsx";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover.tsx";
 
-import { cn } from "@mingull/lib/utils";
+import { cn } from "@mingull/lib";
 
 export function Combobox({
 	options,
