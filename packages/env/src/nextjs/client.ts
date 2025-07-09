@@ -2,9 +2,9 @@ import { createEnv } from "@t3-oss/env-nextjs";
 import { config } from "dotenv";
 import { z } from "zod";
 
-const envConfig = process.env.NODE_ENV !== "production" ? config({ path: "../../.env" }) : undefined;
+const envConfig = process.env.NODE_ENV !== "production" ? config({ path: "../../.env" }) : config({ path: "/.env" });
 
-console.log({ envConfig });
+console.log({ envConfig, env: process.env });
 
 export const env = createEnv({
 	client: {
