@@ -111,7 +111,7 @@ export async function getPosts({
 		for (const file of files) {
 			if (!file.endsWith(".mdx")) continue;
 
-			const slug = file.replace(/\.mdx$/, "");
+			const slug = file.replace(/\.mdx$/, "").replace(/^(nl|en)\\/, "");
 			if (seenSlugs.has(slug)) continue;
 
 			try {
