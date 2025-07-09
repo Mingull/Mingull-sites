@@ -55,12 +55,12 @@
 		"typescript": "^5.8.3"
 	},
 	"exports": {
-		"./comps": "./src/components/index.tsx",
-		"./comps/*": "./src/components/*.tsx",
+		"./comps": "./dist/components/index.js",
+		"./comps/*": "./dist/components/*.js",
 		"./globals.css": "./styles/globals.css",
 		"./postcss.config": "./postcss.config.mjs",
 		"./hooks": "./dist/hooks/index.js",
 		"./hooks/*": "./dist/hooks/*.js",
-		"./contexts": "./src/contexts/index.ts"
+		"./contexts": "./dist/contexts/index.js"
 	}
 }
