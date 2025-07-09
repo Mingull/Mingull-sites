@@ -79,8 +79,6 @@ export function createDefaults<
 		throw error; // Re-throw to ensure server-side rendering fails if needed
 	}
 
-	console.log({ merged: mergeLocaleDataWithShared(localeData, shared) });
-
 	return {
 		locales,
 		defaultLocale,
