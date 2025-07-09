@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs/promises";
 import matter from "gray-matter";
 import { z } from "zod";
-import { projectMetadataSchema, projectSchema } from "./schemas/project.schema";
+import { projectMetadataSchema, projectSchema } from "./schemas/project";
 
 const rootDirectory = path.join(process.cwd(), "src", "content", "projects");
 

@@ -1,4 +1,4 @@
-import { cn } from "@mingull/lib/utils";
+import { cn } from "@mingull/lib";
 
 export const Typography = {
 	H1: ({ children, className, ...props }: React.ComponentProps<"h1">) => (
@@ -61,7 +61,7 @@ export const Typography = {
 		</div>
 	),
 	Small: ({ children, className, ...props }: React.ComponentProps<"small">) => (
-		<small className={cn("text-sm leading-none font-medium", className)} {...props}>
+		<small className={cn("text-sm font-medium leading-none", className)} {...props}>
 			{children}
 		</small>
 	),

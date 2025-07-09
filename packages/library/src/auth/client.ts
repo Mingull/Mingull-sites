@@ -1,17 +1,18 @@
-import { createAuthClient } from "better-auth/client";
+import { createAuthClient as createAuthClientCore } from "better-auth/react";
 import { adminClient, apiKeyClient, inferAdditionalFields, usernameClient } from "better-auth/client/plugins";
-import { auth } from "./server.js";
-import { accountDetailsClient } from "@mingull/lib/plugins/client/account-details";
-import { birthdayClient } from "@mingull/lib/plugins/client/birthday";
+import { auth } from "./server.ts";
+import { accountDetailsClient } from "~/plugins/client/account-details.ts";
+import { birthdayClient } from "~/plugins/client/birthday.ts";
 
-export const authClient = createAuthClient({
-	baseURL: "http://localhost:3001/v1",
-	plugins: [
-		adminClient(),
-		apiKeyClient(),
-		accountDetailsClient(),
-		birthdayClient(),
-		usernameClient(),
-		inferAdditionalFields<typeof auth>(),
-	],
-});
+export const createAuthClient = ({ baseURL }: { baseURL: string }) =>
+	createAuthClientCore({
+		baseURL,
+		plugins: [
+			adminClient(),
+			apiKeyClient(),
+			accountDetailsClient(),
+			birthdayClient(),
+			usernameClient(),
+			inferAdditionalFields<typeof auth>(),
+		],
+	});

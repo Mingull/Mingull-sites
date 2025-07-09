@@ -1,5 +1,5 @@
 "use client";
-import { Icon } from "@mingull/icons/icon";
+import { Icon } from "@mingull/icons";
 import { Progress } from "@mingull/ui/comps/progress";
 import { AngularIcon, NextJsIcon, NodeJsIcon, ReactIcon, TailwindIcon, TypeScriptIcon } from "@mingull/icons";
 

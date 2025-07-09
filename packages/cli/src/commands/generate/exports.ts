@@ -1,4 +1,5 @@
 import { handleError } from "@/utils/handle-errors.js";
+import { sanitizePath } from "@/utils/sanitize-path.js";
 import { intro, log, outro, spinner, tasks } from "@clack/prompts";
 import { Command } from "commander";
 import fg from "fast-glob";
@@ -37,6 +38,7 @@ export const exports = new Command()
 		intro("Minager - Generate exports");
 		const s = spinner();
 		s.start("Validating options...");
+
 		const parsed = generateExportsSchema.safeParse({
 			cwd: path.resolve(opts.cwd ?? process.cwd()),
 			dir: sanitizePath(opts.dir),
@@ -71,8 +73,6 @@ export const exports = new Command()
 	});
 
 type GenerateOptions = z.infer<typeof generateExportsSchema>;
-
-const sanitizePath = (input: string) => input.replace(/^\.?[\\/]+/, "").replace(/\\/g, "/");
 
 const generateExports = async ({
 	cwd,
@@ -193,8 +193,7 @@ const generateExports = async ({
 						await prettier.format(content, {
 							filepath: outputPath,
 							semi: true,
-							singleQuote: true,
-							trailingComma: "all",
+							singleQuote: false,
 							arrowParens: "avoid",
 						})
 					:	content;

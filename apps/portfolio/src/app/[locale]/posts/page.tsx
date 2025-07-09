@@ -1,6 +1,6 @@
 "use client";
 import Posts from "@/components/posts";
-import { getPosts } from "@/lib/actions/get-posts";
+import { getPosts } from "@/data/posts/get-posts";
 import { Button } from "@mingull/ui/comps/button";
 import { Input } from "@mingull/ui/comps/input";
 import { Skeleton } from "@mingull/ui/comps/skeleton";
@@ -29,7 +29,7 @@ export default function PostsPage() {
 
 	return (
 		<section className="py-24">
-			<div className="container max-w-3xl xl:max-w-4xl">
+			<div className="container max-w-3xl xl:max-w-5xl">
 				<h1 className="title mb-12">Posts</h1>
 				<div className="mb-12 flex items-center gap-3">
 					<Input
@@ -63,7 +63,7 @@ export default function PostsPage() {
 										<Skeleton className="mt-1 h-4 w-5/6" />
 									</div>
 								</div>
-								<div className="mt-2 flex-shrink-0 sm:mt-0 sm:ml-4">
+								<div className="mt-2 flex-shrink-0 sm:ml-4 sm:mt-0">
 									<Skeleton className="h-3.5 w-20" />
 								</div>
 							</li>

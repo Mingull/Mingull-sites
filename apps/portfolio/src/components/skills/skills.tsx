@@ -1,4 +1,4 @@
-import { Icon } from "@mingull/icons/icon";
+import { type Icon } from "@mingull/icons";
 import {
 	AngularIcon,
 	MySQLIcon,
@@ -17,6 +17,10 @@ export type SkillNode = {
 	experience: number;
 	years: number;
 	icon: Icon;
+	cta?: {
+		text: string;
+		link: string;
+	};
 };
 
 export const skills: SkillNode[] = [
@@ -34,6 +38,10 @@ export const skills: SkillNode[] = [
 				especially in React applications, to ensure type safety and better developer experience.
 			</p>
 		),
+		cta: {
+			text: "Learn more about TypeScript",
+			link: "https://www.typescriptlang.org/",
+		},
 	},
 	{
 		name: "React",
@@ -49,6 +57,10 @@ export const skills: SkillNode[] = [
 				leveraging its component-based architecture and virtual DOM for optimal performance.
 			</p>
 		),
+		cta: {
+			text: "Learn more about React",
+			link: "https://reactjs.org/",
+		},
 	},
 	{
 		name: "Next.js",
@@ -64,6 +76,10 @@ export const skills: SkillNode[] = [
 				used Next.js to build highly performant web applications with a great developer experience.
 			</p>
 		),
+		cta: {
+			text: "Learn more about Next.js",
+			link: "https://nextjs.org/",
+		},
 	},
 	{
 		name: "Tailwind CSS",
@@ -80,6 +96,10 @@ export const skills: SkillNode[] = [
 				user interfaces.
 			</p>
 		),
+		cta: {
+			text: "Learn more about Tailwind CSS",
+			link: "https://tailwindcss.com/",
+		},
 	},
 	{
 		name: "Node.js",
@@ -95,6 +115,10 @@ export const skills: SkillNode[] = [
 				Node.js in various projects, particularly for building RESTful APIs and real-time applications.
 			</p>
 		),
+		cta: {
+			text: "Learn more about Node.js",
+			link: "https://nodejs.org/",
+		},
 	},
 	{
 		name: "MySQL",
@@ -110,6 +134,10 @@ export const skills: SkillNode[] = [
 				databases, and writing complex queries to retrieve and manipulate data efficiently.
 			</p>
 		),
+		cta: {
+			text: "Learn more about MySQL",
+			link: "https://www.mysql.com/",
+		},
 	},
 	{
 		name: "Angular",
@@ -126,5 +154,9 @@ export const skills: SkillNode[] = [
 				to create robust applications.
 			</p>
 		),
+		cta: {
+			text: "Learn more about Angular",
+			link: "https://angular.io/",
+		},
 	},
 ];

@@ -1,5 +1,5 @@
 import MDXContent from "@/components/mdx-content";
-import { getPostBySlug } from "@/lib/actions/get-post-by-slug";
+import { getPostBySlug } from "@/data/posts/get-post-by-slug";
 import { formatDate } from "@/lib/utils.server";
 import { Button } from "@mingull/ui/comps/button";
 import { Separator } from "@mingull/ui/comps/separator";
@@ -54,7 +54,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string;
 	}
 
 	return (
-		<section className="container max-w-3xl px-4 pt-20 pb-16 md:px-6 md:pt-24 md:pb-24 xl:max-w-6xl">
+		<section className="container max-w-3xl px-4 pt-20 pb-16 md:px-6 md:pt-24 md:pb-24 xl:max-w-5xl">
 			<BackLink />
 			{image && (
 				<div className="relative mb-6 aspect-square h-96 w-full overflow-hidden rounded-2xl shadow-md xl:aspect-[16/9] xl:h-auto">

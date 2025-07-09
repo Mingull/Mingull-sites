@@ -8,11 +8,11 @@
 			"outputs": [".next/**", "!.next/cache/**", "dist/**", "!.turbo/**", "!.next/server/app/**"]
 		},
 		"portfolio#build": {
-			"dependsOn": ["api#build", "@mingull/exceptify#build"],
-			"env": ["API_URL","BASE_API","RESEND_API_KEY", "RESEND_AUDIENCE_ID", "NODE_ENV"]
+			"dependsOn": ["api#build", "@mingull/exceptify#build", "@mingull/env#build", "@mingull/ui#build"],
+			"env": ["API_URL", "BASE_API", "RESEND_API_KEY", "RESEND_AUDIENCE_ID", "NODE_ENV"]
 		},
 		"api#build": {
-			"dependsOn": ["@mingull/exceptify#build"],
+			"dependsOn": ["@mingull/exceptify#build", "@mingull/env#build"],
 			"env": ["NODE_ENV"]
 		},
 		"lint": {

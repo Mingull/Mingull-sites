@@ -1,17 +1,21 @@
-import { db } from "@mingull/lib/db/index";
-import * as authSchema from "@mingull/lib/db/schemas/auth";
+import { db } from "~/db/index.ts";
+import { accounts, apikeys, sessions, users, verifications } from "~/db/schemas/auth.ts";
+import { accountDetails } from "~/plugins/server/account-details.ts";
+import { birthday } from "~/plugins/server/birthday.ts";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { admin, apiKey, username } from "better-auth/plugins";
-import { accountDetails } from "@mingull/lib/plugins/server/account-details";
-import { birthday } from "@mingull/lib/plugins/server/birthday";
 
 export const auth = betterAuth({
 	database: drizzleAdapter(db, {
 		provider: "mysql",
 		usePlural: true,
 		schema: {
-			...authSchema,
+			accounts,
+			apikeys,
+			sessions,
+			users,
+			verifications,
 		},
 	}),
 	basePath: "/v1/auth",
@@ -36,7 +40,10 @@ export const auth = betterAuth({
 			domain: process.env.NODE_ENV === "production" ? "mingull.nl" : undefined, // Set to your production domain
 		},
 	},
-	trustedOrigins: ["http://localhost:3000", "http://localhost:3001"],
+	trustedOrigins:
+		process.env.TRUSTED_ORIGINS ?
+			process.env.TRUSTED_ORIGINS.split(",").map((origin) => origin.trim())
+		:	["http://localhost:3000", "https://mingull.nl"],
 	onAPIError: {
 		onError(error) {
 			console.error(error);

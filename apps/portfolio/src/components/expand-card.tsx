@@ -4,6 +4,7 @@ import React, { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useClickOutside } from "@mingull/ui/hooks";
 import Image from "next/image";
+
 export function ExpandableCardDemo() {
 	const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(null);
 	const id = useId();
@@ -46,19 +47,10 @@ export function ExpandableCardDemo() {
 						<motion.button
 							key={`button-${active.title}-${id}`}
 							layout
-							initial={{
-								opacity: 0,
-							}}
-							animate={{
-								opacity: 1,
-							}}
-							exit={{
-								opacity: 0,
-								transition: {
-									duration: 0.05,
-								},
-							}}
-							className="absolute top-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-white lg:hidden"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0, transition: { duration: 0.05 } }}
+							className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-white lg:hidden"
 							onClick={() => setActive(null)}
 						>
 							<CloseIcon />

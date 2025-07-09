@@ -1,6 +1,6 @@
 "use client";
 
-import { postMetadataSchema } from "@/lib/schemas";
+import { postMetadataSchema } from "@/schemas/posts";
 import { Button } from "@mingull/ui/comps/button";
 import { Input } from "@mingull/ui/comps/input";
 import { Cross2Icon } from "@radix-ui/react-icons";

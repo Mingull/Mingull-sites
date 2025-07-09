@@ -1,13 +1,15 @@
 "use client";
 import { createContext, ReactNode, useContext } from "react";
 
-export function createFlexibleContext<T>({ defaultValue, errorMessage }: { defaultValue?: T; errorMessage?: string }) {
-	const Context = createContext<T | undefined>(defaultValue);
+export function createFlexibleContext<T>(opts?: { defaultValue: T }) {
+	const Context = createContext<T | undefined>(opts?.defaultValue);
 
-	const useFlexibleContext = () => {
+	const useFlexibleContext = (opts?: { errorMessage?: string; onError?: (error: Error) => void }) => {
 		const ctx = useContext(Context);
 		if (ctx === undefined) {
-			throw new Error(errorMessage ?? "useFlexibleContext must be used within a Provider");
+			const error = new Error(opts?.errorMessage || "useFlexibleContext must be used within a Provider");
+			opts?.onError?.(error);
+			throw error;
 		}
 		return ctx;
 	};

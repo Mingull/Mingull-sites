@@ -1,0 +1,15 @@
+{
+	"extends": "@mingull/typescript-config/react-library.json",
+	"compilerOptions": {
+		"allowImportingTsExtensions": true,
+		"noEmit": true,
+		"sourceMap": false,
+		"declarationMap": false,
+		"baseUrl": ".",
+		"paths": {
+			"~/*": ["./src/*"]
+		}
+	},
+	"include": ["src/", "tests/**/*.ts", "tests/**/*.tsx"],
+	"exclude": ["node_modules", "dist"]
+}

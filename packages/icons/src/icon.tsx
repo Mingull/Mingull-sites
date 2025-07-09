@@ -8,7 +8,7 @@ export type IconProps = {
 	style?: React.CSSProperties;
 };
 
-export type ElementName = "path" | "circle" | "rect" | "line" | "polygon" | "polyline" | "ellipse" | "g";
+export type ElementName = "path" | "circle" | "rect" | "line" | "polygon" | "polyline" | "ellipse" | "g" | "text";
 
 export type IconNode = [elementName: ElementName, props: React.SVGProps<SVGElement> & { key: string }][];
 export type Icon = (props: IconProps) => React.ReactNode;

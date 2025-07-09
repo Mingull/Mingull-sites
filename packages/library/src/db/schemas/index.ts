@@ -1,6 +1,6 @@
+import { users } from "~/db/schemas/auth.ts";
+import { timestamps } from "~/db/schemas/helpers.ts";
 import { boolean, datetime, json, mysqlEnum, mysqlTable, primaryKey, text, varchar } from "drizzle-orm/mysql-core";
-import { users } from "@mingull/lib/db/schemas/auth";
-import { timestamps } from "@mingull/lib/db/schemas/helpers";
 
 export const collections = mysqlTable("collections", {
 	id: varchar("id", { length: 36 }).primaryKey(),
@@ -83,3 +83,6 @@ export type NewPreference = typeof preferences.$inferInsert;
 
 export type Site = typeof sites.$inferSelect;
 export type NewSite = typeof sites.$inferInsert;
+
+export * from "./auth.js";
+export * from "./helpers.js";

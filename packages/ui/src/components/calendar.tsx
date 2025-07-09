@@ -2,7 +2,7 @@
 
 import { Button, buttonVariants } from "./button.tsx";
 
-import { cn } from "@mingull/lib/utils";
+import { cn } from "@mingull/lib";
 
 import { differenceInCalendarDays } from "date-fns";
 import { ChevronLeft, ChevronRight } from "lucide-react";

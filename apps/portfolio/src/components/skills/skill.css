@@ -1,14 +1,7 @@
 .containerize {
 	display: grid;
 	gap: 1rem;
-	/*   grid-template-columns: repeat(calc(var(--column-count, 3) * 2), 1fr); */
 	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-
-	/* for demo */
-	max-width: 65rem;
-	margin-inline: auto;
-	margin-block: 6rem;
-
 	container-type: inline-size;
 
 	@container (width >= calc(100px * 2 + 1rem)) {
