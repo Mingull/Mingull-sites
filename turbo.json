@@ -1,6 +1,7 @@
 {
 	"$schema": "https://turbo.build/schema.json",
 	"ui": "tui",
+	"globalEnv": [],
 	"tasks": {
 		"build": {
 			"dependsOn": ["^build"],
@@ -8,11 +9,12 @@
 			"outputs": [".next/**", "!.next/cache/**", "dist/**", "!.turbo/**", "!.next/server/app/**"]
 		},
 		"portfolio#build": {
-			"dependsOn": ["api#build", "@mingull/exceptify#build", "@mingull/env#build", "@mingull/ui#build"],
+			"dependsOn": ["api#build", "@mingull/env#build", "@mingull/constants#build", "@mingull/exceptify#build", "@mingull/ui#build", "@mingull/lib#build"],
+			"with": ["api#start"],
 			"env": ["API_URL", "BASE_API", "RESEND_API_KEY", "RESEND_AUDIENCE_ID", "NODE_ENV"]
 		},
 		"api#build": {
-			"dependsOn": ["@mingull/exceptify#build", "@mingull/env#build"],
+			"dependsOn": ["@mingull/api#build", "@mingull/exceptify#build", "@mingull/env#build"],
 			"env": ["NODE_ENV"]
 		},
 		"lint": {
@@ -21,6 +23,7 @@
 		"api#lint": {
 			"env": ["REDIS_URL"]
 		},
+		"api#start": {},
 		"check-types": {
 			"dependsOn": ["^check-types"]
 		},

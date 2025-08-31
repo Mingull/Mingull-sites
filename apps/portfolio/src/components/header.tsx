@@ -1,7 +1,7 @@
 "use client";
 
 import { Link } from "@/i18n/navigation";
-import { cn } from "@/lib/utils";
+import { cn } from "@mingull/lib";
 import { GitHubIcon, MingullIcon } from "@mingull/icons";
 import { Button } from "@mingull/ui/comps/button";
 import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@mingull/ui/comps/sheet";
@@ -10,8 +10,11 @@ import { useSelectedLayoutSegment } from "next/navigation";
 import { ComponentProps } from "react";
 import LanguageSelector from "./language-selector";
 import ThemeToggle from "./theme-toggle";
+import NextLink from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function Header() {
+	const t = useTranslations("nav");
 	return (
 		<header className="border-border bg-background/70 fixed top-0 z-50 w-full border-b backdrop-blur-md md:inset-x-0">
 			<nav
@@ -28,8 +31,8 @@ export default function Header() {
 					</Link>
 
 					<ul className="hidden items-center gap-2 text-sm sm:flex">
-						<HeaderLink href="/posts">Posts</HeaderLink>
-						<HeaderLink href="/projects">Projects</HeaderLink>
+						<HeaderLink href="/posts">{t("posts.title")}</HeaderLink>
+						<HeaderLink href="/projects">{t("projects.title")}</HeaderLink>
 					</ul>
 				</div>
 
@@ -40,9 +43,9 @@ export default function Header() {
 				<div className="hidden items-center gap-2 sm:flex sm:gap-3">
 					<LanguageSelector />
 					<Button variant="ghost" size="sm" asChild aria-label="View GitHub profile">
-						<Link href="https://github.com/mingull" target="_blank" rel="noopener noreferrer">
+						<NextLink href="https://github.com/mingull" target="_blank" rel="noopener noreferrer">
 							<GitHubIcon className="text-foreground size-4" />
-						</Link>
+						</NextLink>
 					</Button>
 					<ThemeToggle />
 				</div>
@@ -103,14 +106,14 @@ function MobileMenu() {
 					<div className="flex items-center justify-evenly">
 						<LanguageSelector size="default" />
 						<Button size="default" variant="ghost" asChild aria-label="View GitHub profile">
-							<Link
+							<NextLink
 								href="https://github.com/mingull"
 								target="_blank"
 								rel="noopener noreferrer"
 								className="text-foreground flex items-center text-sm"
 							>
 								<GitHubIcon className="text-foreground size-6" />
-							</Link>
+							</NextLink>
 						</Button>
 						<ThemeToggle size="default" />
 					</div>

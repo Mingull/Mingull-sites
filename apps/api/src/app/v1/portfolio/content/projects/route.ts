@@ -1,7 +1,6 @@
 import { withRateLimit } from "@/lib/middlewares/with-ratelimit";
 import { getProjects } from "@/lib/projects";
 import { createErrorResponse, createSuccessResponse, getHttpCode, getStatus } from "@mingull/api";
-import { env } from "@mingull/env/next/server";
 import { attempt } from "@mingull/exceptify";
 import { NextResponse } from "next/server";
 
@@ -29,7 +28,7 @@ export const GET = withRateLimit<{ searchParams: { locale: string; limit?: strin
 			message: "Posts fetched successfully",
 			data: data?.map((project) => ({
 				...project,
-				image: project.image ? `${env.BASE_API}${project.image}` : null,
+				image: project.image ? `${process.env.BASE_API}${project.image}` : null,
 			})),
 		}),
 		{

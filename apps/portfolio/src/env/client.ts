@@ -5,7 +5,7 @@ import { z } from "zod";
 config({ path: "../../.env" });
 export const env = createEnv({
 	client: {
-		NEXT_PUBLIC_API_URL: z.string().url(),
+		NEXT_PUBLIC_API_URL: z.url(),
 	},
 	experimental__runtimeEnv: {
 		NEXT_PUBLIC_API_URL: process.env.API_URL,

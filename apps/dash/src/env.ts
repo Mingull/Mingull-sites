@@ -17,5 +17,3 @@ export const env = createEnv({
 	isServer: false,
 	extends: [coolify()],
 });
-
-console.log({ env });

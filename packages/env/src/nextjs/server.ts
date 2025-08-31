@@ -8,10 +8,7 @@ config({ path: "../../.env" });
 export const env = createEnv({
 	shared: {
 		NODE_ENV: z.enum(["development", "production"]),
-		TRUSTED_ORIGINS: z.preprocess(
-			(val) => (typeof val === "string" ? val.split(",").map((s) => s.trim()) : []),
-			z.array(z.string().url()),
-		),
+		TRUSTED_ORIGINS: z.preprocess((val) => (typeof val === "string" ? val.split(",").map((s) => s.trim()) : []), z.array(z.string().url())),
 	},
 	server: {
 		API_URL: z.string().url(),

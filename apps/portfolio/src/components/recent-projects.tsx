@@ -5,9 +5,11 @@ import { Skeleton } from "@mingull/ui/comps/skeleton";
 import { useQuery } from "@tanstack/react-query";
 import { useLocale } from "next-intl";
 import Projects from "./projects";
+import { useTranslations } from "next-intl";
 
 export default function RecentProjects() {
 	const locale = useLocale();
+	const t = useTranslations("nav.projects");
 	const {
 		data: projects,
 		isLoading,
@@ -16,11 +18,11 @@ export default function RecentProjects() {
 
 	return (
 		<section className="pb-24" id="projects">
-			<h2 className="title mb-10 text-center text-3xl font-bold sm:text-4xl md:text-start">Recent Projects</h2>
+			<h2 className="title mb-10 text-center text-3xl font-bold sm:text-4xl md:text-start">{t("recent")}</h2>
 
 			{isLoading ?
 				<ul className="grid grid-cols-1 gap-10 sm:grid-cols-2">
-					{Array.from({ length: 4 }).map((_, i) => (
+					{Array.from({ length: 2 }).map((_, i) => (
 						<li key={i} className="group relative">
 							<div className="bg-muted relative h-64 w-full overflow-hidden rounded-lg sm:h-60">
 								<Skeleton className="h-full w-full object-cover object-center" />
@@ -44,7 +46,7 @@ export default function RecentProjects() {
 					className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm font-medium underline decoration-1 underline-offset-4 transition-colors"
 				>
 					<span>
-						Bekijk alle projecten <span aria-hidden="true">→</span>
+						{t("view-all")} <span aria-hidden="true">→</span>
 					</span>
 				</Link>
 			</div>

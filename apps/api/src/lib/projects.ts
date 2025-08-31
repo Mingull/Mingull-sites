@@ -110,7 +110,7 @@ export async function getProjects({
 		for (const file of files) {
 			if (!file.endsWith(".mdx")) continue;
 
-			const slug = file.replace(/\.mdx$/, "").replace(/^(nl|en)\\/, "");
+			const slug = file.replace(/\.mdx$/, "").replace(/^(nl|en)(\/|\\)/, "");
 			if (seenSlugs.has(slug)) continue;
 
 			try {
@@ -132,8 +132,7 @@ export async function getProjects({
 
 export async function getProjectMetadata(filepath: string): Promise<ProjectMetadata> {
 	// remove {nl|en}/ and .mdx extension
-	const slug = filepath.replace(/\.mdx$/, "").replace(/^(nl|en)\//, "");
-	console.log({ slug });
+	const slug = filepath.replace(/\.mdx$/, "").replace(/^(nl|en)(\/|\\)/, "");
 	const filePath = path.join(rootDirectory, filepath);
 	const fileContent = await fs.readFile(filePath, "utf-8");
 	const { data } = matter(fileContent);

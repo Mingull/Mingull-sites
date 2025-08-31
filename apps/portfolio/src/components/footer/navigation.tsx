@@ -1,9 +1,12 @@
 "use client";
-import { DiscordIcon, GitHubIcon, MingullIcon } from "@mingull/icons";
+import { GitHubIcon, MingullIcon } from "@mingull/icons";
 import { LinkedInLogoIcon } from "@radix-ui/react-icons";
+import { useTranslations } from "next-intl";
 import { Navigation } from "./type";
 
 export const useNavigation = (): Navigation => {
+	const t = useTranslations();
+
 	return {
 		title: "Mingull",
 		icon: MingullIcon,
@@ -15,20 +18,16 @@ export const useNavigation = (): Navigation => {
 				orientation: "horizontal",
 				items: [
 					{
-						label: "Home",
-						href: "/",
-					},
-					{
-						label: "Projects",
+						label: t("nav.projects.title"),
 						href: "/projects",
 					},
 					{
-						label: "Posts",
+						label: t("nav.posts.title"),
 						href: "/posts",
 					},
 					{
-						label: "Contact",
-						href: "/contact",
+						label: t("nav.about.title"),
+						href: "/about",
 					},
 				],
 			},
@@ -37,14 +36,14 @@ export const useNavigation = (): Navigation => {
 				header: (year) => <>&copy; {year} Mingull</>,
 				footer: (
 					<>
-						Built by <span className="font-bold">Mingull</span>
+						{t("footer.builtBy")} <span className="font-bold">Mingull</span>
 					</>
 				),
 				muted: true,
 				items: [
 					{
 						label: "GitHub",
-						href: "https://github.com/gebruikersnaam",
+						href: "https://github.com/mingull",
 						description: "View my open source work",
 						icon: GitHubIcon,
 						external: true,
@@ -52,17 +51,9 @@ export const useNavigation = (): Navigation => {
 					},
 					{
 						label: "LinkedIn",
-						href: "https://linkedin.com/in/gebruikersnaam",
+						href: "https://linkedin.com/in/niels-plug",
 						description: "Connect with me on LinkedIn",
 						icon: LinkedInLogoIcon,
-						external: true,
-						iconOnly: true,
-					},
-					{
-						label: "Discord",
-						href: "https://discord.gg/jouwserver",
-						description: "Join my Discord community",
-						icon: DiscordIcon,
 						external: true,
 						iconOnly: true,
 					},

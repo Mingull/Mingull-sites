@@ -3,6 +3,7 @@ import { defineConfig } from "tsdown";
 export default defineConfig({
 	clean: true,
 	dts: true,
+	watch: true,
 	entry: ["./src/index.ts"],
 	sourcemap: false,
 	minify: false,

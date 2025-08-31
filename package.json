@@ -1,9 +1,10 @@
 {
-	"name": "test-repo",
+	"name": "mingull-sites",
 	"private": true,
 	"scripts": {
 		"build": "turbo run build",
-		"dev": "turbo run dev --concurrency 11",
+		"dev": "turbo run dev --concurrency 12",
+		"dev:mobile": "turbo run dev:mobile --concurrency 12",
 		"lint": "turbo run lint",
 		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
 		"check-types": "turbo run check-types"
@@ -11,13 +12,13 @@
 	"devDependencies": {
 		"@mingull/eslint-config": "workspace:*",
 		"@mingull/typescript-config": "workspace:*",
-		"@typescript-eslint/parser": "^8.36.0",
+		"@typescript-eslint/parser": "^8.41.0",
 		"prettier": "^3.6.2",
-		"prettier-plugin-tailwindcss": "^0.6.13",
-		"turbo": "^2.5.4",
-		"typescript": "5.8.3"
+		"prettier-plugin-tailwindcss": "^0.6.14",
+		"turbo": "^2.5.6",
+		"typescript": "5.9.2"
 	},
-	"packageManager": "pnpm@10.12.4",
+	"packageManager": "pnpm@10.15.0",
 	"engines": {
 		"node": ">=20"
 	}

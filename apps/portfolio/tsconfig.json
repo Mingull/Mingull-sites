@@ -27,11 +27,13 @@
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "allowArbitraryExtensions": true
   },
   "include": [
     "./src/**/*.ts",
     "./src/**/*.tsx",
+    "./src/global.ts",
     ".next/types/**/*.ts"
   ],
   "exclude": [

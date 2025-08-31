@@ -124,9 +124,9 @@
 	--sidebar-accent-foreground: oklch(0.2285 0.0352 276.0125);
 	--sidebar-border: oklch(0.9197 0.004 286.3202);
 	--sidebar-ring: oklch(0.5366 0.2455 283.506);
-	--font-sans: DM Sans, sans-serif;
+	--font-sans: Poppins, sans-serif;
 	--font-serif: Merriweather, serif;
-	--font-mono: Fira Code, monospace;
+	--font-mono: Roboto Code, monospace;
 	--font-special: Leckerli One, cursive;
 	--radius: 0.3rem;
 	--shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
@@ -208,7 +208,7 @@
 		@apply decoration-border/75 font-serif text-3xl font-bold underline decoration-2 underline-offset-8;
 	}
 }
-@layer utilities {
+/* @layer utilities {
 	.prose pre {
 		@apply bg-muted overflow-x-auto rounded-lg px-5 py-2 text-base;
 
@@ -245,5 +245,5 @@
 		&::after {
 			content: "";
 		}
-	}
-}
+	} 
+} */

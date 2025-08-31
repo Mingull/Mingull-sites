@@ -1,88 +1,29 @@
-import { users } from "~/db/schemas/auth.ts";
-import { timestamps } from "~/db/schemas/helpers.ts";
-import { boolean, datetime, json, mysqlEnum, mysqlTable, primaryKey, text, varchar } from "drizzle-orm/mysql-core";
+// shared database schemas
+export { accounts, type Account, type NewAccount } from "./accounts.ts";
+export { apikeys, type ApiKey, type NewApiKey } from "./api-keys.ts";
+export { invitations, type Invitation, type NewInvitation } from "./invitations.ts";
+export { members, type Member, type NewMember } from "./members.ts";
+export { organizations, type NewOrganization, type Organization } from "./organizations.ts";
+export { preferences, type NewPreference, type Preference } from "./preferences.ts";
+export { sessions, type NewSession, type Session } from "./sessions.ts";
+export { sites, type NewSite, type Site } from "./sites.ts";
+export { userPreferences } from "./user-preferences.ts";
+export { users, type NewUser, type User } from "./users.ts";
+export { verifications, type NewVerification, type Verification } from "./verifications.ts";
 
-export const collections = mysqlTable("collections", {
-	id: varchar("id", { length: 36 }).primaryKey(),
-	userId: varchar("user_id", { length: 36 }).references(() => users.id, { onDelete: "cascade" }),
-	name: varchar("name", { length: 255 }).notNull(),
-	description: text("description"),
-	...timestamps(),
-});
+// Repulse schemas
+export { repulseExercises, type NewRepulseExercises, type RepulseExercises } from "./repulse/exercises.ts";
+export { repulseFriends, type NewRepulseFriend, type RepulseFriend } from "./repulse/friends.ts";
+export { repulseLeaderboards, type NewRepulseLeaderboard, type RepulseLeaderboard } from "./repulse/leaderboards.ts";
+export { repulseMuscleGroups, type NewRepulseMuscleGroup, type RepulseMuscleGroup } from "./repulse/muscle-groups.ts";
+export { repulseNutritionLogs, type NewRepulseNutritionLog, type RepulseNutritionLog } from "./repulse/nutrition-logs.ts";
+export { repulseProfiles, type NewRepulseProfiles, type RepulseProfiles } from "./repulse/profiles.ts";
+export { repulseStreaks, type NewRepulseStreak, type RepulseStreak } from "./repulse/streaks.ts";
+export { repulseWorkoutSets, type NewRepulseWorkoutSet, type RepulseWorkoutSet } from "./repulse/workout-sets.ts";
+export { repulseWorkouts, type NewRepulseWorkouts, type RepulseWorkouts } from "./repulse/workouts.ts";
 
-export const pastes = mysqlTable("pastes", {
-	id: varchar("id", { length: 36 }).primaryKey(),
-	userId: varchar("user_id", { length: 36 }).references(() => users.id, { onDelete: "cascade" }),
-	collectionId: varchar("collection_id", { length: 36 }).references(() => collections.id, { onDelete: "set null" }),
-	title: varchar("title", { length: 255 }).notNull(),
-	content: text("content").notNull(),
-	syntax: varchar("syntax", { length: 50 }).default("plaintext"),
-	isPublic: boolean("is_public").default(false).notNull(),
-	...timestamps({ expiresAt: datetime("expires_at") }),
-});
-
-export const tags = mysqlTable("tags", {
-	id: varchar("id", { length: 36 }).primaryKey(),
-	name: varchar("name", { length: 255 }).notNull(),
-	...timestamps(),
-});
-
-export const pasteTags = mysqlTable("paste_tags", {
-	pasteId: varchar("paste_id", { length: 36 }).references(() => pastes.id, { onDelete: "cascade" }),
-	tagId: varchar("tag_id", { length: 36 }).references(() => tags.id, { onDelete: "cascade" }),
-});
-
-export const preferences = mysqlTable("preferences", {
-	id: varchar("id", { length: 36 }).primaryKey(),
-	name: varchar("name", { length: 255 }).notNull().unique(),
-	description: text("description"),
-	type: mysqlEnum("type", ["string", "boolean", "number", "list"]).notNull(),
-	site: varchar("site", { length: 36 }).references(() => sites.id, { onDelete: "cascade", onUpdate: "cascade" }),
-	defaultValue: text("default_value").notNull(),
-	options: json("options").$type<string[]>(),
-});
-
-export const userPreferences = mysqlTable(
-	"user_preferences",
-	{
-		userId: varchar("user_id", { length: 36 })
-			.notNull()
-			.references(() => users.id, { onDelete: "cascade" }),
-		preferenceId: varchar("preference_id", { length: 36 })
-			.notNull()
-			.references(() => preferences.id, { onDelete: "cascade" }),
-		value: text("value").notNull(),
-	},
-	(table) => [primaryKey({ columns: [table.userId, table.preferenceId] })],
-);
-
-export const sites = mysqlTable("sites", {
-	id: varchar("id", { length: 36 }).primaryKey(),
-	name: varchar("name", { length: 255 }).notNull().unique(),
-	domain: varchar("domain", { length: 255 }).notNull().unique(),
-	description: text("description"),
-	summary: text("summary"),
-	themes: json("themes"),
-	keywords: json("keywords"),
-	logo: varchar("logo", { length: 255 }),
-	favicon: varchar("favicon", { length: 255 }),
-	...timestamps(),
-});
-
-export type Paste = typeof pastes.$inferSelect;
-export type NewPaste = typeof pastes.$inferInsert;
-
-export type Collection = typeof collections.$inferSelect;
-export type NewCollection = typeof collections.$inferInsert;
-
-export type Tag = typeof tags.$inferSelect;
-export type NewTag = typeof tags.$inferInsert;
-
-export type Preference = typeof preferences.$inferSelect;
-export type NewPreference = typeof preferences.$inferInsert;
-
-export type Site = typeof sites.$inferSelect;
-export type NewSite = typeof sites.$inferInsert;
-
-export * from "./auth.js";
-export * from "./helpers.js";
+// Pastelimency schemas
+export { pastelimencyCollections, type NewPastelimencyCollection, type PastelimencyCollection } from "./pastelimency/collections.ts";
+export { pastelimencyPasteTags } from "./pastelimency/paste-tags.ts";
+export { pastelimencyPastes, type NewPastelimencyPaste, type PastelimencyPaste } from "./pastelimency/pastes.ts";
+export { pastelimencyTags, type NewPastelimencyTag, type PastelimencyTag } from "./pastelimency/tags.ts";

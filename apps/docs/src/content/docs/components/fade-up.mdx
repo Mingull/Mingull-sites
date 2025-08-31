@@ -1,6 +1,121 @@
 ---
-    title: Fade Up
-    summary: A simple fade up component that can be used to animate elements as they enter the viewport.
+title: Fade Up
+summary: A simple fade up component that can be used to animate elements as they enter the viewport.
 ---
 
-The `FadeUp` component is a simple React component that can be used to animate elements as they enter the viewport. It uses the `Framer Motion` library to create a smooth fade up animation.
+The `FadeUp` component animates elements as they scroll into view. It uses the `Framer Motion` library under the hood to provide smooth transitions.
+
+---
+
+## Installation
+
+You'll need to install the `framer-motion` package:
+
+### Using NPM
+
+```bash
+npm install framer-motion
+```
+
+### Using PNPM
+
+```bash
+pnpm install framer-motion
+```
+
+### Using Yarn
+
+```bash
+yarn add framer-motion
+```
+
+---
+
+## Usage
+
+The FadeUp component wraps any element and animates it when it becomes visible in the viewport.
+
+### Basic Example
+
+<CodeBlock 
+mode="minimized"
+source={`import { FadeUp } from "@/components/fade-up";
+
+export default function Example() {
+	return (
+		<FadeUp>
+			<h1>Hello World</h1>
+		</FadeUp>
+	);
+}`
+}>
+	<CodeBlockHeader />
+	<CodeBlockContent />
+</CodeBlock>
+
+### Multiple Elements
+
+You can wrap multiple elements individually for staggered animations:
+
+```tsx
+<FadeUp><h2>First Item</h2></FadeUp>
+<FadeUp><h2>Second Item</h2></FadeUp>
+<FadeUp><h2>Third Item</h2></FadeUp>
+```
+
+## Indent 1
+
+### Sub Indent 1
+
+#### Sub Indent 2
+
+## Props
+
+The `FadeUp` component accepts a few optional props to customize the animation.
+
+`delay`
+
+- Type: `number`
+- Default: `0`
+- Delays the animation in seconds. Useful when staggering multiple elements.
+
+`duration`
+
+- Type: `number`
+- Default: `0.4`
+- Controls how long the animation lasts.
+
+`once`
+
+- Type: `boolean`
+- Default: `true`
+- If true, the animation will only trigger the first time the element enters the viewport.
+
+## Advanced Example
+
+<CodeBlock
+	source={`
+<FadeUp delay={0.2} duration={0.6} once={false}>
+	<p>This text fades up with a slight delay, takes longer to animate, and re-animates every time it enters the viewport.</p>
+</FadeUp>
+`}
+>
+	<CodeBlockHeader />
+	<CodeBlockContent />
+</CodeBlock>
+
+---
+
+## Best Practices
+
+- ✅ Use once for content that should animate in only once (e.g., hero sections).
+- ✅ Use delay with lists to create staggered animations.
+- ❌ Don’t overuse fade-up on large blocks of content — it can feel distracting.
+
+---
+
+## Related Components
+
+- [Fade In](/components/fade-in) - A simple fade-in animation component.
+- [Slide In](/components/slide-in) - A component that slides elements into view.
+- [Scale Up](/components/scale-up) - A component that scales elements up as they enter the viewport.

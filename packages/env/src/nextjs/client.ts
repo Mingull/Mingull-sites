@@ -1,3 +1,4 @@
+"use client";
 import { createEnv } from "@t3-oss/env-nextjs";
 import { config } from "dotenv";
 import { z } from "zod";
@@ -6,7 +7,7 @@ config({ path: "../../.env" });
 
 export const env = createEnv({
 	client: {
-		NEXT_PUBLIC_BETTER_AUTH_URL: z.string().url(),
+		NEXT_PUBLIC_BETTER_AUTH_URL: z.url(),
 	},
 	shared: {
 		NODE_ENV: z.enum(["development", "production"]),

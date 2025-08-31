@@ -1,0 +1,131 @@
+{
+	"nav": {
+		"posts": {
+			"title": "Posts",
+			"recent": "Recent Posts",
+			"back": "Back to posts",
+			"view-all": "View all posts"
+		},
+		"projects": {
+			"title": "Projects",
+			"recent": "Recent Projects",
+			"back": "Back to projects",
+			"view-all": "View all projects"
+		},
+		"skills": {
+			"title": "Skills",
+			"version": "<strong>Version:</strong> {version}"
+		},
+		"about": {
+			"title": "About Me",
+			"summary": "I am a passionate developer who not only writes code, but builds solutions. With a love for detail, design and user experience, I help bring ideas to life.",
+			"quote": "Always curious, always in development."
+		}
+	},
+	"footer": {
+		"builtBy": "Built by"
+	},
+	"sign-in": {
+		"title": "Sign In to {title}",
+		"divider": "or",
+		"email": "Email",
+		"password": "Password",
+		"remember": "Remember me",
+		"forgot": "Forgot password?",
+		"button": "Sign In",
+		"continue": "Continue with {provider}",
+		"no-account": "Don't have an account?",
+		"linkText": "Sign Up",
+		"tos": "By clicking sign up, you agree to our <tos>Terms of Service</tos> and <privacy>Privacy Policy</privacy>."
+	},
+	"sign-up": {
+		"title": "Sign Up for {title}",
+		"username": "Username",
+		"email": "Email",
+		"password": "Password",
+		"confirmPassword": "Confirm Password",
+		"button": "Sign Up",
+		"continue": "Continue with {provider}",
+		"have-account": "Already have an account?",
+		"linkText": "Sign In",
+		"tos": "By clicking sign up, you agree to our <tos>Terms of Service</tos> and <privacy>Privacy Policy</privacy>.",
+		"name": "Name"
+	},
+	"onboarding": {
+		"title": "Welcome to Repulse!",
+		"description": "Let&apos;s get started by setting up your profile. This will help us tailor your experience and provide personalized recommendations.",
+		"step-onboarding": {
+			"title": "Welcome to Repulse!",
+			"summary": "Let's set up your profile",
+			"description": "Fill in your name, username, and birthday to get started",
+			"name": "Name",
+			"username": "Username",
+			"birthday": "Birthday"
+		},
+		"step-profile": {
+			"title": "Your info",
+			"summary": "Lets track your info",
+			"description": "Tell us your current weight and height to help us personalize your experience.",
+			"gender": {
+				"title": "Your gender",
+				"options": {
+					"male": "Male",
+					"female": "Female",
+					"other": "Other",
+					"prefer-not-to-say": "Prefer not to say"
+				}
+			},
+			"weight": { "title": "Your weight" },
+			"height": { "title": "Your height" }
+		},
+		"step-goals": {
+			"title": "Your Goals",
+			"summary": "Let's define your goals",
+			"description": "Choose your fitness goals and activity level to tailor your plan.",
+			"goals": "Your goals",
+			"activityLevel": "Your activity level"
+		},
+		"step-complete": {
+			"title": "Complete",
+			"summary": "You're all set!",
+			"description": "Thank you for completing the onboarding! You can always update your profile later in the settings.",
+			"button": "Finish"
+		},
+		"errors": {
+			"name-too-short": "Name must be at least {min, number} characters long",
+			"username-too-short": "Username must be at least {min, number} characters long",
+			"birthday-required": "Birthday is required",
+			"invalid-birthdate": "Invalid birthdate",
+			"invalid-birthdate-future": "Birthdate must be in the past",
+			"gender-required": "Please select a gender",
+			"weight-too-low": "Weight must be at least {min, number}{unit}",
+			"weight-too-high": "Weight must be at most {max, number}{unit}",
+			"weight-unit-invalid": "Select a valid weight unit",
+			"height-too-low": "Height must be at least {min, number}{unit}",
+			"height-too-high": "Height must be at most {max, number}{unit}",
+			"height-unit-invalid": "Select a valid height unit",
+			"goal-invalid": "Please select a valid goal",
+			"activity-level-invalid": "Please select a valid activity level",
+			"bio-too-long": "Bio must be at most {max, number} characters"
+		}
+	},
+	"forgot-password": {
+		"title": "Forgot Password",
+		"description": "Enter your email address and we will send you a link to reset your password.",
+		"email": "Email",
+		"button": "Reset Password",
+		"linkText": "Sign Up",
+		"no-account": "Don't have an account?",
+		"tos": "By requesting a password reset, you agree to our <tos>Terms of Service</tos> and <privacy>Privacy Policy</privacy>."
+	},
+	"reset-password": {
+		"title": "Reset Password",
+		"description": "Enter your new password.",
+		"password": "Wachtwoord",
+		"confirmPassword": "Bevestig wachtwoord",
+		"button": "Reset Password",
+		"linkText": "Sign Up",
+		"no-account": "Don't have an account?",
+		"tos": "By resetting your password, you agree to our <tos>Terms of Service</tos> and <privacy>Privacy Policy</privacy>."
+	}
+}

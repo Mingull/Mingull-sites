@@ -1,0 +1,16 @@
+{
+	"extends": "@mingull/typescript-config/react-library.json",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"noEmit": true,
+		"allowImportingTsExtensions": true,
+		"paths": {
+			"~/*": ["./src/*"]
+		},
+		"strict": true,
+		"declaration": false,
+		"declarationMap": false
+	},
+	"include": ["."],
+	"exclude": ["node_modules", "dist", "better-auth"]
+}

@@ -1,0 +1,2 @@
+ALTER TABLE `sessions` ADD `active_organization_id` varchar(36);--> statement-breakpoint
+ALTER TABLE `sessions` ADD CONSTRAINT `sessions_active_organization_id_users_id_fk` FOREIGN KEY (`active_organization_id`) REFERENCES `users`(`id`) ON DELETE set null ON UPDATE no action;

@@ -1,19 +1,35 @@
 {
-	"homepage": {
-		"titles": {
-			"skills": "Vaardigheden",
-			"recentPosts": "Recente Berichten",
-			"recentProjects": "Recente Projecten"
+	"nav": {
+		"posts": {
+			"title": "Berichten",
+			"recent": "Recente Berichten",
+			"back": "Terug naar berichten",
+			"view-all": "Bekijk alle berichten"
 		},
-		"intro": {
-			"title": "Hey, ik ben Niels.",
-			"description": "Ik ben student webontwikkelaar aan de Avans Hogeschool in Breda. Ik hou ervan om dingen voor het web te bouwen en elke dag nieuwe dingen te leren."
+		"projects": {
+			"title": "Projecten",
+			"recent": "Recente Projecten",
+			"back": "Terug naar projecten",
+			"view-all": "Bekijk alle projecten"
+		},
+		"skills": {
+			"title": "Vaardigheden",
+			"version": "<strong>Versie:</strong> {version}"
+		},
+		"about": {
+			"title": "Over Mij",
+			"summary": "Ik ben een gepassioneerde developer die niet alleen code schrijft, maar oplossingen bouwt. Met een liefde voor detail, design en gebruikservaring help ik ideeën tot leven brengen.",
+			"quote": "Altijd nieuwsgierig, altijd in ontwikkeling."
 		}
 	},
-	"post": {
-		"back": "Terug naar berichten"
+	"hero": {
+		"title": "Hey, ik ben",
+		"summary": "Ik ben een gepassioneerde developer die niet alleen code schrijft, maar oplossingen bouwt. Met een liefde voor detail, design én gebruikservaring help ik ideeën tot leven brengen.",
+		"quote": "Altijd nieuwsgierig, altijd in ontwikkeling.",
+		"cta": "Bekijk mijn projecten",
+		"student": "🎓 Student Software Development aan Avans Hogeschool te Breda"
 	},
-	"project": {
-		"back": "Terug naar projecten"
+	"footer": {
+		"builtBy": "Gebouwd door"
 	}
 }

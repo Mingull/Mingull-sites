@@ -11,7 +11,7 @@ import { AnimatePresence, motion as m } from "motion/react";
 import { SetStateAction, useEffect, useId, useRef, useState } from "react";
 import { z } from "zod";
 import "./skill.css";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const containerVariants = {
 	hidden: {},
@@ -43,6 +43,7 @@ export default function Skills() {
 	const [ActiveIcon, setActiveIcon] = useState<Icon | null>(null);
 	const id = useId();
 	const ref = useRef<HTMLDivElement>(null);
+	const t = useTranslations("nav.skills");
 	const isActiveSkill = active && typeof active === "object";
 
 	useClickOutside(ref, () => setActive(null));
@@ -65,7 +66,7 @@ export default function Skills() {
 
 	return (
 		<section className="pb-24" id="skills">
-			<h2 className="title mb-12">Vaardigheden</h2>
+			<h2 className="title mb-12">{t("title")}</h2>
 
 			{/* Overlay */}
 			<AnimatePresence>
@@ -117,7 +118,7 @@ export default function Skills() {
 											{active.summary}
 										</m.p>
 										<m.p layout className="dark:text-muted-foreground text-sm text-neutral-600">
-											<strong>Version:</strong> {active.version}
+											{t("version", { version: active.version })}
 										</m.p>
 										<m.p layout className="dark:text-muted-foreground text-sm text-neutral-600">
 											<strong>Experience:</strong> {calculateYearsOfExperience(active.years)}

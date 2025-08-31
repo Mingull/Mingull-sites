@@ -1,8 +1,9 @@
+import { withCors } from "@/lib/middlewares/with-cors";
 import { withRateLimit } from "@/lib/middlewares/with-ratelimit";
-import { createErrorResponse, getHttpCode, getStatus } from "@mingull/api";
-import { NextRequest, NextResponse } from "next/server";
+import { createErrorResponse, getHttpCode, getStatus, Handler } from "@mingull/api";
+import { NextResponse } from "next/server";
 
-async function notFoundResponse(req: NextRequest) {
+const notFoundResponse = withCors(async (req, ctx) => {
 	return NextResponse.json(
 		createErrorResponse({
 			code: "NotFound",
@@ -16,14 +17,9 @@ async function notFoundResponse(req: NextRequest) {
 		{
 			status: getHttpCode("NotFound"),
 			statusText: getStatus("NotFound"),
-			headers: {
-				"Content-Type": "application/json",
-				"X-Status": getStatus("NotFound"),
-				"Cache-Control": "no-store",
-			},
 		},
 	);
-}
+});
 
 export const GET = withRateLimit(notFoundResponse);
 export const POST = withRateLimit(notFoundResponse);

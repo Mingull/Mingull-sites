@@ -3,10 +3,13 @@
 import authorImage from "@/../public/images/authors/niels.jpg" with { type: "image/jpeg" };
 import { useTypewriter } from "@mingull/ui/hooks";
 import { motion as m } from "motion/react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 
 export default function Hero() {
+	const t = useTranslations("hero");
 	const typedText = useTypewriter(["Niels", "Mingull"], 100, 2500);
 	const container = {
 		hidden: {},
@@ -40,7 +43,7 @@ export default function Hero() {
 					variants={fadeInItem}
 					className="w-full font-serif text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl"
 				>
-					Hey, ik ben{" "}
+					{t("title")}{" "}
 					<span className="text-primary font-special inline-block">
 						{typedText}
 						<span className="animate-pulse">|</span>
@@ -68,28 +71,25 @@ export default function Hero() {
 					variants={fadeInItem}
 					className="text-muted-foreground mt-4 max-w-2xl text-lg font-light leading-relaxed sm:text-xl"
 				>
-					<Balancer>
-						Ik ben een gepassioneerde developer die niet alleen code schrijft, maar oplossingen bouwt. Met
-						een liefde voor detail, design én gebruikservaring help ik ideeën tot leven brengen.
-					</Balancer>
+					<Balancer>{t("summary")}</Balancer>
 				</m.p>
 
 				{/* QUOTE */}
 				<m.blockquote
 					variants={fadeInItem}
-					className="border-primary bg-primary/10 text-muted-foreground border-l-3 mt-4 px-2 py-1 text-base font-medium"
+					className="border-primary bg-primary/10 text-muted-foreground border-l-3 mt-4 px-2 py-1 font-mono text-base font-medium leading-tight"
 				>
-					Altijd nieuwsgierig, altijd in ontwikkeling
+					{t("quote")}
 				</m.blockquote>
 
 				{/* CTA BUTTON */}
 				<m.div variants={fadeInItem} className="mt-6">
-					<a
+					<Link
 						href="#projects"
 						className="bg-primary hover:bg-primary/90 inline-block rounded-lg px-6 py-3 text-base font-semibold text-white shadow-md transition"
 					>
-						Bekijk mijn projecten
-					</a>
+						{t("cta")}
+					</Link>
 				</m.div>
 			</m.div>
 
@@ -108,7 +108,7 @@ export default function Hero() {
 					/>
 				</m.div>
 				<m.p variants={fadeInItem} className="text-muted-foreground mt-4 text-center text-sm font-light">
-					<Balancer>🎓 Student Software Development aan Avans Hogeschool te Breda</Balancer>
+					<Balancer>{t("student")}</Balancer>
 				</m.p>
 			</div>
 		</section>

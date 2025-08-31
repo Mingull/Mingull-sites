@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createDefaults } from "@mingull/defaults";
+import { createConstants } from "@mingull/constants";
 import { routing } from "@/i18n/routing";
 
 const schema = {
@@ -8,7 +8,7 @@ const schema = {
 	SUMMARY: z.string(),
 	DESCRIPTION: z.string(),
 	KEYWORDS: z.string(),
-	TOOLTIPS: z.record(z.string()),
+	TOOLTIPS: z.record(z.string(), z.string()),
 	LOADING_SCREENS: z.array(z.string()),
 	ERROR_PAGES: z.object({
 		NOT_FOUND: z.object({
@@ -30,7 +30,7 @@ const schema = {
 	}),
 };
 
-export const defaults = createDefaults({
+export const constants = createConstants({
 	routing,
 	schema,
 	shared: {

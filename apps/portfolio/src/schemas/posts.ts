@@ -6,14 +6,8 @@ export const postMetadataSchema = z.object({
 	summary: z.string().optional(),
 	image: z.string().optional(),
 	author: z.string().optional(),
-	publishedAt: z.string().datetime().optional(),
-	updatedAt: z.string().datetime().optional(),
-	components: z
-		.record(
-			z.string(),
-			//.regex(/^(?!.*\.mdx$)(?!.*\.json$)[\w/@-]+$/, "Component path must not end with .mdx or .json"),
-		)
-		.optional(),
+	publishedAt: z.iso.datetime().optional(),
+	updatedAt: z.iso.datetime().optional(),
 });
 
 export const postSchema = z.object({

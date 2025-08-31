@@ -6,8 +6,8 @@ export const projectMetadataSchema = z.object({
 	summary: z.string().optional(),
 	image: z.string().optional(),
 	author: z.string().optional(),
-	publishedAt: z.string().datetime().optional(),
-	updatedAt: z.string().datetime().optional(),
+	publishedAt: z.iso.datetime().optional(),
+	updatedAt: z.iso.datetime().optional(),
 	tags: z.array(z.string()).optional(),
 });
 
