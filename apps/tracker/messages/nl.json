@@ -1,0 +1,135 @@
+{
+	"nav": {
+		"posts": {
+			"title": "Berichten",
+			"recent": "Recente Berichten",
+			"back": "Terug naar berichten",
+			"view-all": "Bekijk alle berichten"
+		},
+		"projects": {
+			"title": "Projecten",
+			"recent": "Recente Projecten",
+			"back": "Terug naar projecten",
+			"view-all": "Bekijk alle projecten"
+		},
+		"skills": {
+			"title": "Vaardigheden",
+			"version": "<strong>Versie:</strong> {version}"
+		},
+		"about": {
+			"title": "Over Mij",
+			"summary": "Ik ben een gepassioneerde developer die niet alleen code schrijft, maar oplossingen bouwt. Met een liefde voor detail, design en gebruikservaring help ik ideeën tot leven brengen.",
+			"quote": "Altijd nieuwsgierig, altijd in ontwikkeling."
+		}
+	},
+	"footer": {
+		"builtBy": "Gebouwd door"
+	},
+	"sign-in": {
+		"title": "Inloggen bij {title}",
+		"divider": "of",
+		"email": "E-mail",
+		"password": "Wachtwoord",
+		"remember": "Onthoud mij",
+		"forgot": "Wachtwoord vergeten?",
+		"button": "Inloggen",
+		"continue": "Doorgaan met {provider}",
+		"no-account": "Nog geen account?",
+		"linkText": "Registreren",
+		"tos": "Door je in te loggen, ga je akkoord met onze <tos>Servicevoorwaarden</tos> en <privacy>Privacy Policy</privacy>."
+	},
+	"sign-up": {
+		"title": "Registreren voor {title}",
+		"username": "Gebruikersnaam",
+		"email": "E-mailadres",
+		"password": "Wachtwoord",
+		"confirmPassword": "Bevestig wachtwoord",
+		"button": "Registreren",
+		"continue": "Doorgaan met {provider}",
+		"have-account": "Heb je al een account?",
+		"linkText": "Inloggen",
+		"tos": "Door je aan te melden, ga je akkoord met onze <tos>Terms of Service</tos> en <privacy>Privacy Policy</privacy>.",
+		"name": "Naam"
+	},
+	"onboarding": {
+		"title": "Welkom bij Repulse!",
+		"description": "Laten we beginnen met het instellen van je profiel. Dit helpt ons om je ervaring aan te passen en gepersonaliseerde aanbevelingen te doen.",
+		"step-onboarding": {
+			"title": "Welkom bij Repulse!",
+			"summary": "Laten we je profiel instellen",
+			"description": "Vul je naam, gebruikersnaam en geboortedatum in om te beginnen",
+			"name": "Naam",
+			"username": "Gebruikersnaam",
+			"birthday": "Geboortedatum"
+		},
+		"step-profile": {
+			"title": "Jouw info",
+			"summary": "Laten we je info bijhouden",
+			"description": "Vertel ons je huidige gewicht en lengte zodat we je ervaring kunnen personaliseren.",
+			"gender": {
+				"title": "Geslacht",
+				"options": {
+					"male": "Man",
+					"female": "Vrouw",
+					"other": "Anders",
+					"prefer-not-to-say": "Liever niet zeggen"
+				}
+			},
+			"weight": {
+				"title": "Gewicht"
+			},
+			"height": {
+				"title": "Lengte"
+			}
+		},
+		"step-goals": {
+			"title": "Jouw doelen",
+			"summary": "Laten we je doelen definiëren",
+			"description": "Kies je fitnessdoelen en activiteitsniveau om je plan op maat te maken.",
+			"goals": "Doelen",
+			"activityLevel": "Activiteitsniveau"
+		},
+		"step-complete": {
+			"title": "Compleet",
+			"summary": "Je bent helemaal klaar!",
+			"description": "Bedankt voor het voltooien van de onboarding! Je kunt je profiel later altijd bijwerken in de instellingen.",
+			"button": "Voltooien"
+		},
+		"errors": {
+			"name-too-short": "Naam moet minimaal {min, number} tekens lang zijn",
+			"username-too-short": "Gebruikersnaam moet minimaal {min, number} tekens lang zijn",
+			"birthday-required": "Geboortedatum is vereist",
+			"invalid-birthdate": "Ongeldige geboortedatum",
+			"invalid-birthdate-future": "Geboortedatum moet in het verleden liggen",
+			"gender-required": "Selecteer een geslacht",
+			"weight-too-low": "Gewicht moet minimaal {min, number}{unit} zijn",
+			"weight-too-high": "Gewicht mag maximaal {max, number}{unit} zijn",
+			"weight-unit-invalid": "Selecteer een geldige gewicht-eenheid",
+			"height-too-low": "Lengte moet minimaal {min, number}{unit} zijn",
+			"height-too-high": "Lengte moet maximaal {max, number}{unit} zijn",
+			"height-unit-invalid": "Selecteer een geldige lengte-eenheid",
+			"goal-invalid": "Selecteer een geldig doel",
+			"activity-level-invalid": "Selecteer een geldig activiteitsniveau",
+			"bio-too-long": "Bio moet maximaal {max, number} tekens lang zijn"
+		}
+	},
+	"forgot-password": {
+		"title": "Wachtwoord vergeten",
+		"description": "Voer je e-mailadres in en we sturen je een link om je wachtwoord opnieuw in te stellen.",
+		"email": "E-mail",
+		"button": "Stuur wachtwoord reset link",
+		"linkText": "Registreren",
+		"no-account": "Nog geen account?",
+		"tos": "Door een wachtwoord reset aan te vragen, ga je akkoord met onze <tos>Servicevoorwaarden</tos> en <privacy>Privacy Policy</privacy>."
+	},
+	"reset-password": {
+		"title": "Wachtwoord opnieuw instellen",
+		"description": "Voer je nieuwe wachtwoord in.",
+		"password": "Wachtwoord",
+		"confirmPassword": "Bevestig wachtwoord",
+		"button": "Stel wachtwoord opnieuw in",
+		"linkText": "Registreren",
+		"no-account": "Nog geen account?",
+		"tos": "Door je wachtwoord te resetten, ga je akkoord met onze <tos>Servicevoorwaarden</tos> en <privacy>Privacy Policy</privacy>."
+	}
+}

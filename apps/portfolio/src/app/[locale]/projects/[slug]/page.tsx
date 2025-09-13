@@ -14,8 +14,9 @@ import { ArrowLeftIcon } from "lucide-react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Balancer from "react-wrap-balancer";
+import { Locale } from "next-intl";
 
-export default async function Project({ params }: { params: Promise<{ slug: string; locale: string }> }) {
+export default async function Project({ params }: { params: Promise<{ slug: string; locale: Locale }> }) {
 	const { slug, locale } = await params;
 	const project = await getProjectBySlug(locale, slug);
 
@@ -25,10 +26,10 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
 	const { title, image, author, publishedAt } = metadata;
 
 	const isScheduled = !publishedAt || new Date(publishedAt).getTime() > Date.now();
-	
+
 	if (isScheduled) {
 		return (
-			<section className="container max-w-3xl px-4 pt-24 pb-16 md:px-6 md:pt-32 md:pb-24">
+			<section className="container max-w-3xl px-4 pb-16 pt-24 md:px-6 md:pb-24 md:pt-32">
 				<BackLink />
 				<div className="mt-8 space-y-4">
 					<Typography.H1>

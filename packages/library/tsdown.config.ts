@@ -6,6 +6,7 @@ export default defineConfig({
 	entry: ["./src/**/*.ts"],
 	sourcemap: false,
 	minify: false,
+	watch: true,
 	target: "esnext",
 	outDir: "dist",
 	treeshake: true,

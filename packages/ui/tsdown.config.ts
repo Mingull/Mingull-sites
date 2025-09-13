@@ -3,8 +3,9 @@ import { defineConfig } from "tsdown";
 export default defineConfig({
 	clean: true,
 	dts: true,
-	entry: ["./src/components/index.ts", "./src/hooks/index.ts", "./src/contexts/index.ts"],
+	entry: ["./src/components/*.{ts,tsx}", "./src/hooks/*.ts", "./src/contexts/*.ts"],
 	sourcemap: false,
+	watch: true,
 	minify: false,
 	target: "esnext",
 	outDir: "dist",

@@ -1,12 +1,16 @@
 import { config } from "dotenv";
 import { drizzle } from "drizzle-orm/mysql2";
 import { createPool } from "mysql2/promise";
+import * as schema from "./schemas/index.ts";
+
 config({ path: "../../.env" });
 
 const sql = createPool(process.env.DATABASE_URL!);
 
 export const db = drizzle(sql, {
 	mode: "planetscale",
+	schema,
 });
 
-export { eq, or, and, sum, count, sql, asc, desc, like, notLike } from "drizzle-orm";
+export { and, asc, count, desc, eq, inArray, like, notLike, or, sql, sum } from "drizzle-orm";
+

@@ -1,4 +1,11 @@
-import { auth } from "@mingull/lib/auth/server";
+import { withCors } from "@/lib/middlewares/with-cors";
+import { auth } from "@mingull/auth";
 import { toNextJsHandler } from "better-auth/next-js";
+import { NextResponse } from "next/server";
 
-export const { POST, GET } = toNextJsHandler(auth);
+const handlers = toNextJsHandler(auth);
+
+export const GET = withCors(handlers.GET);
+export const POST = withCors(handlers.POST);
+
+export const OPTIONS = withCors(async (req, ctx) => new NextResponse(null, { status: 204 }));

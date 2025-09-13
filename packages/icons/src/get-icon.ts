@@ -6,8 +6,7 @@ import { registry } from "./registry.jsx";
  * @param name The name of the icon.
  * @returns A promise that resolves to the icon.
  */
-export const getIcon = async (name: keyof typeof registry.nodes | (string & {})): Promise<Icon | null> =>
-	registry.get(name);
+export const getIcon = async (name: keyof typeof registry.nodes | (string & {})): Promise<Icon | null> => registry.get(name);
 
 /**
  * Get a synchronous icon by name.

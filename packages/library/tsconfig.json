@@ -7,8 +7,9 @@
 		"paths": {
 			"~/*": ["./src/*"]
 		},
+		"strict": true,
 		"declarationMap": false
 	},
-	"include": [".", "../middleware"],
+	"include": [".", "../middleware", "../auth/src/client.ts", "../auth/src/server.ts", "../auth/src/_plugins"],
 	"exclude": ["node_modules", "dist"]
 }

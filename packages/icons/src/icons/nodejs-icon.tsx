@@ -1,5 +1,4 @@
-import { createLucideIcon } from "lucide-react";
-import { createIcon } from "@/icon.tsx";
+import { createIcon } from "../icon.tsx";
 
 export const NodeJsIcon = createIcon(
 	"nodejs",

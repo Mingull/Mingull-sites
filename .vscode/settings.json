@@ -1,4 +1,8 @@
 {
 	"tailwindCSS.experimental.configFile": "./packages/ui/styles/globals.css",
-	"typescript.tsdk": "node_modules\\typescript\\lib"
+	"typescript.tsdk": "node_modules\\typescript\\lib",
+	"i18n-ally.localesPaths": ["./apps/tracker/messages"],
+	"i18n-ally.keystyle": "nested",
+	"i18n-ally.enabledFrameworks": ["next-intl"],
+	"i18n-ally.sourceLanguage": "en"
 }

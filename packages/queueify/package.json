@@ -9,12 +9,12 @@
 		"start": "node dist/index.js"
 	},
 	"dependencies": {
-		"ioredis": "^5.6.1"
+		"ioredis": "^5.7.0"
 	},
 	"devDependencies": {
 		"@mingull/eslint-config": "workspace:*",
 		"@mingull/typescript-config": "workspace:*",
-		"tsdown": "^0.12.9"
+		"tsdown": "^0.14.2"
 	},
 	"exports": {
 		".": "./src/index.ts",

@@ -4,10 +4,12 @@ import { cn } from "@mingull/lib";
 import { Badge } from "@mingull/ui/comps/badge";
 import { useNavigation } from "./navigation";
 import { useId } from "react";
+import { useTranslations } from "next-intl";
 
 export default function Footer() {
 	const navigation = useNavigation();
 	const id = useId();
+	const t = useTranslations();
 
 	if (!navigation) return null;
 
@@ -62,7 +64,7 @@ export default function Footer() {
 										{group.label}
 									</p>
 								: showHeader ?
-									<p className="mb-2 min-w-fit font-semibold">
+									<p className="min-w-full font-semibold">
 										{typeof group.header === "function" ?
 											group.header(new Date().getFullYear())
 										:	group.header}
@@ -71,8 +73,8 @@ export default function Footer() {
 
 							const footerContent =
 								group.footer ?
-									<p className="mb-2 min-w-fit font-semibold">
-										{typeof group.footer === "function" ? group.footer() : group.footer}
+									<p className="min-w-full font-semibold">
+										{typeof group.footer === "function" ? group.footer(t) : group.footer}
 									</p>
 								:	null;
 
@@ -83,7 +85,7 @@ export default function Footer() {
 										"text-center": !isGroupHorizontal,
 										"text-muted-foreground": group.muted,
 										"sm:gap-22 flex w-full items-center justify-center": isGroupHorizontal,
-										"justify-evenly": group.header,
+										"grid grid-cols-3": group.header,
 									})}
 								>
 									{labelContent}
@@ -115,8 +117,8 @@ export default function Footer() {
 													>
 														{ItemIcon && (
 															<ItemIcon
-																className={cn("h-4 w-4", {
-																	"mr-2 h-6 w-6": isGroupHorizontal,
+																className={cn("mr-2 h-4 w-4", {
+																	"mr-0 h-6 w-6": isGroupHorizontal,
 																	"text-muted-foreground": group.muted,
 																})}
 															/>

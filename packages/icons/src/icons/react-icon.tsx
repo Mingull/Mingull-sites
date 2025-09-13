@@ -1,4 +1,4 @@
-import { createIcon } from "@/icon.tsx";
+import { createIcon } from "../icon.tsx";
 
 export const ReactIcon = createIcon(
 	"react",

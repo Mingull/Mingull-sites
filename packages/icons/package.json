@@ -13,19 +13,19 @@
 	},
 	"dependencies": {
 		"@mingull/lib": "workspace:*",
-		"react": "^19.1.0",
-		"react-dom": "^19.1.0"
+		"react": "^19.1.1",
+		"react-dom": "^19.1.1"
 	},
 	"devDependencies": {
 		"@mingull/eslint-config": "workspace:*",
 		"@mingull/registry": "workspace:*",
 		"@mingull/typescript-config": "workspace:*",
-		"@tailwindcss/postcss": "^4.1.11",
-		"@turbo/gen": "^2.5.4",
-		"@types/node": "^24.0.12",
-		"@types/react": "^19.1.8",
-		"@types/react-dom": "^19.1.6",
-		"tsdown": "^0.12.9"
+		"@tailwindcss/postcss": "^4.1.12",
+		"@turbo/gen": "^2.5.6",
+		"@types/node": "^24.3.0",
+		"@types/react": "^19.1.11",
+		"@types/react-dom": "^19.1.8",
+		"tsdown": "^0.14.2"
 	},
 	"exports": {
 		".": {

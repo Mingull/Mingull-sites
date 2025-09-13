@@ -5,6 +5,7 @@ import { Button } from "@mingull/ui/comps/button";
 import { Separator } from "@mingull/ui/comps/separator";
 import { Typography } from "@mingull/ui/comps/typography";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
+import { Locale } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -20,7 +21,7 @@ import Balancer from "react-wrap-balancer";
 // };
 // }
 
-export default async function Post({ params }: { params: Promise<{ slug: string; locale: string }> }) {
+export default async function Post({ params }: { params: Promise<{ slug: string; locale: Locale }> }) {
 	const { slug, locale } = await params;
 	const post = await getPostBySlug(locale, slug);
 
@@ -33,7 +34,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string;
 
 	if (isScheduled) {
 		return (
-			<section className="container max-w-3xl px-4 pt-24 pb-16 md:px-6 md:pt-32 md:pb-24">
+			<section className="container max-w-3xl px-4 pb-16 pt-24 md:px-6 md:pb-24 md:pt-32">
 				<BackLink />
 				<div className="mt-8 space-y-4">
 					<Typography.H1>
@@ -54,7 +55,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string;
 	}
 
 	return (
-		<section className="container max-w-3xl px-4 pt-20 pb-16 md:px-6 md:pt-24 md:pb-24 xl:max-w-5xl">
+		<section className="container max-w-3xl px-4 pb-16 pt-20 md:px-6 md:pb-24 md:pt-24 xl:max-w-5xl">
 			<BackLink />
 			{image && (
 				<div className="relative mb-6 aspect-square h-96 w-full overflow-hidden rounded-2xl shadow-md xl:aspect-[16/9] xl:h-auto">
@@ -82,7 +83,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string;
 			<main className="prose prose-neutral dark:prose-invert prose-sm sm:prose-base max-w-none">
 				<Suspense
 					fallback={
-						<section className="container max-w-3xl px-4 pt-24 pb-16 md:px-6 md:pt-32 md:pb-24">
+						<section className="container max-w-3xl px-4 pb-16 pt-24 md:px-6 md:pb-24 md:pt-32">
 							<BackLink />
 							<div className="mt-8 space-y-4">
 								<Typography.H1>

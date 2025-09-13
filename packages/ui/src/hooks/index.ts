@@ -5,6 +5,7 @@ export * from "./use-is-first-render.ts";
 export * from "./use-mounted.ts";
 export * from "./use-previous.ts";
 export * from "./use-promise.ts";
+export * from "./use-slugify.ts";
 export * from "./use-timeout.ts";
 export * from "./use-toggler.ts";
 export * from "./use-typewriter.ts";

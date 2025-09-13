@@ -10,9 +10,7 @@ import { z } from "zod";
 export type PostMetadata = z.infer<typeof postMetadataSchema>;
 
 export const getPosts = async (locale: Locale, limit?: number): Promise<PostMetadata[]> => {
-	const result = await fetch(`${env.API_URL}/portfolio/content/posts?limit=${limit ?? 10}&locale=${locale}`).then(
-		(res) => res.json() as Promise<ApiResponse<PostMetadata[]>>,
-	);
+	const result = await fetch(`${env.API_URL}/portfolio/content/posts?limit=${limit ?? 10}&locale=${locale}`).then((res) => res.json() as Promise<ApiResponse<PostMetadata[]>>);
 
 	if (result?.status !== getHttpCode("Ok") || result?.code !== getStatus("Ok")) {
 		console.log("Error fetching posts:", result?.message);

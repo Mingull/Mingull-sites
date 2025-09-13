@@ -19,6 +19,11 @@ const nextConfig: NextConfig = {
 			},
 		],
 	},
+	reactStrictMode: true,
 };
-const withNextIntl = createNextIntlPlugin();
+const withNextIntl = createNextIntlPlugin({
+	experimental: {
+		createMessagesDeclaration: ["./messages/en.json", "./messages/nl.json"],
+	},
+});
 export default withNextIntl(nextConfig);

@@ -7,20 +7,29 @@ import "@mingull/ui/globals.css";
 import type { Metadata } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import { Inter, JetBrains_Mono, Leckerli_One, Lora } from "next/font/google";
+import { Leckerli_One, Merriweather, Poppins, Roboto_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import React from "react";
 // import "@/app/globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-// const playFair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" });
-const lora = Lora({ subsets: ["latin"], variable: "--font-serif" });
-const jetBrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
+const poppins = Poppins({
+	subsets: ["latin"],
+	weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+	variable: "--font-sans",
+});
+const merriweather = Merriweather({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-serif" });
+const robotoMono = Roboto_Mono({ subsets: ["latin"], variable: "--font-mono" });
 const leckerliOne = Leckerli_One({ subsets: ["latin"], weight: "400", variable: "--font-special" });
-export const metadata: Metadata = {
-	
-	title: { template: "%s - Mingull", default: "Niels Plug - Mingull" },
-	description: "Personal website of Niels Plug",
+
+export function generateStaticParams() {
+	return routing.locales.map((locale) => ({ locale }));
+}
+
+export const generateMetadata = async (): Promise<Metadata> => {
+	return {
+		title: { template: "%s - Mingull", default: "Niels Plug - Mingull" },
+		description: "Personal website of Niels Plug",
+	};
 };
 
 export default async function RootLayout({
@@ -33,14 +42,18 @@ export default async function RootLayout({
 	}
 
 	const messages = await getMessages();
+
 	return (
 		<html lang={locale} suppressHydrationWarning>
+			<head>
+				<meta name="apple-mobile-web-app-title" content="Mingull" />
+			</head>
 			<body
 				className={cn(
 					"bg-background text-foreground flex min-h-screen flex-col font-sans antialiased",
-					inter.variable,
-					lora.variable,
-					jetBrainsMono.variable,
+					poppins.variable,
+					merriweather.variable,
+					robotoMono.variable,
 					leckerliOne.variable,
 				)}
 			>

@@ -1,0 +1,7 @@
+{
+	"categories": ["getting-started", "installation", "components"],
+	"order": {
+		"installation": "asc",
+		"components": "asc"
+	}
+}

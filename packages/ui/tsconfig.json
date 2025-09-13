@@ -7,8 +7,9 @@
 		"declarationMap": false,
 		"baseUrl": ".",
 		"paths": {
-			"@mingull/ui/*": ["./src/*"]
-		}
+			"@/*": ["./src/*"]
+		},
+		"allowArbitraryExtensions": true
 	},
 	"include": ["."],
 	"exclude": ["node_modules", "dist"]
