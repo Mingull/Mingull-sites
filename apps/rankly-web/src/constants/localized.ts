@@ -18,9 +18,9 @@ export const constants = defineConstants({
 		KEYWORDS: ["Rankly"],
 	},
 	en: {
-		SUBTITLE: "s",
+		SUBTITLE: "Create, share, and discover ranked lists.",
 	},
 	nl: {
-		SUBTITLE: "s",
+		SUBTITLE: "Maak, deel en ontdek gerangschikte lijsten.",
 	},
 });
