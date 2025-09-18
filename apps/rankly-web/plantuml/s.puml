@@ -1,0 +1,56 @@
+@startuml
+!define RECTANGLE class
+
+' --- Components ---
+RECTANGLE PaperPlugin {
+    :Collect player stats/events
+    :Send stats & events to API
+    :Fetch leaderboard / rank info
+    :PlaceholderAPI support (custom & external)
+}
+
+RECTANGLE NextJSAPI {
+    :Plugin endpoints
+    :Frontend endpoints
+    :Server management
+    :Leaderboard & page management
+    :Authentication (BetterAuth)
+    :Health / monitoring endpoints
+}
+
+RECTANGLE NextJSFrontend {
+    :Dashboard UI
+    :Server owner management
+    :Leaderboard pages
+    :Custom placeholder setup
+}
+
+RECTANGLE Database {
+    :Servers
+    :Players
+    :Stats
+    :Leaderboard pages
+    :Custom placeholders
+}
+
+RECTANGLE Cache {
+    :Optional caching for leaderboards & stats
+}
+
+' --- Legend ---
+note top of PaperPlugin
+PaperPlugin = Minecraft plugin installed on servers
+NextJSAPI = Backend API (REST) handling plugin & frontend requests
+NextJSFrontend = Web dashboard UI
+Database = Persistent storage (MySQL / Drizzle ORM)
+Cache = Optional caching layer (Redis)
+end note
+
+' --- Interactions ---
+PaperPlugin --> NextJSAPI : POST /players/sync, /players/:uuid/stats
+NextJSAPI --> PaperPlugin : Return player stats, leaderboard data, custom placeholders
+NextJSAPI --> Database : CRUD operations
+NextJSAPI --> Cache : Store/retrieve frequently accessed stats
+NextJSFrontend --> NextJSAPI : Fetch server & leaderboard data
+NextJSAPI --> NextJSFrontend : JSON responses
+@enduml

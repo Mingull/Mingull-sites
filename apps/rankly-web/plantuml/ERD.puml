@@ -1,0 +1,34 @@
+@startuml
+entity Server {
+  *id : string
+  *name : string
+  *visibility : string
+  *apiKey : string
+}
+
+entity Player {
+  *uuid : string
+  *username : string
+  *firstJoin : datetime
+  *serverId : string
+}
+
+entity Stat {
+  *id : string
+  *playerId : string
+  *type : string
+  *value : number
+  *timestamp : datetime
+}
+
+entity LeaderboardPage {
+  *id : string
+  *serverId : string
+  *title : string
+  *metric : string
+}
+
+Server ||--o{ Player : "owns"
+Player ||--o{ Stat : "has"
+Server ||--o{ LeaderboardPage : "contains"
+@enduml
