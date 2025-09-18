@@ -18,7 +18,7 @@ export const GET = withDummy(async () => {
 
 		// --- Health evaluation ---
 		const freeRatio = sysFree / sysTotal;
-		const avgCpuLoad = cpuLoad[0]! / os.cpus().length; // 1-min load / cores
+		const avgCpuLoad = (cpuLoad.length > 0 && typeof cpuLoad[0] === "number" ? cpuLoad[0] : 0) / os.cpus().length; // 1-min load / cores
 		let status: "healthy" | "degraded" | "unhealthy" = "healthy";
 
 		if (freeRatio < 0.1 || avgCpuLoad > 0.8) {
