@@ -1,0 +1,10 @@
+{
+	"nav": {
+		"home": "Home",
+		"features": "Functions",
+		"pricing": "Pricing"
+	},
+	"footer": {
+		"builtBy": "Built by"
+	}
+}

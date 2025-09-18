@@ -14,7 +14,7 @@
 	"devDependencies": {
 		"@mingull/eslint-config": "workspace:*",
 		"@mingull/typescript-config": "workspace:*",
-		"tsdown": "^0.14.2"
+		"tsdown": "^0.15.2"
 	},
 	"exports": {
 		"import": "./dist/index.js",
