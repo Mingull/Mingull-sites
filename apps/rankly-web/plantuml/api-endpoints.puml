@@ -1,0 +1,53 @@
+@startuml
+!define RECTANGLE class
+
+package "NextJS API" {
+    class "Auth" {
+        +POST /api/auth/login
+        +POST /api/auth/logout
+        +POST /api/auth/register
+    }
+
+    class "Servers" {
+        +GET /api/servers
+        +POST /api/servers
+        +GET /api/servers/:serverId
+        +PATCH /api/servers/:serverId
+        +DELETE /api/servers/:serverId
+        +POST /api/servers/:serverId/regenerate-key
+    }
+
+    class "Players" {
+        +POST /api/servers/:serverId/players/sync
+        +POST /api/servers/:serverId/players/:uuid/stats
+        +GET /api/servers/:serverId/players/:uuid/stats
+    }
+
+    class "Events" {
+        +POST /api/servers/:serverId/events
+    }
+
+    class "Leaderboards" {
+        +GET /api/servers/:serverId/leaderboards
+        +GET /api/servers/:serverId/leaderboards/:metric
+    }
+
+    class "Pages" {
+        +GET /api/servers/:serverId/pages
+        +POST /api/servers/:serverId/pages
+        +GET /api/servers/:serverId/pages/:pageId
+        +PATCH /api/servers/:serverId/pages/:pageId
+        +DELETE /api/servers/:serverId/pages/:pageId
+    }
+
+    class "Admin/Utility" {
+        +GET /api/health
+    }
+}
+
+"Auth" --> "Servers"
+"Servers" --> "Players"
+"Servers" --> "Events"
+"Servers" --> "Leaderboards"
+"Servers" --> "Pages"
+@enduml
