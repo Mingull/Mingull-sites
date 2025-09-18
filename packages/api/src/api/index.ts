@@ -26,11 +26,7 @@ export const createErrorResponse = <TCode extends keyof typeof httpCodePhrases.e
 	details,
 });
 
-export type CreateSuccessProps<
-	TCodePhrase extends keyof typeof httpCodePhrases.success,
-	TData,
-	TMeta = Record<string, unknown>,
-> = {
+export type CreateSuccessProps<TCodePhrase extends keyof typeof httpCodePhrases.success, TData, TMeta = Record<string, unknown>> = {
 	code: TCodePhrase;
 	data?: TData;
 	message?: string;
@@ -42,22 +38,13 @@ export type CreateSuccessProps<
  * @param {CreateSuccessProps<TCode, TData, TMeta>} props
  * @returns success response
  */
-export const createSuccessResponse = <
-	TCode extends keyof typeof httpCodePhrases.success,
-	TData,
-	TMeta = Record<string, unknown>,
->({
+export const createSuccessResponse = <TCode extends keyof typeof httpCodePhrases.success, TData, TMeta = Record<string, unknown>>({
 	code,
 	data,
 	message,
 	meta,
 	debugInfo,
-}: CreateSuccessProps<TCode, TData, TMeta>): SuccessResponse<
-	(typeof httpCodePhrases.success)[TCode],
-	(typeof httpCodes.success)[TCode],
-	TData,
-	TMeta
-> => ({
+}: CreateSuccessProps<TCode, TData, TMeta>): SuccessResponse<(typeof httpCodePhrases.success)[TCode], (typeof httpCodes.success)[TCode], TData, TMeta> => ({
 	success: true,
 	code: getStatus(code) as (typeof httpCodePhrases.success)[TCode],
 	status: getHttpCode(code) as (typeof httpCodes.success)[TCode],

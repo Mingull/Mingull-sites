@@ -10,15 +10,15 @@
 	},
 	"dependencies": {
 		"@mingull/lib": "workspace:*",
-		"dotenv": "^17.2.1",
-		"next": "15.5.0",
-		"zod": "^4.1.3"
+		"dotenv": "^17.2.2",
+		"next": "15.5.3",
+		"zod": "^4.1.9"
 	},
 	"devDependencies": {
 		"@mingull/eslint-config": "workspace:*",
 		"@mingull/typescript-config": "workspace:*",
-		"eslint": "^9.34.0",
-		"tsdown": "^0.14.2"
+		"eslint": "^9.35.0",
+		"tsdown": "^0.15.2"
 	},
 	"exports": {
 		".": "./dist/index.js",

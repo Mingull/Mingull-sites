@@ -1,0 +1,10 @@
+{
+	"nav": {
+		"home": "Home",
+		"features": "Functies",
+		"pricing": "Prijzen"
+	},
+	"footer": {
+		"builtBy": "Gebouwd door"
+	}
+}
