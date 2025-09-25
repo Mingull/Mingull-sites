@@ -1,6 +1,4 @@
-import { authClient } from "@/lib/auth-client";
 import { db } from ".";
-import { users, organizations, members } from "./schemas";
 import { auth } from "@/lib/auth";
 
 // async function createStripeProducts() {
