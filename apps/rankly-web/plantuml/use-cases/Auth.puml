@@ -1,0 +1,23 @@
+@startuml "Authentication & Access"
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor :Server Owner: <<HUMAN>> as Owner
+actor :Paper Plugin: <<SYSTEM>> as Plugin
+
+rectangle "Authentication" {
+    (Register Account) 
+    (Login to Dashboard) 
+    (Authenticate User)
+    (Validate API Key)
+}
+
+Owner --> (Register Account)
+(Register Account) .left-> (Authenticate User) : <<include>>
+
+Owner --> (Login to Dashboard)
+(Login to Dashboard) .right-> (Authenticate User) : <<include>>
+
+Plugin --> (Validate API Key)
+@enduml

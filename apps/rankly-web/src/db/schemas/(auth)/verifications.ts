@@ -1,5 +1,5 @@
 import { mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
-import { timestamps } from "./helper";
+import { timestamps } from "../helper";
 
 export const verifications = mysqlTable("verifications", {
 	id: varchar("id", { length: 36 }).primaryKey(),

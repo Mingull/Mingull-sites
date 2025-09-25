@@ -1,17 +1,21 @@
+' @startuml
+' actor "Player" as P
+' participant "Paper Plugin" as Plugin
+' participant "Next.js API" as API
+' database "Database" as DB
+
+' P -> Plugin : Joins server / kills / events
+' Plugin -> API : POST /servers/:id/players/sync
+' API -> DB : Create/Update player entry
+' DB --> API : Return success
+' API --> Plugin : 200 OK
+
+' Plugin -> API : POST /servers/:id/players/:uuid/stats
+' API -> DB : Update player stats
+' DB --> API : Return success
+' API --> Plugin : 200 OK
+' @enduml
+
 @startuml
-actor "Player" as P
-participant "Paper Plugin" as Plugin
-participant "Next.js API" as API
-database "Database" as DB
-
-P -> Plugin : Joins server / kills / events
-Plugin -> API : POST /servers/:id/players/sync
-API -> DB : Create/Update player entry
-DB --> API : Return success
-API --> Plugin : 200 OK
-
-Plugin -> API : POST /servers/:id/players/:uuid/stats
-API -> DB : Update player stats
-DB --> API : Return success
-API --> Plugin : 200 OK
+listsprite
 @enduml
