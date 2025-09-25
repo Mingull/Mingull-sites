@@ -11,7 +11,7 @@ export const apikeys = mysqlTable(
 			.references(() => users.id, { onDelete: "cascade" }),
 		name: text("name"),
 		start: text("start"),
-		prefix: text("prefix"),
+		prefix: varchar("prefix", { length: 32 }).notNull(),
 		key: text("key").notNull(),
 		refillInterval: int("refill_interval"),
 		refillAmount: int("refill_amount"),
