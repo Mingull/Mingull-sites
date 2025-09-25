@@ -2,9 +2,10 @@
 !define RECTANGLE class
 
 package "NextJS API" {
+ 
     class "Auth" {
-        +POST /api/auth/login
-        +POST /api/auth/logout
+        +POST /api/auth/signin
+        +POST /api/auth/signout
         +POST /api/auth/register
     }
 
@@ -43,7 +44,14 @@ package "NextJS API" {
     class "Admin/Utility" {
         +GET /api/health
     }
+
+' note of "NextJS API"
+' NextJS API = Backend API (REST) handling plugin & frontend requests
+' api prefix = /api
+' end note
 }
+
+
 
 "Auth" --> "Servers"
 "Servers" --> "Players"

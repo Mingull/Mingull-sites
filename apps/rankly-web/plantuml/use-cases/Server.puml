@@ -1,0 +1,47 @@
+@startuml
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor :Server Owner: <<HUMAN>> as Owner
+actor :Player: <<HUMAN>> as Player
+actor :Paper Plugin: <<SYSTEM>> as Plugin
+
+rectangle "Server Management" {
+    (View Dashboard) 
+    together{
+        (Regenerate API Key)
+        (Manage Servers) 
+    } 
+}
+
+rectangle "Leaderboards" {
+    (Create Leaderboard Page) 
+    (View Leaderboards) 
+    (Fetch Leaderboards / Stats)
+}
+
+rectangle "Player Data" {
+    (Push Player Stats) 
+    (Synchronize Player Data) 
+}
+
+Owner --> (Manage Servers)
+(Manage Servers) .right-> (View Dashboard) : <<include>>
+
+Owner --> (View Dashboard)
+Owner --> (Create Leaderboard Page)
+(Create Leaderboard Page) .-> (View Dashboard) : <<extend>>
+
+Owner --> (View Leaderboards)
+Owner --> (Regenerate API Key)
+
+Player --> (View Leaderboards)
+(View Leaderboards) .> (Fetch Leaderboards / Stats) : <<include>>
+
+Plugin --> (Push Player Stats)
+(Push Player Stats) .> (Synchronize Player Data) : <<include>>
+
+Plugin --> (Fetch Leaderboards / Stats)
+Plugin --> (Synchronize Player Data)
+@enduml

@@ -1,0 +1,94 @@
+Project Rankly {
+  database_type: "MySQL"
+}
+
+Table users {
+  id varchar(36) [pk]
+  name text
+  username varchar(255) [unique]
+  email varchar(255) [unique]
+  email_verified boolean
+  image text
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table servers {
+  id varchar(36) [pk]
+  server_uuid varchar(64) [unique]
+  setup_token varchar(64) [unique]
+  owner_id varchar(36) [ref: > users.id]
+  activated boolean
+  name varchar(255)
+  hostname varchar(255)
+  ip varchar(45)
+  port int
+  version varchar(50)
+  plugins json
+  banner_url varchar(2048)
+  icon_url varchar(2048)
+  motd text
+  status_id int [ref: > server_status.id]
+  player_count int
+  max_players int
+  last_heartbeat timestamp
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table server_status {
+  id int [pk]
+  name varchar(128) [unique]
+}
+
+Table players {
+  uuid varchar(36) [pk]
+  username varchar(255)
+  linked_user_id varchar(36) [ref: > users.id]
+}
+
+Table player_server {
+  player_uuid varchar(36) [ref: > players.uuid]
+  server_id varchar(36) [ref: > servers.id]
+  first_seen timestamp
+  last_seen timestamp
+  indexes {
+    (player_uuid, server_id) [pk]
+  }
+}
+
+Table player_stats {
+  id varchar(36) [pk]
+  player_uuid varchar(36) [ref: > players.uuid]
+  server_id varchar(36) [ref: > servers.id]
+  type varchar(255)
+  value int
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+  indexes {
+    (player_uuid, server_id, type) [unique]
+  }
+}
+
+Table leaderboards {
+  id varchar(36) [pk]
+  server_id varchar(36) [ref: > servers.id]
+  title varchar(255)
+  type varchar(50)
+  public boolean
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+Table leaderboard_entries {
+  id varchar(36) [pk]
+  leaderboard_id varchar(36) [ref: > leaderboards.id]
+  player_uuid varchar(36) [ref: > players.uuid]
+  score int
+  position int
+  created_at timestamp
+  updated_at timestamp
+}

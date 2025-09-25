@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor :Admin: <<HUMAN>> as Admin
+
+rectangle "Monitoring" {
+    (Monitor System Status)
+}
+
+rectangle "Server Management" {
+    (Manage Servers)
+}
+
+Admin --> (Monitor System Status)
+Admin .> (Manage Servers) : <<extend>>
+@enduml

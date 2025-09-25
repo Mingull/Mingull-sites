@@ -1,34 +1,106 @@
-@startuml
+@startuml "SaaS Platform ERD"
+left to right direction
+!theme plain
+skinparam PackageStyle rectangle
+skinparam Linetype ortho
+skinparam ArrowMessageAlignment left
+
+
+entity User {
+  * id : varchar(36) <<PK>>
+  name : text
+  username : varchar(255) <<UQ>>
+  * email : varchar(255) <<UQ>>
+  email_verified : boolean
+  image : text
+  created_at : timestamp
+  updated_at : timestamp
+  deleted_at : timestamp <<N>>
+}
+
 entity Server {
-  *id : string
-  *name : string
-  *visibility : string
-  *apiKey : string
+  * id : varchar(36) <<PK>>
+  server_uuid : varchar(64) <<UQ>> 
+  setup_token : varchar(64) <<UQ>> 
+  * owner_id : varchar(36) <<FK>> 
+  activated : boolean <<(d: false)>>
+  name : varchar(255)
+  hostname : varchar(255) <<N>>
+  ip : varchar(45) <<N>>
+  port : int <<(d: 25565)>> <<N>>
+  version : varchar(50) <<N>>
+  plugins : JSON <<N>>
+  banner_url : varchar(2048) <<N>>
+  icon_url : varchar(2048) <<N>>
+  motd : text <<N>>
+  * status_id : int <<FK>>
+  player_count : int <<N>>
+  max_players : int <<N>>
+  last_heartbeat : timestamp 
+  created_at : timestamp 
+  updated_at : timestamp 
+}
+
+entity ServerStatus {
+  * id : int <<PK>>
+  name : varchar(128) <<UQ>>
 }
 
 entity Player {
-  *uuid : string
-  *username : string
-  *firstJoin : datetime
-  *serverId : string
+  * uuid : varchar(36) <<PK>>
+  username : varchar(255)
+  linked_user_id : varchar(36) <<FK>> <<N>>
 }
 
-entity Stat {
-  *id : string
-  *playerId : string
-  *type : string
-  *value : number
-  *timestamp : datetime
+entity PlayerServer {
+  * player_uuid : varchar(36) <<FK>>
+  * server_id : varchar(36) <<FK>>
+  first_seen : timestamp
+  last_seen : timestamp
+  <<PK>> (player_uuid, server_id)
 }
 
-entity LeaderboardPage {
-  *id : string
-  *serverId : string
-  *title : string
-  *metric : string
+entity PlayerStat {
+  * id : varchar(36) <<PK>>
+  * player_uuid : varchar(36) <<FK>>
+  * server_id : varchar(36) <<FK>>
+  type : varchar(255)
+  value : number
+  created_at : timestamp
+  updated_at : timestamp
+  deleted_at : timestamp <<N>>
+  <<UQ>> (player_uuid, server_id, type)
 }
 
-Server ||--o{ Player : "owns"
-Player ||--o{ Stat : "has"
-Server ||--o{ LeaderboardPage : "contains"
+entity Leaderboard {
+  * id : varchar(36) <<PK>>
+  * server_id : varchar(36) <<FK>>
+  title : varchar(255)
+  type : varchar(50)
+  public : boolean
+  created_at : timestamp
+  updated_at : timestamp
+  deleted_at : timestamp <<N>>
+}
+
+entity LeaderboardEntry {
+  * id : varchar(36) <<PK>>
+  * leaderboard_id : varchar(36) <<FK>>
+  * player_uuid : varchar(36) <<FK>>
+  score : number
+  position : int
+  created_at : timestamp
+  updated_at : timestamp
+}
+
+' Relationships
+User ||--o{ Server : owns
+ServerStatus ||--o{ Server : has status
+Player ||-down-o{ PlayerServer : plays on
+Server ||-left-o{ PlayerServer : has players
+Player ||--o{ PlayerStat : has stats
+Server ||--o{ PlayerStat : belongs to
+Server ||--o{ Leaderboard : has
+Player ||--o{ LeaderboardEntry : participates in
+Leaderboard ||--o{ LeaderboardEntry : has entries
 @enduml

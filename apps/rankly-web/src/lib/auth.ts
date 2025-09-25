@@ -3,7 +3,7 @@ import { accounts, apikeys, sessions, users, verifications } from "@/db/schemas"
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
-import { organization, username } from "better-auth/plugins";
+import { apiKey, organization, username } from "better-auth/plugins";
 import { Resend } from "resend";
 import { ForgotPasswordEmail } from "@mingull/auth/emails";
 import { ac, admin, member, owner } from "./permissions";
@@ -63,9 +63,13 @@ export const auth = betterAuth({
 	},
 	plugins: [
 		nextCookies(),
+		apiKey(),
 		organization({
 			ac,
 			roles: { member, admin, owner },
+			dynamicAccessControl:{
+				enabled: true,
+			}
 		}),
 		username(),
 	],
