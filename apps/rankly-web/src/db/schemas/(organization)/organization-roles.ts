@@ -11,3 +11,6 @@ export const organizationRoles = mysqlTable("organization_roles", {
 	permission: text("permission").notNull(),
 	...timestamps(),
 });
+
+export type OrganizationRole = typeof organizationRoles.$inferSelect;
+export type NewOrganizationRole = typeof organizationRoles.$inferInsert;
