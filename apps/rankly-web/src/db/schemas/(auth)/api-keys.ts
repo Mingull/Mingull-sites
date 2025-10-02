@@ -27,7 +27,6 @@ export const apikeys = mysqlTable(
 		...timestamps({
 			lastRequest: datetime("last_request"),
 			expiresAt: datetime("expires_at"),
-			deletedAt: false,
 		}),
 	},
 	(table) => [index("userId_prefix_idx").on(table.userId, table.prefix)],

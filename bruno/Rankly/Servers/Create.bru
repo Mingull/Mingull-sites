@@ -5,11 +5,16 @@ meta {
 }
 
 post {
-  url: {{host}}/servers
-  body: none
+  url: {{host}}/{{version}}/servers
+  body: json
   auth: inherit
 }
 
-params:path {
-    serverId: server_id
+body:json {
+  {
+    "name": "TestServer",
+    "serverUuid": "this-isa-server-uuid",
+    "setupToken": "this-isa-setup-token",
+    "status": 1
+  }
 }

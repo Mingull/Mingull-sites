@@ -1,7 +1,7 @@
 import { int, mysqlTable, varchar } from "drizzle-orm/mysql-core";
 
 export const serverStatus = mysqlTable("server_status", {
-	id: int("id").primaryKey(),
+	id: int("id").primaryKey().autoincrement(),
 	name: varchar("name", { length: 128 }).notNull().unique(),
 });
 

@@ -16,4 +16,3 @@ export { invitations, type Invitation, type NewInvitation } from "./(organizatio
 export { members, type Member, type NewMember } from "./(organization)/members";
 export { organizationRoles, type NewOrganizationRole, type OrganizationRole } from "./(organization)/organization-roles";
 export { organizations, type NewOrganization, type Organization } from "./(organization)/organizations";
-

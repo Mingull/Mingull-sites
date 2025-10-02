@@ -12,6 +12,7 @@ export const sessions = mysqlTable("sessions", {
 	token: varchar("token", { length: 255 }).notNull().unique(),
 	ipAddress: text("ip_address"),
 	userAgent: text("user_agent"),
+	impersonatedBy: varchar("impersonated_by", { length: 36 }).references(() => users.id, { onDelete: "set null" }),
 	...timestamps({
 		expiresAt: timestamp("expires_at").notNull(),
 	}),

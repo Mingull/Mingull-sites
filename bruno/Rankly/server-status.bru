@@ -1,0 +1,11 @@
+meta {
+  name: server-status
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{host}}/{{version}}/server-status
+  body: none
+  auth: inherit
+}
