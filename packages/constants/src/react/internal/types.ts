@@ -1,4 +1,4 @@
-import { Prettify } from "@mingull/";
+import { Prettify } from "@mingull/lib";
 import { DomainsConfig, LocalePrefixMode, Pathnames, RoutingConfig } from "next-intl/routing";
 import { z } from "zod";
 import { ConstantsError } from "~/exceptions/constants-error.ts";

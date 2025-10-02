@@ -20,7 +20,6 @@ export const json = async <T extends z.ZodType, E extends Error | z.ZodError<z.i
 	}
 	const body = await req.json();
 	if (!body) return { data: null, error: new Error("Invalid body") as E };
-	console.log(body);
 	const parsed = schema.safeParse(body);
 	if (parsed.success) {
 		return { data: parsed.data, error: null };
