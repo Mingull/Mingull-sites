@@ -14,7 +14,7 @@ export const users = mysqlTable("users", {
 	banned: boolean("banned"),
 	banReason: text("ban_reason"),
 	banExpires: timestamp("ban_expires").default(sql`NULL`),
-	...timestamps({ onboardedAt: timestamp("onboarded_at").default(sql`NULL`) }),
+	...timestamps(),
 });
 
 export type User = typeof users.$inferSelect;

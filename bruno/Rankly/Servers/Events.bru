@@ -5,11 +5,11 @@ meta {
 }
 
 post {
-  url: {{host}}/server/:serverId/events
+  url: {{host}}/{{version}}/server/:serverId/events
   body: none
   auth: inherit
 }
 
 params:path {
-    serverId: server_id
+  serverId: server_id
 }

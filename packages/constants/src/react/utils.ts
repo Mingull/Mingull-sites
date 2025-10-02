@@ -42,7 +42,7 @@ type Input = SimpleInput | TupleInput | MixedInput;
  * @param schema The schema for the state.
  * @returns A Zod object schema that represents the state with the given keys and schema.
  */
-export const StatefulSchema = <
+export const statefulSchema = <
 	const T extends Input,
 	const S extends SchemaType,
 	const FlatKeys extends FlattenKeys<T> = FlattenKeys<T>,

@@ -4,7 +4,7 @@ import { timestamps } from "../helper";
 export const organizations = mysqlTable("organizations", {
 	id: varchar("id", { length: 36 }).primaryKey(),
 	name: text("name").notNull(),
-	slug: varchar("slug", { length: 255 }).unique(),
+	slug: varchar("slug", { length: 255 }).unique().notNull(),
 	logo: text("logo"),
 	metadata: text("metadata"),
 	...timestamps(),

@@ -12,21 +12,14 @@ export type MiddlewareParams = {
 export type BaseContext<P extends MiddlewareParams> = {
 	params: Promise<NonNullable<P["params"]> extends Params ? P["params"] : {}>;
 	searchParams: Promise<NonNullable<P["searchParams"]> extends SearchParams ? P["searchParams"] : {}>;
-	json: <T extends z.ZodType<any, any, any>>(schema?: T) => ReturnType<typeof json<z.infer<T>>>;
+	json: <T extends z.ZodType>(schema?: T) => ReturnType<typeof json<T>>;
 };
 
 export type Context<T = {}, P extends MiddlewareParams = MiddlewareParams> = BaseContext<P> & T;
 
-export type Handler<C = {}, P extends MiddlewareParams = MiddlewareParams> = (
-	req: NextRequest,
-	context: Context<C, P>,
-) => Promise<Response>;
+export type Handler<C = {}, P extends MiddlewareParams = MiddlewareParams> = (req: NextRequest, context: Context<C, P>) => Promise<Response>;
 
-export type Middleware<C = {}> = <P extends MiddlewareParams = MiddlewareParams>(
-	handler: Handler<C, P>,
-) => Handler<C, P>;
+export type Middleware<C = {}> = <P extends MiddlewareParams = MiddlewareParams>(handler: Handler<C, P>) => Handler<C, P>;
 
 type ExtractContext<M> = M extends Middleware<infer CTX> ? CTX : never;
-export type MergeContexts<M extends Middleware<any>[]> =
-	M extends [infer First, ...infer Rest] ? ExtractContext<First> & MergeContexts<Extract<Rest, Middleware<any>[]>>
-	:	{};
+export type MergeContexts<M extends Middleware<any>[]> = M extends [infer First, ...infer Rest] ? ExtractContext<First> & MergeContexts<Extract<Rest, Middleware<any>[]>> : {};

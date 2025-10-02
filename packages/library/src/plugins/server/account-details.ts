@@ -1,9 +1,9 @@
-import { BetterAuthPlugin, nullable } from "better-auth";
+import { type BetterAuthPlugin } from "better-auth";
 import { createAuthMiddleware } from "better-auth/plugins";
 
 export type PluginOptions = {};
 
-export const accountDetails = (opts?: PluginOptions) =>
+export const accountDetails = (opts?: PluginOptions): BetterAuthPlugin =>
 	({
 		id: "account-details",
 		schema: {
