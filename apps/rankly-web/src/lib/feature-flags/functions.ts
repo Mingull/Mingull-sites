@@ -78,9 +78,43 @@ export async function canViewFeature(flagName: string, context: TenantContext): 
 	}
 
 	// --- 4. Evaluate global rules ---
-	rules.forEach((rule) => {
-		// dont know how to handle these yet
-	});
+	for (const rule of rules) {
+		// Check target type
+		if (rule.targetType === "user" && tenantContext.tenantType !== "user") continue;
+
+		// Check allowed roles (if user), dont understand this part
+		if (rule.targetType === "role" && tenantContext.tenantType === "user") {
+			const userRole = await getUserRole(tenantContext.tenantId);
+			if (rule.allowedRoles === userRole) {
+				return true;
+			}
+		}
+
+		// Check org plan (if org), also dont understand this part
+		if (rule.targetType === "plan" && tenantContext.tenantType === "organization") {
+			const orgPlan = await getOrgPlan(tenantContext.tenantId);
+			if (rule.plan && rule.plan === orgPlan) {
+				return true;
+			}
+		}
+
+		// Check rollout percentage
+		if (!(rule.rolloutPercentage && rule.rolloutPercentage > 0 && rule.rolloutPercentage <= 100)) continue;
+
+		if (userIsWithinPercentage(flag.key, rule.rolloutPercentage / 100, tenantContext.tenantId)) {
+			return true;
+		}
+
+		// if rule matches
+		// - if linked to a variant return that variant
+		// - otherwise return true(flag on for tenant)
+		const variant = variants.find((v) => v.id === rule.featureFlagId); // this seems wrong
+		if (variant) {
+			return variant.key;
+		} else {
+			return true;
+		}
+	}
 
 	// --- 5. Evaluate percentage rollout ---
 	if (flag.rolloutPercentage && flag.rolloutPercentage > 0 && flag.rolloutPercentage <= 100) {
@@ -100,4 +134,9 @@ function userIsWithinPercentage(flagKey: string, allowedPercent: number, tenantI
 async function getUserRole(userId: string): Promise<"user" | "admin"> {
 	const user = await db.query.users.findFirst({ where: (u, { eq }) => eq(u.id, userId) });
 	return (user?.role || "user") as "user" | "admin";
+}
+
+async function getOrgPlan(orgId: string): Promise<"free" | "pro" | "enterprise"> {
+	const org = await db.query.organizations.findFirst({ where: (o, { eq }) => eq(o.id, orgId) });
+	return (org?.plan || "free") as "free" | "pro" | "enterprise";
 }

@@ -6,8 +6,9 @@ export const flagRules = mysqlTable("flag_rules", {
 	featureFlagId: int("feature_flag_id")
 		.notNull()
 		.references(() => featureFlags.id, { onDelete: "cascade" }),
-	type: varchar("type", { length: 32 }).notNull(), // e.g. "role" | "org" | "user" | "plan"
-	value: varchar("value", { length: 255 }).notNull(), // e.g. "admin", "pro", userId
+	targetType: varchar("target_type", { length: 32 }).notNull(), // e.g. "role" | "org" | "user" | "plan"
+	allowedRoles: varchar("allowed_roles", { length: 255 }).notNull(), // e.g. "admin" | "member" | "owner" | "user" | ("admin" | "member" | "owner" | "user")[] | null
+	plan: varchar("plan", { length: 64 }), // e.g. "free" | "pro" | "enterprise" | null
 	rolloutPercentage: int("rollout_percentage").default(100),
 	description: varchar("description", { length: 255 }),
 });
