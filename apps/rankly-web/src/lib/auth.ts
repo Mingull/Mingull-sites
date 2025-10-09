@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { accounts, apikeys, sessions, users, verifications } from "@/db/schemas";
+import { accounts, apikeys, invitations, members, organizationRoles, organizations, sessions, users, verifications } from "@/db/schemas";
 import { ForgotPasswordEmail } from "@mingull/auth/emails";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
@@ -9,7 +9,7 @@ import { Resend } from "resend";
 import { ac } from "./permissions";
 import { getActiveOrganization } from "./utils";
 
-const schema = { accounts, apikeys, sessions, users, verifications };
+const schema = { accounts, apikeys, invitations, members, organizationRoles, organizations, sessions, users, verifications };
 
 const resend = new Resend();
 
@@ -53,7 +53,7 @@ export const auth = betterAuth({
 			});
 		},
 	},
-	logger:{
+	logger: {
 		log(level, message, ...args) {
 			console[level](`[${level}] ${message}`, ...args);
 		},
@@ -68,5 +68,19 @@ export const auth = betterAuth({
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
 		},
 	},
-	plugins: [nextCookies(), admin(), apiKey(), organization({ ac, dynamicAccessControl: { enabled: true } }), username()],
+	plugins: [
+		nextCookies(),
+		admin(),
+		apiKey(),
+		organization({
+			ac,
+			dynamicAccessControl: {
+				enabled: true,
+			},
+		}),
+		username(),
+	],
 });
+
+export type Session = typeof auth.$Infer.Session.session;
+export type User = typeof auth.$Infer.Session.user;

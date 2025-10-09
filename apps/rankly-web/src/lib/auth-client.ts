@@ -1,7 +1,8 @@
 "use client";
 import { createAuthClient } from "better-auth/react";
-import { adminClient, apiKeyClient, inferAdditionalFields, organizationClient, usernameClient } from "better-auth/client/plugins";
+import { adminClient, apiKeyClient, inferAdditionalFields, inferOrgAdditionalFields, organizationClient, usernameClient } from "better-auth/client/plugins";
 import { ac } from "./permissions";
+import { auth } from "./auth";
 
 export const authClient = createAuthClient({
 	fetchOptions: {
@@ -10,17 +11,9 @@ export const authClient = createAuthClient({
 	baseURL: process.env.NEXT_PUBLIC_RANKLY_BASE_URL!,
 	plugins: [
 		adminClient(),
-		organizationClient({ ac, dynamicAccessControl: { enabled: true } }),
+		organizationClient({ ac, dynamicAccessControl: { enabled: true }, schema: inferOrgAdditionalFields<typeof auth>() }),
 		apiKeyClient(),
 		usernameClient(),
-		inferAdditionalFields({
-			user: {
-				bio: {
-					type: "string",
-					nullable: true,
-					required: false,
-				},
-			},
-		}),
+		inferAdditionalFields<typeof auth>(),
 	],
 });

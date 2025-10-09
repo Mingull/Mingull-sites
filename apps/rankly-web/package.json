@@ -12,9 +12,11 @@
 		"lint:fix": "next lint --fix",
 		"check-types": "tsc --noEmit",
 		"db": "drizzle-kit",
-		"db:generate": "pnpm db generate --config drizzle.config.ts",
-		"db:migrate": "pnpm db migrate --config drizzle.config.ts",
-		"db:seed": "npx tsx lib/db/seed.ts"
+		"db:generate": "drizzle-kit generate",
+		"db:migrate": "drizzle-kit migrate",
+		"db:studio": "drizzle-kit studio",
+		"db:push": "drizzle-kit push",
+		"db:seed": "pnpm dlx tsx src/db/seed.ts"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^5.2.2",

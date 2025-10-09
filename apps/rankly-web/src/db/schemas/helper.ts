@@ -8,7 +8,7 @@ export const timestamps = <T extends Record<string, unknown>>(timestamps?: Times
 	return {
 		...timestamps,
 		createdAt: timestamp("created_at").defaultNow().notNull(),
-		updatedAt: timestamp("updated_at").defaultNow().onUpdateNow().notNull(),
+		updatedAt: timestamp("updated_at").onUpdateNow().notNull(),
 		deletedAt: timestamp("deleted_at"),
 	};
 };

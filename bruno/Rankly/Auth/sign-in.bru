@@ -25,4 +25,5 @@ vars:pre-request {
 
 vars:post-response {
   auth_token: res.body.token
+  user_id: res.body.user.id
 }
