@@ -1,5 +1,7 @@
-import { db } from ".";
 import { auth } from "@/lib/auth";
+import { sql } from "drizzle-orm";
+import { db } from ".";
+import { serverStatus } from "./schemas";
 
 // async function createStripeProducts() {
 // 	console.log("Creating Stripe products and prices...");
@@ -37,33 +39,67 @@ import { auth } from "@/lib/auth";
 // 	console.log("Stripe products and prices created successfully.");
 // }
 
-async function seed() {
-	const name = "Test User";
-	const email = "test@test.com";
-	const password = "admin123";
+const createUser = async (name = "Niels Plug", username = "Mingull", email = "nielsplug@outlook.com", password = "Pass1234") => {
+	try {
+		const { user } = await auth.api.signUpEmail({
+			body: {
+				name,
+				username,
+				email,
+				password,
+			},
+		});
+		return user;
+	} catch (e) {
+		const existingUser = await db.query.users.findFirst({
+			where: (users, { eq }) => eq(users.email, email),
+		});
+		if (!existingUser) throw e;
+		return existingUser;
+	}
+};
 
-	const { user } = await auth.api.signUpEmail({
-		body: {
-			email,
-			password,
-			name,
-		},
-	});
+const createOrganization = async (name: string, slug: string, userId: string) => {
+	try {
+		await auth.api.createOrganization({
+			body: { name, slug, userId },
+		});
+	} catch (e) {}
+};
 
+const createServerStatus = async (...statuses: { name: string; descriptor?: string; type: "runtime" | "lifecycle" }[]) => {
+	await db
+		.insert(serverStatus)
+		.values(statuses.map(({ name, descriptor, type }) => ({ name, descriptor, type })))
+		.onDuplicateKeyUpdate({
+			set: {
+				descriptor: sql`VALUES(descriptor)`,
+				type: sql`VALUES(type)`,
+			},
+		});
+};
+
+const seed = async () => {
+	const user = await createUser();
 	console.log("Initial user created.");
 
-	const data = await auth.api.createOrganization({
-		body: {
-			name: "Test Organization",
-			slug: "test-organization",
-			userId: user.id,
-		},
-	});
-
+	await createOrganization("Test Organization", "test-organization", user.id);
 	console.log("Initial organization created.");
 
+	await createServerStatus(
+		{ name: "PENDING", descriptor: "Server created but not yet activated/setup", type: "lifecycle" },
+		{ name: "UNCLAIMED", descriptor: "Server exists but no owner/org has claimed it", type: "lifecycle" },
+		{ name: "ACTIVATED", descriptor: "Server is active and ready for use", type: "lifecycle" },
+		{ name: "DECOMMISSIONED", descriptor: "Server is retired or deleted", type: "lifecycle" },
+		{ name: "ONLINE", descriptor: "Server is currently online", type: "runtime" },
+		{ name: "OFFLINE", descriptor: "Server is currently offline", type: "runtime" },
+		{ name: "MAINTENANCE", descriptor: "Server is under maintenance or temporarily down", type: "runtime" },
+		{ name: "ERROR", descriptor: "Server reported an error (plugin/API failure)", type: "runtime" },
+	);
+	console.log("Server statuses created or updated.");
+
 	// await createStripeProducts();
-}
+};
 
 seed()
 	.catch((error) => {

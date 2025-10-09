@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import { boolean, check, int, json, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { boolean, check, int, json, mysqlTable, text, timestamp, unique, varchar } from "drizzle-orm/mysql-core";
 import { timestamps } from "../helper";
 import { users } from "../(auth)/users";
 import { serverStatus } from "./server-status";
@@ -14,13 +14,12 @@ export const servers = mysqlTable(
 			.$defaultFn(() => randomUUID())
 			.primaryKey(),
 
-		serverUuid: varchar("server_uuid", { length: 64 }).notNull().unique(), // REQUIRED, unique per Minecraft server
-		setupToken: varchar("setup_token", { length: 64 }).notNull().unique(), // REQUIRED, used for initial setup
+		serverUuid: varchar("server_uuid", { length: 64 }), // OPTIONAL, unique per Minecraft server, only when used through plugin setup
+		setupToken: varchar("setup_token", { length: 64 }), // OPTIONAL, used for initial setup, only when used through plugin setup
 
 		// --- Ownership / access ---
 		ownerId: varchar("owner_id", { length: 36 }).references(() => users.id, { onDelete: "cascade" }), // OPTIONAL, links server to account if user-managed
 		organizationId: varchar("organization_id", { length: 36 }).references(() => organizations.id, { onDelete: "cascade" }), // OPTIONAL, links server to organization if org-managed
-		activated: boolean("activated").notNull().default(false), // REQUIRED, setup completion
 
 		// --- Server metadata (general info) ---
 		name: varchar("name", { length: 255 }).notNull(), // REQUIRED, display name
@@ -29,6 +28,8 @@ export const servers = mysqlTable(
 		port: int("port").default(25565), // OPTIONAL, default Minecraft port
 		version: varchar("version", { length: 50 }), // OPTIONAL, Minecraft version
 		plugins: json("plugins"), // OPTIONAL, JSON/text list of plugins
+		playerCount: int("player_count").default(0), // OPTIONAL, live player count
+		maxPlayers: int("max_players").default(0), // OPTIONAL, max slots
 
 		// --- Visuals (for listings) ---
 		bannerUrl: varchar("banner_url", { length: 2048 }), // OPTIONAL, wide banner image
@@ -36,15 +37,16 @@ export const servers = mysqlTable(
 		motd: text("motd"), // OPTIONAL, server MOTD (rich text)
 
 		// --- Dynamic status ---
-		status: int("status")
+		lifecycleStatus: int("lifecycle_status")
 			.references(() => serverStatus.id)
-			.notNull(), // REQUIRED, FK to server_status table
-		playerCount: int("player_count").default(0), // OPTIONAL, live player count
-		maxPlayers: int("max_players").default(0), // OPTIONAL, max slots
+			.notNull(), // REQUIRED, FK to server_status table (lifecycle type)
+		runtimeStatus: int("runtime_status")
+			.references(() => serverStatus.id)
+			.notNull(), // REQUIRED, FK to server_status table (runtime type)
 
 		// --- Tracking ---
 		...timestamps({
-			lastHeartbeat: timestamp("last_heartbeat").notNull(), // REQUIRED, heartbeat for "is online?"
+			lastHeartbeat: timestamp("last_heartbeat").defaultNow().notNull(), // REQUIRED, heartbeat for "is online?"
 		}),
 	},
 	(table) => [
@@ -53,7 +55,8 @@ export const servers = mysqlTable(
 			sql`(${table.ownerId} IS NOT NULL AND ${table.organizationId} IS NULL) OR
     			(${table.ownerId} IS NULL AND ${table.organizationId} IS NOT NULL) OR
 				(${table.ownerId} IS NULL AND ${table.organizationId} IS NULL)`,
-		),
+		), // Ensures a server is either user-owned, org-owned, or unowned (for initial setup)
+		unique("serverUuid_setupToken").on(table.serverUuid, table.setupToken), // UNIQUE when both serverUuid and setupToken are set (plugin setup)
 	],
 );
 

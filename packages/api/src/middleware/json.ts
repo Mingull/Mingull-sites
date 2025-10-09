@@ -18,8 +18,10 @@ export const json = async <T extends z.ZodType, E extends Error | z.ZodError<z.i
 	if (!contentType.includes("application/json")) {
 		return { data: null, error: new Error("Invalid content type") as E };
 	}
+
 	const body = await req.json();
 	if (!body) return { data: null, error: new Error("Invalid body") as E };
+
 	const parsed = schema.safeParse(body);
 	if (parsed.success) {
 		return { data: parsed.data, error: null };

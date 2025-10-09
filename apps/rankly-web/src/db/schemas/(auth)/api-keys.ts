@@ -11,7 +11,7 @@ export const apikeys = mysqlTable(
 			.references(() => users.id, { onDelete: "cascade" }),
 		name: text("name"),
 		start: text("start"),
-		prefix: varchar("prefix", { length: 32 }).notNull(),
+		prefix: varchar("prefix", { length: 32 }),
 		key: text("key").notNull(),
 		refillInterval: int("refill_interval"),
 		refillAmount: int("refill_amount"),
@@ -29,7 +29,7 @@ export const apikeys = mysqlTable(
 			expiresAt: datetime("expires_at"),
 		}),
 	},
-	(table) => [index("userId_prefix_idx").on(table.userId, table.prefix)],
+	// (table) => [index("userId_prefix_idx").on(table.userId, table.prefix)],
 );
 
 export type ApiKey = typeof apikeys.$inferSelect;

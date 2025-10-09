@@ -1,6 +1,5 @@
 import { createErrorResponse, createMiddleware, getHttpCode, getStatus } from "@mingull/api";
-import { auth } from "@/lib/auth";
-import { Session, User } from "better-auth";
+import { auth, type Session, type User } from "@/lib/auth";
 import { NextResponse } from "next/server";
 
 export const withAuth = createMiddleware<{ session: Session; user: User }>((handler) => async (req, ctx) => {
