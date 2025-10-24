@@ -23,8 +23,6 @@ export const createMiddleware =
 		});
 	};
 
-// export const createMiddleware = <T = {}>(middleware: Middleware<T>) => middleware;
-
 /**
  * @param middlewares - The middleware functions to be composed.
  * @returns A middleware function that takes a handler and returns a new handler.

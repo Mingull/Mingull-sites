@@ -37,13 +37,8 @@ export const servers = mysqlTable(
 		motd: text("motd"), // OPTIONAL, server MOTD (rich text)
 
 		// --- Dynamic status ---
-		lifecycleStatus: int("lifecycle_status")
-			.references(() => serverStatus.id)
-			.notNull(), // REQUIRED, FK to server_status table (lifecycle type)
-		runtimeStatus: int("runtime_status")
-			.references(() => serverStatus.id)
-			.notNull(), // REQUIRED, FK to server_status table (runtime type)
-
+		lifecycleStatus: int("lifecycle_status").references(() => serverStatus.id), // OPTIONAL, FK to server_status table (lifecycle type)
+		runtimeStatus: int("runtime_status").references(() => serverStatus.id), // OPTIONAL, FK to server_status table (runtime type)
 		// --- Tracking ---
 		...timestamps({
 			lastHeartbeat: timestamp("last_heartbeat").defaultNow().notNull(), // REQUIRED, heartbeat for "is online?"

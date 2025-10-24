@@ -1,4 +1,4 @@
-import { int, mysqlTable, varchar } from "drizzle-orm/mysql-core";
+import { int, json, mysqlTable, varchar } from "drizzle-orm/mysql-core";
 import { featureFlags } from "./flags";
 
 export const flagRules = mysqlTable("flag_rules", {
@@ -6,9 +6,13 @@ export const flagRules = mysqlTable("flag_rules", {
 	featureFlagId: int("feature_flag_id")
 		.notNull()
 		.references(() => featureFlags.id, { onDelete: "cascade" }),
-	targetType: varchar("target_type", { length: 32 }).notNull(), // e.g. "role" | "org" | "user" | "plan"
-	allowedRoles: varchar("allowed_roles", { length: 255 }).notNull(), // e.g. "admin" | "member" | "owner" | "user" | ("admin" | "member" | "owner" | "user")[] | null
-	plan: varchar("plan", { length: 64 }), // e.g. "free" | "pro" | "enterprise" | null
+	variantId: int("variant_id")
+		.references(() => featureFlags.id, { onDelete: "set null" }), // nullable, if null means just enable flag
+	targetType: varchar("target_type", { length: 32, enum: ["role", "organization", "user", "plan"] }).notNull(), // "role" | "organization" | "user" | "plan"
+	allowedRoles: json("allowed_roles").$type<string[]>().notNull().default([]), // example ("admin" | "member" | "owner" | "user")[]
+	plan: varchar("plan", { length: 64, enum: ["free", "pro", "enterprise"] })
+		.notNull()
+		.default("free"), // "free" | "pro" | "enterprise"
 	rolloutPercentage: int("rollout_percentage").default(100),
 	description: varchar("description", { length: 255 }),
 });
