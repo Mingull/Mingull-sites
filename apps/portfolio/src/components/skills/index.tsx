@@ -25,15 +25,17 @@ const itemVariants = {
 	show: { opacity: 1, y: 0 },
 };
 
-const calculateYearsOfExperience = (years: number): string => {
+// const calculateYearsOfExperience = (years: number): string => {
+// 	const months = Math.round(years * 12);
+// 	const y = Math.floor(months / 12);
+// 	const m = months % 12;
+// 	return [y && `${y} ${y === 1 ? "Year" : "Years"}`, m && `${m} ${m === 1 ? "Month" : "Months"}`].filter(Boolean).join(" ") || "0 Months";
+// };
+const calculateYearsOfExperience = (years: number): { years: number; months: number } => {
 	const months = Math.round(years * 12);
 	const y = Math.floor(months / 12);
 	const m = months % 12;
-	return (
-		[y && `${y} ${y === 1 ? "Year" : "Years"}`, m && `${m} ${m === 1 ? "Month" : "Months"}`]
-			.filter(Boolean)
-			.join(", ") || "0 Months"
-	);
+	return { years: y, months: m };
 };
 
 export default function Skills() {
@@ -64,20 +66,15 @@ export default function Skills() {
 		return () => window.removeEventListener("keydown", onKeyDown);
 	}, [isActiveSkill, active]);
 
+	console.log({ skills });
+
 	return (
 		<section className="pb-24" id="skills">
 			<h2 className="title mb-12">{t("title")}</h2>
 
 			{/* Overlay */}
 			<AnimatePresence>
-				{isActiveSkill && (
-					<m.div
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						exit={{ opacity: 0 }}
-						className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
-					/>
-				)}
+				{isActiveSkill && <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm" />}
 			</AnimatePresence>
 			<AnimatePresence>
 				{isActiveSkill && ActiveIcon ?
@@ -105,23 +102,17 @@ export default function Skills() {
 							<div>
 								<div className="flex items-start justify-between p-4">
 									<div>
-										<m.h3
-											layoutId={`title-${active.name}-${id}`}
-											className="dark:text-foreground text-base font-medium text-neutral-700"
-										>
+										<m.h3 layoutId={`title-${active.name}-${id}`} className="dark:text-foreground text-base font-medium text-neutral-700">
 											{active.name}
 										</m.h3>
-										<m.p
-											layoutId={`description-${active.summary}-${id}`}
-											className="dark:text-muted-foreground text-base text-neutral-600"
-										>
+										<m.p layoutId={`description-${active.summary}-${id}`} className="dark:text-muted-foreground text-base text-neutral-600">
 											{active.summary}
 										</m.p>
 										<m.p layout className="dark:text-muted-foreground text-sm text-neutral-600">
-											{t("version", { version: active.version })}
+											{t.rich("version", { version: active.version, strong: (chunks) => <strong>{chunks}</strong> })}
 										</m.p>
 										<m.p layout className="dark:text-muted-foreground text-sm text-neutral-600">
-											<strong>Experience:</strong> {calculateYearsOfExperience(active.years)}
+											{t.rich("experience", { ...calculateYearsOfExperience(active.experience.years), strong: (chunks) => <strong>{chunks}</strong> })}
 										</m.p>
 									</div>
 									<m.a
@@ -155,13 +146,7 @@ export default function Skills() {
 
 			{/* Skills List */}
 			{!isPending && skills ?
-				<m.ul
-					variants={containerVariants}
-					initial="hidden"
-					whileInView="show"
-					viewport={{ once: true, amount: 0.2 }}
-					className="containerize"
-				>
+				<m.ul variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="containerize">
 					{skills.map((skill) => (
 						<Skill key={skill.name} {...skill} setActive={setActive} id={id} />
 					))}
@@ -210,24 +195,13 @@ const Skill = ({
 					</m.div>
 				)}
 				<div className="flex flex-col items-center justify-center">
-					<m.h3
-						layoutId={`title-${skill.name}-${id}`}
-						className="text-foreground text-center text-base font-medium"
-					>
+					<m.h3 layoutId={`title-${skill.name}-${id}`} className="text-foreground text-center text-base font-medium">
 						{skill.name}
 					</m.h3>
-					<m.p
-						layoutId={`description-${skill.summary}-${id}`}
-						className="text-muted-foreground text-center text-base"
-					>
+					<m.p layoutId={`description-${skill.summary}-${id}`} className="text-muted-foreground text-center text-base">
 						{skill.summary}
 					</m.p>
-					<m.a
-						layoutId={`cta-${skill.cta.text}-${id}`}
-						href={skill.cta.link}
-						target="_blank"
-						className={cn(buttonVariants({ size: "sm", className: "hidden" }))}
-					>
+					<m.a layoutId={`cta-${skill.cta.text}-${id}`} href={skill.cta.link} target="_blank" className={cn(buttonVariants({ size: "sm", className: "hidden" }))}>
 						{skill.cta.text}
 					</m.a>
 				</div>

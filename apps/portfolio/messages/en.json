@@ -14,7 +14,8 @@
 		},
 		"skills": {
 			"title": "Skills",
-			"version": "<strong>Version:</strong> {version}"
+			"version": "<strong>Version:</strong> {version}",
+			"experience": "<strong>Experience:</strong> {years, plural, =1 {# Year} other {# Years}} {months, plural, =0 {0 Months} =1 {# Month} other {# Months}}"
 		},
 		"about": {
 			"title": "About Me",

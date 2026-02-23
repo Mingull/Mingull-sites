@@ -55,7 +55,7 @@ export async function normalizeTenantContext(input: User | Organization | { user
 	throw new Error("normalizeTenantContext: could not infer tenant type from input");
 }
 
-export async function canViewFeature(flagName: string, context: TenantContext): Promise<unknown> {
+export async function canViewFeature(flagName: string, context: TenantContext): Promise<boolean | string> {
 	// return type needs to be made
 
 	// --- 1. Get normalized tenant context ---
@@ -74,13 +74,44 @@ export async function canViewFeature(flagName: string, context: TenantContext): 
 		where: (tf, { and, eq }) => and(eq(tf.featureFlagId, flag.id), eq(tf.tenantId, tenantContext.tenantId), eq(tf.type, tenantContext.tenantType)),
 	});
 	if (tenantOverride) {
-		return tenantOverride.overrideValue;
+		return tenantOverride.overrideValue!;
 	}
 
 	// --- 4. Evaluate global rules ---
-	rules.forEach((rule) => {
-		// dont know how to handle these yet
-	});
+	for (const rule of rules) {
+		// Check target type
+		if (rule.targetType === "user" && tenantContext.tenantType !== "user") continue;
+		if (rule.targetType === "organization" && tenantContext.tenantType !== "organization") continue;
+
+		// Check allowed roles (if user), don't understand this part
+		if (rule.targetType === "role" && tenantContext.tenantType === "user") {
+			const userRole = tenantContext.user?.role;
+			if (!userRole || (rule.allowedRoles && !rule.allowedRoles.includes(userRole))) continue;
+		}
+
+		// Check org plan (if org), also don't understand this part
+		if (rule.targetType === "organization" && tenantContext.organization) {
+			const orgPlan = tenantContext.organization.plan;
+			if (rule.plan && rule.plan !== orgPlan) continue;
+		}
+
+		// Check rollout percentage
+		// Rollout percentage (optional gate)
+		if (rule.rolloutPercentage && rule.rolloutPercentage > 0 && rule.rolloutPercentage <= 100) {
+			const isInRollout = userIsWithinPercentage(flag.key, rule.rolloutPercentage / 100, tenantContext.tenantId);
+			if (!isInRollout) continue;
+		}
+
+		// if rule matches
+		// - if linked to a variant return that variant
+		// - otherwise return true(flag on for tenant)
+		const variant = variants.find((v) => v.id === rule.variantId);
+		if (variant) {
+			return variant.key;
+		} else {
+			return true;
+		}
+	}
 
 	// --- 5. Evaluate percentage rollout ---
 	if (flag.rolloutPercentage && flag.rolloutPercentage > 0 && flag.rolloutPercentage <= 100) {
@@ -100,4 +131,9 @@ function userIsWithinPercentage(flagKey: string, allowedPercent: number, tenantI
 async function getUserRole(userId: string): Promise<"user" | "admin"> {
 	const user = await db.query.users.findFirst({ where: (u, { eq }) => eq(u.id, userId) });
 	return (user?.role || "user") as "user" | "admin";
+}
+
+async function getOrgPlan(orgId: string): Promise<"free" | "pro" | "enterprise"> {
+	const org = await db.query.organizations.findFirst({ where: (o, { eq }) => eq(o.id, orgId) });
+	return (org?.plan || "free") as "free" | "pro" | "enterprise";
 }

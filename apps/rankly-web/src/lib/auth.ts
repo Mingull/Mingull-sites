@@ -77,6 +77,16 @@ export const auth = betterAuth({
 			dynamicAccessControl: {
 				enabled: true,
 			},
+			schema: {
+				organization: {
+					additionalFields: {
+						plan: {
+							type: "string",
+							default: "free",
+						},
+					},
+				},
+			},
 		}),
 		username(),
 	],
