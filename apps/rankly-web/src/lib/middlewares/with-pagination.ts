@@ -14,12 +14,13 @@ export const withPagination = createMiddleware<{ pagination: { offset: number; l
 	const offset = Number(searchParams.get("offset")) || 0;
 
 	const sort: Record<string, "asc" | "desc"> = {};
-	searchParams.get("sort")?.split(",").forEach((field) => {
-        const [key, direction] = field.split(":");
-        if(!key) return;
-        if(direction !== "asc" && direction !== "desc") return;
-        sort[key] = direction as "asc" | "desc";
-	});
+	searchParams.get("sort")?.split(",")
+		.forEach((field) => {
+			const [key, direction] = field.split(":", 2);
+			if (!key) return;
+			if (direction !== "asc" && direction !== "desc") return;
+			sort[key] = direction as "asc" | "desc";
+		});
 
 	ctx.pagination = { offset, limit, sort };
 

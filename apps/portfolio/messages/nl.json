@@ -14,7 +14,8 @@
 		},
 		"skills": {
 			"title": "Vaardigheden",
-			"version": "<strong>Versie:</strong> {version}"
+			"version": "<strong>Versie:</strong> {version}",
+			"experience": "<strong>Ervaring:</strong> {years, plural, =1 {# Jaar} other {# Jaren}} {months, plural, =0 {0 Maanden} =1 {# Maand} other {# Maanden}}"
 		},
 		"about": {
 			"title": "Over Mij",

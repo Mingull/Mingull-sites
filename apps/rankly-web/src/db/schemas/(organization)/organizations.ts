@@ -6,7 +6,7 @@ export const organizations = mysqlTable("organizations", {
 	name: text("name").notNull(),
 	slug: varchar("slug", { length: 255 }).unique().notNull(),
 	logo: text("logo"),
-	plan: varchar("plan", { length: 64 }).notNull().default("free").$type<OrganizationPlan>(), // e.g. "free" | "pro" | "enterprise"s
+	plan: varchar("plan", { length: 64 }).notNull().default("free").$type<OrganizationPlan>(), // e.g. "free" | "pro" | "enterprise"
 	metadata: text("metadata"),
 	...timestamps(),
 });

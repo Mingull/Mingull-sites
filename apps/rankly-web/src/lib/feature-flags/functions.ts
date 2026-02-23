@@ -83,13 +83,13 @@ export async function canViewFeature(flagName: string, context: TenantContext): 
 		if (rule.targetType === "user" && tenantContext.tenantType !== "user") continue;
 		if (rule.targetType === "organization" && tenantContext.tenantType !== "organization") continue;
 
-		// Check allowed roles (if user), dont understand this part
+		// Check allowed roles (if user), don't understand this part
 		if (rule.targetType === "role" && tenantContext.tenantType === "user") {
 			const userRole = tenantContext.user?.role;
 			if (!userRole || (rule.allowedRoles && !rule.allowedRoles.includes(userRole))) continue;
 		}
 
-		// Check org plan (if org), also dont understand this part
+		// Check org plan (if org), also don't understand this part
 		if (rule.targetType === "organization" && tenantContext.organization) {
 			const orgPlan = tenantContext.organization.plan;
 			if (rule.plan && rule.plan !== orgPlan) continue;
@@ -105,7 +105,7 @@ export async function canViewFeature(flagName: string, context: TenantContext): 
 		// if rule matches
 		// - if linked to a variant return that variant
 		// - otherwise return true(flag on for tenant)
-		const variant = variants.find((v) => v.id === rule.variantId); // this seems wrong
+		const variant = variants.find((v) => v.id === rule.variantId);
 		if (variant) {
 			return variant.key;
 		} else {

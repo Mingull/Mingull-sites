@@ -11,6 +11,7 @@
 	},
 	"dependencies": {
 		"@mingull/api": "workspace:*",
+		"@mingull/env": "workspace:*",
 		"@mingull/auth": "workspace:*",
 		"@mingull/exceptify": "workspace:*",
 		"@mingull/lib": "workspace:*",

@@ -23,14 +23,10 @@ export const skillSchema = z.object({
 		.regex(/^\d+\.\d+(\.\d+)?$/, { message: "Version must be in the format X.Y or X.Y.Z" }),
 	summary: z.string({ error: "Summary is required." }).min(1, "Summary is required."),
 	content: z.string({ error: "Content is required." }).min(1, "Content is required."),
-	experience: z
-		.number({ error: "Experience is required." })
-		.min(0, "Experience must be a positive number.")
-		.max(100, "Experience must be realistic."),
-	years: z
-		.number({ error: "Years is required." })
-		.min(0.1, { message: "Years must be at least 0.1." })
-		.max(100, "Years must be realistic."),
+	experience: z.object({
+		value: z.number({ error: "Experience is required." }).min(0, "Experience must be a positive number.").max(100, "Experience must be realistic."),
+		years: z.number({ error: "Years is required." }).min(0.1, { message: "Years must be at least 0.1." }).max(100, "Years must be realistic."),
+	}),
 	icon: z
 		.string({ error: "Icon is required." })
 		.min(1, "Icon is required.")

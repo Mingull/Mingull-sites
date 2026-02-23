@@ -24,23 +24,12 @@ export default function Posts({ posts }: { posts?: PostMetadata[] }) {
 	return (
 		<div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
 			{posts.map((post) => (
-				<Link
-					key={post.slug}
-					href={{ pathname: "/posts/[slug]", params: { slug: post.slug } }}
-					className="group"
-					aria-label={`View post: ${post.title}`}
-				>
+				<Link key={post.slug} href={{ pathname: "/posts/[slug]", params: { slug: post.slug } }} className="group" aria-label={`View post: ${post.title}`}>
 					<Card className="relative overflow-hidden pt-0">
 						{post.image ?
 							<div className="relative mb-6 h-60">
 								<AspectRatio ratio={16 / 9} className="overflow-hidden rounded-t-xl">
-									<Image
-										src={post.image}
-										alt={post.title ?? ""}
-										className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
-										fill
-										loading="lazy"
-									/>
+									<Image src={post.image} alt={post.title ?? ""} className="object-cover object-center transition-transform duration-500 group-hover:scale-105" fill loading="lazy" />
 								</AspectRatio>
 							</div>
 						:	null}
